@@ -76,7 +76,7 @@ npx skills add vercel-labs/agent-skills --skill web-design-guidelines --agent co
 npx skills add https://github.com/DietrichGebert/ponytail/tree/9cc65d03aa2da1db7121b912d03596409ee340b8 --skill ponytail --agent codex --copy --yes
 ```
 
-Ask Codex to use `$ponytail` when working on this project. The core skill supports `lite`, `full` (default), and `ultra` levels. This project-local installation contains the core skill and its MIT license; it does not install the upstream plugin's lifecycle hooks or companion skills.
+The root `AGENTS.md` instructs Codex to read and apply Ponytail automatically for every coding task in this project, using `full` mode by default. No `$ponytail` invocation is required. Ask to switch to `lite` or `ultra`, or say "stop ponytail" / "normal mode" to disable it for the current session. This project-local installation contains the core skill and its MIT license; it does not install the upstream plugin's lifecycle hooks or companion skills.
 
 User instructions take precedence over skill guidance. The scientific topic remains undecided, and deployment remains a separate task.
 
