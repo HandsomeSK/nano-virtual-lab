@@ -7,6 +7,13 @@
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
     },
+    "ponytail": {
+      "source": "DietrichGebert/ponytail",
+      "ref": "9cc65d03aa2da1db7121b912d03596409ee340b8",
+      "sourceType": "github",
+      "skillPath": "skills/ponytail/SKILL.md",
+      "computedHash": "99f0589e5646b46da07b9419a5daa178004b3dd8930fec528918a51ab07f5efc"
+    },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
