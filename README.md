@@ -78,28 +78,48 @@ User instructions take precedence over skill guidance. The scientific topic rema
 
 ## Scaffold verification
 
-The initial scaffold passed `npm run lint`, `npm run build`, `npm run typecheck`, and `git diff --check`. Production-browser checks covered all five routes at 320, 390, 768, and 1440 pixel widths, with no horizontal overflow or runtime errors. Mobile-menu toggling, Escape-key focus restoration, navigation, the homepage call to action, route metadata, and the custom 404 were also verified.
+The initial scaffold passed `npm run lint`, `npm run build`, `npm run typecheck`, and `git diff --check`. Browser checks against the local production build covered all five routes at 320, 390, 768, and 1440 pixel widths, with no horizontal overflow or runtime errors. Mobile-menu toggling, Escape-key focus restoration, navigation, the homepage call to action, route metadata, and the custom 404 were also verified.
 
-## Commit the scaffold to GitHub
+## GitHub workflow
 
-This checkout targets `HandsomeSK/nano-virtual-lab`. The scaffold is prepared on `initialize-website`, based on the existing `origin/main` initial commit. Review the files, then:
+The scaffold and project-local skills are saved in [HandsomeSK/nano-virtual-lab](https://github.com/HandsomeSK/nano-virtual-lab). [PR #1](https://github.com/HandsomeSK/nano-virtual-lab/pull/1) merged the initial website into `main`.
+
+For future changes, create a branch from the latest `main`, implement and validate the change, then push it:
 
 ```sh
-git status
+git switch main
+git pull --ff-only origin main
+git switch -c feature/your-change
+# Edit and validate the change before committing.
 git add .
-git commit -m "Initialize Nano Virtual Lab educational website"
-git push -u origin initialize-website
+git commit -m "Describe your change"
+git push -u origin feature/your-change
 ```
 
-Open a pull request from `initialize-website` into `main`, review it, and merge it. GitHub authentication with write access is required to push. Generated build output, dependencies, local secrets, and Vercel state are ignored.
+Open a pull request into `main`, review it, and merge it. GitHub authentication with write access is required to push. Generated build output, dependencies, local secrets, and Vercel state are ignored.
 
-## Vercel compatibility (deployment not performed)
+## Vercel deployment
 
-The project uses standard Next.js conventions, so a `vercel.json` is unnecessary. When you decide to deploy:
+The repository has been imported into the **HandsomeSK** Vercel workspace as **nano-virtual-lab**. GitHub reported the initial deployment of `main` commit `a5f8d39` as successful.
 
-1. Commit and push the project, then import `HandsomeSK/nano-virtual-lab` in Vercel.
-2. Select **Next.js** as the framework and leave the root directory at the repository root.
-3. Use Node.js **24.x**, install command `npm ci`, and build command `npm run build`. Leave the output directory at the framework default.
-4. Select `main` as the production branch. No environment variables are required for the scaffold.
+- [Initial deployment](https://nano-virtual-9hx0dj182-handsome-sk.vercel.app)
+- [Vercel project dashboard](https://vercel.com/handsome-sk/nano-virtual-lab)
 
-All five pages currently prerender as static content and remain compatible with future server routes. No Vercel project has been linked and no deployment has been created.
+The initial deployment URL identifies that build. Find the current production domain in the project's **Overview → Domains** section for sharing the website.
+
+The project uses standard Next.js conventions, so a `vercel.json` is unnecessary. The deployment configuration is:
+
+| Setting | Value |
+| --- | --- |
+| Git repository | `HandsomeSK/nano-virtual-lab` |
+| Production branch | `main` |
+| Framework | Next.js |
+| Root directory | Repository root (`./`) |
+| Install command | `npm ci` |
+| Build command | `npm run build` |
+| Output directory | Next.js default |
+| Environment variables | None required |
+
+Node.js 24.x is recommended; the project's minimum is Node.js 22. All five pages currently prerender as static content and remain compatible with future server routes.
+
+Vercel's Git integration builds updates to `main` automatically. After merging a change, check the commit's **Vercel** status on GitHub and the resulting deployment in Vercel. A successful build status confirms the deployment pipeline; public access and browser behaviour require separate checks against the live domain.
