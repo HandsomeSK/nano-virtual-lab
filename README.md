@@ -58,21 +58,25 @@ Scientific content, sources, model assumptions, units, validation, and limitatio
 
 ## Project-local Codex skills
 
-Two reviewed skills are installed as ordinary files in `.agents/skills/` for Codex:
+Three reviewed skills are installed as ordinary files in `.agents/skills/` for Codex:
 
 | Skill | Source | Purpose |
 | --- | --- | --- |
 | `frontend-design` | [anthropics/skills](https://github.com/anthropics/skills) | Visual direction, typography, layout, and interface design |
 | `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Accessibility, responsive layouts, and UI reviews |
+| `ponytail` | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | Complete changes with minimal code, reuse existing features, and avoid unnecessary abstractions |
 
-`skills-lock.json` records their sources and content hashes. Commit the skill files and lockfile with the project so future checkouts retain them. The frontend-design license is included in its directory. These development instructions are independent of website runtime dependencies.
+`skills-lock.json` records their sources and content hashes. Ponytail is pinned to upstream commit `9cc65d03aa2da1db7121b912d03596409ee340b8` (v5.1.0). Commit the skill files and lockfile with the project so future checkouts retain them. The frontend-design and ponytail licenses are included in their directories. These development instructions are independent of website runtime dependencies.
 
 Verify project-local discovery with `npx skills list --agent codex`. To reinstall, use:
 
 ```sh
 npx skills add anthropics/skills --skill frontend-design --agent codex --copy --yes
 npx skills add vercel-labs/agent-skills --skill web-design-guidelines --agent codex --copy --yes
+npx skills add https://github.com/DietrichGebert/ponytail/tree/9cc65d03aa2da1db7121b912d03596409ee340b8 --skill ponytail --agent codex --copy --yes
 ```
+
+Ask Codex to use `$ponytail` when working on this project. The core skill supports `lite`, `full` (default), and `ultra` levels. This project-local installation contains the core skill and its MIT license; it does not install the upstream plugin's lifecycle hooks or companion skills.
 
 User instructions take precedence over skill guidance. The scientific topic remains undecided, and deployment remains a separate task.
 
