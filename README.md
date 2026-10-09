@@ -80,6 +80,12 @@ User instructions take precedence over skill guidance. The scientific topic rema
 
 The initial scaffold passed `npm run lint`, `npm run build`, `npm run typecheck`, and `git diff --check`. Browser checks against the local production build covered all five routes at 320, 390, 768, and 1440 pixel widths, with no horizontal overflow or runtime errors. Mobile-menu toggling, Escape-key focus restoration, navigation, the homepage call to action, route metadata, and the custom 404 were also verified.
 
+### Live-site verification
+
+On 2026-10-09, Playwright Chromium checked [the production site](https://nano-virtual-lab.vercel.app) at 320, 390, 768, and 1440 pixel widths using a fresh browser context without Vercel credentials. All five pages returned HTTP 200, loaded their styles, displayed the correct titles and headings, and had no horizontal overflow. Mobile-menu navigation, Escape-key focus restoration, active navigation states, the homepage call to action, and the HTTP 404 page passed. No browser runtime errors or failed requests were recorded during the functional checks.
+
+The tested production deployment was built from `main` commit `df8ce56`. Vercel confirmed its state as `READY` and source as `git`; the merge of PR #2 had automatically triggered this successful deployment. The Vercel runtime-error check also reported no errors in the preceding hour. The temporary browser-testing sandbox was stopped after verification.
+
 ## GitHub workflow
 
 The scaffold and project-local skills are saved in [HandsomeSK/nano-virtual-lab](https://github.com/HandsomeSK/nano-virtual-lab). [PR #1](https://github.com/HandsomeSK/nano-virtual-lab/pull/1) merged the initial website into `main`.
@@ -102,10 +108,11 @@ Open a pull request into `main`, review it, and merge it. GitHub authentication 
 
 The repository has been imported into the **HandsomeSK** Vercel workspace as **nano-virtual-lab**. GitHub reported the initial deployment of `main` commit `a5f8d39` as successful.
 
+- **Website:** [nano-virtual-lab.vercel.app](https://nano-virtual-lab.vercel.app)
 - [Initial deployment](https://nano-virtual-9hx0dj182-handsome-sk.vercel.app)
 - [Vercel project dashboard](https://vercel.com/handsome-sk/nano-virtual-lab)
 
-The initial deployment URL identifies that build. Find the current production domain in the project's **Overview → Domains** section for sharing the website.
+The website URL is the stable production address to share. Individual deployment URLs identify specific builds. Updates merged into `main` retain the production address.
 
 The project uses standard Next.js conventions, so a `vercel.json` is unnecessary. The deployment configuration is:
 
