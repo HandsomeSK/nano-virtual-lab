@@ -1,35 +1,28 @@
 import Link from "next/link";
 import { Brand } from "./brand";
 import { navigation, site } from "@/lib/site";
-
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line py-10">
+    <footer className="site-footer">
       <div className="container">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+        <div className="footer-top">
           <Brand />
-          <nav
-            aria-label="Footer navigation"
-            className="flex flex-wrap gap-x-6 gap-y-3"
-          >
-            {navigation
-              .filter(({ href }) => href !== "/")
-              .map(({ href, title }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="text-sm text-muted hover:text-teal"
-                >
-                  {title}
-                </Link>
-              ))}
-          </nav>
-        </div>
-        <div className="mt-8 flex flex-col justify-between gap-3 border-t border-line pt-6 text-xs leading-relaxed text-muted sm:flex-row">
-          <p>
+          <p className="muted text-sm">
+            An interactive educational research platform.
+            <br />
             {site.courseCode} · {site.courseTitle}
           </p>
-          <p>An educational project · In development</p>
+        </div>
+        <nav aria-label="Footer navigation" className="footer-nav">
+          {navigation.map(({ href, title }) => (
+            <Link key={href} href={href}>
+              {title}
+            </Link>
+          ))}
+        </nav>
+        <div className="footer-bottom">
+          <span>Learn the physics. Explore the possibilities.</span>
+          <Link href="/about#credits">Sources, model scope & credits ↗</Link>
         </div>
       </div>
     </footer>
