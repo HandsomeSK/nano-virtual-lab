@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageShell, Notice, RelatedTopics } from "@/components/page-shell";
+import { PageShell, RelatedTopics } from "@/components/page-shell";
 import { Simulator } from "@/components/simulation/simulator";
 import { normalizeParameters } from "@/lib/simulation/model";
 import type { Query } from "@/lib/site";
@@ -13,13 +13,13 @@ export default async function SimulatorPage({
   return (
     <PageShell
       title="Transistor Simulator"
-      intro="Explore how bias, geometry and interfaces influence a MoS₂-context transistor model. Change one assumption and follow the response."
+      intro="Turn a material idea into a device experiment. Adjust bias, channel geometry and contacts, then follow the calculated response and its explanation."
     >
-      <Notice>
-        <strong>Educational / Simplified Model.</strong> This is a long-channel
-        teaching calculation, not a calibrated prediction of a particular MoS₂
-        device. Parameter defaults are assumed, not measured.
-      </Notice>
+      <p className="model-note text-sm mb-6">
+        <strong>Simplified Educational Model.</strong> A MoS₂-context,
+        long-channel teaching calculation with assumed parameters, rather than a
+        calibrated device prediction.
+      </p>
       <Simulator
         key={JSON.stringify(query)}
         initial={normalizeParameters(query)}
@@ -28,7 +28,7 @@ export default async function SimulatorPage({
         links={[
           {
             href: "/comparison",
-            title: "Comparison",
+            title: "Material Comparison",
             description: "Compare the same model under different assumptions.",
           },
           {

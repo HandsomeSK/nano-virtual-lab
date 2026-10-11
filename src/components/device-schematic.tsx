@@ -10,27 +10,27 @@ export function DeviceSchematic({ on = true }: { on?: boolean }) {
     >
       <defs>
         <linearGradient id={id + "slab"} x2="1" y2="1">
-          <stop stopColor="#364963" />
-          <stop offset="1" stopColor="#1b293e" />
+          <stop stopColor="#b9c7dc" />
+          <stop offset="1" stopColor="#889ab8" />
         </linearGradient>
         <linearGradient id={id + "gold"} x2="1" y2="1">
           <stop stopColor="#eed99c" />
           <stop offset="1" stopColor="#a98942" />
         </linearGradient>
       </defs>
-      <g stroke="#617791" strokeWidth="1">
+      <g stroke="#8091ad" strokeWidth="1">
         <path
           d="M60 272 297 217 452 276 215 340Z"
           fill={"url(#" + id + "slab)"}
         />
         <path
           d="M60 272v38l155 61v-31ZM215 340l237-64v38l-237 57Z"
-          fill="#263952"
+          fill="#8b9bb5"
         />
         <path
           d="M90 244 301 196 421 241 210 294Z"
-          fill={on ? "#39b4c4" : "#35485c"}
-          stroke="#67e8f9"
+          fill={on ? "#8b5cf6" : "#c4b5fd"}
+          stroke="#7652c8"
         />
         <path
           d="M87 215 164 195 209 213 131 235Z"
@@ -44,12 +44,12 @@ export function DeviceSchematic({ on = true }: { on?: boolean }) {
         <path d="M318 229v21l44 18v-19l78-22v20l-78 21" fill="#ad8e4a" />
         <path
           d="M135 153 292 115 398 155 241 196Z"
-          fill="#7390b3"
+          fill="#a3bbde"
           fillOpacity=".48"
         />
         <path
           d="M135 153v16l106 42v-15l157-41v16l-157 40"
-          fill="#425777"
+          fill="#809ac2"
           fillOpacity=".7"
         />
         <path
@@ -59,11 +59,11 @@ export function DeviceSchematic({ on = true }: { on?: boolean }) {
         <path d="M157 82v17l87 34v-15l131-36v17l-131 34" fill="#b2934c" />
       </g>
       <g
-        fill="#cad7e9"
+        fill="#202d53"
         fontFamily="monospace"
         fontSize="12"
         strokeWidth="1"
-        stroke="#899db7"
+        stroke="#536480"
       >
         <path d="M347 70h55" />
         <text x="410" y="74" stroke="none">
@@ -91,7 +91,7 @@ export function DeviceSchematic({ on = true }: { on?: boolean }) {
         </text>
       </g>
       {on ? (
-        <g className="carrier-flow" fill="#e6feff">
+        <g className="carrier-flow" fill="#06b6d4">
           {[0, 1, 2, 3, 4].map((i) => (
             <circle key={i} cx={213 + i * 19} cy={245 - i * 4} r="3" />
           ))}

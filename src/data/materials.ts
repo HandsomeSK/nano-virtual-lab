@@ -26,10 +26,11 @@ export const materials: Record<
     structure: "A single honeycomb layer of carbon",
     band: "Pristine graphene: zero-gap semimetal",
     gap: "No intrinsic gap in pristine monolayer graphene",
-    strength: "Excellent transport possibilities and an atomically thin sheet.",
+    strength:
+      "High mobility and long mean free paths in suitable conditions; opportunities in fast transport, analogue and sensing devices.",
     limitation:
       "A missing gap makes a low OFF current challenging for digital switching.",
-    reference: "radis2011",
+    reference: "neto2009",
   },
   silicon: {
     name: "Silicon",

@@ -5,8 +5,12 @@ export const challenges = [
     tag: "Charge injection",
     summary:
       "Metal–semiconductor interfaces can limit current even when the channel itself conducts well.",
-    detail:
-      "Injection barriers, interface chemistry and contact geometry affect resistance. A single ohmic resistor cannot describe bias-dependent Schottky injection.",
+    cause:
+      "Carriers must cross a metal–semiconductor interface. Injection barriers, surface chemistry and contact geometry can make that crossing resistive.",
+    impact:
+      "Part of the applied voltage drops at the contacts, leaving less voltage to drive the channel and reducing the external drain current.",
+    modelBoundary:
+      "The simulator represents both contacts as symmetric series resistances; it does not calculate bias-dependent Schottky injection.",
     solution:
       "Explore contact engineering, interface preparation and device-specific extraction of contact resistance.",
     foundation: "/foundations#surfaces",
@@ -22,8 +26,12 @@ export const challenges = [
     tag: "Electrostatic control",
     summary:
       "A thin gate stack must control charge while limiting leakage, traps and reliability problems.",
-    detail:
-      "Dielectric thickness, permittivity and interface states influence gate coupling and threshold stability. The simulator keeps capacitance and threshold fixed; it does not calculate traps or dielectric breakdown.",
+    cause:
+      "Dielectric thickness and permittivity set gate coupling. Defects at the interface can trap charge, while an imperfect insulating layer can allow leakage.",
+    impact:
+      "Trapped charge can shift threshold voltage and cause hysteresis. Leakage and breakdown affect power consumption and reliability.",
+    modelBoundary:
+      "The simulator keeps gate capacitance and threshold fixed; it does not calculate traps, dielectric leakage or breakdown.",
     solution:
       "Investigate dielectric integration and passivation, then measure hysteresis and long-term stability.",
     foundation: "/foundations#transistors",
@@ -37,8 +45,12 @@ export const challenges = [
     tag: "Shrinking dimensions",
     summary:
       "As a channel shrinks, drain fields can compete with the gate and weaken switching control.",
-    detail:
-      "Atomically thin channels offer electrostatic opportunities, but tunnelling, contacts and gate geometry still matter. Physical gate length and effective channel length are different quantities.",
+    cause:
+      "At small channel lengths, drain fields can influence the channel barrier and compete with the gate. Tunnelling and device geometry can also affect transport.",
+    impact:
+      "Weaker gate control can increase off-state leakage and change threshold behaviour. An atomically thin body offers opportunities, but does not remove every scaling problem.",
+    modelBoundary:
+      "The length control illustrates ideal 1/L scaling, not short-channel leakage. Physical gate length and effective channel length are distinct.",
     solution:
       "Study thin-body electrostatics, gate geometry and transport together. Quantitative nanoscale predictions require a more complete model.",
     foundation: "/foundations#quantum",
@@ -54,10 +66,14 @@ export const challenges = [
     tag: "From flakes to wafers",
     summary:
       "Useful circuits require uniform materials, repeatable contacts and processes compatible with integration.",
-    detail:
-      "Growth, grain boundaries, transfer, patterning and yield can introduce variation. A successful laboratory device is not evidence of a production-ready replacement for silicon.",
+    cause:
+      "Growth, grain boundaries, transfer damage and patterning can create variation across a wafer. Every extra fabrication step must preserve the ultrathin material and its interfaces.",
+    impact:
+      "Variations in threshold, current and contact quality reduce circuit yield. A good single transistor does not guarantee that many connected devices work together.",
+    modelBoundary:
+      "Saved simulator configurations explore assumptions for one teaching model; they do not calculate wafer variation or fabrication yield.",
     solution:
-      "Connect wafer-scale growth and integration studies with variability, yield and process-temperature requirements.",
+      "Improve uniform growth, cleaner transfer and repeatable integration; use characterization and circuit-level testing to track variability and yield.",
     foundation: "/foundations#characterization",
     research: "/research?category=Manufacturing",
     reference: "kwon2024",

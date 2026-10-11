@@ -40,13 +40,13 @@ export function IVChart({
           <g key={i}>
             <path
               d={"M66 " + y((maxY * i) / 4) + "H520"}
-              stroke="#29364c"
+              stroke="var(--line)"
               strokeDasharray="4 5"
             />
             <text
               x="57"
               y={y((maxY * i) / 4) + 4}
-              fill="#99abc4"
+              fill="var(--muted)"
               fontSize="11"
               textAnchor="end"
             >
@@ -55,7 +55,7 @@ export function IVChart({
             <text
               x={x((maxX * i) / 4)}
               y="299"
-              fill="#99abc4"
+              fill="var(--muted)"
               fontSize="11"
               textAnchor="middle"
             >
@@ -63,8 +63,8 @@ export function IVChart({
             </text>
           </g>
         ))}
-        <path d="M66 40V280H520" stroke="#aebfd5" fill="none" />
-        {curves.map((item) => (
+        <path d="M66 40V280H520" stroke="var(--muted)" fill="none" />
+        {curves.map((item, index) => (
           <path
             key={item.name}
             d={item.points
@@ -79,14 +79,21 @@ export function IVChart({
             fill="none"
             stroke={item.color}
             strokeWidth="2.5"
+            strokeDasharray={index ? "7 4" : undefined}
           />
         ))}
-        <text x="293" y="325" fill="#edf3ff" fontSize="12" textAnchor="middle">
+        <text
+          x="293"
+          y="325"
+          fill="var(--ink)"
+          fontSize="12"
+          textAnchor="middle"
+        >
           {mode === "transfer" ? "Gate voltage (V)" : "Drain voltage (V)"}
         </text>
         <text
           transform="translate(15,170) rotate(-90)"
-          fill="#edf3ff"
+          fill="var(--ink)"
           fontSize="12"
           textAnchor="middle"
         >
@@ -94,9 +101,14 @@ export function IVChart({
         </text>
       </svg>
       <figcaption className="chart-legend">
-        {series.map((item) => (
+        {series.map((item, index) => (
           <span key={item.name}>
-            <i style={{ background: item.color }} />
+            <i
+              style={{
+                borderTop:
+                  "2px " + (index ? "dashed" : "solid") + " " + item.color,
+              }}
+            />
             {item.name}
           </span>
         ))}

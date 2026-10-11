@@ -7,6 +7,7 @@ export function AnchorNavigation() {
   useEffect(() => {
     // Streamed route content can arrive after the browser's initial fragment scroll.
     const observer = new MutationObserver(reveal);
+    let frame = 0;
     function reveal() {
       let id: string;
       try {
@@ -24,11 +25,15 @@ export function AnchorNavigation() {
       ) {
         if (ancestor instanceof HTMLDetailsElement) ancestor.open = true;
       }
-      target.scrollIntoView({ block: "start" });
+      // Position after hydration's layout and browser scroll restoration settle.
+      frame = requestAnimationFrame(() => {
+        target.scrollIntoView({ block: "start", behavior: "instant" });
+      });
       observer.disconnect();
       return true;
     }
     function seek() {
+      cancelAnimationFrame(frame);
       observer.disconnect();
       if (window.location.hash && !reveal())
         observer.observe(document.getElementById("main-content")!, {
@@ -39,6 +44,7 @@ export function AnchorNavigation() {
     seek();
     window.addEventListener("hashchange", seek);
     return () => {
+      cancelAnimationFrame(frame);
       observer.disconnect();
       window.removeEventListener("hashchange", seek);
     };

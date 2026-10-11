@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col antialiased">
         <a
           href="#main-content"
-          className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-cyan px-5 py-3 text-sm text-paper focus:translate-y-0"
+          className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-lg bg-primary px-5 py-3 text-sm text-white focus:translate-y-0"
         >
           Skip to content
         </a>

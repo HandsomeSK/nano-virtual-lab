@@ -12,7 +12,13 @@ export function KnowledgeCard({
   children: ReactNode;
 }) {
   return (
-    <section id={concept.id} className="knowledge-section">
+    <section
+      id={concept.id}
+      className={
+        "knowledge-section" +
+        (concept.id === "graphene-electronics" ? " graphene-feature" : "")
+      }
+    >
       <div className="knowledge-title">
         <span>{"0" + (index + 1)}</span>
         <h2>{concept.title}</h2>
@@ -20,7 +26,7 @@ export function KnowledgeCard({
       <p className="theory">{concept.theory}</p>
       {children}
       <div className="connection">
-        <h3>Connection to MoS₂</h3>
+        <h3>{concept.connectionTitle}</h3>
         <p>
           {concept.connection}{" "}
           <ReferenceLink

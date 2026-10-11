@@ -97,9 +97,6 @@ export function ReferenceBrowser({
               {ref.authors}. {ref.venue}.
             </p>
             <p className="muted text-sm mt-4">{ref.note}</p>
-            {ref.status ? (
-              <span className="status-label mt-3">{ref.status}</span>
-            ) : null}
             <div className="actions">
               {ref.doi ? (
                 <a

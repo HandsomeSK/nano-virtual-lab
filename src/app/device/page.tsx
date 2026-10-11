@@ -14,8 +14,26 @@ export default function Device() {
       title="Device Explorer"
       intro="Explore a simplified top-gated MoS₂ field-effect transistor. Orbit the model, reveal the layers and discover what each component does."
     >
+      <section className="panel mb-6">
+        <h2>Why a MoS₂ channel?</h2>
+        <p className="mt-3">
+          Semiconducting MoS₂ combines an atomically thin channel with a finite
+          band gap. The gap supports switching between conducting and depleted
+          states, while the thin channel offers a route to strong gate control.
+          Contact and dielectric engineering still determine how well a real
+          device performs. <ReferenceLink id="radis2011" from="/device" />
+        </p>
+        <div className="actions">
+          <Link href="/foundations#bands" className="text-link">
+            Review Band Gap →
+          </Link>
+          <Link href="/why-mos2#meet-mos2" className="text-link">
+            From Graphene to MoS₂ →
+          </Link>
+        </div>
+      </section>
       <DeviceViewer />
-      <section className="section">
+      <section className="section" id="working-principle">
         <SectionHeading title="Working Principle" />
         <div className="two-column">
           <p>
@@ -40,10 +58,9 @@ export default function Device() {
       <RelatedTopics
         links={[
           {
-            href: "/foundations#transistors",
-            title: "Transistor Basics",
-            description:
-              "Revisit source, drain, gate and electrostatic control.",
+            href: "/why-mos2",
+            title: "From Graphene to MoS₂",
+            description: "Connect material properties with the channel choice.",
           },
           {
             href: "/simulator",

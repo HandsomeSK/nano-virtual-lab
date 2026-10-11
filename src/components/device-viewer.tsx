@@ -150,7 +150,7 @@ export function DeviceViewer() {
                   "--slab-depth": item.d + "px",
                   "--slab-height": item.h + "px",
                   "--slab-color":
-                    item.id === "channel" && !on ? "#33515a" : item.color,
+                    item.id === "channel" && !on ? "#c4b5fd" : item.color,
                 } as CSSProperties;
                 return (
                   <div
@@ -217,9 +217,11 @@ export function DeviceViewer() {
           </label>
         </div>
         <p className="text-sm mt-4" aria-live="polite">
-          {on
-            ? "ON illustration: gate-induced charge enables a channel."
-            : "OFF illustration: channel charge is reduced."}{" "}
+          <strong className={on ? "text-cyan" : "text-violet"}>
+            {on
+              ? "ON illustration: gate-induced charge enables a channel."
+              : "OFF illustration: channel charge is reduced."}
+          </strong>{" "}
           This state toggle is conceptual; bias-dependent current is calculated
           in the simulator.
         </p>
@@ -256,10 +258,10 @@ export function DeviceViewer() {
         </div>
         <section className="component-info" aria-live="polite">
           <h3>Component Information</h3>
-          <h4 className="text-cyan mt-4">{part.name}</h4>
+          <h4 className="text-violet mt-4">{part.name}</h4>
           <p className="text-sm mt-2">{part.role}</p>
           <Link className="text-link" href={part.concept}>
-            Review the foundation →
+            Explore the related concept →
           </Link>
         </section>
       </aside>

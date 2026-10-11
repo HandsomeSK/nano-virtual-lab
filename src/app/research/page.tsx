@@ -28,7 +28,8 @@ export default async function Page({
         <SectionHeading title="Research Overview" />
         <p>
           MoS₂ research spans material physics, gate-controlled devices and
-          manufacturing. These five studies offer entry points into that story.
+          manufacturing. These {studies.length} studies offer entry points into
+          that story, including verified publications from 2025 and 2026.
           Summaries are brief; follow the original sources for methods,
           conditions and evidence.
         </p>
@@ -36,8 +37,11 @@ export default async function Page({
       <ResearchExplorer
         key={JSON.stringify(query)}
         initialYear={
-          references.some(
-            (ref) => String(ref.year) === year && ref.category === "Paper",
+          studies.some(
+            (item) =>
+              String(
+                references.find((ref) => ref.id === item.reference)?.year,
+              ) === year,
           )
             ? year
             : ""

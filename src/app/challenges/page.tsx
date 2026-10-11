@@ -4,7 +4,6 @@ import {
   PageShell,
   RelatedTopics,
   SectionHeading,
-  Notice,
 } from "@/components/page-shell";
 import { ChallengeExplorer } from "@/components/challenge-explorer";
 export const metadata: Metadata = { title: "Engineering Challenges" };
@@ -17,18 +16,13 @@ export default function Page() {
       <section className="section">
         <SectionHeading
           title="Challenges Overview"
-          description="Select a category, then connect the mechanism to the teaching model and real research."
+          description="Choose a problem, explore its mechanism and device impact, then follow the related experiment or research direction."
         />
-        <Notice>
-          Simulator links illustrate resistance or ideal length scaling.
-          Interface traps, tunnelling, short-channel effects and fabrication
-          variability are outside the V1 model.
-        </Notice>
         <ChallengeExplorer />
       </section>
       <section className="section">
         <SectionHeading
-          title="Potential Solutions"
+          title="Bringing the Pieces Together"
           description="Progress requires materials, device design and process engineering together."
         />
         <p>

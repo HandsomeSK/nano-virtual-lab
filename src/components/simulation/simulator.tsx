@@ -5,6 +5,7 @@ import {
   currentA,
   defaultParameters,
   metrics,
+  modelConstants,
   parameterControls,
   parametersQuery,
   type Parameters,
@@ -18,6 +19,7 @@ import { IVChart } from "./iv-chart";
 import { ParameterControl } from "./parameter-control";
 import { DeviceSchematic } from "@/components/device-schematic";
 import { ReferenceLink } from "@/components/reference-link";
+import { parameterInsight } from "@/lib/simulation/insights";
 
 export function Simulator({ initial }: { initial: Parameters }) {
   const [parameters, setParameters] = useState(initial);
@@ -25,10 +27,19 @@ export function Simulator({ initial }: { initial: Parameters }) {
   const [name, setName] = useState("My configuration");
   const [message, setMessage] = useState("");
   const [saveError, setSaveError] = useState("");
+  const [adjustment, setAdjustment] = useState<{
+    key: keyof Parameters;
+    before: Parameters;
+  } | null>(null);
   const { configurations, issue } = useConfigurations();
   const result = metrics(parameters);
+  const withoutContacts = metrics({ ...parameters, contactResistance: 0 });
   function change(key: keyof Parameters, value: number) {
+    if (parameters[key] === value) return;
     const next = { ...parameters, [key]: value };
+    setAdjustment((previous) =>
+      previous?.key === key ? previous : { key, before: parameters },
+    );
     setParameters(next);
     setMessage("");
     window.history.replaceState(
@@ -99,6 +110,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
               className="button-secondary"
               onClick={() => {
                 setParameters({ ...defaultParameters });
+                setAdjustment(null);
                 setMessage("");
                 window.history.replaceState(
                   null,
@@ -147,7 +159,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
           <IVChart
             mode={mode}
             series={[
-              { name: "Current configuration", parameters, color: "#67e8f9" },
+              { name: "Current configuration", parameters, color: "#4f46e5" },
             ]}
           />
           <div className="metrics-grid" aria-live="polite">
@@ -198,18 +210,58 @@ export function Simulator({ initial }: { initial: Parameters }) {
           </div>
         </section>
       </div>
+      <section
+        className="section panel result-insights"
+        id="understanding-results"
+      >
+        <h2>Understanding the Results</h2>
+        <p className="mt-3" aria-live="polite" data-result-explanation>
+          {adjustment
+            ? parameterInsight(adjustment.before, parameters, adjustment.key)
+            : "Change one parameter to compare its calculated current with the value before that adjustment. All other assumptions stay fixed during that comparison."}
+        </p>
+        <div className="two-column mt-5">
+          <div>
+            <h3>Your selected bias point</h3>
+            <p className="text-sm mt-2" data-bias-explanation>
+              {parameters.gateVoltage <= modelConstants.thresholdV
+                ? "The external gate bias is at or below the model threshold, so the calculation gives zero channel current. Increasing mobility alone cannot turn this bias point ON."
+                : parameters.drainVoltage === 0
+                  ? "There is no source-to-drain bias, so calculated drain current is zero even though the gate can induce channel charge."
+                  : `The model is in the ${result.region.toLowerCase()} region. Its internal gate-to-source voltage is ${result.internalVgs.toFixed(3)} V and its internal drain-to-source voltage is ${result.internalVds.toFixed(3)} V.`}
+            </p>
+          </div>
+          <div>
+            <h3>What the contacts change</h3>
+            <p className="text-sm mt-2" data-contact-explanation>
+              {result.currentUa === 0
+                ? "At this zero-current bias point, the model has no contact voltage drop. Raising contact resistance therefore leaves the calculated current at zero."
+                : parameters.contactResistance === 0
+                  ? "You selected ideal zero-resistance contacts. The internal and external voltages are equal; add contact resistance to explore their difference."
+                  : `At the same external bias and channel assumptions, ideal zero-resistance contacts would give ${withoutContacts.currentUa.toFixed(3)} µA. Your selected contacts give ${result.currentUa.toFixed(3)} µA, because part of the applied voltage drops across the contacts.`}
+            </p>
+          </div>
+        </div>
+        <p className="text-sm mt-4">
+          These explanations describe the selected bias point. The graph sweeps{" "}
+          {mode === "transfer" ? "gate" : "drain"} voltage to show a wider
+          response.
+        </p>
+      </section>
       <div className="two-column section">
         <div className="panel">
-          <details open>
+          <details>
             <summary>Model & Equations</summary>
-            <p className="formula">β = μ Cg W/L</p>
+            <p className="formula" id="model">
+              β = μ Cg W/L
+            </p>
             <p className="formula">I = β[(Vgs − Vt)Vds − Vds²/2]</p>
             <p className="text-sm">
               Linear region: 0 ≤ Vds &lt; Vgs − Vt. In saturation: I = β(Vgs −
               Vt)²/2. In cutoff: I = 0.{" "}
               <ReferenceLink id="mosfet" from="/simulator#model" />
             </p>
-            <details id="model">
+            <details>
               <summary>Units, constants & contact correction</summary>
               <p className="text-sm">
                 W = 1 µm; Cg = 0.01 F/m²; Vt = 0.7 V. Mobility converts from
@@ -222,7 +274,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
           </details>
         </div>
         <div className="panel">
-          <details open>
+          <details>
             <summary>Assumptions & Limitations</summary>
             <p className="text-sm">
               Long-channel, quasi-static n-channel teaching model with constant
@@ -243,13 +295,13 @@ export function Simulator({ initial }: { initial: Parameters }) {
         <h2>Related Knowledge</h2>
         <div className="actions">
           <Link href="/foundations#bands" className="text-link">
-            Band Gap →
+            Energy Bands →
           </Link>
           <Link href="/foundations#transistors" className="text-link">
-            Gate control →
+            Transistor Basics →
           </Link>
-          <Link href="/foundations#surfaces" className="text-link">
-            Surfaces & interfaces →
+          <Link href="/comparison" className="text-link">
+            Material Comparison →
           </Link>
         </div>
       </section>
