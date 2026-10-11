@@ -1,6 +1,6 @@
 # NanoLab: Beyond Silicon
 
-An interactive educational platform for **MECH6045: Nanotechnology — Fundamentals and Applications**. V1 explores **Next-Generation 2D Semiconductor Transistors — Exploring MoS₂ Beyond Silicon** through introductory physics, a device explorer, a teaching simulator and selected published research.
+An Interactive Learning Platform for Nanotechnology and Next-Generation Electronics, developed for **MECH6045: Nanotechnology — Fundamentals and Applications**. The learning journey connects nanoscale fundamentals → graphene structure and electronic properties → the zero-band-gap challenge → MoS₂ semiconductors → transistors → simulation → engineering challenges → research.
 
 [Production website](https://nano-virtual-lab.vercel.app) · [GitHub repository](https://github.com/HandsomeSK/nano-virtual-lab)
 
@@ -27,19 +27,19 @@ npm start          # Serve the production build
 
 ## Connected pages
 
-| Route          | Content and interactions                                                                                    |
-| -------------- | ----------------------------------------------------------------------------------------------------------- |
-| `/`            | Hero, research question, features, learning journey and research previews                                   |
-| `/foundations` | Six anchored learning modules: scales, surfaces, quantum/bands, materials, characterization and transistors |
-| `/why-mos2`    | Motivation, layer structure, material switching, opportunities and limitations                              |
-| `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF    |
-| `/simulator`   | Five live parameters, calculated I–V curves, metrics, save/reset and model disclosures                      |
-| `/comparison`  | Qualitative material properties plus two teaching-model scenarios; overlay/side-by-side with shared axes    |
-| `/challenges`  | Contacts, interfaces, scaling and manufacturing; foundation, simulator and research links                   |
-| `/research`    | Five verified milestones with publication-year/direction filters and an interactive timeline                |
-| `/about`       | Reference search/filter, highlighted citations and return links, scope, course status and credits           |
+| Route          | Content and interactions                                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `/`            | Graphene-to-electronics hero, topic introduction, eight clickable learning nodes, tools and research previews                      |
+| `/foundations` | Six modules: nanoscale/surfaces, quantum/bands, graphene structure, interactive Dirac/transport lab, characterization, transistors |
+| `/why-mos2`    | From Graphene to MoS₂: transport, zero-gap challenge, interactive bands, layered structures and device connections                 |
+| `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF                           |
+| `/simulator`   | Five live parameters, calculated I–V curves, save/reset, result explanations from actual calculations and collapsed model details  |
+| `/comparison`  | Qualitative material properties plus two teaching-model scenarios; overlay/side-by-side with shared axes                           |
+| `/challenges`  | Contacts, interfaces, scaling and manufacturing; foundation, simulator and research links                                          |
+| `/research`    | Seven verified MoS₂ milestones through 2026, filters/timeline and links explaining why each study matters                          |
+| `/about`       | Reference search/filter, highlighted citations and return links, scope, course resources and credits                               |
 
-The legacy `/explore` route redirects to `/device`. Every canonical page has shared navigation and at least two contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands` and `#transistors`.
+The legacy `/explore` route redirects to `/device`. Every canonical page has shared navigation and at least two contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands`, `#graphene-structure`, `#graphene-electronics` and `#transistors`; previous `#materials` links still work.
 
 ## Model and saved configurations
 
@@ -65,20 +65,27 @@ src/components/learning/ Reusable knowledge cards, bands, material and foundatio
 src/components/simulation/ Parameter controls, charts, simulator and comparison UI
 src/components/          Navigation, device viewer, challenge/research/reference components
 src/data/                Knowledge, materials, device geometry, challenges, studies and references
-src/lib/simulation/      Pure model, parameter bounds, storage parsing and storage subscription
+src/lib/simulation/      Unchanged physical model and persistence; calculated interpretation helper
+src/lib/graphene.ts       Pure normalized teaching dispersion and transport helpers
 src/lib/site.ts          Shared identity, navigation, journey and safe return paths
-tests/simulation.test.mjs Model, units, contacts, URLs and persistence validation
+tests/*.test.mjs         Model, units, contacts, URLs, persistence and new teaching-logic checks
 ```
 
 Add sources to `src/data/references.ts` before adding a new scientific claim. Citation numbers are shared globally; keep existing source IDs stable and append new references. Research summaries reference those IDs. Extend `knowledge.ts` and learning widgets for new concepts; keep model changes in `model.ts` and update its tests and assumptions together. New material performance models require justification and their own calibration, not merely a material selector.
 
 ## Scientific scope and attribution
 
-The selected papers span 2010, 2011, 2016, 2023 and 2024, with DOI/original-source links. This is a curated entry point, not a comprehensive or automatically updated literature review. Optical transitions are distinguished from quasiparticle gaps, and physical gate length from effective channel length.
+Graphene explanations cite Castro Neto et al. (2009), Novoselov et al. (2004, 2005) and Schwierz (2010). The MoS₂ timeline spans 2010–2026, including publisher-verified 2025 dry-transfer and 2026 microprocessor studies. This is a curated selection, not a comprehensive or automatically updated literature review.
 
-**Course Lecture 1–6 files have not been supplied.** Their mapping and specific lecture figures/wording remain pending. Foundations currently uses general physics and cited teaching resources.
+Course connections use the project author's supplied page locations: **MECH6045 Lecture 2, pp. 18–19** (energy bands and band gap) and **Lecture 3, p. 26** (graphene electronic properties). No lecture quotations or additional page numbers are invented. The full lecture files have not been independently reviewed; linked scientific literature supports the explanations.
 
-All production diagrams are original SVG/CSS schematics, not to scale. No publisher figures or measured datasets have been copied. AI-generated design concepts informed the interface; AI also assisted implementation and testing. Simulator constants and everyday size examples are explicitly illustrative. Tool, font, model and image credits are visible on About & References.
+The Dirac lab uses relative energy/wave-vector units and a low-energy schematic near a graphene Dirac point, not a full band calculation. Moving Fermi energy changes carrier occupancy, without opening an intrinsic graphene gap. Mobility, group velocity and mean free path are distinct quantities. The transport activity uses an illustrative length/mean-free-path ratio and does not predict measured conductance. Gapped/metal diagrams are qualitative. A finite gap can help switching; it does not guarantee a device's leakage or outperform silicon.
+
+Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage illustration is AI-generated conceptual artwork, optimized locally as WebP; it is not an atomistic simulation or experimental image. No publisher figures or measured datasets have been copied. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
+
+## Visual system
+
+The light theme uses a cool `#F7FAFF` background, white learning panels, navy `#202D53` text and `#536480` secondary text. Indigo `#4F46E5` marks actions, cyan `#06B6D4` graphene and transport, violet `#8B5CF6` MoS₂, and orange `#F59E0B` learning questions. Darker cyan/violet variants keep small text readable. Shared CSS variables, soft borders/shadows and rounded interaction cards apply across all nine pages. Charts include labels, legends and distinct line styles; state is not communicated by color alone.
 
 ## Project-local Codex skills
 
@@ -108,11 +115,19 @@ User instructions take precedence over skill guidance.
 
 Model checks exercise analytic linear/saturation limits, SI conversions, self-consistent contact drops, mobility/length scaling, finite curves, malformed parameter URLs, versioned stored data and safe citation return links. Run the commands above after model changes.
 
-Browser verification should cover all nine routes at 320, 390, 768 and 1440 px, navigation and anchors, learning controls, 3D interactions, save/compare/edit/reload flows, research filters and citation search/return. On 2026-10-10, Playwright Chromium against the local production build passed **48 checks**, including **36 page checks** (nine routes at 320, 390, 768 and 1440 px) and all **64 unique internal destinations/anchors**. Functional checks covered desktop/mobile navigation and focus, all six learning widgets, material switching, 3D selection/visibility/orbit/zoom/reset, natural numeric entry, curve switching, two saved configurations, comparison/edit/reload/removal, invalid storage feedback, research filters/timeline/empty results, citation search/highlight/safe return, challenge parameter links, direct anchor refresh, legacy redirect, 404 and reduced motion. No unexpected browser console/runtime errors or failed requests were recorded; the intentional 404 response was checked separately.
+The redesign passed ESLint with zero warnings, standalone TypeScript validation, all **13 named automated tests**, and `npm run build`. Production-build browser validation used Playwright Chromium because the Browser plugin was unavailable:
 
-The source also passed `npm run lint`, `npm run test` (7 tests), `npm run build`, `npm run typecheck` and `git diff --check`. Visual review compared desktop Home and Simulator and mobile Foundations/Home with the design concepts: dark/cyan palette, typography, split hero, device layers, action hierarchy, feature/journey layout and control/chart layout. Production diagrams and paper titles intentionally use corrected schematics and verified sources in place of errors in generated concepts.
+- All nine pages at **320, 390, 768 and 1440 px**: 36 route/layout checks, with no horizontal overflow.
+- **76 unique internal destinations**, including knowledge anchors, citation targets and parameter links.
+- **15 interaction flows**: desktop/mobile navigation and keyboard focus; six foundation widgets and the Dirac/Fermi/transport lab; material switching; 3D rotation, zoom, selection, visibility, exploded view and ON/OFF; simulator controls, calculated explanations, save/compare/edit/reload and malformed storage; research filters/timeline; reference search/filter/return; challenge deep links; direct/refreshed model anchors; redirects, 404 and reduced motion.
+- No unexpected console warnings, application errors or framework overlays. The intentional missing-page check produced its expected 404 response.
+- A computed foreground/background review covered **1,366 text samples** across the nine pages with no flagged contrast failures. Gradients and all possible interactive states are not exhaustively resolved by this review.
+- Visual checks at **1536 × 1024** and **390 × 844** compared design concepts with rendered screenshots. Fixed narrow-screen overflow, cyan label contrast, diagram annotations, quantum-level label overlap and topic-number wrapping.
+- Fragment positioning completes immediately so rapid cross-page navigation does not interrupt a pending smooth scroll. Direct links, refreshes and the zero-gap → Dirac lab → learning-question return flow were checked in the production build.
 
-Browser coverage is Chromium; Safari and Firefox have not been tested. Saved configurations are local to the browser. Course lecture mapping and a calibrated transport model remain future work.
+The core physical solver, storage schema/key, dependency manifests and route definitions remain unchanged. Temporary browser scripts and screenshots are kept outside the repository.
+
+Browser coverage uses Chromium; Safari and Firefox are not included. Configurations remain browser-local; the transistor model remains educational and uncalibrated.
 
 ## GitHub and Vercel
 

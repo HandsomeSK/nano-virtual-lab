@@ -9,6 +9,9 @@ const papers = studies.map((study) => ({
   ...study,
   reference: references.find((ref) => ref.id === study.reference)!,
 }));
+const publicationYears = [
+  ...new Set(papers.map((paper) => paper.reference.year)),
+];
 export function ResearchExplorer({
   initialYear,
   initialCategory,
@@ -49,8 +52,8 @@ export function ResearchExplorer({
     <>
       <section className="section">
         <SectionHeading
-          title="Research Categories"
-          description="A curated set of verified milestones, not a comprehensive or continuously updated literature review."
+          title="Find a Research Direction"
+          description="Explore selected, verified studies from monolayer physics to integrated circuits."
         />
         <div className="filter-row">
           <label>
@@ -61,9 +64,9 @@ export function ResearchExplorer({
               onChange={(event) => update(event.target.value, category, "")}
             >
               <option value="">All years</option>
-              {papers.map((paper) => (
-                <option key={paper.reference.year} value={paper.reference.year}>
-                  {paper.reference.year}
+              {publicationYears.map((publicationYear) => (
+                <option key={publicationYear} value={publicationYear}>
+                  {publicationYear}
                 </option>
               ))}
             </select>
@@ -140,11 +143,23 @@ export function ResearchExplorer({
                 {paper.reference.authors} · {paper.reference.venue}
               </p>
               <p className="mt-4">{paper.summary}</p>
+              <div className="connection">
+                <h4>Why This Research Matters</h4>
+                <p>{paper.whyMatters}</p>
+                <Link className="text-link" href={paper.concept}>
+                  {paper.conceptLabel} →
+                </Link>
+              </div>
               <details
                 key={String(active === paper.reference.id)}
                 open={active === paper.reference.id}
                 onToggle={(event) => {
-                  if (event.currentTarget.open) setSelected(paper.reference.id);
+                  if (
+                    event.currentTarget.open &&
+                    active !== paper.reference.id
+                  ) {
+                    update(year, category, paper.reference.id);
+                  }
                 }}
               >
                 <summary>Study details & open question</summary>

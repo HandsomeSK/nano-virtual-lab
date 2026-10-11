@@ -2,7 +2,7 @@ export const deviceParts = [
   {
     id: "substrate",
     name: "Substrate",
-    color: "#405675",
+    color: "#a9bbd3",
     x: 0,
     y: 0,
     z: 0,
@@ -15,7 +15,7 @@ export const deviceParts = [
   {
     id: "channel",
     name: "MoS₂ Channel",
-    color: "#45b9c5",
+    color: "#8b5cf6",
     x: 30,
     y: 50,
     z: 28,
@@ -23,12 +23,12 @@ export const deviceParts = [
     d: 140,
     h: 3,
     role: "A semiconducting conduction path between source and drain. Thickness is exaggerated for visibility.",
-    concept: "/foundations#materials",
+    concept: "/why-mos2#meet-mos2",
   },
   {
     id: "source",
     name: "Source",
-    color: "#d2b46d",
+    color: "#b7c3d4",
     x: 30,
     y: 50,
     z: 31,
@@ -41,7 +41,7 @@ export const deviceParts = [
   {
     id: "drain",
     name: "Drain",
-    color: "#d2b46d",
+    color: "#b7c3d4",
     x: 305,
     y: 50,
     z: 31,
@@ -54,7 +54,7 @@ export const deviceParts = [
   {
     id: "dielectric",
     name: "Dielectric",
-    color: "#8895bd",
+    color: "#dbe6f5",
     x: 110,
     y: 50,
     z: 31,
@@ -67,7 +67,7 @@ export const deviceParts = [
   {
     id: "gate",
     name: "Gate",
-    color: "#b5a4ff",
+    color: "#94a3b8",
     x: 120,
     y: 65,
     z: 45,

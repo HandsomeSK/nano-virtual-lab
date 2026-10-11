@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { BandDiagram } from "./band-diagram";
-import { MaterialExplorer } from "./material-explorer";
+import { GrapheneStructureExplorer } from "./graphene-structure";
+import { GrapheneElectronicsExplorer } from "./graphene-electronics";
 import { ReferenceLink } from "@/components/reference-link";
 
 function ScaleExplorer() {
@@ -82,7 +83,7 @@ function ScaleExplorer() {
 function SurfaceExplorer() {
   const [diameter, setDiameter] = useState(10);
   return (
-    <div className="panel two-column">
+    <div className="panel two-column" id="surfaces">
       <div>
         <h3>Explore surface-to-volume ratio</h3>
         <label htmlFor="particle-size" className="block mt-5">
@@ -139,14 +140,23 @@ function QuantumExplorer() {
           onChange={(event) => setWidth(Number(event.target.value))}
         />
         <svg
-          viewBox="0 0 360 190"
+          viewBox="0 0 360 250"
           role="img"
           aria-label="First three infinite-well energy levels in electronvolts"
         >
+          <text x="65" y="12" fill="var(--color-ink)" fontSize="14">
+            Energy (eV) · fixed scale
+          </text>
+          <text x="35" y="165" fill="var(--color-muted)" fontSize="12">
+            0
+          </text>
+          <text x="25" y="35" fill="var(--color-muted)" fontSize="12">
+            3.5
+          </text>
           <path
             d="M65 18v145h235V18"
             fill="none"
-            stroke="#526886"
+            stroke="#536480"
             strokeWidth="3"
           />
           {[1, 2, 3].map((n) => {
@@ -156,9 +166,17 @@ function QuantumExplorer() {
               <g key={n}>
                 <path
                   d={"M70 " + y + "H293"}
-                  stroke={n === 1 ? "#67e8f9" : "#b5a4ff"}
+                  stroke={n === 1 ? "#076b7d" : "#7652c8"}
+                  strokeDasharray={
+                    n === 2 ? "6 3" : n === 3 ? "2 2" : undefined
+                  }
                 />
-                <text x="74" y={y - 6} fill="#edf3ff" fontSize="12">
+                <text
+                  x="74"
+                  y={196 + (n - 1) * 23}
+                  fill="var(--color-ink)"
+                  fontSize="16"
+                >
                   {"n=" + n + " · " + e.toFixed(3) + " eV"}
                 </text>
               </g>
@@ -196,10 +214,15 @@ function QuantumExplorer() {
         </div>
         <BandDiagram material={band} />
         <p className="text-sm mt-4">
-          Electrons behave as waves. In a crystal, allowed states form bands; a
-          forbidden energy interval is the band gap. Graphene is a semimetal,
-          not a conventional gapped semiconductor.
+          Electrons behave as waves. A crystal’s periodic lattice potential
+          organizes allowed states into energy bands; a forbidden interval is
+          the band gap. A metal has available states at the Fermi level. In
+          ideal graphene, bands touch at the Dirac point.{" "}
+          <ReferenceLink id="course-bands" from="/foundations#bands" />
         </p>
+        <Link href="/why-mos2#band-gap" className="text-link">
+          Why does the gap matter for switching? →
+        </Link>
       </div>
     </div>
   );
@@ -297,34 +320,40 @@ function CharacterizationExplorer() {
         role="img"
         aria-label={technique.id + " measurement target: " + technique.measure}
       >
-        <path d="M35 95H385V120H35Z" fill="#243b5b" stroke="#526886" />
+        <path d="M35 95H385V120H35Z" fill="#edf1fb" stroke="#536480" />
         {selected === "TEM" ? (
           <g>
             {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
               <g key={i}>
-                <circle cx={75 + i * 38} cy="65" r="5" fill="#67e8f9" />
-                <circle cx={75 + i * 38} cy="80" r="5" fill="#b5a4ff" />
+                <circle cx={75 + i * 38} cy="65" r="5" fill="#076b7d" />
+                <circle cx={75 + i * 38} cy="80" r="5" fill="#7652c8" />
               </g>
             ))}
           </g>
         ) : selected === "AFM" || selected === "STM" ? (
           <g>
-            <path d="M70 95V82H190V72H310V95" fill="#316777" stroke="#67e8f9" />
-            <path d="M175 20H235L205 57Z" fill="#b5a4ff" />
-            <path d="M205 60V70" stroke="#e4c879" strokeDasharray="3 2" />
+            <path d="M70 95V82H190V72H310V95" fill="#cff1f5" stroke="#076b7d" />
+            <path d="M175 20H235L205 57Z" fill="#7652c8" />
+            <path d="M205 60V70" stroke="#b87910" strokeDasharray="3 2" />
           </g>
         ) : (
           <g>
-            <path d="M105 85H315V95H105Z" fill="#316777" stroke="#67e8f9" />
+            <path d="M105 85H315V95H105Z" fill="#cff1f5" stroke="#076b7d" />
             <path
               d="M185 15 205 75 225 15"
               fill="none"
-              stroke={selected === "SEM" ? "#b5a4ff" : "#e4c879"}
+              stroke={selected === "SEM" ? "#7652c8" : "#b87910"}
               strokeWidth="2"
             />
           </g>
         )}
-        <text x="210" y="136" fill="#aebfd5" textAnchor="middle" fontSize="11">
+        <text
+          x="210"
+          y="136"
+          fill="var(--color-muted)"
+          textAnchor="middle"
+          fontSize="11"
+        >
           {selected === "TEM"
             ? "Atomic structure / diffraction"
             : selected === "AFM"
@@ -372,11 +401,16 @@ function TransistorExplorer() {
         </div>
       </div>
       <div className={"fet-demo " + (on ? "is-on" : "")}>
-        <button onClick={() => setPart("Gate")} className="fet-gate">
+        <button
+          onClick={() => setPart("Gate")}
+          aria-pressed={part === "Gate"}
+          className="fet-gate"
+        >
           Gate
         </button>
         <button
           onClick={() => setPart("Dielectric")}
+          aria-pressed={part === "Dielectric"}
           className="fet-dielectric"
         >
           Dielectric
@@ -388,13 +422,26 @@ function TransistorExplorer() {
               onClick={() => setPart(name)}
               aria-pressed={part === name}
             >
-              {name === "Channel" ? "MoS₂ channel" : name}
+              {name === "Channel" ? (
+                <>
+                  MoS₂ channel
+                  {on ? (
+                    <span className="fet-flow" aria-hidden="true">
+                      {[0, 1, 2, 3].map((i) => (
+                        <i key={i} style={{ animationDelay: i * -0.4 + "s" }} />
+                      ))}
+                    </span>
+                  ) : null}
+                </>
+              ) : (
+                name
+              )}
             </button>
           ))}
         </div>
         <p>
           {on
-            ? "ON · channel charge is increased in this n-channel example"
+            ? "ON · electron transport from source to drain (n-channel schematic)"
             : "OFF · channel charge is reduced (idealized)"}
         </p>
       </div>
@@ -404,7 +451,7 @@ function TransistorExplorer() {
       </p>
       <div className="actions">
         <Link href="/why-mos2" className="text-link">
-          Explore MoS₂ →
+          From Graphene to MoS₂ →
         </Link>
         <Link href="/device" className="button-secondary">
           Explore Device
@@ -416,13 +463,18 @@ function TransistorExplorer() {
 export function FoundationWidget({ id }: { id: string }) {
   switch (id) {
     case "nanoscale":
-      return <ScaleExplorer />;
-    case "surfaces":
-      return <SurfaceExplorer />;
+      return (
+        <div className="widget-stack">
+          <ScaleExplorer />
+          <SurfaceExplorer />
+        </div>
+      );
     case "quantum":
       return <QuantumExplorer />;
-    case "materials":
-      return <MaterialExplorer from="/foundations#materials" />;
+    case "graphene-structure":
+      return <GrapheneStructureExplorer />;
+    case "graphene-electronics":
+      return <GrapheneElectronicsExplorer />;
     case "characterization":
       return <CharacterizationExplorer />;
     default:

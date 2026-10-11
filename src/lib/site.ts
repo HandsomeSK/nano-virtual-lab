@@ -3,12 +3,12 @@ export const site = {
   courseCode: "MECH6045",
   courseTitle: "Nanotechnology: Fundamentals and Applications",
   description:
-    "Explore MoS₂ beyond silicon through nanoscale foundations, a 3D device explorer, educational transistor simulations, and research.",
+    "An Interactive Learning Platform for Nanotechnology and Next-Generation Electronics. Explore graphene, energy bands, MoS₂ transistors and educational simulations.",
 };
 export const navigation = [
   { href: "/", title: "Home" },
   { href: "/foundations", title: "Foundations" },
-  { href: "/why-mos2", title: "Why MoS₂?" },
+  { href: "/why-mos2", title: "From Graphene to MoS₂" },
   { href: "/device", title: "Device" },
   { href: "/simulator", title: "Simulator" },
   { href: "/comparison", title: "Comparison" },
@@ -19,33 +19,51 @@ export const navigation = [
 export const journey = [
   {
     href: "/foundations",
-    title: "Foundations",
-    description: "Start with six ideas at the nanoscale.",
+    title: "Nanotechnology",
+    description: "Find your bearings at the nanoscale.",
+    tone: "indigo",
   },
   {
-    href: "/why-mos2",
-    title: "Why MoS₂?",
-    description: "Understand the material choice.",
+    href: "/foundations#graphene-electronics",
+    title: "Graphene",
+    description: "Explore extraordinary transport.",
+    tone: "cyan",
+  },
+  {
+    href: "/why-mos2#zero-gap",
+    title: "Zero-gap challenge",
+    description: "Ask what a digital switch needs.",
+    tone: "cyan",
+  },
+  {
+    href: "/why-mos2#meet-mos2",
+    title: "MoS₂",
+    description: "Meet a 2D semiconductor.",
+    tone: "violet",
   },
   {
     href: "/device",
-    title: "Device",
+    title: "Devices",
     description: "Explore the layers of a transistor.",
+    tone: "violet",
   },
   {
     href: "/simulator",
-    title: "Simulator",
+    title: "Simulation",
     description: "Change a parameter. See its effect.",
+    tone: "indigo",
   },
   {
-    href: "/comparison",
-    title: "Comparison",
-    description: "Compare materials and your scenarios.",
+    href: "/challenges",
+    title: "Challenges",
+    description: "Connect the science to engineering.",
+    tone: "orange",
   },
   {
     href: "/research",
     title: "Research",
     description: "Follow the evidence and open questions.",
+    tone: "indigo",
   },
 ];
 export type Query = Record<string, string | string[] | undefined>;

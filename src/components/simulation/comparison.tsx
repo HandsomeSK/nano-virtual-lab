@@ -15,7 +15,8 @@ import {
   writeConfigurations,
 } from "@/lib/simulation/use-configurations";
 import { IVChart } from "./iv-chart";
-import { SectionHeading, Notice } from "@/components/page-shell";
+import { SectionHeading } from "@/components/page-shell";
+import { parameterInsight } from "@/lib/simulation/insights";
 type Scenario = { id: string; name: string; parameters: Parameters };
 export function Comparison({
   incoming,
@@ -61,6 +62,9 @@ export function Comparison({
   const second = scenarios.find((item) => item.id === b) || scenarios[1];
   const mA = metrics(first.parameters),
     mB = metrics(second.parameters);
+  const differingControls = parameterControls.filter(
+    (item) => first.parameters[item.key] !== second.parameters[item.key],
+  );
   const maximumCurrent = Math.max(
     ...curve(first.parameters, mode).map((point) => point.y),
     ...curve(second.parameters, mode).map((point) => point.y),
@@ -137,14 +141,9 @@ export function Comparison({
       </section>
       <section className="section">
         <SectionHeading
-          title="Comparison Visualization"
-          description="Compare two parameter sets in the same MoS₂-context educational model."
+          title="Simulator Results Comparison"
+          description="Compare two parameter sets in the same MoS₂-context teaching model. The qualitative material properties above do not set the parameters of these curves."
         />
-        <Notice>
-          <strong>Educational / Simplified Model.</strong> These curves compare
-          assumptions, not measured performance across silicon, graphene and
-          MoS₂.
-        </Notice>
         <div className="two-column">
           <label className="block text-sm">
             Scenario A
@@ -221,12 +220,12 @@ export function Comparison({
                 {
                   name: "A: " + first.name,
                   parameters: first.parameters,
-                  color: "#67e8f9",
+                  color: "#4f46e5",
                 },
                 {
                   name: "B: " + second.name,
                   parameters: second.parameters,
-                  color: "#b5a4ff",
+                  color: "#7652c8",
                 },
               ]}
             />
@@ -241,7 +240,7 @@ export function Comparison({
                   {
                     name: "A: " + first.name,
                     parameters: first.parameters,
-                    color: "#67e8f9",
+                    color: "#4f46e5",
                   },
                 ]}
               />
@@ -254,7 +253,7 @@ export function Comparison({
                   {
                     name: "B: " + second.name,
                     parameters: second.parameters,
-                    color: "#b5a4ff",
+                    color: "#7652c8",
                   },
                 ]}
               />
@@ -312,12 +311,19 @@ export function Comparison({
         </div>
       </section>
       <section className="section">
-        <SectionHeading title="Comparison Summary" />
-        <p>
-          At their selected bias points, A gives {mA.currentUa.toFixed(3)} µA
-          and B gives {mB.currentUa.toFixed(3)} µA. Check every parameter before
-          attributing the difference to a single cause. Device architecture and
-          measurement conditions would also matter in a real comparison.
+        <SectionHeading title="Key Observations" />
+        <p aria-live="polite" data-comparison-observation>
+          {differingControls.length === 0
+            ? `Both scenarios use the same parameters and give ${mA.currentUa.toFixed(3)} µA at the selected bias point.`
+            : differingControls.length === 1
+              ? `Relative to Scenario B, Scenario A changes one assumption: ${parameterInsight(second.parameters, first.parameters, differingControls[0].key)}`
+              : `At their selected bias points, A gives ${mA.currentUa.toFixed(3)} µA and B gives ${mB.currentUa.toFixed(3)} µA. The scenarios differ in ${differingControls.map((item) => item.label.toLowerCase()).join(", ")}; their response combines these changes.`}
+        </p>
+        <p className="text-sm mt-3">
+          A finite gap, strong carrier transport and a mature fabrication
+          process answer different materials questions. These assumed device
+          curves cannot rank graphene, MoS₂ and silicon. Real comparisons also
+          need matched architecture and measurement conditions.
         </p>
         <Link href="/challenges" className="text-link">
           Explore what this model omits →

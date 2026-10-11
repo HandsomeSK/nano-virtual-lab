@@ -1,53 +1,58 @@
 export const knowledge = [
   {
     id: "nanoscale",
-    title: "Nanoscale & Nanotechnology",
+    title: "Understanding the Nanoscale",
     theory:
       "A nanometre is one billionth of a metre. Nanotechnology often concerns dimensions around 1–100 nm, where surfaces and quantum behaviour can become especially important.",
+    connectionTitle: "Why does size change behaviour?",
     connection:
-      "An MoS₂ monolayer is approximately 0.65 nm thick. An atomically thin channel offers a different geometry for controlling charge.",
-    href: "/why-mos2#meet-mos2",
-    link: "Meet MoS₂",
-    reference: "radis2011",
-  },
-  {
-    id: "surfaces",
-    title: "Size-Dependent Properties",
-    theory:
-      "For a sphere, surface area grows with diameter squared while volume grows with diameter cubed. Smaller particles therefore expose more surface per unit volume.",
-    connection:
-      "A sphere is only an analogy: the exposed surfaces of a 2D channel make interfaces, contamination and contacts central to device behaviour.",
+      "Smaller particles expose more surface per volume. For an atomically thin sheet, exposed surfaces and interfaces are especially important; the spherical model below is a geometric analogy.",
     href: "/challenges#interfaces",
     link: "Explore interfaces",
     reference: "assets",
   },
   {
     id: "quantum",
-    title: "Quantum Effects & Energy Bands",
+    title: "Quantum Mechanics & Energy Bands",
     theory:
-      "Electrons have wave-like behaviour. Confinement restricts allowed states; in solids, many states form bands separated by gaps. A useful semiconductor can modulate carrier density for switching.",
+      "Electrons have wave-like behaviour. Confinement restricts allowed states. In a solid, the periodic lattice potential organizes electron states into energy bands, sometimes separated by forbidden gaps. A semiconductor can modulate carrier density for switching.",
+    connectionTitle: "From allowed states to switching",
     connection:
-      "MoS₂ has a finite band gap; pristine graphene is a zero-gap semimetal. This matters for switching, but a band gap alone does not determine a transistor’s performance.",
-    href: "/why-mos2#materials",
-    link: "Why the band gap matters",
-    reference: "mak2010",
+      "A band gap is an energy interval without allowed states in an ideal crystal. It helps a gate suppress carrier density, while contacts, defects and architecture determine the actual OFF current. This topic connects to MECH6045 Lecture 2, pages 18–19.",
+    href: "/why-mos2#band-gap",
+    link: "Explore why the gap matters",
+    reference: "course-bands",
   },
   {
-    id: "materials",
-    title: "Carbon & 2D Materials",
+    id: "graphene-structure",
+    title: "Structure of Graphene",
     theory:
-      "Graphene is one atomic layer of carbon. A MoS₂ monolayer contains a sulfur–molybdenum–sulfur unit. Strong bonds within a layer and weaker interactions between layers enable thin sheets.",
+      "Graphene is a single layer of carbon atoms arranged in a honeycomb lattice. Two carbon sites form the repeating basis; strong in-plane bonds create an atomically thin sheet.",
+    connectionTitle: "One sheet, several carbon structures",
     connection:
-      "Semiconducting 2H-MoS₂ belongs to the transition-metal dichalcogenides. Its material properties and graphene’s properties lead to different device opportunities.",
-    href: "/why-mos2",
-    link: "Explore the material choice",
-    reference: "radis2011",
+      "Stacking graphene-like sheets gives graphite; rolling a sheet provides a geometric picture of a carbon nanotube. Structure changes electronic behaviour: nanotubes can be metallic or semiconducting depending on how the sheet is rolled.",
+    href: "/foundations#graphene-electronics",
+    link: "Explore graphene electronics",
+    reference: "neto2009",
+  },
+  {
+    id: "graphene-electronics",
+    title: "Electronic Properties of Graphene",
+    theory:
+      "Near the K and K′ points, ideal monolayer graphene has approximately linear energy–wave-vector dispersion. Its bands meet at the Dirac point. Clean graphene can support high mobility and long mean free paths, creating opportunities for high-speed electronics.",
+    connectionTitle: "A natural next question",
+    connection:
+      "Moving charge efficiently and switching a digital transistor to a low-leakage OFF state are different goals. Explore how graphene’s zero gap motivates interest in semiconducting 2D materials. This learning connection begins with MECH6045 Lecture 3, page 26.",
+    href: "/why-mos2#zero-gap",
+    link: "From graphene to MoS₂",
+    reference: "course-graphene",
   },
   {
     id: "characterization",
     title: "Nanomaterial Characterization",
     theory:
       "Imaging, spectroscopy and electrical measurements answer different questions. The right technique depends on whether you need morphology, atomic structure, local electronic states or transport.",
+    connectionTitle: "Choose evidence for your question",
     connection:
       "AFM can help identify thin flakes; TEM can investigate atomic structure. Optical spectroscopy and electrical measurements provide complementary evidence.",
     href: "/research",
@@ -56,7 +61,8 @@ export const knowledge = [
   },
   {
     id: "transistors",
-    title: "From Nanomaterials to Transistors",
+    title: "From Materials to Transistors",
+    connectionTitle: "Build on the material picture",
     theory:
       "A field-effect transistor has source and drain contacts connected by a semiconductor channel. A gate acts through an insulating dielectric to control channel charge.",
     connection:

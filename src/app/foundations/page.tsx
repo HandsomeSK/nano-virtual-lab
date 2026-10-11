@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageShell, RelatedTopics, Notice } from "@/components/page-shell";
+import { PageShell, RelatedTopics } from "@/components/page-shell";
 import { knowledge } from "@/data/knowledge";
 import { KnowledgeCard } from "@/components/learning/knowledge-card";
 import { FoundationWidget } from "@/components/learning/foundation-widgets";
@@ -8,7 +8,7 @@ export default function Foundations() {
   return (
     <PageShell
       title="Foundations"
-      intro="Six ideas that connect the nanoscale to a working transistor. Explore the physics before exploring the device."
+      intro="Explore six connected ideas: the nanoscale, energy bands, graphene and the physics of a working transistor. Choose a topic and learn by experimenting."
     >
       <div className="learning-layout">
         <aside className="knowledge-toc">
@@ -30,19 +30,13 @@ export default function Foundations() {
           ))}
         </div>
       </div>
-      <div className="section">
-        <Notice>
-          General foundations for MECH6045. Lecture 1–6 files have not yet been
-          supplied; course-specific mapping is awaiting review.
-        </Notice>
-      </div>
       <RelatedTopics
         links={[
           {
             href: "/why-mos2",
-            title: "Why MoS₂?",
+            title: "From Graphene to MoS₂",
             description:
-              "Use these concepts to understand the material choice.",
+              "Follow the band-gap question from graphene to a 2D semiconductor.",
           },
           {
             href: "/device",
