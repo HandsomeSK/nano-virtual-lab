@@ -9,7 +9,7 @@ export const deviceParts = [
     w: 400,
     d: 240,
     h: 28,
-    role: "Supports the device stack. Its surface and environment can influence the channel.",
+    role: "Provides mechanical support and a fabrication surface. Roughness, adsorbates and substrate charge can affect the channel; thermal and processing compatibility constrain integration. In some experiments a conducting substrate also acts as a back gate, unlike this model's separate top gate.",
     concept: "/foundations#surfaces",
   },
   {
@@ -22,7 +22,7 @@ export const deviceParts = [
     w: 340,
     d: 140,
     h: 3,
-    role: "A semiconducting conduction path between source and drain. Thickness is exaggerated for visibility.",
+    role: "The semiconductor path between source and drain. Gate-induced charge moves through it, with transport affected by phonons, defects and interfaces. A finite band gap helps depletion but does not guarantee low device leakage. Its thickness is exaggerated here for visibility.",
     concept: "/why-mos2#meet-mos2",
   },
   {
@@ -35,7 +35,7 @@ export const deviceParts = [
     w: 65,
     d: 140,
     h: 18,
-    role: "A metal contact that supplies carriers to the MoS₂ channel.",
+    role: "Supplies carriers from a metal into MoS₂. The interface can add resistance or an injection barrier, set by alignment, chemistry and contact geometry. A contact voltage drop reduces the internal gate overdrive as well as the available channel bias.",
     concept: "/foundations#transistors",
   },
   {
@@ -48,7 +48,7 @@ export const deviceParts = [
     w: 65,
     d: 140,
     h: 18,
-    role: "The collecting contact. Source-to-drain bias drives current along the channel.",
+    role: "Collects carriers while source-to-drain bias drives current. Its interface contributes resistance and can limit injection/extraction. In a real short-channel device, the drain field may also perturb the channel barrier; that field is not solved in this conceptual viewer.",
     concept: "/foundations#transistors",
   },
   {
@@ -61,7 +61,7 @@ export const deviceParts = [
     w: 180,
     d: 140,
     h: 14,
-    role: "An insulating layer between gate and channel. It supports electrostatic control while limiting gate leakage.",
+    role: "Insulates the gate from the channel while coupling its electric field. In a planar approximation Cg ≈ ε/t per area. Thinner or higher-permittivity dielectrics increase coupling, but leakage, breakdown and trapped charge constrain the stack. Interface traps can shift threshold and produce history-dependent current.",
     concept: "/foundations#surfaces",
   },
   {
@@ -74,7 +74,7 @@ export const deviceParts = [
     w: 160,
     d: 110,
     h: 18,
-    role: "A top-gate electrode that controls the channel through the dielectric.",
+    role: "Controls channel carrier density through the dielectric. Above threshold, a simple classical approximation is |Q| ≈ Cg(VGS − VT) per area, using the internal source voltage. This top-gate model demonstrates the role of bias; it does not solve spatial electric fields or quantum capacitance.",
     concept: "/foundations#transistors",
   },
 ] as const;

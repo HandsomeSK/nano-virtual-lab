@@ -5,6 +5,7 @@ import { references } from "@/data/references";
 import { studies, researchCategories } from "@/data/research";
 import { ReferenceLink } from "./reference-link";
 import { SectionHeading } from "./page-shell";
+import { ScientificFigure } from "./scientific-figure";
 const papers = studies.map((study) => ({
   ...study,
   reference: references.find((ref) => ref.id === study.reference)!,
@@ -163,7 +164,15 @@ export function ResearchExplorer({
                 }}
               >
                 <summary>Study details & open question</summary>
-                <p>{paper.question}</p>
+                <h4 className="mt-4">Research problem</h4>
+                <p className="text-sm mt-2">{paper.problem}</p>
+                <h4 className="mt-4">What was demonstrated?</h4>
+                <p className="text-sm mt-2">{paper.demonstration}</p>
+                <h4 className="mt-4">What is technically new?</h4>
+                <p className="text-sm mt-2">{paper.novelty}</p>
+                {paper.figure ? <ScientificFigure id={paper.figure} /> : null}
+                <h4 className="mt-4">Limitations & open question</h4>
+                <p className="text-sm mt-2">{paper.question}</p>
                 <p className="muted text-sm mt-3">{paper.boundary}</p>
               </details>
               <div className="actions">

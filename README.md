@@ -31,14 +31,14 @@ npm start          # Serve the production build
 
 | Route          | Content and interactions                                                                                                           |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `/`            | Nanomaterials hero, course-to-research introduction, eight clickable learning nodes, tools and 2024–2026 research previews          |
+| `/`            | Nanomaterials hero, course-to-research introduction, eight clickable learning nodes, tools and 2024–2026 research previews         |
 | `/foundations` | Six modules: nanoscale/surfaces, quantum/bands, graphene structure, interactive Dirac/transport lab, characterization, transistors |
 | `/why-mos2`    | From Graphene to MoS₂: transport, zero-gap challenge, interactive bands, layered structures and device connections                 |
 | `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF                           |
 | `/simulator`   | Five live parameters, calculated I–V curves, save/reset, result explanations from actual calculations and collapsed model details  |
 | `/comparison`  | Qualitative material properties plus two teaching-model scenarios; overlay/side-by-side with shared axes                           |
 | `/challenges`  | Contacts, interfaces, scaling and manufacturing; foundation, simulator and research links                                          |
-| `/research`    | Seven verified MoS₂ milestones through 2026, filters/timeline and links explaining why each study matters                          |
+| `/research`    | Ten verified MoS₂ studies through 2026, filters/timeline, experimental figures and a separate industry announcement                |
 | `/about`       | Reference search/filter, highlighted citations and return links, scope, course resources and credits                               |
 
 The legacy `/explore` route redirects to `/device`. Every canonical page has shared navigation and at least two contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands`, `#graphene-structure`, `#graphene-electronics` and `#transistors`; previous `#materials` links still work.
@@ -83,7 +83,17 @@ Course connections use the project author's supplied lecture topics and page loc
 
 The Dirac lab uses relative energy/wave-vector units and a low-energy schematic near a graphene Dirac point, not a full band calculation. Moving Fermi energy changes carrier occupancy, without opening an intrinsic graphene gap. Mobility, group velocity and mean free path are distinct quantities. The transport activity uses an illustrative length/mean-free-path ratio and does not predict measured conductance. Gapped/metal diagrams are qualitative. A finite gap can help switching; it does not guarantee a device's leakage or outperform silicon.
 
-Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage illustration is AI-generated conceptual artwork, optimized locally as WebP; it is not an atomistic simulation or experimental image. No publisher figures or measured datasets have been copied. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
+Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage illustration is AI-generated conceptual artwork, optimized locally as WebP; it is not an atomistic simulation or experimental image. Licensed external scientific figures are separately identified and credited; their measured datasets are not fitted or imported into the current solver. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
+
+## Scientific evidence update
+
+All nine existing pages retain their learning tools and receive concise, cited scientific explanations. The seven original studies and first 17 citation numbers remain stable. Three 2026 papers, contact/dielectric studies, a benchmarking perspective and an engineering review are appended; imec's institutional announcement has its own category. The total is **10 studies and 27 references**.
+
+Eight licensed external images include graphene lattice/HRTEM evidence, MoS₂ crystal phases, an experimental back-gated transistor, measured transfer hysteresis, wafer-transfer evidence, a corrected crystalline-dielectric figure and self-aligned gate/channel microscopy. `src/data/figures.ts` holds every image's creator, source, DOI/figure identifier, licence, attribution and modification status. `ScientificFigure` uses Next.js Image with a small HTTPS host/path allowlist and `object-fit: contain` to display full figures.
+
+The managed executor blocks source-host downloads, so the images use controlled remote URLs and Vercel image optimization rather than claiming local `public` copies. Image hosting remains an external dependency. CC BY-SA images retain their licences; the two CC BY-NC-ND figures are complete/unadapted and limited to non-commercial course use. Commercial reuse needs separate permission. Unverified image permissions result in source links rather than rehosting.
+
+See [the content inventory](docs/content-audit.md) and [the scientific evidence ledger](docs/scientific-evidence.md) for page changes, licensing decisions, paper corrections, model audit and remaining subject review. The simulator's physical equations, inputs, defaults, result calculations, storage and comparison remain unchanged; experimental plots provide qualitative context rather than numerical validation.
 
 ## Visual system
 
@@ -128,6 +138,8 @@ The redesign passed ESLint with zero warnings, standalone TypeScript validation,
 - Fragment positioning completes immediately so rapid cross-page navigation does not interrupt a pending smooth scroll. Direct links, refreshes and the zero-gap → Dirac lab → learning-question return flow were checked in the production build.
 
 The core physical solver, storage schema/key, dependency manifests and route definitions remain unchanged. Temporary browser scripts and screenshots are kept outside the repository.
+
+The scientific evidence update passes lint, all **15 tests**, TypeScript checking and the production build. Production-build Chromium checks cover all nine routes at four widths (36 checks), 105 unique internal destinations, the retained 3D/simulator/save/compare/research/citation flows and new scientific disclosures. Local image downloads are restricted, so actual remote-image loading is verified separately on Vercel; local layout checks do not claim that result. The evidence ledger records the source/licence decisions and verification scope.
 
 Browser coverage uses Chromium; Safari and Firefox are not included. Configurations remain browser-local; the transistor model remains educational and uncalibrated.
 

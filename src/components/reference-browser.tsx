@@ -8,6 +8,7 @@ const categories = [
   "Learning resource",
   "Course material",
   "Data & assets",
+  "Institutional announcement",
 ];
 export function ReferenceBrowser({
   selected,

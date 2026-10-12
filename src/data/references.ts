@@ -4,7 +4,12 @@ export type Reference = {
   authors: string;
   year: number;
   venue: string;
-  category: "Paper" | "Learning resource" | "Course material" | "Data & assets";
+  category:
+    | "Paper"
+    | "Learning resource"
+    | "Course material"
+    | "Data & assets"
+    | "Institutional announcement";
   doi?: string;
   url?: string;
   note: string;
@@ -104,7 +109,7 @@ export const references: Reference[] = [
     venue: "NanoLab: Beyond Silicon",
     category: "Data & assets",
     url: "https://github.com/HandsomeSK/nano-virtual-lab",
-    note: "Original interactive SVG/CSS schematics; not to scale. The AI-generated homepage illustration is conceptual, not an atomistic calculation or microscopy image. Model defaults and everyday length examples are illustrative assumptions; actual specimens vary. No publisher figures or measured research datasets were imported.",
+    note: "Original interactive SVG/CSS schematics; not to scale. The AI-generated homepage illustration is conceptual, not an atomistic calculation or microscopy image. Model defaults and everyday length examples are illustrative assumptions; actual specimens vary. External licensed figures have a separate image registry; their measured curves are not imported into the simulator.",
   },
   {
     id: "neto2009",
@@ -194,6 +199,126 @@ export const references: Reference[] = [
     venue: "Lecture 3, page 26",
     category: "Course material",
     note: "Page reference supplied by the project author for graphene's electronic properties and the learning route towards MoS₂. Scientific explanations use the linked graphene literature.",
+  },
+  {
+    id: "shimazu2016",
+    title:
+      "Environmental Effects on Hysteresis of Transfer Characteristics in Molybdenum Disulfide Field-Effect Transistors",
+    authors: "Y. Shimazu, M. Tashiro, S. Sonobe & M. Takahashi",
+    year: 2016,
+    venue: "Scientific Reports 6, 30084; published 20 July 2016",
+    category: "Paper",
+    doi: "10.1038/srep30084",
+    url: "https://www.nature.com/articles/srep30084",
+    note: "Experimental environmental and sweep-history effects in multilayer back-gated MoS₂ FETs. Figure 1 is reproduced under CC BY 4.0. Device geometry, bias and author scaling/offsets are stated in its caption; this is qualitative evidence, not simulator calibration.",
+  },
+  {
+    id: "macucci2017",
+    title: "On current transients in MoS₂ Field Effect Transistors",
+    authors:
+      "M. Macucci, G. Tambellini, D. Ovchinnikov, A. Kis, G. Iannaccone & G. Fiori",
+    year: 2017,
+    venue: "Scientific Reports 7, 11575; published 14 September 2017",
+    category: "Paper",
+    doi: "10.1038/s41598-017-11930-6",
+    url: "https://www.nature.com/articles/s41598-017-11930-6",
+    note: "Current transients interpreted in terms of oxide and surface trapping. Figure 1, CC BY 4.0, shows a monolayer back-gated research device, separate from the original top-gate teaching model and from Shimazu's multilayer device.",
+  },
+  {
+    id: "benchmark2022",
+    title: "How to report and benchmark emerging field-effect transistors",
+    authors: "Z. Cheng, C.-S. Pang, P. Wang et al.",
+    year: 2022,
+    venue: "Nature Electronics 5, 416–423; published 29 July 2022",
+    category: "Paper",
+    doi: "10.1038/s41928-022-00798-8",
+    url: "https://www.nature.com/articles/s41928-022-00798-8",
+    note: "A reporting and benchmarking perspective: geometry, bias, extraction method, contacts and statistical context matter when comparing emerging FETs. No figures are reproduced.",
+  },
+  {
+    id: "du2025",
+    title:
+      "Scaled crystalline antimony ohmic contacts for two-dimensional transistors",
+    authors: "M. Du, W. Li, G. Xiong et al.",
+    year: 2025,
+    venue: "Nature Electronics 8, 1191–1200; published 17 December 2025",
+    category: "Paper",
+    doi: "10.1038/s41928-025-01500-4",
+    url: "https://www.nature.com/articles/s41928-025-01500-4",
+    note: "Molecular-beam epitaxy of crystalline antimony contacts on MoS₂. Author correction, 13 January 2026 (10.1038/s41928-026-01563-x), fixes duplicated reverse sweeps in Figure 4b and Supplementary Figure 18. Use the corrected article; no publisher figures are reproduced here.",
+  },
+  {
+    id: "zeng2024",
+    title:
+      "Single-crystalline metal-oxide dielectrics for top-gate 2D transistors",
+    authors: "D. Zeng, Z. Zhang, Z. Xue et al.",
+    year: 2024,
+    venue: "Nature 632, 788–794; published 7 August 2024",
+    category: "Paper",
+    doi: "10.1038/s41586-024-07786-2",
+    url: "https://www.nature.com/articles/s41586-024-07786-2",
+    note: "Crystalline Al₂O₃ formation and transfer for top-gate MoS₂ devices. Publisher correction, 6 September 2024 (10.1038/s41586-024-08001-y), fixes the crystalline/amorphous label in Figure 1g. The corrected full figure is reproduced under CC BY 4.0.",
+  },
+  {
+    id: "engineering2024",
+    title:
+      "Transistor engineering based on 2D materials in the post-silicon era",
+    authors: "S. Zeng, C. Liu & P. Zhou",
+    year: 2024,
+    venue:
+      "Nature Reviews Electrical Engineering 1, 335–348; published 30 April 2024",
+    category: "Paper",
+    doi: "10.1038/s44287-024-00045-6",
+    url: "https://www.nature.com/articles/s44287-024-00045-6",
+    note: "Review of contact, dielectric and process integration challenges. It provides an engineering framework, rather than a single experimental performance benchmark. Figures are linked at the source, not reproduced.",
+  },
+  {
+    id: "lin2026",
+    title:
+      "Wafer-scale 2D MoS₂ transistors with sub-5 nm channel length and subthreshold performance beyond the silicon limit",
+    authors: "S. Lin, T. Huang, N. Yang et al.",
+    year: 2026,
+    venue: "Nature Communications; early version published 21 September 2026",
+    category: "Paper",
+    doi: "10.1038/s41467-026-77186-9",
+    url: "https://www.nature.com/articles/s41467-026-77186-9",
+    note: "Citable early version checked on 12 October 2026; final production details may change. Air-gap isolation and gate/contact overlap target electrostatics at sub-5 nm channels. The title's silicon comparison does not mean a violation of the approximately 60 mV/dec room-temperature thermal limit. Figures remain linked to the original early version.",
+  },
+  {
+    id: "wang2026",
+    title:
+      "Wafer-scale 2D MoS₂ transistors with self-aligned angstrom gate length and nanometer channel length",
+    authors: "Z. Wang, A. Liu, H. Ding et al.",
+    year: 2026,
+    venue:
+      "Nature Communications 17, 8556; first published 11 July 2026, version of record 18 August 2026",
+    category: "Paper",
+    doi: "10.1038/s41467-026-75409-7",
+    url: "https://www.nature.com/articles/s41467-026-75409-7",
+    note: "A graphene sidewall edge defines a sub-1 nm physical gate; oblique deposition defines a separate 10 nm channel. Theoretical scaling projections and measured devices are distinct. Full Figure 1 is used unadapted under CC BY-NC-ND 4.0 for non-commercial education.",
+  },
+  {
+    id: "fan2026",
+    title:
+      "A bit-parallel molybdenum disulfide computer built through multi-level co-optimization",
+    authors: "D. Fan, Y. Mao, H. Qiu et al.",
+    year: 2026,
+    venue: "Nature Electronics 9, 887–896; published 26 May 2026",
+    category: "Paper",
+    doi: "10.1038/s41928-026-01641-0",
+    url: "https://www.nature.com/articles/s41928-026-01641-0",
+    note: "A research computer with 1,433 transistors, using a 0.5 μm industrial process together with academic back-end integration. This is a circuit-system demonstration, not an industrially qualified modern CPU. Publisher images are linked only.",
+  },
+  {
+    id: "imec2026",
+    title:
+      "ASML, TSMC and imec bring industry-ready 2D-material transistors closer with breakthrough 300mm integration",
+    authors: "imec; ASML and TSMC collaboration",
+    year: 2026,
+    venue: "Institutional press release, 15 June 2026",
+    category: "Institutional announcement",
+    url: "https://www.imec-int.com/en/press/asml-tsmc-and-imec-bring-industry-ready-2d-material-transistors-closer-breakthrough-300mm",
+    note: "An institutional announcement, not a peer-reviewed article. Reports 300 mm integration and 50 nm contacted poly pitch, a different dimension from gate/channel length. Its 94% operational-device figure uses Imax/Imin > 10⁵ as the stated criterion. No institutional images or logos are reproduced without a clear reuse licence.",
   },
 ];
 export function referenceNumber(id: string) {

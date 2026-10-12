@@ -8,6 +8,7 @@ import {
 import { ResearchExplorer } from "@/components/research-explorer";
 import { researchCategories, studies } from "@/data/research";
 import { references } from "@/data/references";
+import { ReferenceLink } from "@/components/reference-link";
 import { queryValue, type Query } from "@/lib/site";
 export const metadata: Metadata = { title: "Research Frontier" };
 export default async function Page({
@@ -30,9 +31,11 @@ export default async function Page({
           MoS₂ research spans material physics, gate-controlled devices and
           manufacturing. These {studies.length} studies connect the
           nanomaterials foundation to transistor research, including verified
-          2024–2026 publications and the earlier milestones behind them.
-          Summaries are brief; follow the original sources for methods,
-          conditions and evidence.
+          2024–2026 publications and the earlier milestones behind them. All
+          seven original milestones remain, with three additional 2026 papers.
+          Open study details for the research problem, demonstration, novelty
+          and limitations. Transfer, self-aligned scaling and interconnected
+          processors provide three focused engineering cases.
         </p>
       </section>
       <ResearchExplorer
@@ -54,6 +57,39 @@ export default async function Page({
           studies.some((item) => item.reference === study) ? study : ""
         }
       />
+      <section className="section panel" id="institutional-research">
+        <SectionHeading
+          title="Industry Research: 300 mm Integration"
+          description="Institutional announcement · imec, ASML and TSMC · 15 June 2026"
+        />
+        <p>
+          imec reports a reverse-TFT integration flow with prepatterned bottom
+          contacts, transferred 2D channels and EUV-defined devices on 300 mm
+          wafers. The reported 50 nm contacted poly pitch is a layout pitch,
+          rather than the physical channel or gate length. The announcement’s
+          94% operational-device figure uses Imax/Imin &gt; 10⁵ as its stated
+          test criterion.
+          <ReferenceLink
+            id="imec2026"
+            from="/research#institutional-research"
+          />
+        </p>
+        <p className="text-sm mt-3">
+          This press release describes industry-linked research, not a
+          peer-reviewed article or proof of commercial mass production. Its
+          Figure 1 microscopy depicts WS₂, so it must not be relabelled as MoS₂.
+          Images remain at the source because a clear reuse licence was not
+          found.
+        </p>
+        <a
+          className="text-link"
+          href={references.find((ref) => ref.id === "imec2026")!.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read the announcement & original figures ↗
+        </a>
+      </section>
       <section className="section">
         <SectionHeading title="Challenges & Future Outlook" />
         <p>

@@ -297,6 +297,27 @@ div[id] {
   padding: 24px;
   min-width: 0;
 }
+.scientific-figure {
+  margin: 24px 0;
+  max-width: 800px;
+}
+.scientific-image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.scientific-image img {
+  object-fit: contain;
+}
+.scientific-figure figcaption {
+  overflow-wrap: anywhere;
+}
+.scientific-figure .actions {
+  gap: 4px 16px;
+}
 .button-primary,
 .button-secondary {
   display: inline-flex;

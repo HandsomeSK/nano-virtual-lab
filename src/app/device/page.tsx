@@ -7,6 +7,7 @@ import {
 } from "@/components/page-shell";
 import { DeviceViewer } from "@/components/device-viewer";
 import { ReferenceLink } from "@/components/reference-link";
+import { ScientificFigure } from "@/components/scientific-figure";
 export const metadata: Metadata = { title: "Device Explorer" };
 export default function Device() {
   return (
@@ -33,6 +34,27 @@ export default function Device() {
         </div>
       </section>
       <DeviceViewer />
+      <section className="section" id="experimental-device">
+        <SectionHeading
+          title="From the Model to an Experimental Device"
+          description="Compare a conceptual top-gate stack with a separately published back-gated transistor."
+        />
+        <ScientificFigure id="macucci-device" />
+        <p>
+          The metal electrodes supply and collect carriers; the MoS₂ flake
+          between them forms the channel. Here the global gate is below the
+          oxide, rather than above the channel as in the 3D model. Contact
+          shape, oxide thickness and channel dimensions belong to this
+          experiment.
+          <ReferenceLink id="macucci2017" from="/device#experimental-device" />
+        </p>
+        <p className="text-sm mt-3">
+          Macucci et al. measured time-dependent gate and drain currents and
+          connected slow settling with charge trapping. A real measurement needs
+          a stated bias history and settling protocol. This photo, the simulator
+          defaults and Shimazu’s hysteresis device are three separate contexts.
+        </p>
+      </section>
       <section className="section" id="working-principle">
         <SectionHeading title="Working Principle" />
         <div className="two-column">
@@ -41,6 +63,10 @@ export default function Device() {
             Source and drain contacts provide a current path. The thin channel
             is only one part of the full device.{" "}
             <ReferenceLink id="radis2011" from="/device" />
+            <ReferenceLink
+              id="engineering2024"
+              from="/device#working-principle"
+            />
           </p>
           <div>
             <p>
