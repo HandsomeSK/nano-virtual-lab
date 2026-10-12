@@ -139,7 +139,7 @@ The redesign passed ESLint with zero warnings, standalone TypeScript validation,
 
 The core physical solver, storage schema/key, dependency manifests and route definitions remain unchanged. Temporary browser scripts and screenshots are kept outside the repository.
 
-The scientific evidence update passes lint, all **15 tests**, TypeScript checking and the production build. Production-build Chromium checks cover all nine routes at four widths (36 checks), 105 unique internal destinations, the retained 3D/simulator/save/compare/research/citation flows and new scientific disclosures. Local image downloads are restricted, so actual remote-image loading is verified separately on Vercel; local layout checks do not claim that result. The evidence ledger records the source/licence decisions and verification scope.
+The scientific evidence update passes lint, all **15 tests**, TypeScript checking and the production build. Production-build Chromium checks cover all nine routes at four widths (36 checks), 105 unique internal destinations, the retained 3D/simulator/save/compare/research/citation flows and new scientific disclosures. The Vercel preview returned **HTTP 200 and valid image content types for all eight images at 640 and 828 px** (16 responses). Local image downloads remain restricted; local layout checks do not claim that result. The evidence ledger records the source/licence decisions and verification scope.
 
 Browser coverage uses Chromium; Safari and Firefox are not included. Configurations remain browser-local; the transistor model remains educational and uncalibrated.
 

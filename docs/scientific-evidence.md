@@ -64,10 +64,11 @@ Du contact figures, Guo/Fan processor photos, the engineering/benchmarking revie
 - **105 unique internal destinations** resolve, including knowledge fragments and citation targets.
 - Retained flows exercised: mobile navigation; all six foundations and new disclosures; material selection/direct-indirect diagrams; 3D part selection/visibility/explosion/ON–OFF/keyboard orbit/zoom/reset; live simulator changes, contact response, save/output/A–B/edit/reload/reset; research filters/timeline/three case deep links; all four engineering cases; reference search/citation return/institutional filtering and eight image registry records.
 - No application errors or unexpected non-image responses were observed. Local remote-image requests were intentionally skipped because the enforced source-host denial was already established; actual image delivery is a separate Vercel preview/production check, not claimed from these local screenshots.
+- The existing Git integration produced a **READY** Vercel preview for commit `e93b58b6a047c8bc9b06e0a156f4440a85f452ca`. All **eight curated images** returned **HTTP 200** with `image/jpeg` or `image/png` from Next.js Image optimization at **640 px and 828 px**: **16 successful image responses**. These checks verify actual platform delivery independently of the restricted local executor.
 - Desktop homepage and mobile simulator screenshots were visually inspected. Browser coverage is Chromium, not Safari or Firefox.
 
 ## Human review and further work
 
 - A subject expert can review the concise paraphrases, especially the early-version 2026 scaling claims, against the final articles and supplementary methods.
 - Full MECH6045 lecture files have not been independently reviewed; the stated lecture pages were supplied by the project author.
-- Browser coverage and actual image-loading results are recorded after verification in the development summary. Remote source hosting and non-commercial image conditions remain practical limits.
+- Browser coverage and actual image-loading results are recorded above. Remote source hosting and non-commercial image conditions remain practical limits.
