@@ -101,13 +101,15 @@ The light theme uses a cool `#F7FAFF` background, white learning panels, navy `#
 
 ## Project-local Codex skills
 
-Three reviewed skills are installed as ordinary files in `.agents/skills/` for Codex:
+Five skills are installed as ordinary files in `.agents/skills/` for Codex: the four requested frontend/browser skills and Ponytail.
 
-| Skill                   | Source                                                                  | Purpose                                                                                         |
-| ----------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `frontend-design`       | [anthropics/skills](https://github.com/anthropics/skills)               | Visual direction, typography, layout, and interface design                                      |
-| `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Accessibility, responsive layouts, and UI reviews                                               |
-| `ponytail`              | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)   | Complete changes with minimal code, reuse existing features, and avoid unnecessary abstractions |
+| Skill                         | Source                                                                    | Purpose                                                                                         |
+| ----------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `frontend-design`             | [anthropics/skills](https://github.com/anthropics/skills)                 | Visual direction, typography, layout, and interface design                                      |
+| `web-design-guidelines`       | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)   | Accessibility, responsive layouts, and UI reviews                                               |
+| `agent-browser`               | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | Browser navigation, screenshots, rendered UI testing and debugging                              |
+| `vercel-react-best-practices` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)   | React/Next.js component, data-fetching and performance guidance                                 |
+| `ponytail`                    | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail)     | Complete changes with minimal code, reuse existing features, and avoid unnecessary abstractions |
 
 `skills-lock.json` records their sources and content hashes. Ponytail is pinned to upstream commit `9cc65d03aa2da1db7121b912d03596409ee340b8` (v5.1.0). Commit the skill files and lockfile with the project so future checkouts retain them. The frontend-design and ponytail licenses are included in their directories. These development instructions are independent of website runtime dependencies.
 
@@ -116,10 +118,16 @@ Verify project-local discovery with `npx skills list --agent codex`. To reinstal
 ```sh
 npx skills add anthropics/skills --skill frontend-design --agent codex --copy --yes
 npx skills add vercel-labs/agent-skills --skill web-design-guidelines --agent codex --copy --yes
+npx skills add vercel-labs/agent-browser --skill agent-browser --agent codex --copy --yes
+npx skills add vercel-labs/agent-skills --skill vercel-react-best-practices --agent codex --copy --yes
 npx skills add https://github.com/DietrichGebert/ponytail/tree/9cc65d03aa2da1db7121b912d03596409ee340b8 --skill ponytail --agent codex --copy --yes
 ```
 
 The root `AGENTS.md` instructs Codex to read and apply Ponytail automatically for every coding task in this project, using `full` mode by default. No `$ponytail` invocation is required. Ask to switch to `lite` or `ultra`, or say "stop ponytail" / "normal mode" to disable it for the current session. This project-local installation contains the core skill and its MIT license; it does not install the upstream plugin's lifecycle hooks or companion skills.
+
+The same `AGENTS.md` automatically selects frontend-design for visual UI work, web-design-guidelines for UI/accessibility reviews, vercel-react-best-practices for React/Next.js work and agent-browser for browser testing/debugging. The React skill's upstream name is **vercel-react-best-practices**, rather than the shorter `react-best-practices` selector. These rules apply to future Codex work in this repository and persist with the committed skill files.
+
+Skills provide instructions; the browser CLI/browser runtime is separate. Before a browser task, check the available runtime and follow the environment's supported browser workflow. Project skill installation does not add website runtime dependencies.
 
 User instructions take precedence over skill guidance.
 
