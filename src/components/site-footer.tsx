@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div className="footer-top">
           <Brand />
           <p className="muted text-sm">
-            Nanotechnology and next-generation electronics.
+            {site.topic} · 2D materials and transistor research.
             <br />
             {site.courseCode} · {site.courseTitle}
           </p>

@@ -1,9 +1,11 @@
 export const site = {
   name: "NanoLab: Beyond Silicon",
+  topic: "Nanomaterials",
+  subtitle: "From Graphene to Next-Generation 2D Semiconductor Transistors",
   courseCode: "MECH6045",
   courseTitle: "Nanotechnology: Fundamentals and Applications",
   description:
-    "An Interactive Learning Platform for Nanotechnology and Next-Generation Electronics. Explore graphene, energy bands, MoS₂ transistors and educational simulations.",
+    "At the nanoscale, materials can exhibit unique physical and electronic properties. This project explores how two-dimensional nanomaterials, from graphene to MoS₂, are enabling the development of next-generation semiconductor transistors.",
 };
 export const navigation = [
   { href: "/", title: "Home" },
@@ -19,19 +21,19 @@ export const navigation = [
 export const journey = [
   {
     href: "/foundations",
-    title: "Nanotechnology",
-    description: "Find your bearings at the nanoscale.",
+    title: "Nanomaterials",
+    description: "Explore size-dependent and surface properties.",
     tone: "indigo",
   },
   {
-    href: "/foundations#graphene-electronics",
-    title: "Graphene",
-    description: "Explore extraordinary transport.",
+    href: "/foundations#graphene-structure",
+    title: "2D materials & graphene",
+    description: "Connect atomic structure with electronic properties.",
     tone: "cyan",
   },
   {
     href: "/why-mos2#zero-gap",
-    title: "Zero-gap challenge",
+    title: "Graphene limitations",
     description: "Ask what a digital switch needs.",
     tone: "cyan",
   },
@@ -43,27 +45,27 @@ export const journey = [
   },
   {
     href: "/device",
-    title: "Devices",
+    title: "MoS₂ transistors",
     description: "Explore the layers of a transistor.",
     tone: "violet",
   },
   {
     href: "/simulator",
-    title: "Simulation",
+    title: "Interactive simulations",
     description: "Change a parameter. See its effect.",
     tone: "indigo",
   },
   {
-    href: "/challenges",
-    title: "Challenges",
-    description: "Connect the science to engineering.",
-    tone: "orange",
+    href: "/research",
+    title: "Latest research",
+    description: "Explore 2024–2026 developments and their foundations.",
+    tone: "indigo",
   },
   {
-    href: "/research",
-    title: "Research",
-    description: "Follow the evidence and open questions.",
-    tone: "indigo",
+    href: "/challenges",
+    title: "Future & challenges",
+    description: "Connect future applications with engineering limits.",
+    tone: "orange",
   },
 ];
 export type Query = Record<string, string | string[] | undefined>;

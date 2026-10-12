@@ -18,14 +18,16 @@ export default async function Page({
   return (
     <PageShell
       title="About & References"
-      intro="The ideas, sources and people behind a connected journey from graphene to next-generation electronics."
+      intro="The course foundations and research sources behind Nanomaterials: From Graphene to Next-Generation 2D Semiconductor Transistors."
     >
       <section className="section">
         <SectionHeading title="About NanoLab" />
         <p>
-          NanoLab is an interactive educational project for MECH6045:
-          Nanotechnology — Fundamentals and Applications: an interactive
-          learning platform for nanotechnology and next-generation electronics.
+          NanoLab is an interactive educational project on Nanomaterials for
+          MECH6045: Nanotechnology — Fundamentals and Applications. Its focused
+          research case is two-dimensional nanomaterials, represented by
+          graphene and MoS₂, and their role in next-generation semiconductor
+          transistors.
         </p>
         <p className="mt-4">
           Explore the nanoscale and energy bands, discover graphene’s unusual
@@ -50,10 +52,12 @@ export default async function Page({
         <SectionHeading title="Course and Educational Resources" />
         <div className="grid gap-5 md:grid-cols-2">
           <article className="panel p-6">
-            <h3>Energy Bands and Band Gap</h3>
+            <h3>Lecture 2: Nanomaterials</h3>
             <p className="muted mt-3">
-              MECH6045 Lecture 2, pages 18–19, provides the course starting
-              point for comparing allowed energy bands and the gap between them.{" "}
+              The course foundation covers nanoscale properties, quantum
+              confinement and electronic bands. Lecture 2, pages 18–19,
+              provides the starting point for comparing allowed energy bands
+              and the gap between them.{" "}
               <ReferenceLink id="course-bands" from="/about#course" />
             </p>
             <Link className="text-link" href="/foundations#bands">
@@ -61,10 +65,12 @@ export default async function Page({
             </Link>
           </article>
           <article className="panel p-6">
-            <h3>Electronic Properties of Graphene</h3>
+            <h3>Lecture 3: Carbon-Based Nanomaterials</h3>
             <p className="muted mt-3">
-              MECH6045 Lecture 3, page 26, motivates the exploration of graphene
-              transport and the learning path towards MoS₂ devices.{" "}
+              Graphene’s two-dimensional carbon structure and electronic
+              properties connect the course material with the interactive
+              learning activities. Lecture 3, page 26, motivates the graphene
+              transport discussion.{" "}
               <ReferenceLink id="course-graphene" from="/about#course" />
             </p>
             <Link
@@ -75,9 +81,25 @@ export default async function Page({
             </Link>
           </article>
         </div>
+        <h3 className="mt-6">Beyond the Lectures</h3>
+        <p className="mt-3">
+          The MoS₂ transistor case study extends the course principles using
+          scientific literature; it is not presented as a device topic taught
+          in detail in Lectures 2–3. The 2024–2026 studies cover more recent
+          research on wafer-scale integration, transfer and interconnected
+          circuits, distinct from the course foundation.
+        </p>
+        <div className="actions">
+          <Link className="text-link" href="/why-mos2">
+            Explore the MoS₂ extension →
+          </Link>
+          <Link className="text-link" href="/research">
+            Explore 2024–2026 research and earlier milestones →
+          </Link>
+        </div>
         <p className="muted text-sm mt-4">
-          Course page references supplied by the project author; scientific
-          explanations are supported by linked literature. OpenStax and MIT
+          Lecture topics and page references supplied by the project author;
+          scientific explanations are supported by linked literature. OpenStax and MIT
           OpenCourseWare provide further background for the quantum-well
           visualization and transistor model.
         </p>

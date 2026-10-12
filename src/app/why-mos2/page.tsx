@@ -18,7 +18,7 @@ export default function Why() {
   return (
     <PageShell
       title="From Graphene to MoS₂"
-      intro="Start with remarkable electronic transport, ask what a digital switch needs, and discover why finite-gap 2D semiconductors are worth exploring."
+      intro="Focus the nanomaterials story on two-dimensional sheets. Follow graphene’s remarkable transport and zero-gap challenge into MoS₂ and the semiconductor channel of a field-effect transistor."
     >
       <nav className="bridge-nav" aria-label="Explore the material story">
         <a href="#beyond-silicon">Graphene transport ↓</a>
@@ -27,8 +27,17 @@ export default function Why() {
       </nav>
       <section id="beyond-silicon" className="bridge-intro">
         <div>
-          <SectionHeading title="The Remarkable Properties of Graphene" />
+          <SectionHeading title="Two-Dimensional Nanomaterials" />
           <p>
+            These materials have atomic-scale thickness while extending much
+            farther in the plane. Their structure and electronic properties
+            make them interesting for advanced electronics. Graphene and MoS₂
+            are the representative materials explored here.{" "}
+            <ReferenceLink id="neto2009" from="/why-mos2#beyond-silicon" />
+            <ReferenceLink id="radis2011" from="/why-mos2#beyond-silicon" />
+          </p>
+          <h3 className="mt-5">The Remarkable Properties of Graphene</h3>
+          <p className="mt-3">
             A carbon sheet just one atom thick can carry charge with high
             mobility and long mean free paths in suitable conditions. Its linear
             bands near the Dirac point make it a distinctive platform for

@@ -1387,6 +1387,12 @@ button {
   letter-spacing: -0.055em;
   line-height: 1.07;
 }
+.hero-subtitle {
+  max-width: 575px;
+  margin-top: 18px;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.4;
+}
 .hero p {
   font-size: 19px;
   line-height: 1.65;

@@ -8,8 +8,8 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} | ${site.courseCode}`,
-    template: `%s | ${site.name}`,
+    default: `${site.topic} | ${site.name}`,
+    template: `%s | ${site.topic} | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,

@@ -1,6 +1,8 @@
-# NanoLab: Beyond Silicon
+# Nanomaterials
 
-An Interactive Learning Platform for Nanotechnology and Next-Generation Electronics, developed for **MECH6045: Nanotechnology — Fundamentals and Applications**. The learning journey connects nanoscale fundamentals → graphene structure and electronic properties → the zero-band-gap challenge → MoS₂ semiconductors → transistors → simulation → engineering challenges → research.
+**From Graphene to Next-Generation 2D Semiconductor Transistors**
+
+NanoLab: Beyond Silicon is an interactive educational project for **MECH6045: Nanotechnology — Fundamentals and Applications**. Nanomaterials is the overall course topic; two-dimensional nanomaterials are the research focus, with graphene and MoS₂ as representative materials and MoS₂-based semiconductor transistors as the advanced application. The learning journey connects nanoscale properties → two-dimensional materials and graphene → the zero-band-gap challenge → MoS₂ → transistors → simulation → 2024–2026 research and earlier milestones → future applications and engineering challenges.
 
 [Production website](https://nano-virtual-lab.vercel.app) · [GitHub repository](https://github.com/HandsomeSK/nano-virtual-lab)
 
@@ -29,7 +31,7 @@ npm start          # Serve the production build
 
 | Route          | Content and interactions                                                                                                           |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `/`            | Graphene-to-electronics hero, topic introduction, eight clickable learning nodes, tools and research previews                      |
+| `/`            | Nanomaterials hero, course-to-research introduction, eight clickable learning nodes, tools and 2024–2026 research previews          |
 | `/foundations` | Six modules: nanoscale/surfaces, quantum/bands, graphene structure, interactive Dirac/transport lab, characterization, transistors |
 | `/why-mos2`    | From Graphene to MoS₂: transport, zero-gap challenge, interactive bands, layered structures and device connections                 |
 | `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF                           |
@@ -77,7 +79,7 @@ Add sources to `src/data/references.ts` before adding a new scientific claim. Ci
 
 Graphene explanations cite Castro Neto et al. (2009), Novoselov et al. (2004, 2005) and Schwierz (2010). The MoS₂ timeline spans 2010–2026, including publisher-verified 2025 dry-transfer and 2026 microprocessor studies. This is a curated selection, not a comprehensive or automatically updated literature review.
 
-Course connections use the project author's supplied page locations: **MECH6045 Lecture 2, pp. 18–19** (energy bands and band gap) and **Lecture 3, p. 26** (graphene electronic properties). No lecture quotations or additional page numbers are invented. The full lecture files have not been independently reviewed; linked scientific literature supports the explanations.
+Course connections use the project author's supplied lecture topics and page locations: **Lecture 2: Nanomaterials**, including **pp. 18–19** for energy bands and band gap, and **Lecture 3: Carbon-Based Nanomaterials**, including **p. 26** for graphene electronic properties. The MoS₂ transistor case study extends the course theory through scientific literature; it does not claim that Lectures 2–3 teach these devices in detail. The 2024–2026 papers form a separate recent-research layer. No lecture quotations or additional page numbers are invented. The full lecture files have not been independently reviewed; linked scientific literature supports the explanations.
 
 The Dirac lab uses relative energy/wave-vector units and a low-energy schematic near a graphene Dirac point, not a full band calculation. Moving Fermi energy changes carrier occupancy, without opening an intrinsic graphene gap. Mobility, group velocity and mean free path are distinct quantities. The transport activity uses an illustrative length/mean-free-path ratio and does not predict measured conductance. Gapped/metal diagrams are qualitative. A finite gap can help switching; it does not guarantee a device's leakage or outperform silicon.
 
@@ -128,6 +130,8 @@ The redesign passed ESLint with zero warnings, standalone TypeScript validation,
 The core physical solver, storage schema/key, dependency manifests and route definitions remain unchanged. Temporary browser scripts and screenshots are kept outside the repository.
 
 Browser coverage uses Chromium; Safari and Firefox are not included. Configurations remain browser-local; the transistor model remains educational and uncalibrated.
+
+The Nanomaterials topic update also passed lint, type checking, all 13 tests and the production build. Its production-build Chromium check covered **44 checks**: all nine pages at the four widths above, exact homepage copy and metadata, **93 internal destinations**, the retained Graphene/3D/simulator/save/compare/edit/reload flows, recent-year research filters and citation search/return. All seven studies and 17 references remain available. No unexpected browser errors or warnings were recorded. Only introduction copy, shared metadata, learning-node labels/order, course context and subtitle spacing changed; scientific data, model parameters, interaction implementations and deployment configuration were verified unchanged.
 
 ## GitHub and Vercel
 
