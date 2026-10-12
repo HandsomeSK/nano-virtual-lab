@@ -10,7 +10,7 @@ export function SiteFooter() {
           <p className="muted text-sm">
             {site.topic} · 2D materials and transistor research.
             <br />
-            {site.courseCode} · {site.courseTitle}
+            An independent {site.identity}.
           </p>
         </div>
         <nav aria-label="Footer navigation" className="footer-nav">

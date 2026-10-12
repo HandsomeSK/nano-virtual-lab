@@ -27,12 +27,23 @@ export function DeviceViewer() {
       zoom: Math.max(0.5, Math.min(1.8, value.zoom + delta)),
     }));
   }
+  function rotate(yaw: number, pitch: number) {
+    setCamera((value) => ({
+      ...value,
+      yaw: value.yaw + yaw,
+      pitch: Math.max(15, Math.min(80, value.pitch + pitch)),
+    }));
+  }
   return (
-    <div className="viewer-layout">
-      <section className="panel viewer-panel">
-        <div className="chart-heading">
+    <div className="viewer-layout device-instrument">
+      <section className="viewer-panel device-stage">
+        <div className="chart-heading viewer-heading">
           <h2>Interactive 3D Viewer</h2>
-          <div className="tabs">
+          <div
+            className="tabs"
+            role="group"
+            aria-label="Conceptual channel state"
+          >
             <button aria-pressed={!on} onClick={() => setOn(false)}>
               OFF
             </button>
@@ -94,32 +105,22 @@ export function DeviceViewer() {
             if (event.key === "+" || event.key === "=") zoom(0.1);
             else if (event.key === "-") zoom(-0.1);
             else if (event.key.startsWith("Arrow"))
-              setCamera((value) => ({
-                ...value,
-                yaw:
-                  value.yaw +
-                  (event.key === "ArrowLeft"
+              rotate(
+                event.key === "ArrowLeft"
+                  ? -8
+                  : event.key === "ArrowRight"
+                    ? 8
+                    : 0,
+                event.key === "ArrowUp"
+                  ? 8
+                  : event.key === "ArrowDown"
                     ? -8
-                    : event.key === "ArrowRight"
-                      ? 8
-                      : 0),
-                pitch: Math.max(
-                  15,
-                  Math.min(
-                    80,
-                    value.pitch +
-                      (event.key === "ArrowUp"
-                        ? 8
-                        : event.key === "ArrowDown"
-                          ? -8
-                          : 0),
-                  ),
-                ),
-              }));
+                    : 0,
+              );
           }}
         >
           <div
-            className="device-world"
+            className={"device-world " + (on ? "device-on" : "device-off")}
             style={{
               transform:
                 "rotateX(" +
@@ -150,13 +151,20 @@ export function DeviceViewer() {
                   "--slab-depth": item.d + "px",
                   "--slab-height": item.h + "px",
                   "--slab-color":
-                    item.id === "channel" && !on ? "#c4b5fd" : item.color,
+                    item.id === "channel"
+                      ? on
+                        ? "var(--primary)"
+                        : "var(--cyan-soft)"
+                      : item.color,
                 } as CSSProperties;
                 return (
                   <div
                     key={item.id}
                     className={
-                      "slab " + (selected === item.id ? "selected" : "")
+                      "slab slab-" +
+                      item.id +
+                      " " +
+                      (selected === item.id ? "selected" : "")
                     }
                     style={style}
                     data-part={item.id}
@@ -185,25 +193,74 @@ export function DeviceViewer() {
               })}
           </div>
         </div>
-        <p className="muted text-xs">
+        <p className="muted text-xs viewer-instructions">
           Drag to orbit · keyboard arrows rotate · +/− zoom. Simplified top-gate
           stack, not to scale.
         </p>
-        <div className="actions">
-          <button
-            aria-label="Zoom out"
-            className="button-secondary"
-            onClick={() => zoom(-0.1)}
+        <div className="viewer-toolbar">
+          <div
+            className="viewer-navigation"
+            role="group"
+            aria-label="Rotate model"
           >
-            −
-          </button>
-          <button
-            aria-label="Zoom in"
-            className="button-secondary"
-            onClick={() => zoom(0.1)}
+            <button
+              className="button-secondary"
+              aria-label="Rotate left"
+              title="Rotate left"
+              onClick={() => rotate(-8, 0)}
+            >
+              ←
+            </button>
+            <button
+              className="button-secondary"
+              aria-label="Rotate right"
+              title="Rotate right"
+              onClick={() => rotate(8, 0)}
+            >
+              →
+            </button>
+            <button
+              className="button-secondary"
+              aria-label="Rotate up"
+              title="Rotate up"
+              onClick={() => rotate(0, 8)}
+            >
+              ↑
+            </button>
+            <button
+              className="button-secondary"
+              aria-label="Rotate down"
+              title="Rotate down"
+              onClick={() => rotate(0, -8)}
+            >
+              ↓
+            </button>
+          </div>
+          <div
+            className="viewer-navigation"
+            role="group"
+            aria-label="Model zoom"
           >
-            +
-          </button>
+            <button
+              aria-label="Zoom out"
+              title="Zoom out"
+              className="button-secondary"
+              onClick={() => zoom(-0.1)}
+            >
+              −
+            </button>
+            <output className="viewer-zoom" aria-label="Zoom level">
+              {Math.round(camera.zoom * 100)}%
+            </output>
+            <button
+              aria-label="Zoom in"
+              title="Zoom in"
+              className="button-secondary"
+              onClick={() => zoom(0.1)}
+            >
+              +
+            </button>
+          </div>
           <button className="button-secondary" onClick={reset}>
             Reset Model
           </button>
@@ -216,7 +273,11 @@ export function DeviceViewer() {
             Exploded view
           </label>
         </div>
-        <p className="text-sm mt-4" aria-live="polite">
+        <p
+          className="text-sm viewer-state"
+          aria-live="polite"
+          data-device-state={on ? "on" : "off"}
+        >
           <strong className={on ? "text-cyan" : "text-violet"}>
             {on
               ? "ON illustration: gate-induced charge enables a channel."
@@ -226,8 +287,12 @@ export function DeviceViewer() {
           in the simulator.
         </p>
       </section>
-      <aside className="panel">
+      <aside className="device-inspector">
         <h2>Device Components</h2>
+        <p className="text-sm mt-2">
+          Select a component to inspect its role. Checkboxes show or hide each
+          layer.
+        </p>
         <div className="component-list">
           {deviceParts.map((item) => (
             <div key={item.id}>
@@ -235,7 +300,12 @@ export function DeviceViewer() {
                 aria-pressed={selected === item.id}
                 onClick={() => select(item.id)}
               >
-                <i style={{ background: item.color }} />
+                <i
+                  style={{
+                    background:
+                      item.id === "channel" ? "var(--primary)" : item.color,
+                  }}
+                />
                 {item.name}
               </button>
               <label>
@@ -256,7 +326,10 @@ export function DeviceViewer() {
             </div>
           ))}
         </div>
-        <section className="component-info" aria-live="polite">
+        <section
+          className="component-info component-inspection"
+          aria-live="polite"
+        >
           <h3>Component Information</h3>
           <h4 className="text-violet mt-4">{part.name}</h4>
           <p className="text-sm mt-2">{part.role}</p>

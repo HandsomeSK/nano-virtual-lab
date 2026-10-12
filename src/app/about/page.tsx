@@ -10,7 +10,13 @@ import { ReferenceLink } from "@/components/reference-link";
 import { figures } from "@/data/figures";
 import { FigureCredit } from "@/components/scientific-figure";
 import { safeReturnPath, queryValue, type Query } from "@/lib/site";
-export const metadata: Metadata = { title: "About & References" };
+
+export const metadata: Metadata = {
+  title: "About & References",
+  description:
+    "An independent nanotechnology virtual laboratory: scientific scope, research references, model assumptions and image credits.",
+};
+
 export default async function Page({
   searchParams,
 }: {
@@ -20,29 +26,90 @@ export default async function Page({
   return (
     <PageShell
       title="About & References"
-      intro="The course foundations and research sources behind Nanomaterials: From Graphene to Next-Generation 2D Semiconductor Transistors."
+      intro="An independent virtual laboratory for exploring nanomaterials, understanding devices and reading the evidence behind them."
     >
-      <section className="section">
-        <SectionHeading title="About NanoLab" />
-        <p>
-          NanoLab is an interactive educational project on Nanomaterials for
-          MECH6045: Nanotechnology — Fundamentals and Applications. Its focused
-          research case is two-dimensional nanomaterials, represented by
-          graphene and MoS₂, and their role in next-generation semiconductor
-          transistors.
-        </p>
-        <p className="mt-4">
-          Explore the nanoscale and energy bands, discover graphene’s unusual
-          electronic properties, and investigate why the finite band gap of MoS₂
-          is useful for transistor switching. Interactive diagrams, a
-          three-dimensional device explorer and a teaching simulator connect
-          these concepts with engineering challenges and published research.
-        </p>
+      <section className="section about-overview">
+        <SectionHeading title="Science You Can Explore" />
+        <div className="about-layout">
+          <div>
+            <p>
+              NanoLab is a public Nanotechnology Virtual Laboratory. Its focus
+              is two-dimensional nanomaterials, represented by graphene and
+              MoS₂, and their role in next-generation semiconductor transistors.
+            </p>
+            <p className="mt-4">
+              Explore the nanoscale and energy bands, discover graphene’s
+              unusual electronic properties, and investigate why the finite band
+              gap of MoS₂ is useful for transistor switching. Interactive
+              diagrams, a three-dimensional device explorer and an educational
+              simulator connect these concepts with engineering challenges and
+              published research.
+            </p>
+          </div>
+          <aside className="about-scope" aria-label="Laboratory scope">
+            <dl>
+              <div>
+                <dt>Materials</dt>
+                <dd>Graphene, MoS₂ & silicon</dd>
+              </div>
+              <div>
+                <dt>Explore</dt>
+                <dd>Atomic structure, transport & device engineering</dd>
+              </div>
+              <div>
+                <dt>Experiment</dt>
+                <dd>
+                  Conceptual visualisations & an uncalibrated current model
+                </dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+      <section className="section" id="learning">
+        <SectionHeading title="From Fundamentals to Research" />
+        <div className="about-layout">
+          <div>
+            <p>
+              Nanoscale materials bring surfaces, quantum confinement and
+              electronic structure into focus. A confined electron has discrete
+              allowed energies; a crystal’s periodic lattice produces energy
+              bands. Graphene’s carbon lattice gives rise to distinctive
+              transport, while its zero intrinsic gap poses challenges for
+              digital switching. These general principles remain the starting
+              point for the experiments.
+            </p>
+            <p className="mt-4">
+              MoS₂ provides a contrasting two-dimensional semiconductor with a
+              finite gap. Its transistor applications connect material physics
+              with contacts, gate dielectrics, scaling and fabrication. Selected
+              studies from 2024–2026, together with earlier milestones, show how
+              these questions are investigated experimentally.
+            </p>
+          </div>
+          <div className="about-reading-links">
+            <Link className="text-link" href="/foundations#bands">
+              Energy Bands
+            </Link>
+            <Link
+              className="text-link"
+              href="/foundations#graphene-electronics"
+            >
+              Graphene Electronics
+            </Link>
+            <Link className="text-link" href="/why-mos2">
+              From Graphene to MoS₂
+            </Link>
+            <Link className="text-link" href="/research">
+              Research Frontier
+            </Link>
+          </div>
+        </div>
       </section>
       <section className="section" id="references">
         <SectionHeading
-          title="Academic References"
-          description="Follow a citation from any learning page, find the original source, and return to the idea you were exploring."
+          title="Scientific References"
+          description="Find the original source, then return to the idea you were exploring."
         />
         <ReferenceBrowser
           key={JSON.stringify(query)}
@@ -50,131 +117,65 @@ export default async function Page({
           returnPath={safeReturnPath(queryValue(query, "from"))}
         />
       </section>
-      <section className="section" id="course">
-        <SectionHeading title="Course and Educational Resources" />
-        <div className="grid gap-5 md:grid-cols-2">
-          <article className="panel p-6">
-            <h3>Lecture 2: Nanomaterials</h3>
-            <p className="muted mt-3">
-              The course foundation covers nanoscale properties, quantum
-              confinement and electronic bands. Lecture 2, pages 18–19, provides
-              the starting point for comparing allowed energy bands and the gap
-              between them.{" "}
-              <ReferenceLink id="course-bands" from="/about#course" />
-            </p>
-            <Link className="text-link" href="/foundations#bands">
-              Explore energy bands →
-            </Link>
-          </article>
-          <article className="panel p-6">
-            <h3>Lecture 3: Carbon-Based Nanomaterials</h3>
-            <p className="muted mt-3">
-              Graphene’s two-dimensional carbon structure and electronic
-              properties connect the course material with the interactive
-              learning activities. Lecture 3, page 26, motivates the graphene
-              transport discussion.{" "}
-              <ReferenceLink id="course-graphene" from="/about#course" />
-            </p>
-            <Link
-              className="text-link"
-              href="/foundations#graphene-electronics"
-            >
-              Explore graphene electronics →
-            </Link>
-          </article>
-        </div>
-        <h3 className="mt-6">Beyond the Lectures</h3>
-        <p className="mt-3">
-          The MoS₂ transistor case study extends the course principles using
-          scientific literature; it is not presented as a device topic taught in
-          detail in Lectures 2–3. The 2024–2026 studies cover more recent
-          research on wafer-scale integration, transfer and interconnected
-          circuits, distinct from the course foundation.
-        </p>
-        <div className="actions">
-          <Link className="text-link" href="/why-mos2">
-            Explore the MoS₂ extension →
-          </Link>
-          <Link className="text-link" href="/research">
-            Explore 2024–2026 research and earlier milestones →
-          </Link>
-        </div>
-        <p className="muted text-sm mt-4">
-          Lecture topics and page references supplied by the project author;
-          scientific explanations are supported by linked literature. OpenStax
-          and MIT OpenCourseWare provide further background for the quantum-well
-          visualization and transistor model.
-        </p>
-      </section>
       <section className="section" id="sources">
-        <SectionHeading title="Scientific Data & Visualisations" />
-        <p>
-          Interactive device, material and learning diagrams are original SVG or
-          CSS schematics, with dimensions exaggerated for visibility. The
-          AI-generated homepage illustration is conceptual, not an atomistic
-          calculation or microscopy image. Research titles and claims link to
-          publisher, author or institutional sources.
-        </p>
-        <p className="mt-4">
-          Simulator defaults are illustrative assumptions. No measured research
-          datasets are used in its curves. Everyday scale examples are
-          approximate, and actual specimens vary.
-        </p>
-        <p className="mt-4">
-          Energy-band and transport diagrams highlight concepts rather than
-          calculate a material’s complete band structure. Graphene mobility,
-          group velocity and mean free path describe different aspects of
-          transport; the simplified MoS₂ teaching model does not predict
-          graphene or silicon device performance.
-        </p>
-        <ReferenceLink id="assets" from="/about#sources" />
-        <div className="two-column mt-5">
-          <div className="panel">
-            <h3>Course-derived Fundamentals</h3>
-            <p className="text-sm mt-3">
-              Author-supplied MECH6045 topics establish the learning route;
-              literature and educational sources support the explanations. No
-              lecture passages are reproduced.
+        <SectionHeading title="How to Read the Evidence" />
+        <div className="about-evidence-grid">
+          <article>
+            <h3>Scientific Fundamentals</h3>
+            <p>
+              General definitions, principles and equations are explained
+              directly. Open textbooks provide further background for the
+              infinite quantum well and classical transistor equations; graphene
+              research supports its structure and transport picture.
             </p>
-          </div>
-          <div className="panel">
+          </article>
+          <article>
             <h3>Peer-reviewed Research</h3>
-            <p className="text-sm mt-3">
+            <p>
               Paper summaries and experimental figures describe specific methods
               and specimens. Early-version status, corrections and measurement
-              conditions are identified where relevant.
+              conditions are identified where relevant. Titles and claims link
+              to publisher or author sources.
             </p>
-          </div>
-          <div className="panel">
+          </article>
+          <article>
             <h3>Institutional Announcements</h3>
-            <p className="text-sm mt-3">
-              Industry press releases have their own source category. They are
+            <p>
+              Industry announcements have their own source category. They are
               distinct from peer-reviewed publications and do not establish
               production qualification.
             </p>
-          </div>
-          <div className="panel">
-            <h3>Original Simulations & Visualisations</h3>
-            <p className="text-sm mt-3">
-              The classical current solver, conceptual 3D device, interactive
-              learning diagrams and explanatory band sketches are project
-              contributions. Measured figure data are not fitted or imported
-              into the current solver.
+          </article>
+          <article>
+            <h3>Original Models & Visualisations</h3>
+            <p>
+              Interactive SVG/CSS schematics exaggerate dimensions for
+              visibility. Band and transport diagrams show concepts, rather than
+              a complete material band structure. The homepage artwork is
+              AI-generated and conceptual, rather than an atomistic calculation
+              or microscopy image.
             </p>
-          </div>
+          </article>
         </div>
+        <p className="mt-5">
+          Simulator defaults and everyday scale examples are illustrative;
+          actual specimens vary. No measured research datasets are fitted or
+          imported into its curves. Graphene mobility, group velocity and mean
+          free path describe different aspects of transport. The simplified MoS₂
+          current model does not predict graphene or silicon device performance.{" "}
+          <ReferenceLink id="assets" from="/about#sources" />
+        </p>
       </section>
       <section className="section" id="figure-sources">
         <SectionHeading
           title="Scientific Image Registry"
-          description="Independent image provenance: creator, original source, figure identifier, DOI, licence and modification status."
+          description="Creator, original source, figure identifier, DOI, licence and modification status for every external scientific image."
         />
         <p className="text-sm mb-5">
-          Every image below retains its stated licence; site code does not
-          relicense third-party material. Share-alike images are displayed
-          without scientific adaptation. CC BY-NC-ND figures are reproduced
-          complete and unadapted for this non-commercial course project. A
-          commercial reuse of those figures needs separate permission.
+          Every image retains its stated licence. Share-alike images are
+          displayed without scientific adaptation. CC BY-NC-ND figures are
+          reproduced complete and unadapted for non-commercial public science
+          education; commercial reuse needs separate permission.
         </p>
         <div className="reference-list">
           {Object.values(figures).map((figure) => (
@@ -195,44 +196,45 @@ export default async function Page({
           ))}
         </div>
       </section>
-      <section className="section" id="credits">
-        <SectionHeading title="Development & Credits" />
-        <p>
-          Built with Next.js, React, TypeScript and Tailwind CSS; hosted on
-          Vercel with version control on GitHub. DM Sans is bundled locally
-          through Fontsource. AI assisted interface concepts, implementation and
-          testing. Generated design concepts are not scientific evidence.
-        </p>
-        <p className="mt-4">
-          Shared reference data, reusable learning components and a separate
-          transistor-model module keep the platform easy to extend as its
-          educational content develops.
-        </p>
-        <a
-          className="text-link"
-          href="https://github.com/HandsomeSK/nano-virtual-lab"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View project code & README ↗
-        </a>
-      </section>
-      <section className="section">
-        <SectionHeading title="Additional Information" />
-        <p>
-          Saved configurations remain in this browser’s local storage. No
-          account or server database is used. Clearing browser data removes
-          those saves; parameter URLs provide a separate way to share a
-          configuration.
-        </p>
-        <p className="mt-4">
-          The teaching model omits subthreshold leakage, quantum transport,
-          traps, self-heating and short-channel effects. Review its equations
-          before interpreting trends.
-        </p>
-        <Link className="text-link" href="/simulator#model">
-          Read model assumptions →
-        </Link>
+      <section className="section about-details" id="credits">
+        <div>
+          <SectionHeading title="Development & Credits" />
+          <p>
+            Built with Next.js, React, TypeScript and Tailwind CSS; hosted on
+            Vercel with version control on GitHub. Fonts are bundled locally. AI
+            assisted interface concepts, implementation and testing. Generated
+            design concepts are not scientific evidence.
+          </p>
+          <p className="mt-4">
+            Shared scientific data, reusable learning components and a separate
+            transistor model keep the platform easy to extend.
+          </p>
+          <a
+            className="text-link"
+            href="https://github.com/HandsomeSK/nano-virtual-lab"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project Code & README ↗
+          </a>
+        </div>
+        <div>
+          <SectionHeading title="Your Experiments & Their Limits" />
+          <p>
+            Saved configurations remain in this browser’s local storage. No
+            account or server database is used. Clearing browser data removes
+            those saves; parameter URLs provide a separate way to share a
+            configuration.
+          </p>
+          <p className="mt-4">
+            The educational model omits subthreshold leakage, quantum transport,
+            traps, self-heating and short-channel effects. Review its equations
+            before interpreting trends.
+          </p>
+          <Link className="text-link" href="/simulator#model">
+            Read Model Assumptions
+          </Link>
+        </div>
       </section>
       <RelatedTopics
         links={[

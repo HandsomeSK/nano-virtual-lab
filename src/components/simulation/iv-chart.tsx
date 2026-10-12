@@ -25,7 +25,7 @@ export function IVChart({
   const x = (v: number) => 66 + (v / maxX) * 454,
     y = (v: number) => 280 - (v / maxY) * 236;
   return (
-    <figure className="iv-chart">
+    <figure className="iv-chart instrument-chart">
       <svg
         viewBox="0 0 580 330"
         role="img"
@@ -113,7 +113,7 @@ export function IVChart({
           </span>
         ))}
       </figcaption>
-      <details>
+      <details className="curve-data">
         <summary>View curve data</summary>
         <div className="horizontal-scroll">
           <table>

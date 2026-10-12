@@ -51,7 +51,7 @@ export function ResearchExplorer({
   }
   return (
     <>
-      <section className="section">
+      <section className="section research-findings">
         <SectionHeading
           title="Find a Research Direction"
           description="Explore selected, verified studies from monolayer physics to integrated circuits."
@@ -61,6 +61,7 @@ export function ResearchExplorer({
             Publication year
             <select
               aria-label="Publication year"
+              name="year"
               value={year}
               onChange={(event) => update(event.target.value, category, "")}
             >
@@ -76,6 +77,7 @@ export function ResearchExplorer({
             Research direction
             <select
               aria-label="Research direction"
+              name="category"
               value={category}
               onChange={(event) => update(year, event.target.value, "")}
             >
@@ -96,7 +98,7 @@ export function ResearchExplorer({
           {filtered.length} studies shown
         </p>
       </section>
-      <section className="section">
+      <section className="section research-timeline">
         <SectionHeading
           title="Interactive Timeline"
           description="Select a milestone to open its study and research question."
@@ -132,85 +134,96 @@ export function ResearchExplorer({
           {filtered.map((paper) => (
             <article
               key={paper.reference.id}
-              className="panel study-card"
+              className="study-card"
               id={"study-" + paper.reference.id}
               data-selected={active === paper.reference.id}
             >
-              <div className="study-meta">
-                {paper.reference.year} / {paper.category}
-              </div>
-              <h3>{paper.reference.title}</h3>
-              <p className="muted text-sm mt-3">
-                {paper.reference.authors} · {paper.reference.venue}
-              </p>
-              <p className="mt-4">{paper.summary}</p>
-              <div className="connection">
-                <h4>Why This Research Matters</h4>
-                <p>{paper.whyMatters}</p>
-                <Link className="text-link" href={paper.concept}>
-                  {paper.conceptLabel} →
-                </Link>
-              </div>
-              <details
-                key={String(active === paper.reference.id)}
-                open={active === paper.reference.id}
-                onToggle={(event) => {
-                  if (
-                    event.currentTarget.open &&
-                    active !== paper.reference.id
-                  ) {
-                    update(year, category, paper.reference.id);
-                  }
-                }}
-              >
-                <summary>Study details & open question</summary>
-                <h4 className="mt-4">Research problem</h4>
-                <p className="text-sm mt-2">{paper.problem}</p>
-                <h4 className="mt-4">What was demonstrated?</h4>
-                <p className="text-sm mt-2">{paper.demonstration}</p>
-                <h4 className="mt-4">What is technically new?</h4>
-                <p className="text-sm mt-2">{paper.novelty}</p>
-                {paper.figure ? <ScientificFigure id={paper.figure} /> : null}
-                <h4 className="mt-4">Limitations & open question</h4>
-                <p className="text-sm mt-2">{paper.question}</p>
-                <p className="muted text-sm mt-3">{paper.boundary}</p>
-              </details>
-              <div className="actions">
-                <a
-                  className="text-link"
-                  href={paper.reference.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Original source ↗
-                </a>
-                <a
-                  className="text-link"
-                  href={"https://doi.org/" + paper.reference.doi}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  DOI ↗
-                </a>
-                <ReferenceLink
-                  id={paper.reference.id}
-                  from={
-                    "/research?" +
-                    new URLSearchParams({
-                      year,
-                      category,
-                      study: paper.reference.id,
-                    }) +
-                    "#study-" +
-                    paper.reference.id
-                  }
-                />
-                <Link
-                  className="text-link"
-                  href={"/challenges#" + paper.challenge}
-                >
-                  Related engineering challenge →
-                </Link>
+              <header className="study-heading">
+                <p className="study-meta">
+                  <span>{paper.reference.year}</span>
+                  <span>{paper.category}</span>
+                </p>
+                <h3>{paper.reference.title}</h3>
+                <p className="study-byline">
+                  {paper.reference.authors} · {paper.reference.venue}
+                </p>
+              </header>
+              <div className="study-layout">
+                <div className="study-main">
+                  <p className="study-summary">{paper.summary}</p>
+                  <details
+                    key={String(active === paper.reference.id)}
+                    open={active === paper.reference.id}
+                    onToggle={(event) => {
+                      if (
+                        event.currentTarget.open &&
+                        active !== paper.reference.id
+                      ) {
+                        update(year, category, paper.reference.id);
+                      }
+                    }}
+                  >
+                    <summary>Study details & open question</summary>
+                    <div className="study-body">
+                      <h4>Research problem</h4>
+                      <p>{paper.problem}</p>
+                      <h4>What was demonstrated?</h4>
+                      <p>{paper.demonstration}</p>
+                      <h4>What is technically new?</h4>
+                      <p>{paper.novelty}</p>
+                      {paper.figure ? (
+                        <ScientificFigure id={paper.figure} />
+                      ) : null}
+                      <h4>Limitations & open question</h4>
+                      <p>{paper.question}</p>
+                      <p className="study-boundary">{paper.boundary}</p>
+                    </div>
+                  </details>
+                  <div className="actions study-sources">
+                    <a
+                      className="text-link"
+                      href={paper.reference.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Original source ↗
+                    </a>
+                    <a
+                      className="text-link"
+                      href={"https://doi.org/" + paper.reference.doi}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      DOI ↗
+                    </a>
+                    <ReferenceLink
+                      id={paper.reference.id}
+                      from={
+                        "/research?" +
+                        new URLSearchParams({
+                          year,
+                          category,
+                          study: paper.reference.id,
+                        }) +
+                        "#study-" +
+                        paper.reference.id
+                      }
+                    />
+                  </div>
+                </div>
+                <aside className="study-context">
+                  <h4>Why This Research Matters</h4>
+                  <p>{paper.whyMatters}</p>
+                  <Link className="text-link" href={paper.concept}>
+                    {paper.conceptLabel} →
+                  </Link>
+                  <Link
+                    className="text-link"
+                    href={"/challenges#" + paper.challenge}
+                  >
+                    Related engineering challenge →
+                  </Link>
+                </aside>
               </div>
             </article>
           ))}

@@ -6,8 +6,10 @@ import { studies } from "../src/data/research.ts";
 import { knowledge } from "../src/data/knowledge.ts";
 import { foundationDetails } from "../src/data/foundation-details.ts";
 import { challengeEvidence } from "../src/data/challenge-evidence.ts";
+import { materials } from "../src/data/materials.ts";
+import { challenges } from "../src/data/challenges.ts";
 
-test("scientific content has resolvable references and preserves original citation numbering", () => {
+test("scientific content preserves research sources and resolves citations after identity cleanup", () => {
   const originalIds = [
     "mak2010",
     "radis2011",
@@ -16,7 +18,6 @@ test("scientific content has resolvable references and preserves original citati
     "kwon2024",
     "quantum",
     "mosfet",
-    "course",
     "assets",
     "neto2009",
     "novoselov2004",
@@ -24,11 +25,9 @@ test("scientific content has resolvable references and preserves original citati
     "schwierz2010",
     "zhang2025",
     "guo2026",
-    "course-bands",
-    "course-graphene",
   ];
   assert.deepEqual(
-    references.slice(0, 17).map((ref) => ref.id),
+    references.slice(0, originalIds.length).map((ref) => ref.id),
     originalIds,
   );
   const refIds = new Set(references.map((ref) => ref.id));
@@ -39,6 +38,9 @@ test("scientific content has resolvable references and preserves original citati
   );
   for (const item of [
     ...studies,
+    ...knowledge,
+    ...Object.values(materials),
+    ...challenges,
     ...Object.values(challengeEvidence),
     ...Object.values(foundationDetails),
   ]) {
@@ -56,6 +58,10 @@ test("scientific content has resolvable references and preserves original citati
   assert.equal(
     references.find((ref) => ref.id === "imec2026").category,
     "Institutional announcement",
+  );
+  assert.doesNotMatch(
+    JSON.stringify([references, knowledge, figures]),
+    /MECH6045|lecture|course material|course-bands|course-graphene/i,
   );
 });
 
@@ -87,6 +93,10 @@ test("every displayed scientific image has curated HTTPS provenance and explicit
     ])
       assert.ok(figure[key]?.trim(), id + ": " + key);
     const image = new URL(figure.imageUrl);
+    if (figure.width !== undefined || figure.height !== undefined) {
+      assert.ok(Number.isInteger(figure.width) && figure.width > 0, id);
+      assert.ok(Number.isInteger(figure.height) && figure.height > 0, id);
+    }
     assert.equal(image.protocol, "https:");
     assert.ok(allowedHosts.has(image.hostname));
     assert.equal(image.search, "");

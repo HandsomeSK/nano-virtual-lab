@@ -2,10 +2,9 @@ export const site = {
   name: "NanoLab: Beyond Silicon",
   topic: "Nanomaterials",
   subtitle: "From Graphene to Next-Generation 2D Semiconductor Transistors",
-  courseCode: "MECH6045",
-  courseTitle: "Nanotechnology: Fundamentals and Applications",
+  identity: "Nanotechnology Virtual Laboratory",
   description:
-    "At the nanoscale, materials can exhibit unique physical and electronic properties. This project explores how two-dimensional nanomaterials, from graphene to MoS₂, are enabling the development of next-generation semiconductor transistors.",
+    "An independent nanotechnology virtual laboratory. Explore nanoscale properties, graphene and MoS₂ through interactive experiments, transistor simulations and published research.",
 };
 export const navigation = [
   { href: "/", title: "Home" },

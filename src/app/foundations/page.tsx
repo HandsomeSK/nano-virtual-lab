@@ -11,7 +11,7 @@ export default function Foundations() {
   return (
     <PageShell
       title="Foundations"
-      intro="Begin with nanomaterials and their size-dependent properties, then explore energy bands, graphene and the path from two-dimensional materials to transistors. Choose among six connected learning modules."
+      intro="Begin with nanomaterials and their size-dependent properties, then explore energy bands, graphene and the path from two-dimensional materials to transistors. Investigate six connected scientific ideas."
     >
       <div className="learning-layout">
         <aside className="knowledge-toc">

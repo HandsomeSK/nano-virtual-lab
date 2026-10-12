@@ -1,12 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { references, referenceNumber } from "@/data/references";
 const categories = [
   "All sources",
   "Paper",
   "Learning resource",
-  "Course material",
   "Data & assets",
   "Institutional announcement",
 ];
@@ -18,6 +17,7 @@ export function ReferenceBrowser({
   returnPath: string;
 }) {
   const [search, setSearch] = useState("");
+  const searchInput = useRef<HTMLInputElement>(null);
   const [category, setCategory] = useState("All sources");
   const selectedRef = references.find((ref) => ref.id === selected);
   const filtered = references.filter(
@@ -33,16 +33,35 @@ export function ReferenceBrowser({
       <div className="filter-row">
         <label className="grow">
           Search references
-          <input
-            type="search"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder="Title, author, year or DOI"
-          />
+          <span className="search-field">
+            <input
+              ref={searchInput}
+              name="reference-search"
+              type="search"
+              autoComplete="off"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Title, author, year or DOI…"
+            />
+            {search ? (
+              <button
+                type="button"
+                className="search-clear"
+                aria-label="Clear search"
+                onClick={() => {
+                  setSearch("");
+                  searchInput.current?.focus();
+                }}
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            ) : null}
+          </span>
         </label>
         <label>
           Source category
           <select
+            name="source-category"
             value={category}
             onChange={(event) => setCategory(event.target.value)}
           >

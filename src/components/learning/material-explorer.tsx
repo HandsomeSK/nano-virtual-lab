@@ -136,7 +136,7 @@ export function MaterialExplorer({
   const material = materials[selected];
   return (
     <div className="panel material-explorer" data-material={selected}>
-      <div className="tabs" aria-label="Select a material">
+      <div className="tabs" role="group" aria-label="Select a material">
         {(["graphene", "mos2", "silicon"] as MaterialId[]).map((id) => (
           <button
             key={id}

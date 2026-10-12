@@ -25,17 +25,16 @@ export default async function Page({
       title="Research Frontier"
       intro="Explore 2024–2026 developments in MoS₂-based two-dimensional semiconductor transistors, alongside the earlier material and device milestones that underpin them."
     >
-      <section className="section">
+      <section className="section research-introduction">
         <SectionHeading title="Research Overview" />
         <p>
           MoS₂ research spans material physics, gate-controlled devices and
           manufacturing. These {studies.length} studies connect the
           nanomaterials foundation to transistor research, including verified
-          2024–2026 publications and the earlier milestones behind them. All
-          seven original milestones remain, with three additional 2026 papers.
-          Open study details for the research problem, demonstration, novelty
-          and limitations. Transfer, self-aligned scaling and interconnected
-          processors provide three focused engineering cases.
+          2024–2026 publications and the earlier milestones behind them. Explore
+          the research problem, demonstration, novelty and limitations of each
+          study. Transfer, self-aligned scaling and interconnected processors
+          provide three focused engineering cases.
         </p>
       </section>
       <ResearchExplorer
@@ -57,7 +56,10 @@ export default async function Page({
           studies.some((item) => item.reference === study) ? study : ""
         }
       />
-      <section className="section panel" id="institutional-research">
+      <section
+        className="section institutional-research"
+        id="institutional-research"
+      >
         <SectionHeading
           title="Industry Research: 300 mm Integration"
           description="Institutional announcement · imec, ASML and TSMC · 15 June 2026"
@@ -90,7 +92,7 @@ export default async function Page({
           Read the announcement & original figures ↗
         </a>
       </section>
-      <section className="section">
+      <section className="section research-outlook">
         <SectionHeading title="Challenges & Future Outlook" />
         <p>
           Better electrostatic control must be balanced with contact quality,
