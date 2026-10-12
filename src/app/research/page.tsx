@@ -22,14 +22,15 @@ export default async function Page({
   return (
     <PageShell
       title="Research Frontier"
-      intro="From the discovery of monolayer behaviour to scaled devices and wafer-level integration: explore selected published milestones."
+      intro="Explore 2024–2026 developments in MoS₂-based two-dimensional semiconductor transistors, alongside the earlier material and device milestones that underpin them."
     >
       <section className="section">
         <SectionHeading title="Research Overview" />
         <p>
           MoS₂ research spans material physics, gate-controlled devices and
-          manufacturing. These {studies.length} studies offer entry points into
-          that story, including verified publications from 2025 and 2026.
+          manufacturing. These {studies.length} studies connect the
+          nanomaterials foundation to transistor research, including verified
+          2024–2026 publications and the earlier milestones behind them.
           Summaries are brief; follow the original sources for methods,
           conditions and evidence.
         </p>

@@ -3,23 +3,20 @@ import Image from "next/image";
 import { Icon } from "@/components/icon";
 import { SectionHeading, RelatedTopics } from "@/components/page-shell";
 import { ReferenceLink } from "@/components/reference-link";
-import { journey } from "@/lib/site";
+import { journey, site } from "@/lib/site";
 import { references } from "@/data/references";
 
 export default function Home() {
-  const featured = ["desai2016", "guo2026"].map(
+  const featured = ["kwon2024", "zhang2025", "guo2026"].map(
     (id) => references.find((ref) => ref.id === id)!,
   );
   return (
     <div className="container home-page pb-16">
       <section className="hero">
         <div>
-          <h1>From Graphene to the Future of Electronics</h1>
-          <p>
-            Explore the extraordinary electronic properties of graphene and
-            discover how next-generation 2D semiconductors could transform
-            transistor technology.
-          </p>
+          <h1>{site.topic}</h1>
+          <h2 className="hero-subtitle">{site.subtitle}</h2>
+          <p>{site.description}</p>
           <div className="actions">
             <Link href="/foundations" className="button-primary">
               Start Learning <Icon name="arrow" className="size-4" />
@@ -60,12 +57,32 @@ export default function Home() {
         </figure>
       </section>
       <section className="topic-introduction">
-        <h2>Great transport is only the beginning</h2>
+        <h2>From Nanomaterials to Two-Dimensional Electronics</h2>
         <p>
-          Graphene shows how remarkable a single atomic layer can be. But moving
-          charge efficiently and switching it off are different challenges.
-          Follow the role of energy bands into MoS₂, then explore how a material
-          becomes a transistor. <ReferenceLink id="schwierz2010" from="/" />
+          Nanomaterials have dimensions at the nanoscale. Surface-to-volume
+          ratio, quantum confinement and electronic structure can give them
+          physical, chemical and electronic properties that differ from bulk
+          materials. Explore these foundations before following a material
+          into a device.
+        </p>
+        <p>
+          Our focus is two-dimensional nanomaterials. Graphene combines an
+          atomically thin carbon structure with remarkable transport, but its
+          zero band gap challenges conventional digital switching.{" "}
+          <ReferenceLink id="schwierz2010" from="/" /> Semiconducting MoS₂
+          provides a finite-gap example for studying field-effect transistors,
+          scaling and device engineering.{" "}
+          <ReferenceLink id="radis2011" from="/" />
+        </p>
+        <p>
+          MECH6045 Lecture 2 introduces Nanomaterials{" "}
+          <ReferenceLink id="course-bands" from="/" /> and Lecture 3 explores
+          Carbon-Based Nanomaterials, including graphene.{" "}
+          <ReferenceLink id="course-graphene" from="/" /> The MoS₂ device case
+          study and 2024–2026 research extend these course foundations.{" "}
+          <Link href="/about#course" className="text-link">
+            See the course and research connection →
+          </Link>
         </p>
         <Link href="/why-mos2#zero-gap" className="text-link">
           Why does a band gap help a digital switch?{" "}
@@ -131,8 +148,8 @@ export default function Home() {
       </section>
       <section className="section">
         <SectionHeading
-          title="Featured Research"
-          description="From an ultra-short gate to interconnected circuits: see why each study matters."
+          title="Latest Research Developments (2024–2026)"
+          description="Follow wafer-scale fabrication, transfer and interconnected circuits. Earlier milestones remain in the Research Frontier."
         />
         {featured.map((ref) => (
           <Link

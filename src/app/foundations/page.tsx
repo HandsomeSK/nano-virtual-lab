@@ -8,7 +8,7 @@ export default function Foundations() {
   return (
     <PageShell
       title="Foundations"
-      intro="Explore six connected ideas: the nanoscale, energy bands, graphene and the physics of a working transistor. Choose a topic and learn by experimenting."
+      intro="Begin with nanomaterials and their size-dependent properties, then explore energy bands, graphene and the path from two-dimensional materials to transistors. Choose among six connected learning modules."
     >
       <div className="learning-layout">
         <aside className="knowledge-toc">
