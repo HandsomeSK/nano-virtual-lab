@@ -7,8 +7,8 @@ import { journey, site } from "@/lib/site";
 import { references } from "@/data/references";
 
 export default function Home() {
-  const featured = ["kwon2024", "zhang2025", "guo2026"].map(
-    (id) => references.find((ref) => ref.id === id)!,
+  const featured = ["kwon2024", "zhang2025", "guo2026"].map((id) =>
+    references.find((ref) => ref.id === id)!,
   );
   return (
     <div className="container home-page pb-16">
@@ -62,8 +62,11 @@ export default function Home() {
           Nanomaterials have dimensions at the nanoscale. Surface-to-volume
           ratio, quantum confinement and electronic structure can give them
           physical, chemical and electronic properties that differ from bulk
-          materials. Explore these foundations before following a material
-          into a device.
+          materials. Surface atoms experience different bonding and
+          environments; confined electronic states depend on geometry and
+          boundary conditions. These are mechanisms to investigate, rather than
+          a promise that every smaller material has better performance. Explore
+          these foundations before following a material into a device.
         </p>
         <p>
           Our focus is two-dimensional nanomaterials. Graphene combines an
@@ -73,6 +76,12 @@ export default function Home() {
           provides a finite-gap example for studying field-effect transistors,
           scaling and device engineering.{" "}
           <ReferenceLink id="radis2011" from="/" />
+        </p>
+        <p>
+          An atomically thin semiconductor is a starting point. Researchers must
+          also inject charge through reliable contacts, integrate a low-defect
+          gate dielectric and reproduce devices across large-area films.
+          <ReferenceLink id="engineering2024" from="/" />
         </p>
         <p>
           MECH6045 Lecture 2 introduces Nanomaterials{" "}

@@ -7,6 +7,8 @@ import {
 } from "@/components/page-shell";
 import { ReferenceBrowser } from "@/components/reference-browser";
 import { ReferenceLink } from "@/components/reference-link";
+import { figures } from "@/data/figures";
+import { FigureCredit } from "@/components/scientific-figure";
 import { safeReturnPath, queryValue, type Query } from "@/lib/site";
 export const metadata: Metadata = { title: "About & References" };
 export default async function Page({
@@ -55,9 +57,9 @@ export default async function Page({
             <h3>Lecture 2: Nanomaterials</h3>
             <p className="muted mt-3">
               The course foundation covers nanoscale properties, quantum
-              confinement and electronic bands. Lecture 2, pages 18–19,
-              provides the starting point for comparing allowed energy bands
-              and the gap between them.{" "}
+              confinement and electronic bands. Lecture 2, pages 18–19, provides
+              the starting point for comparing allowed energy bands and the gap
+              between them.{" "}
               <ReferenceLink id="course-bands" from="/about#course" />
             </p>
             <Link className="text-link" href="/foundations#bands">
@@ -84,8 +86,8 @@ export default async function Page({
         <h3 className="mt-6">Beyond the Lectures</h3>
         <p className="mt-3">
           The MoS₂ transistor case study extends the course principles using
-          scientific literature; it is not presented as a device topic taught
-          in detail in Lectures 2–3. The 2024–2026 studies cover more recent
+          scientific literature; it is not presented as a device topic taught in
+          detail in Lectures 2–3. The 2024–2026 studies cover more recent
           research on wafer-scale integration, transfer and interconnected
           circuits, distinct from the course foundation.
         </p>
@@ -99,8 +101,8 @@ export default async function Page({
         </div>
         <p className="muted text-sm mt-4">
           Lecture topics and page references supplied by the project author;
-          scientific explanations are supported by linked literature. OpenStax and MIT
-          OpenCourseWare provide further background for the quantum-well
+          scientific explanations are supported by linked literature. OpenStax
+          and MIT OpenCourseWare provide further background for the quantum-well
           visualization and transistor model.
         </p>
       </section>
@@ -126,6 +128,72 @@ export default async function Page({
           graphene or silicon device performance.
         </p>
         <ReferenceLink id="assets" from="/about#sources" />
+        <div className="two-column mt-5">
+          <div className="panel">
+            <h3>Course-derived Fundamentals</h3>
+            <p className="text-sm mt-3">
+              Author-supplied MECH6045 topics establish the learning route;
+              literature and educational sources support the explanations. No
+              lecture passages are reproduced.
+            </p>
+          </div>
+          <div className="panel">
+            <h3>Peer-reviewed Research</h3>
+            <p className="text-sm mt-3">
+              Paper summaries and experimental figures describe specific methods
+              and specimens. Early-version status, corrections and measurement
+              conditions are identified where relevant.
+            </p>
+          </div>
+          <div className="panel">
+            <h3>Institutional Announcements</h3>
+            <p className="text-sm mt-3">
+              Industry press releases have their own source category. They are
+              distinct from peer-reviewed publications and do not establish
+              production qualification.
+            </p>
+          </div>
+          <div className="panel">
+            <h3>Original Simulations & Visualisations</h3>
+            <p className="text-sm mt-3">
+              The classical current solver, conceptual 3D device, interactive
+              learning diagrams and explanatory band sketches are project
+              contributions. Measured figure data are not fitted or imported
+              into the current solver.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="section" id="figure-sources">
+        <SectionHeading
+          title="Scientific Image Registry"
+          description="Independent image provenance: creator, original source, figure identifier, DOI, licence and modification status."
+        />
+        <p className="text-sm mb-5">
+          Every image below retains its stated licence; site code does not
+          relicense third-party material. Share-alike images are displayed
+          without scientific adaptation. CC BY-NC-ND figures are reproduced
+          complete and unadapted for this non-commercial course project. A
+          commercial reuse of those figures needs separate permission.
+        </p>
+        <div className="reference-list">
+          {Object.values(figures).map((figure) => (
+            <article
+              className="panel"
+              id={"figure-" + figure.id}
+              key={figure.id}
+            >
+              <div className="study-meta">
+                {figure.kind} · {figure.figureNumber ?? "External image"}
+              </div>
+              <h3 className="mt-2">{figure.title}</h3>
+              <p className="text-sm mt-3">
+                Creator / authors: {figure.authors}
+              </p>
+              <FigureCredit figure={figure} />
+            </article>
+          ))}
+        </div>
       </section>
       <section className="section" id="credits">
         <SectionHeading title="Development & Credits" />

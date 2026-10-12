@@ -88,6 +88,67 @@ export default async function ComparisonPage({
           electrostatics and defects also influence an actual OFF current.
         </p>
       </section>
+      <section className="section panel" id="benchmarking">
+        <SectionHeading title="Material Properties Are Not Device Benchmarks" />
+        <p>
+          A band gap or crystal structure describes a material under stated
+          conditions. Drain current, OFF leakage, field-effect mobility and
+          switching speed depend on a complete device and measurement protocol.
+          Cheng et al. recommend reporting the information needed for a fair FET
+          benchmark rather than ranking isolated headline values.
+          <ReferenceLink id="benchmark2022" from="/comparison#benchmarking" />
+        </p>
+        <div className="horizontal-scroll mt-4">
+          <table>
+            <caption className="sr-only">
+              Context required to compare measured transistor performance
+            </caption>
+            <thead>
+              <tr>
+                <th>Reported quantity</th>
+                <th>Context needed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Mobility</th>
+                <td>
+                  Extraction method, gate capacitance, contact effects, drain
+                  bias and temperature; field-effect and Hall values are
+                  different measurements.
+                </td>
+              </tr>
+              <tr>
+                <th>ON/OFF current</th>
+                <td>
+                  Gate/drain bias points, width normalization, measurement
+                  floor, leakage paths, environment and sweep history.
+                </td>
+              </tr>
+              <tr>
+                <th>Scaled dimensions</th>
+                <td>
+                  Physical gate length, effective channel length and contacted
+                  pitch, each defined separately.
+                </td>
+              </tr>
+              <tr>
+                <th>Repeatability</th>
+                <td>
+                  Device count, distributions, selection criteria, geometry and
+                  fabrication process.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-sm mt-4">
+          The A/B tool below compares the same classical equations with
+          different assumed parameters. Its curves are not measured graphene,
+          silicon or MoS₂ benchmarks, and changing the material selector does
+          not assign a new calibrated transport model.
+        </p>
+      </section>
       <Comparison
         key={JSON.stringify(query)}
         incoming={

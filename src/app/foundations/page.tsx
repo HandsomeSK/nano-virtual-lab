@@ -3,6 +3,9 @@ import { PageShell, RelatedTopics } from "@/components/page-shell";
 import { knowledge } from "@/data/knowledge";
 import { KnowledgeCard } from "@/components/learning/knowledge-card";
 import { FoundationWidget } from "@/components/learning/foundation-widgets";
+import { foundationDetails } from "@/data/foundation-details";
+import { ReferenceLink } from "@/components/reference-link";
+import { ScientificFigure } from "@/components/scientific-figure";
 export const metadata: Metadata = { title: "Foundations" };
 export default function Foundations() {
   return (
@@ -26,6 +29,24 @@ export default function Foundations() {
           {knowledge.map((item, i) => (
             <KnowledgeCard key={item.id} concept={item} index={i}>
               <FoundationWidget id={item.id} />
+              <details className="mt-5">
+                <summary>{foundationDetails[item.id].title}</summary>
+                {foundationDetails[item.id].paragraphs.map((paragraph) => (
+                  <p className="text-sm mt-3" key={paragraph}>
+                    {paragraph}
+                  </p>
+                ))}
+                <ReferenceLink
+                  id={foundationDetails[item.id].reference}
+                  from={"/foundations#" + item.id}
+                />
+              </details>
+              {item.id === "graphene-structure" ? (
+                <ScientificFigure id="graphene-lattice" />
+              ) : null}
+              {item.id === "characterization" ? (
+                <ScientificFigure id="graphene-hrtem" />
+              ) : null}
             </KnowledgeCard>
           ))}
         </div>

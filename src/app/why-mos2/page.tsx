@@ -11,6 +11,8 @@ import {
 } from "@/components/learning/material-explorer";
 import { BandDiagram } from "@/components/learning/band-diagram";
 import { ReferenceLink } from "@/components/reference-link";
+import { ScientificFigure } from "@/components/scientific-figure";
+import { LayerBandEvidence } from "@/components/learning/layer-band-evidence";
 
 export const metadata: Metadata = { title: "From Graphene to MoS₂" };
 
@@ -30,9 +32,9 @@ export default function Why() {
           <SectionHeading title="Two-Dimensional Nanomaterials" />
           <p>
             These materials have atomic-scale thickness while extending much
-            farther in the plane. Their structure and electronic properties
-            make them interesting for advanced electronics. Graphene and MoS₂
-            are the representative materials explored here.{" "}
+            farther in the plane. Their structure and electronic properties make
+            them interesting for advanced electronics. Graphene and MoS₂ are the
+            representative materials explored here.{" "}
             <ReferenceLink id="neto2009" from="/why-mos2#beyond-silicon" />
             <ReferenceLink id="radis2011" from="/why-mos2#beyond-silicon" />
           </p>
@@ -133,6 +135,17 @@ export default function Why() {
         <Link href="/foundations#bands" className="text-link">
           Review energy bands & the band gap →
         </Link>
+        <details>
+          <summary>What does an ON/OFF ratio tell a digital circuit?</summary>
+          <p className="text-sm">
+            ION/IOFF describes two specified bias states of a device. Low
+            leakage reduces static power and helps separate logic levels; useful
+            ON current must charge a circuit’s load. Both values require
+            drain/gate biases, temperature and a measurement floor. A high ratio
+            alone does not establish speed, reliability or manufacturing yield.
+            <ReferenceLink id="benchmark2022" from="/why-mos2#band-gap" />
+          </p>
+        </details>
       </section>
 
       <section className="section panel" id="meet-mos2">
@@ -174,6 +187,36 @@ export default function Why() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="section" id="layer-evidence">
+        <ScientificFigure id="mos2-phases" />
+        <p className="text-sm">
+          The 2H bulk stacking has trigonal-prismatic coordination within each
+          sheet; an isolated sheet is often called the 1H monolayer. The 1T
+          coordination is different and must not be assigned the same
+          semiconducting band picture. Layer coupling changes band extrema,
+          while crystal phase, defects and the environment also matter.
+          <ReferenceLink id="engineering2024" from="/why-mos2#layer-evidence" />
+        </p>
+        <LayerBandEvidence />
+        <details>
+          <summary>
+            Thin-body electrostatics: an advantage with conditions
+          </summary>
+          <p className="text-sm">
+            A thin channel reduces the depth over which the gate must control
+            charge and can improve electrostatics. The benefit also depends on
+            oxide thickness/permittivity, gate geometry, contacts and drain
+            bias. Drain-induced barrier changes and tunnelling still matter at
+            very short lengths. NanoLab’s 100–2000 nm length slider demonstrates
+            classical geometry scaling; it does not calculate those effects.
+            <ReferenceLink
+              id="engineering2024"
+              from="/why-mos2#layer-evidence"
+            />
+          </p>
+        </details>
       </section>
 
       <section className="section" id="materials">

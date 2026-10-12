@@ -1,0 +1,22 @@
+# Scientific content inventory
+
+Baseline: `main` at `9fc5450` (PR #8), inspected against the existing production website on 12 October 2026. This update extends the nine existing pages; it does not replace the learning system.
+
+| Page                  | Existing content and interactions                                                                                                     | Targeted additions                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Home                  | Nanomaterials heading, course connection, eight learning links, conceptual AI illustration, recent studies                            | Explain surface/confinement mechanisms and the contact/interface/manufacturing gap                                                                       |
+| Foundations           | Six modules; size slider, infinite well/bands, graphene/graphite/CNT, Dirac/Fermi/transport lab, characterization, FET switching      | Short expandable explanations; licensed graphene lattice and HRTEM evidence                                                                              |
+| From Graphene to MoS₂ | Six connected sections; zero gap, ON/OFF, S–Mo–S, material selector                                                                   | Crystal-phase illustration, direct/indirect momentum diagram, optical versus quasiparticle gaps, electrostatic limits                                    |
+| Device Explorer       | Original six-part CSS 3D model, orbit/zoom/reset, selection/visibility/explode, conceptual ON/OFF                                     | Richer part descriptions; a separately identified experimental device micrograph                                                                         |
+| Simulator             | Five inputs, transfer/output curves, SI conversions, self-consistent contact solve, actual result explanations, save/reset, equations | Explicit assumptions and units; experimental hysteresis figure with measurement conditions and qualitative comparison                                    |
+| Comparison            | Graphene/MoS₂/silicon concepts, normalized band sketches, saved A/B scenarios, edit/remove/shared axes                                | Benchmarking guidance separating intrinsic material properties from device/extraction conditions                                                         |
+| Challenges            | Four mechanisms, original SVG diagrams, causes/impacts/solutions/model boundaries and deep links                                      | Concrete contact/dielectric/scaling/transfer studies and properly attributed experimental evidence                                                       |
+| Research              | Seven milestones (2010–2026), year/direction filters, timeline, questions/boundaries/citations                                        | Preserve all seven IDs; add three 2026 papers, three focused explanations, licensed transfer figure and a separately labelled institutional announcement |
+| About & References    | Seventeen references, search/filter/return, course page references, model/asset credits                                               | Append sources without renumbering; independent image registry and clear evidence categories                                                             |
+
+## Boundaries to preserve
+
+- Existing page routes, fragment IDs, local-storage schema/key, model constants/ranges and all original interactions remain intact.
+- Original diagrams and the AI homepage artwork remain explicitly conceptual; external illustrations and measured figures are labelled separately.
+- Literature figures do not become fitted simulator datasets. Optical gaps, device mobility and experimental ON/OFF ratios are not universal constants.
+- New images use curated HTTPS URLs through Next.js Image optimization because the managed executor blocks downloads from these source hosts. This is a product delivery choice; no proxy bypass or unrestricted fetch route is added. Local copies remain a future option when the supported environment policy permits source downloads.

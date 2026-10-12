@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { challenges } from "@/data/challenges";
 import { ReferenceLink } from "./reference-link";
+import { challengeEvidence } from "@/data/challenge-evidence";
+import { ScientificFigure } from "./scientific-figure";
 function subscribe(callback: () => void) {
   window.addEventListener("hashchange", callback);
   return () => window.removeEventListener("hashchange", callback);
@@ -397,7 +399,33 @@ export function ChallengeExplorer() {
             <div className="connection">
               <h3>Research Directions</h3>
               <p>{item.solution}</p>
+              <ReferenceLink
+                id="engineering2024"
+                from={"/challenges#" + item.id}
+              />
             </div>
+            <details>
+              <summary>{challengeEvidence[item.id].title}</summary>
+              <p className="text-sm mt-3">
+                {challengeEvidence[item.id].explanation}{" "}
+                <ReferenceLink
+                  id={challengeEvidence[item.id].reference}
+                  from={"/challenges#" + item.id}
+                />
+              </p>
+              <p className="text-sm muted mt-3">
+                {challengeEvidence[item.id].boundary}
+              </p>
+              <ScientificFigure id={challengeEvidence[item.id].figure} />
+              <a
+                className="text-link"
+                href={challengeEvidence[item.id].source}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read the research case ↗
+              </a>
+            </details>
             <div className="actions">
               {"simulator" in item ? (
                 <Link className="button-secondary" href={item.simulator}>
