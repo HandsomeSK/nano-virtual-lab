@@ -206,10 +206,14 @@ export default async function Page({
             design concepts are not scientific evidence.
           </p>
           <p className="mt-4">
-            The NanoLab wordmark is outlined from Google Sans. The locally
-            hosted font is distributed under the{" "}
-            <a className="text-link" href="/assets/google-sans-OFL.txt">
-              SIL Open Font License
+            NanoLab uses locally hosted Inter and Instrument Serif Italic. Both
+            fonts are distributed under the{" "}
+            <a className="text-link" href="/assets/Inter-OFL.txt">
+              SIL Open Font License for Inter
+            </a>{" "}
+            and the{" "}
+            <a className="text-link" href="/assets/Instrument-Serif-OFL.txt">
+              Instrument Serif licence
             </a>
             .
           </p>

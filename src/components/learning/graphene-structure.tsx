@@ -75,8 +75,8 @@ export function GrapheneStructureExplorer() {
                   width="310"
                   height="135"
                   rx="58"
-                  fill="#e7fafe"
-                  stroke="#076b7d"
+                  fill="#102229"
+                  stroke="var(--cyan-ink)"
                   strokeWidth="2"
                 />
                 <g transform="translate(15 47) scale(1 .7)">
@@ -88,10 +88,14 @@ export function GrapheneStructureExplorer() {
                   rx="54"
                   ry="67"
                   fill="none"
-                  stroke="#076b7d"
+                  stroke="var(--cyan-ink)"
                   strokeDasharray="4 3"
                 />
-                <path d="M285 32q58 65 0 132" fill="none" stroke="#076b7d" />
+                <path
+                  d="M285 32q58 65 0 132"
+                  fill="none"
+                  stroke="var(--cyan-ink)"
+                />
               </g>
             ) : (
               <g transform="translate(15 30)">

@@ -17,7 +17,7 @@ function ProjectedCone({
   fermiEnergy: number;
 }) {
   const clipId = useId();
-  const color = kind === "graphene" ? "#076b7d" : "#7652c8";
+  const color = kind === "graphene" ? "var(--cyan-ink)" : "var(--violet-ink)";
   const top =
     kind === "graphene"
       ? "M60 49L180 175 300 49A120 26 0 0 0 60 49Z"
@@ -118,10 +118,10 @@ function ProjectedCone({
         <path
           d={"M45 " + fermiY + "l70-16 200 16-70 16Z"}
           fill="#4f46e50b"
-          stroke="#4f46e5"
+          stroke="#b4bffa"
           strokeDasharray="5 4"
         />
-        <text x="294" y={fermiY - 6} fill="#4f46e5" fontSize="12">
+        <text x="294" y={fermiY - 6} fill="#b4bffa" fontSize="12">
           E<tspan baselineShift="sub">F</tspan>
         </text>
         <text x="193" y="18" fill="var(--color-ink)" fontSize="12">
@@ -181,7 +181,7 @@ function TransportExplorer() {
               width="350"
               height="85"
               rx="12"
-              fill="#eefbfe"
+              fill="#102229"
               stroke="#b9e8ee"
             />
             <rect
@@ -190,8 +190,8 @@ function TransportExplorer() {
               width="32"
               height="85"
               rx="4"
-              fill="#dde5ef"
-              stroke="#536480"
+              fill="#404b5e"
+              stroke="#8391a7"
             />
             <rect
               x="420"
@@ -199,8 +199,8 @@ function TransportExplorer() {
               width="32"
               height="85"
               rx="4"
-              fill="#dde5ef"
-              stroke="#536480"
+              fill="#404b5e"
+              stroke="#8391a7"
             />
             <path
               d="M74 37H416m-8-4 8 4-8 4m-326-8-8 4 8 4"
@@ -219,7 +219,7 @@ function TransportExplorer() {
             <polyline
               points={route.map(([x, y]) => x + "," + y).join(" ")}
               fill="none"
-              stroke="#076b7d"
+              stroke="var(--cyan-ink)"
               strokeWidth="3"
             />
             {route.slice(1, -1).map(([x, y], i) => (
@@ -229,15 +229,21 @@ function TransportExplorer() {
                   cy={y - 13}
                   r="7"
                   fill="#c2ceda"
-                  stroke="#536480"
+                  stroke="#8391a7"
                 />
-                <circle cx={x} cy={y} r="4" fill="#06b6d4" stroke="#076b7d" />
+                <circle
+                  cx={x}
+                  cy={y}
+                  r="4"
+                  fill="#06b6d4"
+                  stroke="var(--cyan-ink)"
+                />
               </g>
             ))}
             <path
               d="M406 97l9 6-9 6"
               fill="none"
-              stroke="#076b7d"
+              stroke="var(--cyan-ink)"
               strokeWidth="2"
             />
             <text

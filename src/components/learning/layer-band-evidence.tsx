@@ -29,13 +29,13 @@ export function LayerBandEvidence() {
               <path
                 d={i === 0 ? "M65 35Q150 102 235 35" : "M105 35Q200 102 295 35"}
                 fill="none"
-                stroke="#7652c8"
+                stroke="var(--violet-ink)"
                 strokeWidth="3"
               />
               <path
                 d="M65 157Q150 98 235 157"
                 fill="none"
-                stroke="#076b7d"
+                stroke="var(--cyan-ink)"
                 strokeWidth="3"
               />
               <path
@@ -45,7 +45,7 @@ export function LayerBandEvidence() {
                     : "M150 127L200 70M190 73L200 70L199 81"
                 }
                 fill="none"
-                stroke="#a16207"
+                stroke="#e6c781"
                 strokeWidth="3"
               />
               <text x="42" y="207" fill="var(--muted)" fontSize="13">
