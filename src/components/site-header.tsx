@@ -27,7 +27,7 @@ export function SiteHeader() {
       }}
     >
       <div className="container header-inner">
-        <Brand showSubtitle={false} />
+        <Brand />
         <nav aria-label="Main navigation" className="desktop-nav">
           {navigation.slice(0, 6).map(({ href, title }) => (
             <Link

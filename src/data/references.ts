@@ -97,10 +97,10 @@ export const references: Reference[] = [
     title: "NanoLab diagrams, model defaults & interface assets",
     authors: "Project-created educational material",
     year: 2026,
-    venue: "NanoLab: Beyond Silicon",
+    venue: "NanoLab",
     category: "Data & assets",
     url: "https://github.com/HandsomeSK/nano-virtual-lab",
-    note: "Original interactive SVG/CSS schematics; not to scale. The AI-generated homepage illustration is conceptual, not an atomistic calculation or microscopy image. Model defaults and everyday length examples are illustrative assumptions; actual specimens vary. External licensed figures have a separate image registry; their measured curves are not imported into the simulator.",
+    note: "Original interactive SVG/CSS schematics; not to scale. The homepage atmosphere is decorative, not scientific evidence. Model defaults and everyday length examples are illustrative assumptions; actual specimens vary. External licensed figures have a separate image registry; their measured curves are not imported into the simulator.",
   },
   {
     id: "neto2009",

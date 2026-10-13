@@ -161,15 +161,10 @@ div[id] {
   line-height: 1.2;
   flex-shrink: 0;
 }
-.brand strong {
-  font-size: 25px;
-  letter-spacing: -0.06em;
-}
-.brand > span {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.03em;
-  margin-top: 3px;
+.brand svg {
+  display: block;
+  width: auto;
+  height: 27px;
 }
 .site-header {
   position: sticky;
@@ -1560,16 +1555,11 @@ select:focus-visible {
 .nav-link {
   min-height: 72px;
 }
-.brand strong {
+.brand {
   color: var(--ink);
-  font-size: 27px;
-  font-weight: 750;
 }
-.brand:hover strong {
+.brand:hover {
   color: var(--primary);
-}
-.brand > span {
-  letter-spacing: 0;
 }
 .dropdown-panel {
   box-shadow: 0 10px 24px var(--shadow-color);
@@ -2994,4 +2984,46 @@ th {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
+}
+
+/* The cinematic entry owns its viewport; scientific routes keep document scrolling. */
+:root {
+  --home-background: #01061a;
+  --home-font:
+    "Google Sans", "Product Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --home-sky: linear-gradient(
+    90deg,
+    #00061a 0%,
+    #01071b 22%,
+    #01071a 45%,
+    #010718 62%,
+    #010614 80%,
+    #020511 100%
+  );
+  --home-ink: #ffffff;
+  --home-navigation: rgba(238, 242, 255, 0.9);
+  --home-subheading: rgba(226, 233, 255, 0.74);
+  --home-secondary: rgba(212, 236, 255, 0.77);
+  --home-hairline: rgba(255, 255, 255, 0.19);
+  --home-focus: #7fd4ff;
+  --home-button-ink: #0a0a0a;
+  --home-button-hover: #e8eef7;
+  --home-button-ring: rgba(120, 200, 255, 0.12);
+}
+html:has(.cinematic-home) {
+  overflow: hidden;
+  color-scheme: dark;
+  scrollbar-gutter: auto;
+}
+body:has(.cinematic-home) {
+  min-height: 0;
+  background: var(--home-background);
+}
+body:has(.cinematic-home) > .site-header,
+body:has(.cinematic-home) > .site-footer {
+  display: none;
+}
+body:has(.cinematic-home) > #main-content {
+  flex: none;
 }

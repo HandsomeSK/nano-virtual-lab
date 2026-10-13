@@ -1,219 +1,142 @@
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { Icon } from "@/components/icon";
-import { RelatedTopics } from "@/components/page-shell";
-import { ReferenceLink } from "@/components/reference-link";
-import { DeviceSchematic } from "@/components/device-schematic";
-import { journey, site } from "@/lib/site";
-import { references } from "@/data/references";
+import { Brand } from "@/components/brand";
+import { HomeMotion } from "@/components/home-motion";
+import styles from "./homepage.module.css";
+
+const homeIntroScript = `(function () {
+  var root = document.documentElement;
+  if (root.dataset.intro === "done") return;
+  if (typeof Element.prototype.animate !== "function" || typeof matchMedia !== "function" || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    root.dataset.intro = "done";
+    return;
+  }
+  root.classList.add("intro");
+  root.dataset.intro = "waiting";
+  document.currentScript.dataset.guard = String(setTimeout(function () {
+    root.classList.remove("intro");
+    root.dataset.intro = "done";
+  }, 3500));
+})();`;
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  title: { absolute: "NanoLab — Nanomaterials. Beyond Graphene." },
+  description:
+    "Explore the nanoscale with NanoLab. Discover graphene, MoS₂, two-dimensional materials, and next-generation semiconductor devices through interactive simulations and scientific visualization.",
+};
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#01061a",
+  colorScheme: "dark",
+};
 
 export default function Home() {
-  const featured = ["kwon2024", "zhang2025", "guo2026"].map((id) =>
-    references.find((ref) => ref.id === id)!,
-  );
   return (
-    <div className="container home-page">
-      <section className="home-opening">
-        <div className="home-title">
-          <h1>{site.topic}</h1>
-          <p className="hero-subtitle">{site.subtitle}</p>
-        </div>
-        <div className="home-context">
-          <p>{site.description}</p>
-          <Link href="/foundations" className="button-primary">
-            Start Learning <Icon name="arrow" className="size-4" />
-          </Link>
-        </div>
-        <figure className="home-material">
-          <Image
-            src="/images/material-journey.webp"
-            width={1200}
-            height={800}
-            alt="Conceptual illustration of a graphene honeycomb sheet, a violet and yellow MoS₂ layer, and a layered top-gate transistor"
-            preload
-            sizes="(max-width: 800px) 100vw, 65vw"
-            className="hero-material-image"
-          />
-          <figcaption>Conceptual illustration · not to scale</figcaption>
-        </figure>
-        <nav
-          className="home-material-index"
-          aria-label="Explore material structures"
-        >
-          <Link href="/foundations#graphene-structure">
-            <strong>Graphene</strong>
-            <span>A carbon lattice. A distinctive transport platform.</span>
-          </Link>
-          <Link href="/why-mos2#meet-mos2">
-            <strong>MoS₂</strong>
-            <span>An atomically thin semiconductor.</span>
-          </Link>
-          <Link href="/device">
-            <strong>Transistor</strong>
-            <span>Material properties under electrical control.</span>
-          </Link>
-          <Link href="/why-mos2" className="text-link">
-            Explore Materials
-          </Link>
-        </nav>
-      </section>
-
-      <section className="home-introduction">
-        <h2>From Nanomaterials to Two-Dimensional Electronics</h2>
-        <div>
-          <p>
-            Nanomaterials have dimensions at the nanoscale. Surface-to-volume
-            ratio, quantum confinement and electronic structure can give them
-            physical, chemical and electronic properties that differ from bulk
-            materials. Surface atoms experience different bonding and
-            environments; confined electronic states depend on geometry and
-            boundary conditions. These are mechanisms to investigate, rather
-            than a promise that every smaller material has better performance.
-          </p>
-          <p>
-            Our focus is two-dimensional nanomaterials. Graphene combines an
-            atomically thin carbon structure with remarkable transport, but its
-            zero band gap challenges conventional digital switching.{" "}
-            <ReferenceLink id="schwierz2010" from="/" /> Semiconducting MoS₂
-            provides a finite-gap example for studying field-effect transistors,
-            scaling and device engineering.{" "}
-            <ReferenceLink id="radis2011" from="/" />
-          </p>
-          <p>
-            An atomically thin semiconductor is a starting point. Researchers
-            must also inject charge through reliable contacts, integrate a
-            low-defect gate dielectric and reproduce devices across large-area
-            films.
-            <ReferenceLink id="engineering2024" from="/" />
-          </p>
-          <Link href="/why-mos2#zero-gap" className="text-link">
-            Why does a band gap help a digital switch?
-          </Link>
-        </div>
-      </section>
-
-      <section className="home-topic-stream">
-        <div className="home-section-intro">
-          <h2>Interactive Learning Journey</h2>
-          <p>
-            Follow a material from its atomic structure to a working device, or
-            choose a starting point of your own.
-          </p>
-        </div>
-        <ol className="journey">
-          {journey.map((item, i) => (
-            <li key={item.href}>
-              <Link href={item.href}>
-                <span className="step" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-                <Icon name="arrow" className="size-4" />
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="home-workbench">
-        <div className="workbench-visual">
-          <h2>Explore the Platform</h2>
-          <p>
-            Hands-on tools to connect structures, material properties and device
-            behaviour.
-          </p>
-          <figure>
-            <DeviceSchematic on />
-            <figcaption>
-              Conceptual top-gate device · select and inspect its layers in the
-              explorer.
-            </figcaption>
-          </figure>
-        </div>
-        <div className="workbench-links">
-          {[
-            {
-              href: "/device",
-              title: "Device Explorer",
-              description:
-                "Rotate a MoS₂ transistor and reveal the role of every layer.",
-              action: "Explore Device",
-            },
-            {
-              href: "/simulator",
-              title: "Transistor Simulator",
-              description:
-                "Adjust a parameter, read the curve and understand the change.",
-              action: "Launch Simulator",
-            },
-            {
-              href: "/comparison",
-              title: "Material Comparison",
-              description:
-                "Compare material concepts and your saved model scenarios.",
-              action: "Compare Materials",
-            },
-          ].map((item) => (
-            <Link href={item.href} key={item.href}>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <span className="text-link">
-                {item.action}
-                <Icon name="arrow" className="size-4" />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="home-research">
-        <div className="home-section-intro">
-          <h2>Latest Research Developments (2024–2026)</h2>
-          <p>
-            Wafer-scale fabrication, transfer and interconnected circuits.
-            Follow the evidence behind the next generation of devices.
-          </p>
-          <Link href="/research" className="text-link">
-            Explore the Research Frontier
-          </Link>
-        </div>
-        <div>
-          {featured.map((ref) => (
-            <Link
-              key={ref.id}
-              href={"/research?study=" + ref.id + "#study-" + ref.id}
-              className="research-row"
-            >
-              <span>{ref.year}</span>
-              <div>
-                <h3>{ref.title}</h3>
-                <p>
-                  {ref.authors} · {ref.venue}
-                </p>
-              </div>
-              <Icon name="arrow" className="size-4" />
-            </Link>
-          ))}
-        </div>
-      </section>
-      <RelatedTopics
-        links={[
-          {
-            href: "/foundations#graphene-electronics",
-            title: "Explore Graphene Electronics",
-            description: "Move the Fermi level and investigate the Dirac cone.",
-          },
-          {
-            href: "/challenges",
-            title: "Engineering Challenges",
-            description:
-              "What stands between a promising material and useful electronics?",
-          },
-        ]}
+    <>
+      <link
+        rel="preload"
+        href="/assets/google-sans-400.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
       />
-    </div>
+      <link
+        rel="preload"
+        href="/assets/google-sans-500.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <script
+        id="home-intro-init"
+        // The prepaint bootstrap records its visibility-guard timer here.
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: homeIntroScript }}
+      />
+      <section
+        className={styles.page + " cinematic-home"}
+        aria-labelledby="home-headline"
+      >
+        <header className={styles.masthead}>
+          <Brand className={styles.wordmark} />
+          <div
+            className={styles.hairline}
+            data-home-intro="hairline"
+            aria-hidden="true"
+          />
+          <nav className={styles.navigation} aria-label="Main navigation">
+            <Link href="/foundations">Explore</Link>
+            <Link href="/simulator">Simulator</Link>
+            <Link href="/research">Research</Link>
+          </nav>
+        </header>
+        <div className={styles.gap} aria-hidden="true" />
+        <div className={styles.copy}>
+          <h1 id="home-headline" className={styles.headline}>
+            <span className="l">
+              <span className="li">Nanomaterials.</span>
+            </span>
+            <span className="l">
+              <span className="li">Beyond graphene.</span>
+            </span>
+          </h1>
+          <p className={styles.subheading} data-home-intro="subheading">
+            {
+              "Explore\u00a0the\u00a0nanoscale. Discover\u00a0what\u00a0comes\u00a0next."
+            }
+          </p>
+          <Link
+            href="/foundations"
+            className={styles.primary}
+            data-home-intro="primary"
+          >
+            Explore Nanomaterials
+          </Link>
+          <Link
+            href="/simulator"
+            className={styles.secondary}
+            data-home-intro="secondary"
+          >
+            Discover the simulator
+            <svg
+              viewBox="0 0 11 12.6"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M5.5 .4V12 M1 7.5L5.5 12L10 7.5"
+                stroke="currentColor"
+                strokeWidth="1.45"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        </div>
+        <div className={styles.videoField} aria-hidden="true">
+          <video
+            id="homepage-video"
+            className={styles.video}
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261005_182549_18378239-da8f-48a7-9666-d6e0a6a88561.mp4"
+            width={1619}
+            height={971}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            tabIndex={-1}
+          />
+        </div>
+        <HomeMotion />
+        <noscript>
+          <style>{".cinematic-home video { display: none; }"}</style>
+        </noscript>
+      </section>
+    </>
   );
 }

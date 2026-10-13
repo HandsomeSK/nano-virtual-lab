@@ -1,5 +1,6 @@
 export const site = {
-  name: "NanoLab: Beyond Silicon",
+  name: "NanoLab",
+  url: "https://nano-virtual-lab.vercel.app",
   topic: "Nanomaterials",
   subtitle: "From Graphene to Next-Generation 2D Semiconductor Transistors",
   identity: "Nanotechnology Virtual Laboratory",

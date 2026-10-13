@@ -1,14 +1,14 @@
-# Nanomaterials
+# NanoLab
 
-**From Graphene to Next-Generation 2D Semiconductor Transistors**
+**Nanomaterials. Beyond graphene.**
 
-NanoLab: Beyond Silicon is an independent **Nanotechnology Virtual Laboratory** for a public audience. Nanomaterials is its overall theme; two-dimensional nanomaterials are the research focus, with graphene and MoS₂ as representative materials and MoS₂-based semiconductor transistors as the advanced application. The learning journey connects nanoscale properties → two-dimensional materials and graphene → the zero-band-gap challenge → MoS₂ → transistors → simulation → 2024–2026 research and earlier milestones → future applications and engineering challenges.
+NanoLab is an independent **Nanotechnology Virtual Laboratory** for a public audience. Nanomaterials is its overall theme; two-dimensional nanomaterials are the research focus, with graphene and MoS₂ as representative materials and MoS₂-based semiconductor transistors as the advanced application. The learning journey connects nanoscale properties → two-dimensional materials and graphene → the zero-band-gap challenge → MoS₂ → transistors → simulation → 2024–2026 research and earlier milestones → future applications and engineering challenges.
 
 [Production website](https://nano-virtual-lab.vercel.app) · [GitHub repository](https://github.com/HandsomeSK/nano-virtual-lab)
 
 ## Stack and local development
 
-Next.js 16 App Router, React 19, strict TypeScript and Tailwind CSS 4. DM Sans and Instrument Serif are bundled locally. No API keys, environment variables, accounts or database are required. Production builds use Next.js’s supported Webpack compiler because Turbopack’s native temporary-port binding is restricted in this cloud environment. The `npm run build` command and Vercel configuration remain standard.
+Next.js 16 App Router, React 19, strict TypeScript and Tailwind CSS 4. The cinematic homepage embeds Google Sans 400/500 from Fontsource 5.3.2 under the SIL OFL licence in `public/assets/google-sans-OFL.txt`. Interior pages retain locally bundled DM Sans and Instrument Serif. No website dependencies were added for the homepage. No API keys, environment variables, accounts or database are required. Production builds use Next.js’s supported Webpack compiler because Turbopack’s native temporary-port binding is restricted in this cloud environment. The `npm run build` command and Vercel configuration remain standard.
 
 Use **Node.js 24 LTS** (Node 22.13+ supports the test command) and npm:
 
@@ -31,7 +31,7 @@ npm start          # Serve the production build
 
 | Route          | Content and interactions                                                                                                                        |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`            | Nanomaterials hero, fundamentals-to-research introduction, eight clickable learning nodes, tools and 2024–2026 research previews                |
+| `/`            | Single-viewport cinematic gateway; Explore, Simulator and Research navigation, two-line headline, exact supplied video and masked entrance      |
 | `/foundations` | Six interactive sections: nanoscale/surfaces, quantum/bands, graphene structure, interactive Dirac/transport lab, characterization, transistors |
 | `/why-mos2`    | From Graphene to MoS₂: transport, zero-gap challenge, interactive bands, layered structures and device connections                              |
 | `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF                                        |
@@ -41,7 +41,7 @@ npm start          # Serve the production build
 | `/research`    | Ten verified MoS₂ studies through 2026, filters/timeline, experimental figures and a separate industry announcement                             |
 | `/about`       | Reference search/filter, highlighted citations and return links, public laboratory scope, scientific evidence and credits                       |
 
-The legacy `/explore` route redirects to `/device`. Every canonical page has shared navigation and at least two contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands`, `#graphene-structure`, `#graphene-electronics` and `#transistors`; previous `#materials` links still work.
+The legacy `/explore` route redirects to `/device`. The homepage links to `/foundations`, `/simulator` and `/research`; every interior page retains shared navigation and contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands`, `#graphene-structure`, `#graphene-electronics` and `#transistors`; previous `#materials` links still work.
 
 ## Model and saved configurations
 
@@ -83,7 +83,7 @@ The scientific foundations explain surfaces, quantum confinement, energy bands a
 
 The Dirac lab uses relative energy/wave-vector units and a low-energy schematic near a graphene Dirac point, not a full band calculation. Moving Fermi energy changes carrier occupancy, without opening an intrinsic graphene gap. Mobility, group velocity and mean free path are distinct quantities. The transport activity uses an illustrative length/mean-free-path ratio and does not predict measured conductance. Gapped/metal diagrams are qualitative. A finite gap can help switching; it does not guarantee a device's leakage or outperform silicon.
 
-Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage illustration is AI-generated conceptual artwork, optimized locally as WebP; it is not an atomistic simulation or experimental image. Licensed external scientific figures are separately identified and credited; their measured datasets are not fitted or imported into the current solver. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
+Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage atmosphere is decorative footage at the exact owner-supplied remote video URL, rather than scientific evidence. It is streamed directly without a download, proxy, replacement image or poster. The previous conceptual WebP remains an unused asset. Licensed external scientific figures are separately identified and credited; their measured datasets are not fitted or imported into the current solver. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
 
 ## Scientific evidence update
 
@@ -99,7 +99,7 @@ See [the content inventory](docs/content-audit.md) and [the scientific evidence 
 
 ## Visual system
 
-The public science exhibit uses a light, restrained palette and content-specific layouts: editorial scientific explanations, larger full-information figures, compact reading links and instrument-style experiment controls. Shared runtime tokens live in `src/app/globals.css`; `DESIGN.md` records the visual intent and token ownership. Charts retain labels, legends and distinct line styles; state is not communicated by color alone.
+Home uses the supplied midnight-blue gradient, compact inline NanoLab wordmark, centered Google Sans typography and viewport scaling. Native Web Animations preserve the specified entrance timings, with readiness bounded at 900 ms and a 3500 ms visibility guard. Reduced motion stops the decorative video and bypasses the intro; a small accessible pause/play control appears only when playback is available. Scientific routes retain the light exhibit palette and readable editorial/instrument layouts. Shared runtime tokens live in `src/app/globals.css`; `DESIGN.md` records the visual intent and token ownership. Charts retain labels, legends and distinct line styles; state is not communicated by color alone.
 
 ## Project-local Codex skills
 
@@ -134,6 +134,8 @@ Skills provide instructions; the browser CLI/browser runtime is separate. Before
 User instructions take precedence over skill guidance.
 
 ## Verification
+
+The cinematic homepage is documented in [the homepage report](docs/cinematic-homepage.md). Production-build browser checks cover 13 viewport sizes, preserved interior scrolling, native navigation, intro/failure states and reduced motion. Screenshots show the gradient fallback because the cloud environment blocks the supplied media host; the exact video remains embedded for unrestricted browsers. The production address continues to be https://nano-virtual-lab.vercel.app/.
 
 Model checks exercise analytic linear/saturation limits, SI conversions, self-consistent contact drops, mobility/length scaling, finite curves, malformed parameter URLs, versioned stored data and safe citation return links. Run the commands above after model changes.
 

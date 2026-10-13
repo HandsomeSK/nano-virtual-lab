@@ -1,5 +1,7 @@
 # Public laboratory redesign
 
+This report records the public-laboratory foundation and its original verification baseline. The current homepage and shared NanoLab wordmark are described in [the cinematic homepage report](cinematic-homepage.md); the earlier homepage composition and subtitle checks below document the preceding review version.
+
 Review baseline: `main` at `886ed01248f2af953dd9127ba89f3f86e78e0352`, 12 October 2026. The requested change is a public scientific platform redesign; production publication requires the owner's confirmation.
 
 ## Scientific content and identity
@@ -51,17 +53,17 @@ The header subtitle refinement was checked separately at 431×672 and 1440×1000
 
 ## Main files
 
-| Files | Responsibility |
-|---|---|
-| `src/app/globals.css`, `src/app/layout.tsx` | Shared design tokens, typography, article/instrument layouts and responsive rules |
-| `src/app/page.tsx`, `src/app/about/page.tsx` | Homepage composition and independent public-platform scope |
-| `src/components/scientific-figure.tsx`, `src/data/figures.ts` | Complete scientific figures, verified image geometry and retained attribution |
-| `src/components/simulation/*.tsx`, `src/components/device-viewer.tsx` | Plot-first instruments, grouped controls/readouts and device inspection |
-| `src/components/research-explorer.tsx`, `src/components/challenge-explorer.tsx` | Editorial studies and paired mechanism/explanation layouts |
-| `src/data/references.ts`, `src/data/knowledge.ts`, `src/lib/site.ts` | Public identity, source cleanup and intact scientific content |
-| `src/components/reference-browser.tsx`, `src/components/site-footer.tsx`, learning components | Source search/clear, course-free footer and accessible control groups |
-| `src/components/brand.tsx`, `src/components/site-header.tsx` | Header-only subtitle suppression and an accurate accessible home-link name |
-| `DESIGN.md`, `UX-CONTRACT.md`, `premium-ui.json`, `README.md`, `tests/evidence.test.mjs` | Durable design/behavior ownership, documentation and source-integrity verification |
+| Files                                                                                         | Responsibility                                                                     |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `src/app/globals.css`, `src/app/layout.tsx`                                                   | Shared design tokens, typography, article/instrument layouts and responsive rules  |
+| `src/app/page.tsx`, `src/app/about/page.tsx`                                                  | Homepage composition and independent public-platform scope                         |
+| `src/components/scientific-figure.tsx`, `src/data/figures.ts`                                 | Complete scientific figures, verified image geometry and retained attribution      |
+| `src/components/simulation/*.tsx`, `src/components/device-viewer.tsx`                         | Plot-first instruments, grouped controls/readouts and device inspection            |
+| `src/components/research-explorer.tsx`, `src/components/challenge-explorer.tsx`               | Editorial studies and paired mechanism/explanation layouts                         |
+| `src/data/references.ts`, `src/data/knowledge.ts`, `src/lib/site.ts`                          | Public identity, source cleanup and intact scientific content                      |
+| `src/components/reference-browser.tsx`, `src/components/site-footer.tsx`, learning components | Source search/clear, course-free footer and accessible control groups              |
+| `src/components/brand.tsx`, `src/components/site-header.tsx`                                  | Header-only subtitle suppression and an accurate accessible home-link name         |
+| `DESIGN.md`, `UX-CONTRACT.md`, `premium-ui.json`, `README.md`, `tests/evidence.test.mjs`      | Durable design/behavior ownership, documentation and source-integrity verification |
 
 ## Remaining limits
 

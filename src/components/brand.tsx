@@ -1,15 +1,14 @@
 import Link from "next/link";
-export function Brand({ showSubtitle = true }: { showSubtitle?: boolean }) {
+import { NanoLabWordmark } from "./nanolab-wordmark";
+
+export function Brand({ className = "" }: { className?: string }) {
   return (
     <Link
       href="/"
-      className="brand"
-      aria-label={showSubtitle ? "NanoLab: Beyond Silicon home" : "NanoLab home"}
+      className={`brand ${className}`.trim()}
+      aria-label="NanoLab home"
     >
-      <strong>
-        NanoLab<span className="text-cyan">.</span>
-      </strong>
-      {showSubtitle ? <span>Beyond Silicon</span> : null}
+      <NanoLabWordmark />
     </Link>
   );
 }

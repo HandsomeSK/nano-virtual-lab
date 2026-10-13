@@ -151,9 +151,9 @@ export default async function Page({
             <p>
               Interactive SVG/CSS schematics exaggerate dimensions for
               visibility. Band and transport diagrams show concepts, rather than
-              a complete material band structure. The homepage artwork is
-              AI-generated and conceptual, rather than an atomistic calculation
-              or microscopy image.
+              a complete material band structure. The homepage atmosphere is
+              decorative, rather than an atomistic calculation or microscopy
+              image.
             </p>
           </article>
         </div>
@@ -204,6 +204,14 @@ export default async function Page({
             Vercel with version control on GitHub. Fonts are bundled locally. AI
             assisted interface concepts, implementation and testing. Generated
             design concepts are not scientific evidence.
+          </p>
+          <p className="mt-4">
+            The NanoLab wordmark is outlined from Google Sans. The locally
+            hosted font is distributed under the{" "}
+            <a className="text-link" href="/assets/google-sans-OFL.txt">
+              SIL Open Font License
+            </a>
+            .
           </p>
           <p className="mt-4">
             Shared scientific data, reusable learning components and a separate
