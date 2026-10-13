@@ -188,27 +188,29 @@ export function ResearchExplorer({
                     >
                       Original source ↗
                     </a>
-                    <a
-                      className="text-link"
-                      href={"https://doi.org/" + paper.reference.doi}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      DOI ↗
-                    </a>
-                    <ReferenceLink
-                      id={paper.reference.id}
-                      from={
-                        "/research?" +
-                        new URLSearchParams({
-                          year,
-                          category,
-                          study: paper.reference.id,
-                        }) +
-                        "#study-" +
-                        paper.reference.id
-                      }
-                    />
+                    <span className="inline-source">
+                      <a
+                        className="text-link"
+                        href={"https://doi.org/" + paper.reference.doi}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        DOI ↗
+                      </a>
+                      <ReferenceLink
+                        id={paper.reference.id}
+                        from={
+                          "/research?" +
+                          new URLSearchParams({
+                            year,
+                            category,
+                            study: paper.reference.id,
+                          }) +
+                          "#study-" +
+                          paper.reference.id
+                        }
+                      />
+                    </span>
                   </div>
                 </div>
                 <aside className="study-context">

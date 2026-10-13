@@ -121,7 +121,11 @@ export function DeviceViewer({
           <span>Thicknesses exaggerated</span>
         </div>
         <ScientificStage
-          spec={{ kind: "device", interface: withInterface, roughOxide: interfaceResearch && !withInterface }}
+          spec={{
+            kind: "device",
+            interface: withInterface,
+            roughOxide: interfaceResearch && !withInterface,
+          }}
           options={options}
           camera={camera}
           onSelect={select}
@@ -247,14 +251,16 @@ export function DeviceViewer({
         </div>
         <section className="science-selection" aria-live="polite">
           <h4>{part.name}</h4>
-          <p>{part.role}</p>
-          {withInterface &&
-          (part.id === "dielectric" || part.id === "interface") ? (
-            <ReferenceLink
-              id="wong2026"
-              from="/discoveries/mos2-interface-breakthrough#interactive-stack"
-            />
-          ) : null}
+          <p>
+            {part.role}
+            {withInterface &&
+            (part.id === "dielectric" || part.id === "interface") ? (
+              <ReferenceLink
+                id="wong2026"
+                from="/discoveries/mos2-interface-breakthrough#interactive-stack"
+              />
+            ) : null}
+          </p>
           <Link className="text-link" href={part.concept}>
             Explore the related concept
           </Link>

@@ -7,7 +7,7 @@ An independent public nanotechnology virtual laboratory. Explore nanomaterials t
 
 ## Stack and local development
 
-Next.js 16 App Router, React 19, strict TypeScript and Tailwind CSS 4. Scientific stages use Three.js 0.186.1 and Anime.js 4.5.0, dynamically imported near the viewport. The homepage uses CSS entrances and the single owner-supplied remote video; it does not load the 3D engine. Inter variable roman (weight 100–900, optical size 14–32) and Instrument Serif Italic are self-hosted under their bundled SIL OFL licences. Node.js 22+ is required; Node.js 24 was used during development.
+Next.js 16 App Router, React 19, strict TypeScript and Tailwind CSS 4. Scientific stages use Three.js 0.186.1 and Anime.js 4.5.0, dynamically imported near the viewport. The homepage uses one-time CSS entrances and a continuous Canvas 2D particle field; it does not load the 3D engine or stream a looping video. The owner requested no pause control; system reduced motion and hidden/offscreen states are respected. Inter variable roman (weight 100–900, optical size 14–32) is self-hosted under its bundled SIL OFL licence. Node.js 22+ is required; Node.js 24 was used during development.
 
 ```sh
 npm ci
@@ -71,7 +71,7 @@ Saved scenarios remain in this browser's local storage, without server backup. C
 
 ## Media and rights
 
-Inter and Instrument Serif licences are in `public/assets/Inter-OFL.txt` and `Instrument-Serif-OFL.txt`. The NanoLab mark is original inline geometry. The only homepage footage is streamed directly from the exact owner-provided August 2026 CloudFront URL in `src/app/page.tsx`, at full opacity with a black fallback. No proxy, downloaded copy, replacement poster or invented URL is used. Its source resolution/codec is not independently certified as 4K.
+The current Inter licence is in `public/assets/Inter-OFL.txt`; archived Instrument Serif assets retain their original licence. The NanoLab mark and decorative silver particle field are original procedural graphics. HomeMotion uses a deterministic field with continuous drift and a static SVG fallback. It is visual atmosphere, not measured data or a scientific particle simulation.
 
 Existing scientific images retain the registry in `src/data/figures.ts`, complete originals, source/licence links and Next.js image optimization. White data plates are preserved when necessary; NC-ND figures are not cropped, recolored or adapted. New discovery diagrams/3D are original explanations, not reproductions of publisher figures. AI-assisted UI concept images are design references, never scientific evidence.
 
@@ -91,4 +91,4 @@ git push -u origin feat/your-change
 
 Open/review a pull request, verify its Vercel preview, merge to main, and verify the main deployment and original alias. A preview URL is not the permanent production address. Do not manually point the production alias at an unverified preview.
 
-Browser and source verification details for this redesign are in `docs/beyond-visible.md`. Previous documents record earlier releases; their screenshots/check counts do not describe the current redesign.
+Latest homepage/navigation/reading refinements are recorded in `docs/home-reading-feedback.md`. Scientific source and model verification for the broader redesign are in `docs/beyond-visible.md`. Earlier documents record previous releases; their screenshots/check counts are historical.

@@ -7,6 +7,7 @@ colors:
   surface: "#111315"
   ink: "#F1F2F3"
   muted: "#A3A6AD"
+  prose: "#D1D5DB"
   primary: "#80DEDC"
   signal: "#F1B87A"
   line: "#FFFFFF24"
@@ -73,23 +74,23 @@ An independent public Nanotechnology Virtual Laboratory. English is the sole UI 
 
 ## Colors
 
-Runtime ownership is model B: src/app/globals.css holds semantic CSS variables and Tailwind mappings; src/app/experience.css holds the shared metal treatments. Frontmatter mirrors background, surface, ink, muted, primary, signal and line. Homepage.module.css owns measured homepage geometry. Black #000 is forced in the first rule and body inline style. --text is white, --ink is #f1f2f3, --muted is #a3a6ad; surfaces are charcoal. Cyan/teal and violet distinguish material/selected scientific roles; orange separates comparison curves. Text and line styles supplement color.
+Runtime ownership is model B: src/app/globals.css holds semantic CSS variables and Tailwind mappings; src/app/experience.css holds the shared metal treatments. Frontmatter mirrors background, surface, ink, prose, muted, primary, signal and line. Homepage.module.css owns measured homepage geometry. Black #000 is forced in the first rule and body inline style. --text is white, --ink is #f1f2f3, --prose is #d1d5db, --muted is #a3a6ad; surfaces are charcoal. Cyan/teal and violet distinguish material/selected scientific roles; orange separates comparison curves. Text and line styles supplement color.
 
 Deprecated --home-\* frontmatter entries remain descriptive aliases for the homepage black/white/gray roles. The live homepage uses the shared palette and scoped dimension tokens; it has no separate sky-gradient palette. Gradient metal is for navigation, buttons and instrument depth, not behind every paragraph. Borders are thin silver. No excessive glow or repeated floating cards.
 
 ## Typography
 
-Inter variable roman is self-hosted with font-display: swap. It owns UI, logo, prose and every interior heading. Instrument Serif Italic is self-hosted and used only for the word nanomaterials in the homepage H1. Both are preloaded with complete OFL files in public/assets. Numeric readouts use tabular figures. Long science prose aligns left and stays near 65–80 characters.
+Inter variable roman is self-hosted with font-display: swap and owns UI, logo, prose and headings. The homepage heading is one phrase, “Explore nanomaterials.”, in uniform white Inter without a serif emphasis or tagline. Only Inter is preloaded; prior serif assets remain archived. Prose uses --prose #D1D5DB, distinct from metadata in --muted #A3A6AD. Theory paragraphs use 17px/1.8; challenge and discovery narratives use 16px/1.8. Numeric readouts use tabular figures. Long science prose aligns left and stays near 65–80 characters. ReferenceLink keeps a citation in the sentence, joined to its preceding text; source action links and citations share an inline group.
 
 ## Layout
 
-Home adapts the supplied Vesper parameters to NanoLab: a three-column header, four metallic navigation pills, bottom-centered two-line copy, two actions and three capability links. Desktop >=901 px locks to one viewport; mobile <=900 px grows naturally and uses a full-screen menu. The explicit 1600/1920/2560, 1280–1599, 901–1279, short-height, <=900 and <=560 rules remain; a <=360 fit rule prevents narrow-phone collisions.
+Home adapts the supplied Vesper geometry with the owner's latest annotations: a three-column header, five metallic navigation pills, bottom-centered single-phrase copy, two actions and three capability links. Engineering Challenges is a peer category. Desktop >=901 px locks to one viewport; mobile <=900 px grows naturally and uses a full-screen menu. The menu owns vertical overflow on short screens, so all five destinations remain reachable. Existing size/height breakpoints remain.
 
 Interior pages keep the document as scroll owner, with a 1440 px container and 48/24/16 px insets. Editorial research uses indexed chapters and open text rows. MoS₂ has a material workbench and a featured discovery; old fragments/widgets remain in a disclosure that fragment navigation opens. Tools reserve stage/plot geometry, then place controls and an inspector. Under 900 px the inspector follows the stage. Tables own horizontal overflow. Native selectors remain platform-owned.
 
 ## Elevation & Depth
 
-Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses only the supplied remote video at 100% opacity, with a pure-black fallback and no added overlay/background asset.
+Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses an original silver-white Canvas 2D particle ribbon over black, replacing the abruptly restarting video. A static stippled SVG remains visible without JavaScript or Canvas.
 
 ## Shapes
 
@@ -97,13 +98,13 @@ Controls and navigation use 6/7 px corners; instruments use 12 px. Sphere sizes 
 
 ## Components
 
-Canonical owners: NanoNavigation for all four-category navigation, Brand for the Inter NanoLab mark, PageShell/SectionHeading for article titles, ParameterControl and IVChart for existing models, AtomicWorkbench/DeviceViewer for science controls, ScientificStage/ScientificCanvas for deferred WebGL, and ScientificFigure/ReferenceBrowser for evidence and rights. UX-CONTRACT.md defines native selection, forms, storage and source lookup.
+Canonical owners: NanoNavigation for all five-category navigation, HomeMotion for decorative particles, ReferenceLink for inline citations, Brand for the Inter NanoLab mark, PageShell/SectionHeading for article titles, ParameterControl and IVChart for existing models, AtomicWorkbench/DeviceViewer for science controls, ScientificStage/ScientificCanvas for deferred WebGL, and ScientificFigure/ReferenceBrowser for evidence and rights. UX-CONTRACT.md defines native selection, forms, storage and source lookup.
 
-Links: Materials /foundations; 3D Lab /lab; Simulators /simulator; Discoveries /research. The silver header action goes to /foundations. Footer/context links preserve all original routes. Buttons perform actions; real links navigate. Menus close on Escape, navigation and desktop resize; background becomes inert while open, focus stays in the header and Escape restores the burger. Selection and visibility are distinct operations. Hover/focus increase contrast; labels, checked states and descriptions remain visible.
+Links: Materials /foundations; 3D Lab /lab; Simulators /simulator; Discoveries /research; Engineering Challenges /challenges. The silver header action goes to /foundations. Footer/context links preserve all original routes. Buttons perform actions; real links navigate. Menus close on Escape, navigation and desktop resize; background becomes inert while open, focus stays in the header and Escape restores the burger. Selection and visibility are distinct operations. Hover/focus increase contrast; labels, checked states and descriptions remain visible.
 
 ## Motion & resilience
 
-Homepage CSS entrances copy the supplied delays/easing, keep resting opacity 1, finish to is-in and recover after two requestAnimationFrames if animation APIs do not run. Reduced motion removes the sequence and stops decorative video; available playback has an accessible pause control. No Three.js or Anime.js enters the homepage bundle.
+Homepage CSS entrances run once, keep resting opacity 1, finish to is-in and recover after two requestAnimationFrames if animation APIs do not run. Ambient particle motion evolves continuously with no video rewind or shared timeline reset. Per the owner's explicit request, there is no pause button. System reduced motion freezes the decorative scene; hidden/offscreen frames stop and resume from the same phase. Rendering is capped at 24fps and DPR 1.5, with a smaller phone particle count. No Three.js or Anime.js enters the homepage bundle. The particle field is decorative art, not a scientific simulation.
 
 Scientific routes defer Three.js/Anime.js until a stage approaches view. Anime.js 4 animates assembly reveal, inspection separation/explosion and camera positioning, not physical particle dynamics. Frames are requested only for interaction/resize/animation; offscreen or hidden motion pauses. Reduced motion finalizes immediately. Instanced geometry, bounded DPR, antialiasing, procedural lighting/environment and disposal keep the scene sharp and bounded. WebGL/chunk/context failures offer a static schematic with native controls/descriptions. Touch orbit is opt-in; page scrolling remains available. Keyboard arrows, zoom and camera buttons provide gesture alternatives.
 

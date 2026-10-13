@@ -206,14 +206,10 @@ export default async function Page({
             design concepts are not scientific evidence.
           </p>
           <p className="mt-4">
-            NanoLab uses locally hosted Inter and Instrument Serif Italic. Both
-            fonts are distributed under the{" "}
+            NanoLab uses locally hosted Inter for headings and body text,
+            distributed under the{" "}
             <a className="text-link" href="/assets/Inter-OFL.txt">
               SIL Open Font License for Inter
-            </a>{" "}
-            and the{" "}
-            <a className="text-link" href="/assets/Instrument-Serif-OFL.txt">
-              Instrument Serif licence
             </a>
             .
           </p>

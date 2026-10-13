@@ -414,11 +414,13 @@ export function ChallengeExplorer() {
                 </details>
                 <div className="challenge-direction">
                   <h3>Research Directions</h3>
-                  <p>{item.solution}</p>
-                  <ReferenceLink
-                    id="engineering2024"
-                    from={"/challenges#" + item.id}
-                  />
+                  <p>
+                    {item.solution}
+                    <ReferenceLink
+                      id="engineering2024"
+                      from={"/challenges#" + item.id}
+                    />
+                  </p>
                 </div>
               </div>
             </div>
@@ -453,13 +455,15 @@ export function ChallengeExplorer() {
               <Link className="text-link" href={item.research}>
                 Related research →
               </Link>
-              <Link className="text-link" href={item.foundation}>
-                Review the foundation →
-              </Link>
-              <ReferenceLink
-                id={item.reference}
-                from={"/challenges#" + item.id}
-              />
+              <span className="inline-source">
+                <Link className="text-link" href={item.foundation}>
+                  Review the foundation →
+                </Link>
+                <ReferenceLink
+                  id={item.reference}
+                  from={"/challenges#" + item.id}
+                />
+              </span>
             </div>
           </section>
         ))}
