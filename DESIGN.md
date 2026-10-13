@@ -128,4 +128,4 @@ The requested homepage entrance is the only brand-motion exception: native Web A
 - Do retain Silicon scientific content; NanoLab branding is consistent across Home and the interior shell.
 - Don't turn every section into an equal rounded card or center long technical paragraphs.
 - Don't change formulas, parameters, model defaults or state behavior to support a visual treatment.
-- Don't promote this review branch to production without the user's confirmation.
+- Do publish checked website updates to the original production address under the owner's standing authorization recorded in AGENTS.md.

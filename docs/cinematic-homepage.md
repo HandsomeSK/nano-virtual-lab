@@ -2,7 +2,7 @@
 
 The default entry is a single-viewport gateway matching the supplied Vexel specification. NanoLab has a filled inline SVG wordmark, the exact “Nanomaterials. / Beyond graphene.” headline, the specified supporting sentence, three navigation links and two actions. Explore and the primary action lead to /foundations; Simulator and the secondary action lead to /simulator; Research leads to /research.
 
-The production address is https://nano-virtual-lab.vercel.app/. It is also the homepage's canonical URL. The existing review branch and draft PR are used for validation; production publication still requires the owner's confirmation, as requested in the prior overall-optimization brief.
+The production address is https://nano-virtual-lab.vercel.app/. It is also the homepage's canonical URL. The redesign was validated in the existing review branch and PR #11. On 13 October 2026, the owner authorized publication of this redesign and future checked website updates to production, superseding the prior per-release confirmation requirement. AGENTS.md records this standing release instruction.
 
 ## Implementation
 

@@ -159,7 +159,7 @@ git commit -m "Describe your change"
 git push -u origin feature/your-change
 ```
 
-The existing Git integration deploys `main` automatically to the stable production domain. A merge therefore publishes the site; the current redesign must remain on its review branch until the owner confirms production deployment. Check GitHub's Vercel commit status and the Vercel deployment's READY state, then verify the live site. [Vercel dashboard](https://vercel.com/handsome-sk/nano-virtual-lab).
+The existing Git integration deploys `main` automatically to https://nano-virtual-lab.vercel.app/. The owner has authorized this redesign and future website updates to be published after appropriate checks; no further routine release confirmation is required unless that instruction changes. Check GitHub's Vercel commit status, the deployment's READY state and production domain assignment, then verify the live site. The standing release instruction is recorded in `AGENTS.md`. [Vercel dashboard](https://vercel.com/handsome-sk/nano-virtual-lab).
 
 | Setting               | Value                            |
 | --------------------- | -------------------------------- |

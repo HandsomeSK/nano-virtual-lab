@@ -2,7 +2,7 @@
 
 This report records the public-laboratory foundation and its original verification baseline. The current homepage and shared NanoLab wordmark are described in [the cinematic homepage report](cinematic-homepage.md); the earlier homepage composition and subtitle checks below document the preceding review version.
 
-Review baseline: `main` at `886ed01248f2af953dd9127ba89f3f86e78e0352`, 12 October 2026. The requested change is a public scientific platform redesign; production publication requires the owner's confirmation.
+Review baseline: `main` at `886ed01248f2af953dd9127ba89f3f86e78e0352`, 12 October 2026. The requested change was a public scientific platform redesign; publication awaited the owner's confirmation at that review stage. The owner subsequently authorized this release and future checked production updates on 13 October 2026; see AGENTS.md.
 
 ## Scientific content and identity
 
@@ -70,4 +70,4 @@ The header subtitle refinement was checked separately at 431×672 and 1440×1000
 - The managed executor still restricts the scientific source hosts. Local screenshots inspect layout and containment but cannot prove remote-image pixel rendering. Actual preview delivery for all eight images is verified separately above; source URLs and licences remain curated.
 - Five publisher image dimensions remain unverified; their full-image containment is conservative. No replacement or estimated source dimensions were introduced.
 - Browser testing uses Chromium; Safari and Firefox are not covered. Automatic accessibility checks need human review for SVG/media semantics and cannot certify the entire site.
-- This review remains on its feature branch. Merging into main would trigger the existing production Git integration and therefore awaits owner confirmation.
+- At this review stage, the feature branch awaited confirmation because merging into main triggers production. The owner subsequently authorized this release and future checked production updates; the current release instruction is in AGENTS.md.
