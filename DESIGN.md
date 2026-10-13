@@ -79,6 +79,8 @@ Static articles, navigation lists, references and related links have no shadows.
 
 Shared owners: `PageShell` for page titles, `SectionHeading` for article headings, `ScientificFigure` for evidence/media/rights, `ParameterControl` for numerical controls, `IVChart` for curves, `ReferenceBrowser` for source lookup, and `SiteHeader`/`SiteFooter` for navigation.
 
+The header brand displays NanoLab alone, with the accessible home-link name "NanoLab home". The shared Brand component retains its subtitle in the footer. The homepage's scientific subtitle remains separate from the header brand.
+
 Primary buttons are solid teal; secondary buttons are a quiet outlined surface. Hover increases contrast, focus-visible uses an offset teal outline, disabled controls remain noninteractive, and pressed controls have text/ARIA state as well as color. Native selects keep platform-owned popups; the product does not promise custom popup geometry. Search includes an accessible clear action. Inputs keep real labels, help text and names.
 
 Global scrollbar roles live in `globals.css`: visible thumb/track, hover/active tokens, standard properties and WebKit fallback, with a forced-colors path. No opt-in scrollbar utility is required.
@@ -91,7 +93,7 @@ Motion answers an interaction or depicts carrier flow. No floating hero animatio
 
 - Do choose layout by content: article, material figure, plot, parameter rail or bibliography.
 - Do keep an experimental figure separate from the unfitted educational simulation.
-- Do retain Silicon and Beyond Silicon scientific content and brand references outside the specifically requested homepage subtitle.
+- Do retain Silicon scientific content and footer branding; the header logo has no Beyond Silicon subtitle.
 - Don't turn every section into an equal rounded card or center long technical paragraphs.
 - Don't change formulas, parameters, model defaults or state behavior to support a visual treatment.
 - Don't promote this review branch to production without the user's confirmation.

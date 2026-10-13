@@ -1,11 +1,15 @@
 import Link from "next/link";
-export function Brand() {
+export function Brand({ showSubtitle = true }: { showSubtitle?: boolean }) {
   return (
-    <Link href="/" className="brand" aria-label="NanoLab: Beyond Silicon home">
+    <Link
+      href="/"
+      className="brand"
+      aria-label={showSubtitle ? "NanoLab: Beyond Silicon home" : "NanoLab home"}
+    >
       <strong>
         NanoLab<span className="text-cyan">.</span>
       </strong>
-      <span>Beyond Silicon</span>
+      {showSubtitle ? <span>Beyond Silicon</span> : null}
     </Link>
   );
 }

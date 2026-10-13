@@ -7,7 +7,7 @@ Review baseline: `main` at `886ed01248f2af953dd9127ba89f3f86e78e0352`, 12 Octobe
 - Removed the institutional identifier and course framing from the homepage, shared identity/SEO description, footer and About.
 - Removed the three internal-material reference entries and their category. Definitions, the infinite-well equation, periodic energy bands, graphene, characterization and transistor explanations remain. Specific research, measurements and image rights retain scholarly provenance.
 - Replaced the lecture-note MOSFET background source with the independently verified COCOA open textbook, preserving its existing source ID. The bibliography now has 24 sources; all 10 research studies and eight external image records remain.
-- The inspected homepage already used **From Graphene to Next-Generation 2D Semiconductor Transistors** beneath Nanomaterials. It did not have a **Beyond Silicon** hero subtitle. The redesigned hero keeps that scientific description and has no Beyond Silicon subtitle. The existing brand and scientific Beyond Silicon/Silicon content elsewhere remain within the user's strict scope.
+- The header logo displays **NanoLab** without the **Beyond Silicon** subtitle. Its accessible home-link name matches the visible brand. The homepage retains **From Graphene to Next-Generation 2D Semiconductor Transistors** beneath Nanomaterials; footer branding and scientific Silicon content remain.
 - `src/lib/simulation/model.ts`, `src/lib/graphene.ts`, the result interpretation helpers and all persistence implementations are unchanged. Formulae, ranges, defaults, units, bias response, contact solve, URL parameters and browser storage schema remain intact.
 
 ## Presentation changes
@@ -47,6 +47,8 @@ Final review completed 13 October 2026. The actual agent-browser CLI 0.39.0 is i
 
 The official DESIGN.md lint and strict premium static audit pass. These audits check documented tokens/ownership and static anti-patterns; they do not establish full WCAG compliance. The project has no formatter script; changed presentation files are formatted with temporary Prettier tooling without changing website dependencies.
 
+The header subtitle refinement was checked separately at 431×672 and 1440×1000 in Chromium: the logo is vertically centered without overflow, its accessible name is accurate, and the scientific homepage subtitle and footer subtitle remain. Native mobile navigation, Escape/focus restoration and the logo's home link pass. ESLint, TypeScript and the production build were repeated successfully; screenshots and results are in `/workspace/artifacts/header-subtitle/`.
+
 ## Main files
 
 | Files | Responsibility |
@@ -58,6 +60,7 @@ The official DESIGN.md lint and strict premium static audit pass. These audits c
 | `src/components/research-explorer.tsx`, `src/components/challenge-explorer.tsx` | Editorial studies and paired mechanism/explanation layouts |
 | `src/data/references.ts`, `src/data/knowledge.ts`, `src/lib/site.ts` | Public identity, source cleanup and intact scientific content |
 | `src/components/reference-browser.tsx`, `src/components/site-footer.tsx`, learning components | Source search/clear, course-free footer and accessible control groups |
+| `src/components/brand.tsx`, `src/components/site-header.tsx` | Header-only subtitle suppression and an accurate accessible home-link name |
 | `DESIGN.md`, `UX-CONTRACT.md`, `premium-ui.json`, `README.md`, `tests/evidence.test.mjs` | Durable design/behavior ownership, documentation and source-integrity verification |
 
 ## Remaining limits
