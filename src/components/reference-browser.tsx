@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useRef, useState } from "react";
 import { references, referenceNumber } from "@/data/references";
 const categories = [
@@ -84,9 +83,10 @@ export function ReferenceBrowser({
         <div className="notice mt-5">
           Selected citation [{referenceNumber(selectedRef.id)}]:{" "}
           {selectedRef.title}.{" "}
-          <Link className="text-link" href={returnPath}>
+          {/* Native navigation preserves the source fragment on return. */}
+          <a className="text-link" href={returnPath}>
             Return to source page →
-          </Link>
+          </a>
           {!filtered.includes(selectedRef) ? (
             <p className="text-sm mt-2">
               Your filters hide this citation. Clear filters to show it.
@@ -139,9 +139,9 @@ export function ReferenceBrowser({
                 </a>
               ) : null}
               {selected === ref.id ? (
-                <Link className="button-secondary" href={returnPath}>
+                <a className="button-secondary" href={returnPath}>
                   Return to source page
-                </Link>
+                </a>
               ) : null}
             </div>
           </article>

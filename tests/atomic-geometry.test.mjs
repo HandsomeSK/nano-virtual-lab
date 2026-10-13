@@ -3,12 +3,36 @@ import assert from "node:assert/strict";
 import {
   createAtomicStructure,
   distance,
+  carbonDetail,
 } from "../src/lib/science/atomic-structure.ts";
 import {
   interfaceMeasurement,
   discoveryThemes,
 } from "../src/data/discoveries.ts";
 import { references } from "../src/data/references.ts";
+
+test("carbon close-ups preserve the sheet's bond length and trigonal geometry", () => {
+  const bond = carbonDetail("bond");
+  assert.equal(bond.atoms.length, 2);
+  assert.equal(bond.bonds.length, 1);
+  assert.ok(
+    Math.abs(distance(...bond.atoms.map((a) => a.position)) - 1.42) < 0.005,
+  );
+  const local = carbonDetail("coordination");
+  assert.equal(local.atoms.length, 4);
+  assert.equal(local.bonds.length, 3);
+  const vectors = local.atoms
+    .slice(1)
+    .map((a) => a.position.map((v, i) => v - local.atoms[0].position[i]));
+  for (let i = 0; i < vectors.length; i++) {
+    assert.ok(Math.abs(Math.hypot(...vectors[i]) - 1.42) < 0.005);
+    const cosine =
+      vectors[i].reduce((sum, v, k) => sum + v * vectors[(i + 1) % 3][k], 0) /
+      Math.hypot(...vectors[i]) /
+      Math.hypot(...vectors[(i + 1) % 3]);
+    assert.ok(Math.abs(cosine + 0.5) < 0.0001);
+  }
+});
 
 test("graphene has a planar two-atom basis and three nearest neighbours per interior carbon", () => {
   const { atoms, bonds } = createAtomicStructure("graphene");

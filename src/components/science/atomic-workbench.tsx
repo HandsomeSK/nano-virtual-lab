@@ -43,6 +43,9 @@ export function AtomicWorkbench({
     [layers, setLayers] = useState<1 | 2>(1),
     [stacking, setStacking] = useState<"2H" | "3R">("2H");
   const [camera, setCamera] = useState(defaultCamera);
+  const [detail, setDetail] = useState<"lattice" | "bond" | "coordination">(
+    "lattice",
+  );
   const [options, setOptions] = useState({
     ...initialOptions,
     selected: initialMaterial === "graphene" ? "carbon" : "molybdenum",
@@ -67,6 +70,7 @@ export function AtomicWorkbench({
   }
   function changeMaterial(next: AtomicMaterial) {
     setMaterial(next);
+    setDetail("lattice");
     setLayers(1);
     setStacking("2H");
     setCamera({ ...defaultCamera, revision: camera.revision + 1 });
@@ -118,7 +122,11 @@ export function AtomicWorkbench({
           <div className="stage-meta">
             <span>
               {material === "graphene"
-                ? "Ideal honeycomb lattice"
+                ? detail === "bond"
+                  ? "One C–C bond · ≈ 1.42 Å"
+                  : detail === "coordination"
+                    ? "Three nearest neighbours · 120°"
+                    : "Ideal honeycomb lattice"
                 : layers === 1
                   ? "1H monolayer"
                   : stacking + " bilayer · ideal registry"}
@@ -126,14 +134,22 @@ export function AtomicWorkbench({
             <span>Ball-and-stick model</span>
           </div>
           <ScientificStage
-            spec={{ kind: "atomic", material, layers, stacking }}
+            spec={{
+              kind: "atomic",
+              material,
+              layers,
+              stacking,
+              detail: material === "graphene" ? detail : "lattice",
+            }}
             options={options}
             camera={camera}
             onSelect={select}
             onCameraChange={setCamera}
           />
           <div className="stage-caption">
-            <span>Drag to orbit · scroll / pinch to zoom</span>
+            <span>
+              360° orbit · drag to see above and below · pinch to zoom
+            </span>
             <span>Arrows and +/− work on the focused model.</span>
           </div>
           <CameraControls
@@ -149,11 +165,41 @@ export function AtomicWorkbench({
             }
           />
           <div className="science-options">
+            {material === "graphene" ? (
+              <div className="tabs" role="group" aria-label="Graphene detail">
+                {(["lattice", "bond", "coordination"] as const).map((view) => (
+                  <button
+                    type="button"
+                    key={view}
+                    aria-pressed={detail === view}
+                    onClick={() => {
+                      setDetail(view);
+                      setCamera({
+                        ...defaultCamera,
+                        pitch: view === "bond" ? 22 : 52,
+                        revision: camera.revision + 1,
+                      });
+                      setOptions({
+                        ...initialOptions,
+                        labels: view === "lattice",
+                      });
+                    }}
+                  >
+                    {view === "lattice"
+                      ? "Carbon sheet"
+                      : view === "bond"
+                        ? "C–C bond"
+                        : "Three neighbours"}
+                  </button>
+                ))}
+              </div>
+            ) : null}
             <label>
               <input
                 type="checkbox"
                 name="unit-cell"
                 checked={options.unitCell}
+                disabled={material === "graphene" && detail !== "lattice"}
                 onChange={(e) =>
                   setOptions({ ...options, unitCell: e.target.checked })
                 }
@@ -311,7 +357,13 @@ export function AtomicWorkbench({
           </div>
           <div className="science-selection" aria-live="polite">
             <h4>{atomNames[options.selected as AtomKind]}</h4>
-            <p>{descriptions[options.selected as AtomKind]}</p>
+            <p>
+              {material === "graphene" && detail === "bond"
+                ? "Two neighbouring carbon sites, separated by approximately 1.42 Å. This is a local bond from the graphene sheet, not an isolated C₂ molecule. The stick represents connectivity; it does not show an electron-density calculation."
+                : material === "graphene" && detail === "coordination"
+                  ? "An interior carbon has three nearest neighbours in one plane, with 120° bond angles. Rotate underneath to inspect the planar geometry. This is a local fragment of graphene; dangling edge bonds and electronic orbitals are not modeled."
+                  : descriptions[options.selected as AtomKind]}
+            </p>
           </div>
           <dl className="science-readouts">
             <div>
@@ -340,8 +392,10 @@ export function AtomicWorkbench({
             {layers === 2 ? (
               <ReferenceLink id="polytypes2020" from="/lab" />
             ) : null}
-            . The 3R illustration holds spacing fixed to isolate registry. It is
-            not a reconstruction of the engineered 2026 bilayer.
+            .
+            {material === "mos2"
+              ? " The 3R illustration holds spacing fixed to isolate registry. It is not a reconstruction of the engineered 2026 bilayer."
+              : " Sphere radii are illustrative; bond lengths describe an ideal sheet."}
           </p>
         </aside>
       </div>

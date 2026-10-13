@@ -46,7 +46,7 @@ export function CameraControls({
       ...current,
       focus: undefined,
       yaw: current.yaw + yaw,
-      pitch: Math.max(8, Math.min(80, current.pitch + pitch)),
+      pitch: Math.max(-89, Math.min(89, current.pitch + pitch)),
     }));
   return (
     <div className="science-camera-controls">

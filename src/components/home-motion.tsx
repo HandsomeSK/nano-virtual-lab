@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import {
   createHomeParticles,
-  homeParticlePosition,
+  rasterizeHomeParticles,
 } from "@/lib/home-particles";
 
 export function HomeMotion({ className }: { className: string }) {
@@ -60,23 +60,21 @@ export function HomeMotion({ className }: { className: string }) {
       visible = true,
       failed = false;
     let particles = createHomeParticles(1);
+    let pixels: ImageData;
+    let dpr = 1;
     function draw() {
       if (!context || !node) return;
-      context.clearRect(0, 0, width, height);
-      context.fillStyle = "#edf0f4";
-      for (const particle of particles) {
-        const point = homeParticlePosition(particle, seconds);
-        context.globalAlpha = point.opacity;
-        const y = point.y - (particle.ribbon && width < 600 ? 0.1 : 0);
-        context.fillRect(point.x * width, y * height, point.size, point.size);
-      }
+      const started = performance.now();
+      rasterizeHomeParticles(particles, seconds, pixels, dpr);
+      context.putImageData(pixels, 0, 0);
       node.dataset.frames = String(++frames);
       node.dataset.elapsed = seconds.toFixed(3);
+      node.dataset.drawMs = (performance.now() - started).toFixed(1);
     }
     function tick(now: number) {
       frame = 0;
       if (failed || !visible || document.hidden || reduced.matches) return;
-      if (now - lastPaint >= 1000 / 24) {
+      if (now - lastPaint >= 1000 / 30) {
         // Resume from the same phase after background tabs or long frames.
         seconds += lastTime ? Math.min((now - lastTime) / 1000, 0.08) : 0;
         lastTime = now;
@@ -97,14 +95,14 @@ export function HomeMotion({ className }: { className: string }) {
       if (!node || !host || !context) return;
       width = host.clientWidth;
       height = host.clientHeight;
-      const dpr = Math.min(devicePixelRatio || 1, 1.5);
+      dpr = Math.min(devicePixelRatio || 1, 1.5);
       node.width = Math.round(width * dpr);
       node.height = Math.round(height * dpr);
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pixels = context.createImageData(node.width || 1, node.height || 1);
       particles = createHomeParticles(
         Math.min(
-          width < 600 ? 2200 : 7600,
-          Math.max(850, Math.round((width * height) / 180)),
+          width < 600 ? 22000 : 72000,
+          Math.max(8000, Math.round((width * height) / 17)),
         ),
       );
       draw();

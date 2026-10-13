@@ -44,6 +44,8 @@ components:
   page:
     backgroundColor: "{colors.background}"
     textColor: "{colors.ink}"
+  science-prose:
+    textColor: "{colors.prose}"
   comparison-curve-b:
     textColor: "{colors.signal}"
   section-rule:
@@ -90,7 +92,7 @@ Interior pages keep the document as scroll owner, with a 1440 px container and 4
 
 ## Elevation & Depth
 
-Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses an original silver-white Canvas 2D particle ribbon over black, replacing the abruptly restarting video. A static stippled SVG remains visible without JavaScript or Canvas.
+Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses an original silver-white Canvas 2D volume of twisting, depth-lit particles over black, replacing the abruptly restarting video. A static stippled SVG remains visible without JavaScript or Canvas.
 
 ## Shapes
 
@@ -104,9 +106,9 @@ Links: Materials /foundations; 3D Lab /lab; Simulators /simulator; Discoveries /
 
 ## Motion & resilience
 
-Homepage CSS entrances run once, keep resting opacity 1, finish to is-in and recover after two requestAnimationFrames if animation APIs do not run. Ambient particle motion evolves continuously with no video rewind or shared timeline reset. Per the owner's explicit request, there is no pause button. System reduced motion freezes the decorative scene; hidden/offscreen frames stop and resume from the same phase. Rendering is capped at 24fps and DPR 1.5, with a smaller phone particle count. No Three.js or Anime.js enters the homepage bundle. The particle field is decorative art, not a scientific simulation.
+Homepage CSS entrances run once, keep resting opacity 1, finish to is-in and recover after two requestAnimationFrames if animation APIs do not run. Ambient particle motion evolves continuously with no video rewind or shared timeline reset. Per the owner's explicit request, there is no pause button. System reduced motion freezes the decorative scene; hidden/offscreen frames stop and resume from the same phase. Rendering is capped at 30fps and DPR 1.5, with at most 72,000 dots on desktop and 22,000 on phones. No Three.js or Anime.js enters the homepage bundle. The particle field is decorative art, not a scientific simulation.
 
-Scientific routes defer Three.js/Anime.js until a stage approaches view. Anime.js 4 animates assembly reveal, inspection separation/explosion and camera positioning, not physical particle dynamics. Frames are requested only for interaction/resize/animation; offscreen or hidden motion pauses. Reduced motion finalizes immediately. Instanced geometry, bounded DPR, antialiasing, procedural lighting/environment and disposal keep the scene sharp and bounded. WebGL/chunk/context failures offer a static schematic with native controls/descriptions. Touch orbit is opt-in; page scrolling remains available. Keyboard arrows, zoom and camera buttons provide gesture alternatives.
+Scientific routes defer Three.js/Anime.js until a stage approaches view. Anime.js 4 animates assembly reveal, inspection separation/explosion and camera positioning, not physical particle dynamics. Frames are requested only for interaction/resize/animation; offscreen or hidden motion pauses. Reduced motion finalizes immediately. Instanced geometry, bounded DPR, antialiasing, procedural lighting/environment and disposal keep the scene sharp and bounded. WebGL/chunk/context failures offer a static schematic with native controls/descriptions. Touch orbit is opt-in; page scrolling remains available. Keyboard arrows, zoom and camera buttons provide gesture alternatives. Yaw is unrestricted and pitch reaches the underside. Graphene has sheet, C–C bond and three-neighbour views derived from the same ideal lattice. The shared device renderer uses gold electrodes, transparent teal HfO₂, an enlarged S–Mo–S motif and separate SiO₂/Si support layers. Material examples cite the 2011 device; the carbon-dot comparison cites the distinct 2026 study. The lab embeds this canonical viewer directly, while the middle homepage capability opens /device.
 
 ## Do's and Don'ts
 
