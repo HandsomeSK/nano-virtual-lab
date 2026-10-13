@@ -970,6 +970,7 @@ html:has(.nano-home) {
 }
 .eot-chart table {
   font-size: 12px;
+  min-width: 480px;
 }
 .measurement-explainer {
   padding: 24px 0;

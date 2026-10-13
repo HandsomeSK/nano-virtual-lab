@@ -95,7 +95,12 @@ export function EotChart() {
       </figcaption>
       <details>
         <summary>Read the value and its source</summary>
-        <div className="table-wrap">
+        <div
+          className="horizontal-scroll"
+          tabIndex={0}
+          role="region"
+          aria-label="Reported EOT measurement table"
+        >
           <table>
             <thead>
               <tr>
