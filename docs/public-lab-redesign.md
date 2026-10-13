@@ -34,13 +34,35 @@ The conceptual homepage artwork trims its empty exterior through the display win
 
 ## Validation and review evidence
 
-The actual agent-browser CLI is installed temporarily outside the website. Before screenshots cover all nine routes at 1440 and 390 px; final screenshots and browser reports live in `/workspace/artifacts/public-lab-redesign/`. Tests run against a stable Next.js production server, not an SSR-only page snapshot. Full results are appended after the final browser pass.
+Final review completed 13 October 2026. The actual agent-browser CLI 0.39.0 is installed temporarily outside the website. Before and after screenshots cover all nine routes at 1440 and 390 px; screenshots and browser reports live in `/workspace/artifacts/public-lab-redesign/`. Tests use a stable Next.js production build with hydrated interactions.
+
+- **36 responsive checks:** nine routes at 320, 390, 768 and 1440 px, with no horizontal overflow or remaining course identity. The narrow three-material comparison was corrected and the final run repeated successfully.
+- **Nine automatic accessibility audits:** zero reported WCAG A/AA violations. SVG/non-text contrast findings marked incomplete still require human judgement; this is not a full accessibility certification.
+- **Ten interaction groups:** navigation; all foundation widgets; material/layer comparisons; 3D orbit, zoom, parts, visibility, explosion and ON/OFF; simulator input/current response, save/compare/edit/reload/reset; research filters/timeline/deep links; four challenge cases; reference search/filter/return and the eight-image registry.
+- **97 unique internal destinations** and citation/knowledge fragments resolve. No application JavaScript errors were observed.
+- **Supplemental edge checks:** empty save-name validation and restored field focus; an 80-character unbroken saved name; selectors, legends and diagrams at 320 px; mobile Escape/focus restoration; native output semantics for the zoom readout.
+- **Motion:** the carrier animation runs under normal preferences and stops under reduced motion, verified in the browser's computed styles and animation state.
+- **Preview delivery:** the READY preview for source commit `46cac55` returns HTTP 200 for all nine pages and all eight scientific images at 640 px through Next.js Image optimization. Image responses have valid JPEG/PNG content types. This checks actual platform delivery independently of local source-host restrictions.
+- **Code checks:** ESLint with zero warnings, all 15 tests, TypeScript, `npm run build`, Prettier and `git diff --check` pass. The model, Graphene helpers and persistence files remain byte-unchanged against main.
 
 The official DESIGN.md lint and strict premium static audit pass. These audits check documented tokens/ownership and static anti-patterns; they do not establish full WCAG compliance. The project has no formatter script; changed presentation files are formatted with temporary Prettier tooling without changing website dependencies.
 
+## Main files
+
+| Files | Responsibility |
+|---|---|
+| `src/app/globals.css`, `src/app/layout.tsx` | Shared design tokens, typography, article/instrument layouts and responsive rules |
+| `src/app/page.tsx`, `src/app/about/page.tsx` | Homepage composition and independent public-platform scope |
+| `src/components/scientific-figure.tsx`, `src/data/figures.ts` | Complete scientific figures, verified image geometry and retained attribution |
+| `src/components/simulation/*.tsx`, `src/components/device-viewer.tsx` | Plot-first instruments, grouped controls/readouts and device inspection |
+| `src/components/research-explorer.tsx`, `src/components/challenge-explorer.tsx` | Editorial studies and paired mechanism/explanation layouts |
+| `src/data/references.ts`, `src/data/knowledge.ts`, `src/lib/site.ts` | Public identity, source cleanup and intact scientific content |
+| `src/components/reference-browser.tsx`, `src/components/site-footer.tsx`, learning components | Source search/clear, course-free footer and accessible control groups |
+| `DESIGN.md`, `UX-CONTRACT.md`, `premium-ui.json`, `README.md`, `tests/evidence.test.mjs` | Durable design/behavior ownership, documentation and source-integrity verification |
+
 ## Remaining limits
 
-- The managed executor still restricts the scientific source hosts. Local screenshots cannot prove successful loading or crop fidelity for the five publisher images. Existing image URLs/licences remain curated; preview HTTP delivery is verified separately when available.
+- The managed executor still restricts the scientific source hosts. Local screenshots inspect layout and containment but cannot prove remote-image pixel rendering. Actual preview delivery for all eight images is verified separately above; source URLs and licences remain curated.
 - Five publisher image dimensions remain unverified; their full-image containment is conservative. No replacement or estimated source dimensions were introduced.
 - Browser testing uses Chromium; Safari and Firefox are not covered. Automatic accessibility checks need human review for SVG/media semantics and cannot certify the entire site.
 - This review remains on its feature branch. Merging into main would trigger the existing production Git integration and therefore awaits owner confirmation.
