@@ -14,6 +14,8 @@ This record preserves existing behavior during the public-platform redesign. The
 ## Preserved flows
 
 - Navigation links remain real links. Mobile menu opens with a button, closes on link selection and Escape, and returns focus on Escape. Page and research deep links continue to resolve.
+- The five peer categories include Engineering Challenges. The mobile menu owns vertical overflow on short screens. Prose citations remain attached to their sentence; linked source actions and their citations wrap as a group.
+- The homepage's decorative silver particles drift continuously in normal motion mode. The owner's latest instruction removes the pause control. System reduced motion freezes the scene and hidden/offscreen rendering pauses without resetting its phase.
 - Foundations retains all six science topics, sliders, selectors, Fermi/transport activities, disclosures and the FET state toggle. Material controls keep their native button/keyboard behavior.
 - Device retains orbit/zoom/reset, selection, visibility, explosion and ON/OFF concept controls. Keyboard arrows and orbit buttons provide alternatives to dragging.
 - Simulator input changes recalculate immediately. Existing normalization and five parameter meanings do not change. Save records a bounded versioned scenario in browser-local storage; errors remain visible. Reset restores the existing defaults.

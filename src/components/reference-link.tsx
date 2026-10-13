@@ -4,12 +4,15 @@ export function ReferenceLink({ id, from }: { id: string; from: string }) {
   const reference = references.find((item) => item.id === id);
   if (!reference) return null;
   return (
-    <Link
-      className="citation"
-      href={referenceHref(id, from)}
-      aria-label={"Reference " + referenceNumber(id) + ": " + reference.title}
-    >
-      [{referenceNumber(id)}]
-    </Link>
+    <>
+      {"\u2060"}
+      <Link
+        className="citation"
+        href={referenceHref(id, from)}
+        aria-label={"Reference " + referenceNumber(id) + ": " + reference.title}
+      >
+        [{referenceNumber(id)}]
+      </Link>
+    </>
   );
 }

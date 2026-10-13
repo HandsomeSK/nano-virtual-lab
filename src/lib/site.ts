@@ -28,6 +28,7 @@ export const primaryNavigation = [
   { href: "/lab", title: "3D Lab" },
   { href: "/simulator", title: "Simulators" },
   { href: "/research", title: "Discoveries" },
+  { href: "/challenges", title: "Engineering Challenges" },
 ] as const;
 export const journey = [
   {

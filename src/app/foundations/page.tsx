@@ -31,15 +31,20 @@ export default function Foundations() {
               <FoundationWidget id={item.id} />
               <details className="mt-5">
                 <summary>{foundationDetails[item.id].title}</summary>
-                {foundationDetails[item.id].paragraphs.map((paragraph) => (
-                  <p className="text-sm mt-3" key={paragraph}>
-                    {paragraph}
-                  </p>
-                ))}
-                <ReferenceLink
-                  id={foundationDetails[item.id].reference}
-                  from={"/foundations#" + item.id}
-                />
+                {foundationDetails[item.id].paragraphs.map(
+                  (paragraph, index) => (
+                    <p className="text-sm mt-3" key={paragraph}>
+                      {paragraph}
+                      {index ===
+                      foundationDetails[item.id].paragraphs.length - 1 ? (
+                        <ReferenceLink
+                          id={foundationDetails[item.id].reference}
+                          from={"/foundations#" + item.id}
+                        />
+                      ) : null}
+                    </p>
+                  ),
+                )}
               </details>
               {item.id === "graphene-structure" ? (
                 <ScientificFigure id="graphene-lattice" />

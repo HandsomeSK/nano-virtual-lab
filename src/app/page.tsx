@@ -7,7 +7,7 @@ import { ScienceIcon } from "@/components/science-icon";
 import styles from "./homepage.module.css";
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
-  title: { absolute: "NanoLab — Beyond the visible" },
+  title: { absolute: "NanoLab — Explore Nanomaterials" },
   description:
     "Discover the structures, properties, and possibilities of matter at the nanoscale through immersive 3D exploration and interactive science.",
 };
@@ -18,19 +18,7 @@ export default function Home() {
       className={styles.home + " nano-home"}
       aria-labelledby="home-headline"
     >
-      <div className={styles.grain} aria-hidden="true" />
-      <div className={styles.media + " hero-photo"} aria-hidden="true">
-        <video
-          id="homepage-video"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          tabIndex={-1}
-        />
-      </div>
+      <HomeMotion className={styles.media + " hero-photo"} />
       <div className={styles.page}>
         <NanoNavigation entrance />
         <div className={styles.hero} data-menu-background>
@@ -52,12 +40,7 @@ export default function Home() {
             <h1 id="home-headline" className={styles.headline}>
               <span className={styles.line}>
                 <span className="appear appear--mask" style={delay(0.42)}>
-                  Explore <em>nanomaterials</em>.
-                </span>
-              </span>
-              <span className={styles.line}>
-                <span className="appear appear--mask" style={delay(0.62)}>
-                  Beyond the visible.
+                  Explore nanomaterials.
                 </span>
               </span>
             </h1>
@@ -121,10 +104,6 @@ export default function Home() {
           ))}
         </footer>
       </div>
-      <HomeMotion />
-      <noscript>
-        <style>{".nano-home video { display:none; }"}</style>
-      </noscript>
     </section>
   );
 }
