@@ -15,31 +15,32 @@ function ScaleExplorer() {
     { label: "Virus (example)", nm: 100 },
     { label: "Hair (example)", nm: 80000 },
   ];
+  const selected = examples.find((item) => Math.abs(size - item.nm) < 0.01);
+  const sizeLabel =
+    size < 1000
+      ? size.toFixed(2) + " nm"
+      : (size / 1000).toFixed(2) + " µm";
+  const previewDiameter = 12 + Math.log10(size + 1) * 12;
   return (
-    <div className="panel">
+    <div className="panel size-scale-explorer">
       <h3>Explore the size scale</h3>
-      <p className="mt-2 text-sm">
-        Move along a logarithmic scale: each major step is ten times larger.
+      <p className="mt-2 text-sm" id="scale-instructions">
+        Select an example or move the slider to compare sizes on one logarithmic
+        scale. Each major step is ten times larger.
       </p>
-      <div className="tabs mt-4">
-        {examples.map((item) => (
-          <button
-            key={item.label}
-            aria-pressed={Math.abs(size - item.nm) < 0.01}
-            onClick={() => setPower(Math.log10(item.nm))}
-          >
-            {item.label}
-          </button>
-        ))}
+      <div className="size-scale-reading">
+        <label htmlFor="scale-range">
+          Selected size
+          <output htmlFor="scale-range">{sizeLabel}</output>
+          <span>{selected?.label ?? "Custom size"}</span>
+        </label>
+        <span className="size-scale-preview" aria-hidden="true">
+          <span
+            className="size-scale-dot"
+            style={{ width: previewDiameter, height: previewDiameter }}
+          />
+        </span>
       </div>
-      <label className="block mt-5" htmlFor="scale-range">
-        Size:{" "}
-        <output className="text-cyan">
-          {size < 1000
-            ? size.toFixed(2) + " nm"
-            : (size / 1000).toFixed(2) + " µm"}
-        </output>
-      </label>
       <input
         id="scale-range"
         type="range"
@@ -47,33 +48,44 @@ function ScaleExplorer() {
         max={5}
         step={0.01}
         value={power}
+        aria-describedby="scale-instructions scale-illustration-note"
+        aria-valuetext={sizeLabel}
         onChange={(event) => setPower(Number(event.target.value))}
       />
-      <div className="flex justify-between text-xs muted">
+      <div className="size-scale-axis" aria-hidden="true">
         <span>0.1 nm</span>
         <span>10 nm</span>
         <span>1 µm</span>
         <span>100 µm</span>
       </div>
-      <div className="scale-objects">
+      <div className="size-scale-examples" role="group" aria-label="Size examples">
         {examples.map((item) => (
-          <div key={item.label}>
-            <span
-              className="scale-dot"
-              style={{
-                width: 12 + Math.log10(item.nm + 1) * 12,
-                height: 12 + Math.log10(item.nm + 1) * 12,
-              }}
-            />
-            <strong>{item.label}</strong>
-            <span>
-              ≈ {item.nm >= 1000 ? item.nm / 1000 + " µm" : item.nm + " nm"}
+          <button
+            key={item.label}
+            type="button"
+            aria-pressed={selected?.label === item.label}
+            onClick={() => setPower(Math.log10(item.nm))}
+          >
+            <span className="size-scale-example-preview" aria-hidden="true">
+              <span
+                className="size-scale-dot"
+                style={{
+                  width: 12 + Math.log10(item.nm + 1) * 12,
+                  height: 12 + Math.log10(item.nm + 1) * 12,
+                }}
+              />
             </span>
-          </div>
+            <span className="size-scale-example-copy">
+              <strong>{item.label}</strong>
+              <span>
+                ≈ {item.nm >= 1000 ? item.nm / 1000 + " µm" : item.nm + " nm"}
+              </span>
+            </span>
+          </button>
         ))}
       </div>
-      <p className="text-xs muted mt-4">
-        Examples are approximate; specimens vary. Diagram circles are
+      <p className="text-xs muted mt-4" id="scale-illustration-note">
+        Examples are approximate; specimens vary. Preview circles are
         illustrative, not linearly to scale.{" "}
         <ReferenceLink id="assets" from="/foundations#nanoscale" />
       </p>

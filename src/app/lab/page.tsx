@@ -19,7 +19,7 @@ export default async function Lab({
     queryValue(query, "material") === "mos2" ? "mos2" : "graphene";
   return (
     <PageShell
-      title="Meet matter. Atom by atom."
+      title="Meet matter. Atom by atom"
       intro="Turn an abstract structure into something you can inspect. Orbit the lattice, reveal its primitive cell and connect atomic arrangement with material properties."
     >
       <AtomicWorkbench key={material} initialMaterial={material} syncUrl />
@@ -27,7 +27,7 @@ export default async function Lab({
         <div className="lab-next">
           <div>
             <span className="eyebrow">The next scale</span>
-            <h2>From a sheet to a switch.</h2>
+            <h2>From a sheet to a switch</h2>
             <p>
               Contacts, a dielectric and a gate give the semiconductor a device
               architecture. Rotate the device below, expose its atomic channel

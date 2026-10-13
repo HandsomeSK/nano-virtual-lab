@@ -69,7 +69,7 @@ export default function InterfaceDiscovery() {
       <section id="challenge" className="research-chapter">
         <div className="chapter-index">01</div>
         <div>
-          <h2>The surface is part of the problem.</h2>
+          <h2>The surface is part of the problem</h2>
           <p>
             A thin semiconductor is only useful to a transistor if its gate can
             control charge through a reliable insulator. A pristine
@@ -90,7 +90,7 @@ export default function InterfaceDiscovery() {
       <section id="breakthrough" className="research-chapter">
         <div className="chapter-index">02</div>
         <div>
-          <h2>A monolayer that helps another layer grow.</h2>
+          <h2>A monolayer that helps another layer grow</h2>
           <p>
             Wong and colleagues assemble insulating carbon dots at a water
             surface and transfer them onto MoS₂. Functional groups at dot edges
@@ -123,7 +123,7 @@ export default function InterfaceDiscovery() {
       <section id="interactive-stack" className="section">
         <div className="section-heading">
           <span className="eyebrow">An original interactive explanation</span>
-          <h2>Find the layer between the layers.</h2>
+          <h2>Find the layer between the layers</h2>
           <p>
             Compare the architectures, select the carbon-dot layer, then
             separate the stack. This structural model explains placement and
@@ -135,7 +135,7 @@ export default function InterfaceDiscovery() {
       <section id="measurements" className="research-chapter">
         <div className="chapter-index">03</div>
         <div>
-          <h2>Measure the stack, not just its appearance.</h2>
+          <h2>Measure the stack, not just its appearance</h2>
           <p>
             The reported hybrid dielectric has an EOT of 0.6 ± 0.1 nm. Initial
             structural measurements resolve HfO₂ near 1.6 nm and an interfacial
@@ -144,7 +144,7 @@ export default function InterfaceDiscovery() {
           </p>
           <EotChart />
           <div className="measurement-explainer">
-            <h3>Equivalent thickness is not physical thickness.</h3>
+            <h3>Equivalent thickness is not physical thickness</h3>
             <p>
               EOT describes the thickness of SiO₂ that would give the same
               capacitance per area. For an ideal uniform dielectric, EOT ≈ t ×
@@ -165,7 +165,7 @@ export default function InterfaceDiscovery() {
       <section id="significance" className="research-chapter">
         <div className="chapter-index">04</div>
         <div>
-          <h2>The useful change is architectural.</h2>
+          <h2>The useful change is architectural</h2>
           <p>
             The interface enables a continuous ultrathin oxide while
             contributing to the stack’s electrical behaviour.
@@ -190,7 +190,7 @@ export default function InterfaceDiscovery() {
       <section id="limits" className="research-chapter">
         <div className="chapter-index">05</div>
         <div>
-          <h2>A breakthrough still has boundaries.</h2>
+          <h2>A breakthrough still has boundaries</h2>
           <p>
             This result does not establish commercial wafer yield or replace
             every dielectric process.
@@ -231,7 +231,7 @@ export default function InterfaceDiscovery() {
       <section id="connected-discoveries" className="section">
         <div className="section-heading">
           <span className="eyebrow">06 · Connected discoveries</span>
-          <h2>No layer works alone.</h2>
+          <h2>No layer works alone</h2>
           <p>
             Interfaces, registry, injection, scaling and integration describe
             different parts of the same device problem.

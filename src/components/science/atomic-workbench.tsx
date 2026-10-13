@@ -94,8 +94,8 @@ export function AtomicWorkbench({
           <span className="eyebrow">Atomic structure</span>
           <h2>
             {material === "graphene"
-              ? "A single carbon sheet."
-              : "One sheet. Three atomic planes."}
+              ? "A single carbon sheet"
+              : "One sheet. Three atomic planes"}
           </h2>
         </div>
         {!fixedMaterial ? (

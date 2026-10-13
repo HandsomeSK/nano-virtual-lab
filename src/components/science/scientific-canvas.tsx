@@ -53,7 +53,7 @@ export default function ScientificCanvas(props: SceneProps) {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color("#080a0d");
+    scene.background = new THREE.Color("#1b2b40");
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 500);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = false;

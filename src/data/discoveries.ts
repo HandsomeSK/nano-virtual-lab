@@ -14,7 +14,7 @@ export const discoveryThemes = [
   {
     id: "interfaces",
     number: "01",
-    title: "The interface becomes a design variable.",
+    title: "The interface becomes a design variable",
     reference: "wong2026",
     date: "7 October 2026",
     label: "Dielectric integration",
@@ -32,7 +32,7 @@ export const discoveryThemes = [
   {
     id: "stacking",
     number: "02",
-    title: "A second sheet changes the question.",
+    title: "A second sheet changes the question",
     reference: "yang-stacking2026",
     date: "23 September 2026",
     label: "Stacking & bands",
@@ -50,7 +50,7 @@ export const discoveryThemes = [
   {
     id: "contacts",
     number: "03",
-    title: "The contact has a length scale of its own.",
+    title: "The contact has a length scale of its own",
     reference: "yang-contacts2026",
     date: "1 July 2026",
     label: "Contact injection",
@@ -68,7 +68,7 @@ export const discoveryThemes = [
   {
     id: "scaling",
     number: "04",
-    title: "Smaller dimensions demand clearer definitions.",
+    title: "Smaller dimensions demand clearer definitions",
     reference: "lin2026",
     secondaryReference: "wang2026",
     date: "July–September 2026",
@@ -87,7 +87,7 @@ export const discoveryThemes = [
   {
     id: "stretchable",
     number: "05",
-    title: "A flexible device needs more than a thin crystal.",
+    title: "A flexible device needs more than a thin crystal",
     reference: "kim-stretch2026",
     date: "20 January 2026",
     label: "Deformable electronics",
@@ -105,7 +105,7 @@ export const discoveryThemes = [
   {
     id: "integration",
     number: "06",
-    title: "A transistor is a beginning, not a processor.",
+    title: "A transistor is a beginning, not a processor",
     reference: "guo2026",
     date: "2026",
     label: "Circuit integration",

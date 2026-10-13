@@ -1,0 +1,102 @@
+/* Keep the selected readout, slider and reference previews in one instrument. */
+.size-scale-reading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.size-scale-reading label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.size-scale-reading output {
+  color: var(--primary);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.size-scale-reading label > span {
+  color: var(--ink);
+}
+.size-scale-preview {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+.size-scale-dot {
+  display: block;
+  border: 1px solid #80dedc;
+  border-radius: 50%;
+  background: #102224;
+}
+.size-scale-explorer input[type="range"] {
+  display: block;
+  margin-top: 10px;
+  accent-color: var(--primary);
+}
+.size-scale-axis {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 12px;
+}
+.size-scale-examples {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+.size-scale-examples button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  text-align: center;
+  cursor: pointer;
+}
+.size-scale-examples button:hover {
+  border-color: var(--primary);
+}
+.size-scale-examples button[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: #85d7ff12;
+  box-shadow: inset 0 -3px 0 var(--primary);
+}
+.size-scale-example-preview {
+  display: grid;
+  place-items: center;
+  height: 72px;
+}
+.size-scale-example-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.size-scale-example-copy > span {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 560px) {
+  .size-scale-examples {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
