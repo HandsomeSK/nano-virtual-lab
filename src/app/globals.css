@@ -1,8 +1,8 @@
 @import "tailwindcss";
 html,
 body {
-  background: #000000 !important;
-  color: #ffffff;
+  background: #111e2d !important;
+  color: #f5f8ff;
 }
 @font-face {
   font-family: "Inter";
@@ -25,10 +25,10 @@ body {
 }
 html,
 body {
-  background: #000000;
-  background: var(--bg, #000000);
-  color: #ffffff;
-  color: var(--text, #ffffff);
+  background: #111e2d;
+  background: var(--bg, #111e2d);
+  color: #f5f8ff;
+  color: var(--text, #f5f8ff);
 }
 
 @theme inline {
@@ -51,35 +51,79 @@ body {
 }
 :root {
   color-scheme: dark;
-  --text: #ffffff;
-  --border: rgba(255, 255, 255, 0.16);
-  --border-soft: rgba(255, 255, 255, 0.12);
-  --bg: #000000;
-  --surface: #111315;
-  --ink: #f1f2f3;
-  --muted: #a3a6ad;
-  --prose: #d1d5db;
-  --primary: #80dedc;
-  --primary-hover: #b6efec;
+  --text: #f5f8ff;
+  --border: rgba(64, 85, 109, 0.16);
+  --border-soft: rgba(64, 85, 109, 0.12);
+  --bg: #111e2d;
+  --home-background: #0c1524;
+  --viewer-background: #1b2b40;
+  --navigation: #26384a;
+  --surface: #1b2b40;
+  --ink: #f5f8ff;
+  --muted: #a9b9ce;
+  --prose: #d6e1ef;
+  --primary: #85d7ff;
+  --primary-hover: #b4e7ff;
+  --secondary: #70e0d2;
+  --plot-primary: #80dedc;
   --cyan: #06b6d4;
   --cyan-ink: #80dedc;
   --violet: #8b5cf6;
   --violet-ink: #c6b4f8;
   --orange: #f1b87a;
   --orange-ink: #f1b87a;
-  --line: #ffffff24;
-  --input-line: #ffffff50;
-  --indigo-soft: #1a2023;
+  --line: #40556d24;
+  --input-line: #40556d50;
+  --indigo-soft: #26384a;
   --cyan-soft: #102224;
   --violet-soft: #1e1c29;
   --orange-soft: #292018;
   --metal: #aeb6c2;
   --danger: #ffaaa4;
   --success: #9ce4b2;
-  --header-bg: #111315f5;
+  --header-bg: #26384af5;
   --slab-border: #a3a6ad66;
   --shadow-color: #f1f2f312;
   --panel-shadow: none;
+}
+/* Scientific fills, axes and labels retain their original semantic colours. */
+:is(
+  svg.band-diagram,
+  .material-canvas svg[role="img"],
+  .cone-figure > svg,
+  .transport-lab svg[role="img"],
+  #quantum .panel > svg[role="img"],
+  #characterization .panel > svg[role="img"],
+  svg[aria-label$=": conceptual energy versus wave-vector diagram"],
+  .challenge-diagram > svg,
+  svg.device-schematic,
+  .interface-illustration > svg,
+  .eot-chart > svg,
+  .iv-chart > svg,
+  .scene-fallback > svg
+) {
+  --ink: #f1f2f3;
+  --muted: #a3a6ad;
+  --prose: #d1d5db;
+  --primary: #80dedc;
+  --surface: #111315;
+  --line: #ffffff24;
+  --cyan-soft: #102224;
+  --violet-soft: #1e1c29;
+  --orange-soft: #292018;
+  --indigo-soft: #1a2023;
+  --color-ink: #f1f2f3;
+  --color-muted: #a3a6ad;
+  color: #f1f2f3;
+}
+.chart-legend {
+  --primary: #80dedc;
+  --muted: #a3a6ad;
+  --ink: #f1f2f3;
+}
+html:has(.nano-home),
+body:has(.nano-home) {
+  background: var(--home-background, #0c1524) !important;
 }
 html {
   scroll-behavior: smooth;
@@ -1266,7 +1310,7 @@ td {
   border-bottom: 1px solid var(--line);
 }
 .result-insights {
-  border-top: 3px solid #80dedc;
+  border-top: 3px solid var(--primary);
 }
 .slab[data-part="channel"] .slab-top {
   color: #f1f2f3;
@@ -1281,7 +1325,7 @@ td {
   padding-top: 28px;
 }
 .graphene-feature .knowledge-title > span {
-  color: #80dedc;
+  color: var(--primary);
 }
 .dirac-visuals {
   display: grid;
@@ -1298,10 +1342,10 @@ td {
   max-height: 330px;
 }
 .fermi-control {
-  border: 1px solid #ffffff24;
+  border: 1px solid #40556d24;
   padding: 18px;
   border-radius: 6px;
-  background: #191d20;
+  background: #26384a;
   margin-top: 20px;
 }
 .fermi-control label {
@@ -1318,16 +1362,16 @@ td {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  color: #a3a6ad;
+  color: #a9b9ce;
   font-size: 12px;
 }
 .learning-explanation {
   padding: 20px;
   border-radius: 6px;
-  background: #191d20;
+  background: #26384a;
 }
 .learning-explanation h4 {
-  color: #f1f2f3;
+  color: #f5f8ff;
   font-weight: 650;
 }
 .learning-question {
@@ -1344,7 +1388,7 @@ td {
 }
 .material-canvas {
   background: var(--surface);
-  border: 1px solid #ffffff24;
+  border: 1px solid #40556d24;
   border-radius: 14px;
   padding: 16px;
 }
@@ -1354,7 +1398,7 @@ td {
 }
 .material-canvas figcaption {
   font-size: 12px;
-  color: #a3a6ad;
+  color: #a9b9ce;
   text-align: center;
 }
 .material-explorer[data-material="graphene"] .material-canvas {
@@ -1370,15 +1414,15 @@ td {
   margin-bottom: 30px;
 }
 .bridge-nav a {
-  border: 1px solid #ffffff24;
+  border: 1px solid #40556d24;
   border-radius: 6px;
   background: var(--surface);
-  color: #80dedc;
+  color: #85d7ff;
   padding: 10px 16px;
   font-size: 14px;
 }
 .bridge-nav a:hover {
-  background: #1a2023;
+  background: #26384a;
 }
 .bridge-intro {
   display: grid;
@@ -1526,10 +1570,10 @@ td {
 }
 /* Public laboratory: open articles, material exhibits and instrument surfaces. */
 :root {
-  --scroll-thumb: #60646a;
-  --scroll-track: #0d0f11;
-  --scroll-hover: #899299;
-  --scroll-active: #80dedc;
+  --scroll-thumb: #40556d;
+  --scroll-track: #111e2d;
+  --scroll-hover: #a9b9ce;
+  --scroll-active: #85d7ff;
 }
 * {
   scrollbar-width: auto;
@@ -1573,7 +1617,7 @@ input {
 button,
 a,
 summary {
-  -webkit-tap-highlight-color: #80dedc1a;
+  -webkit-tap-highlight-color: #85d7ff1a;
 }
 button:active:not(:disabled),
 .button-primary:active,
@@ -1699,7 +1743,7 @@ select:focus-visible {
   gap: 36px;
 }
 .site-footer {
-  background: #191d20;
+  background: #26384a;
   padding-block: 32px 24px;
 }
 .footer-nav a {
@@ -2062,7 +2106,7 @@ th {
 }
 .instrument-controls {
   padding: 24px 20px;
-  background: #191d20;
+  background: #26384a;
   border-left: 1px solid var(--line);
 }
 .parameter-group {

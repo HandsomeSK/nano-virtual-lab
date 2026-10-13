@@ -109,7 +109,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
               {
                 name: "Current configuration",
                 parameters,
-                color: "var(--primary)",
+                color: "var(--plot-primary)",
               },
             ]}
           />

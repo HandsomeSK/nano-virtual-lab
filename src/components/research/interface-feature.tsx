@@ -6,8 +6,8 @@ export function InterfaceFeature({ from }: { from: string }) {
       <div>
         <span className="eyebrow">Featured discovery · 7 October 2026</span>
         <h2>
-          One interface.
-          <br />A different possibility.
+          One interface
+          <br />A different possibility
         </h2>
         <p>
           A carbon-dot assembly helps an ultrathin oxide take shape on MoS₂.

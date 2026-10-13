@@ -3,22 +3,22 @@ version: alpha
 name: Nano Virtual Lab
 description: Public nanotechnology explanations and interactive instruments, inspired by a materials research exhibition and a measurement bench.
 colors:
-  background: "#000000"
-  surface: "#111315"
-  ink: "#F1F2F3"
-  muted: "#A3A6AD"
-  prose: "#D1D5DB"
-  primary: "#80DEDC"
+  background: "#111E2D"
+  surface: "#1B2B40"
+  ink: "#F5F8FF"
+  muted: "#A9B9CE"
+  prose: "#D6E1EF"
+  primary: "#85D7FF"
   signal: "#F1B87A"
-  line: "#FFFFFF24"
-  home-background: "#000000"
-  home-ink: "#ffffff"
-  home-navigation: "#f3f3f3"
-  home-subheading: "#9a9a9a"
-  home-secondary: "#d8d8d8"
-  home-hairline: "rgba(255,255,255,.16)"
-  home-focus: "#7fd4ff"
-  home-button-ink: "#0a0a0a"
+  line: "#40556D24"
+  home-background: "#111E2D"
+  home-ink: "#F5F8FF"
+  home-navigation: "#F5F8FF"
+  home-subheading: "#A9B9CE"
+  home-secondary: "#D6E1EF"
+  home-hairline: "rgba(64,85,109,.16)"
+  home-focus: "#85D7FF"
+  home-button-ink: "#111E2D"
 typography:
   sans:
     fontFamily: '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
@@ -76,23 +76,23 @@ An independent public Nanotechnology Virtual Laboratory. English is the sole UI 
 
 ## Colors
 
-Runtime ownership is model B: src/app/globals.css holds semantic CSS variables and Tailwind mappings; src/app/experience.css holds the shared metal treatments. Frontmatter mirrors background, surface, ink, prose, muted, primary, signal and line. Homepage.module.css owns measured homepage geometry. Black #000 is forced in the first rule and body inline style. --text is white, --ink is #f1f2f3, --prose is #d1d5db, --muted is #a3a6ad; surfaces are charcoal. Cyan/teal and violet distinguish material/selected scientific roles; orange separates comparison curves. Text and line styles supplement color.
+Runtime ownership is model B: src/app/globals.css holds semantic CSS variables and Tailwind mappings; src/app/experience.css holds the shared metal treatments. Frontmatter mirrors the runtime palette. Interior backgrounds use #111E2D, home uses #0C1524, viewer panels use #1B2B40 and navigation uses #26384A. Borders use #40556D with existing alpha values preserved. Main text is #F5F8FF, prose #D6E1EF, metadata #A9B9CE, primary UI accent #85D7FF and secondary accent #70E0D2. Route viewport colours match their backgrounds.
 
-Deprecated --home-\* frontmatter entries remain descriptive aliases for the homepage black/white/gray roles. The live homepage uses the shared palette and scoped dimension tokens; it has no separate sky-gradient palette. Gradient metal is for navigation, buttons and instrument depth, not behind every paragraph. Borders are thin silver. No excessive glow or repeated floating cards.
+The Midnight Blue + Arctic Blue update preserves typography, dimensions, breakpoints, gradient angles/stops, alpha values, shadow geometry and animation timing. Scientific colours have separate ownership: --plot-primary remains #80DEDC; local scientific SVG variables retain their previous fills, strokes and labels. Atom, bond, material and data colours stay unchanged. Homepage.module.css continues to own homepage geometry, while HomeMotion and its particle renderer remain unchanged. Metal treatments remain confined to controls and instruments.
 
 ## Typography
 
-Inter variable roman is self-hosted with font-display: swap and owns UI, logo, prose and headings. The homepage heading is one phrase, “Explore nanomaterials.”, in uniform white Inter without a serif emphasis or tagline. Only Inter is preloaded; prior serif assets remain archived. Prose uses --prose #D1D5DB, distinct from metadata in --muted #A3A6AD. Theory paragraphs use 17px/1.8; challenge and discovery narratives use 16px/1.8. Numeric readouts use tabular figures. Long science prose aligns left and stays near 65–80 characters. ReferenceLink keeps a citation in the sentence, joined to its preceding text; source action links and citations share an inline group.
+Inter variable roman is self-hosted with font-display: swap and owns UI, logo, prose and headings. The homepage heading is one phrase, “Explore nanomaterials”, in uniform light Inter without a serif emphasis or tagline. Only Inter is preloaded; prior serif assets remain archived. Prose uses --prose #D6E1EF, distinct from metadata in --muted #A9B9CE. Theory paragraphs use 17px/1.8; challenge and discovery narratives use 16px/1.8. Numeric readouts use tabular figures. Long science prose aligns left and stays near 65–80 characters. ReferenceLink keeps a citation in the sentence, joined to its preceding text; source action links and citations share an inline group.
 
 ## Layout
 
 Home adapts the supplied Vesper geometry with the owner's latest annotations: a three-column header, five metallic navigation pills, bottom-centered single-phrase copy, two actions and three capability links. Engineering Challenges is a peer category. Desktop >=901 px locks to one viewport; mobile <=900 px grows naturally and uses a full-screen menu. The menu owns vertical overflow on short screens, so all five destinations remain reachable. Existing size/height breakpoints remain.
 
-Interior pages keep the document as scroll owner, with a 1440 px container and 48/24/16 px insets. Editorial research uses indexed chapters and open text rows. MoS₂ has a material workbench and a featured discovery; old fragments/widgets remain in a disclosure that fragment navigation opens. Tools reserve stage/plot geometry, then place controls and an inspector. Under 900 px the inspector follows the stage. Tables own horizontal overflow. Native selectors remain platform-owned.
+Interior pages keep the document as scroll owner, with a 1440 px container and 48/24/16 px insets. Editorial research uses indexed chapters and open text rows. MoS₂ has a material workbench and a featured discovery; old fragments/widgets remain in a disclosure that fragment navigation opens. Tools reserve stage/plot geometry, then place controls and an inspector. Under 900 px the inspector follows the stage. Tables own horizontal overflow. Native selectors remain platform-owned. The size-scale instrument connects each example circle, name and size into one selectable control; its slider and live preview share the same logarithmic state. The transistor inspector keeps material examples visible and places full role/model explanations in native disclosures, with model notes spanning the workbench. The simulator evidence figure retains its complete source image in a maximum 460 px column beside caption and provenance, stacked on phones. These are the owner’s explicit layout exceptions to the colour-only brief. Editorial headings omit final periods; sentence and bibliography punctuation remains intact.
 
 ## Elevation & Depth
 
-Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses an original silver-white Canvas 2D volume of twisting, depth-lit particles over black, replacing the abruptly restarting video. A static stippled SVG remains visible without JavaScript or Canvas.
+Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses an original silver-white Canvas 2D volume of twisting, depth-lit particles over midnight blue, replacing the abruptly restarting video. A static stippled SVG remains visible without JavaScript or Canvas.
 
 ## Shapes
 

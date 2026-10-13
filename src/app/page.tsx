@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { NanoNavigation } from "@/components/site-header";
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Discover the structures, properties, and possibilities of matter at the nanoscale through immersive 3D exploration and interactive science.",
 };
+export const viewport: Viewport = { themeColor: "#0c1524" };
 const delay = (seconds: number) => ({ "--d": seconds + "s" }) as CSSProperties;
 export default function Home() {
   return (
@@ -40,7 +41,7 @@ export default function Home() {
             <h1 id="home-headline" className={styles.headline}>
               <span className={styles.line}>
                 <span className="appear appear--mask" style={delay(0.42)}>
-                  Explore nanomaterials.
+                  Explore nanomaterials
                 </span>
               </span>
             </h1>

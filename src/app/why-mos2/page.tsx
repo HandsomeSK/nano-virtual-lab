@@ -31,7 +31,7 @@ export default function Why() {
       </section>
       <section className="section material-reasons" id="possibilities">
         <SectionHeading
-          title="Atomic thickness changes the design space."
+          title="Atomic thickness changes the design space"
           description="A material property becomes useful when its environment and device architecture support it."
         />
         <div className="open-questions">
@@ -84,7 +84,7 @@ export default function Why() {
       <section className="section lab-next" id="engineering-limits">
         <div>
           <span className="eyebrow">Materials become devices</span>
-          <h2>The next layer is an engineering decision.</h2>
+          <h2>The next layer is an engineering decision</h2>
           <p>
             Contacts, dielectrics, transfer cleanliness and reproducible
             processing decide how much of a material’s potential survives

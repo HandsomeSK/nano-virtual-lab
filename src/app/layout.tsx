@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./experience.css";
+import "./size-scale-feedback.css";
+import "./instrument-feedback.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AnchorNavigation } from "@/components/anchor-navigation";
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#111e2d",
   colorScheme: "dark",
   viewportFit: "cover",
 };
@@ -37,7 +39,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        style={{ background: "#000", color: "#fff" }}
+        style={{ background: "#111e2d", color: "#f5f8ff" }}
         className="flex min-h-screen flex-col antialiased"
       >
         <a

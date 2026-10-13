@@ -223,7 +223,7 @@ export function DeviceViewer({
       </section>
       <aside className="science-inspector">
         <h3>Device components</h3>
-        <p className="text-sm">
+        <p className="text-xs">
           Select a layer to inspect its role. Checkboxes control visibility.
         </p>
         <div className="science-parts">
@@ -270,29 +270,35 @@ export function DeviceViewer({
               from={from}
             />
           </p>
-          <p>
-            {part.role}
-            {part.id === "channel" ? (
-              <>
-                {" "}
-                Violet spheres mark Mo; gold spheres mark S. The enlarged ideal
-                S–Mo–S motif follows the lattice geometry source.
-                <ReferenceLink id="ridolfi2015" from={from} />
-              </>
-            ) : null}
-            {withInterface &&
-            (part.id === "dielectric" || part.id === "interface") ? (
-              <ReferenceLink
-                id="wong2026"
-                from="/discoveries/mos2-interface-breakthrough#interactive-stack"
-              />
-            ) : null}
-          </p>
+          <details className="device-component-role">
+            <summary>Role & scientific explanation</summary>
+            <p>
+              {part.role}
+              {part.id === "channel" ? (
+                <>
+                  {" "}
+                  Violet spheres mark Mo; gold spheres mark S. The enlarged ideal
+                  S–Mo–S motif follows the lattice geometry source.
+                  <ReferenceLink id="ridolfi2015" from={from} />
+                </>
+              ) : null}
+              {withInterface &&
+              (part.id === "dielectric" || part.id === "interface") ? (
+                <ReferenceLink
+                  id="wong2026"
+                  from="/discoveries/mos2-interface-breakthrough#interactive-stack"
+                />
+              ) : null}
+            </p>
+          </details>
           <Link className="text-link" href={part.concept}>
             Explore the related concept
           </Link>
         </section>
-        <p className="text-xs">
+      </aside>
+      <details className="device-model-notes">
+        <summary>Materials, scale & model limits</summary>
+        <p className="text-sm">
           {interfaceResearch
             ? "Support and electrode examples come from the 2011 stack; the carbon-dot/HfO₂ comparison illustrates the 2026 interface study. "
             : "Material examples follow the 2011 monolayer device: Au contacts, Cr/Au top gate and HfO₂ on MoS₂/SiO₂/Si. "}
@@ -300,7 +306,7 @@ export function DeviceViewer({
           inspection. Geometry is not to scale; no spatial fields or current are
           computed.
         </p>
-      </aside>
+      </details>
     </div>
   );
 }

@@ -28,13 +28,13 @@ export default async function Page({
     study = queryValue(query, "study");
   return (
     <PageShell
-      title="Small structures. Big questions."
+      title="Small structures. Big questions"
       intro="Discover what changes when interfaces, atomic registry and device architecture become design variables. Follow the evidence from a single layer to an interconnected system."
     >
       <InterfaceFeature from="/research" />
       <section className="section">
         <SectionHeading
-          title="Six directions. One connected frontier."
+          title="Six directions. One connected frontier"
           description="Selected research reviewed through 13 October 2026. Dates establish a cutoff, not a claim to cover every new publication."
         />
         <DiscoverySynthesis />

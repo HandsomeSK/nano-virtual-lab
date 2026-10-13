@@ -73,7 +73,10 @@ export default async function SimulatorPage({
           </div>
         </div>
       </section>
-      <section className="section" id="experimental-evidence">
+      <section
+        className="section simulator-evidence"
+        id="experimental-evidence"
+      >
         <SectionHeading
           title="Experimental Evidence: History Matters"
           description="A measured transfer curve can depend on environment and sweep direction as well as voltage."

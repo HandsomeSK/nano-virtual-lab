@@ -169,7 +169,7 @@ export function Comparison({
                 {
                   name: "A: " + first.name,
                   parameters: first.parameters,
-                  color: "var(--primary)",
+                  color: "var(--plot-primary)",
                 },
                 {
                   name: "B: " + second.name,
@@ -189,7 +189,7 @@ export function Comparison({
                   {
                     name: "A: " + first.name,
                     parameters: first.parameters,
-                    color: "var(--primary)",
+                    color: "var(--plot-primary)",
                   },
                 ]}
               />
