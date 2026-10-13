@@ -10,10 +10,10 @@ export function BandDiagram({
 }) {
   const color =
     material === "graphene"
-      ? "#076b7d"
+      ? "var(--cyan-ink)"
       : material === "mos2" || material === "semiconductor"
-        ? "#7652c8"
-        : "#4f46e5";
+        ? "var(--violet-ink)"
+        : "#b4bffa";
   const point = (k: number, energy: number) =>
     215 + k * 128 + "," + (123 - energy * 65);
   const points = Array.from({ length: 65 }, (_, i) => (i - 32) / 32);
@@ -63,7 +63,7 @@ export function BandDiagram({
           width="348"
           height="209"
           rx="12"
-          fill={material === "graphene" ? "#eefbfe" : "#f5f2ff"}
+          fill={material === "graphene" ? "#102229" : "#1c1c29"}
         />
         <path
           d="M58 217V28m-5 8 5-8 5 8M58 217H377m-8-5 8 5-8 5"
@@ -73,7 +73,7 @@ export function BandDiagram({
         />
         <path
           d="M65 123H370M215 28V217"
-          stroke="#b5c7dc"
+          stroke="#455366"
           strokeDasharray="4 5"
         />
         <text x="12" y="15" fill="var(--color-ink)" fontSize="12">
@@ -105,11 +105,11 @@ export function BandDiagram({
               stroke={color}
               strokeWidth="3"
             />
-            <path d="M65 123H370" stroke="#4f46e5" strokeDasharray="5 4" />
+            <path d="M65 123H370" stroke="#b4bffa" strokeDasharray="5 4" />
             <text x="87" y="73" fill={color} fontSize="12">
               Partly filled band
             </text>
-            <text x="270" y="117" fill="#4f46e5" fontSize="11">
+            <text x="270" y="117" fill="#b4bffa" fontSize="11">
               Fermi level
             </text>
           </>
@@ -149,7 +149,7 @@ export function BandDiagram({
                       ? "M215 149 273 97"
                       : "M215 149V97m-4 6 4-6 4 6m-8 40 4 6 4-6"
                   }
-                  stroke="#4f46e5"
+                  stroke="#b4bffa"
                   strokeWidth="1.5"
                   fill="none"
                   strokeDasharray={material === "silicon" ? "4 3" : undefined}
@@ -165,14 +165,14 @@ export function BandDiagram({
           <>
             <path
               d={"M65 " + (123 - fermiEnergy * 65) + "H370"}
-              stroke="#4f46e5"
+              stroke="#b4bffa"
               strokeWidth="2"
               strokeDasharray="5 4"
             />
             <text
               x="349"
               y={117 - fermiEnergy * 65}
-              fill="#4f46e5"
+              fill="#b4bffa"
               fontSize="11"
             >
               E<tspan baselineShift="sub">F</tspan>

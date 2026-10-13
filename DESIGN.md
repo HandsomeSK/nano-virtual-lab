@@ -3,28 +3,28 @@ version: alpha
 name: Nano Virtual Lab
 description: Public nanotechnology explanations and interactive instruments, inspired by a materials research exhibition and a measurement bench.
 colors:
-  background: "#F5F7F7"
-  surface: "#FFFFFF"
-  ink: "#172C32"
-  muted: "#506269"
-  primary: "#086C70"
-  signal: "#AE5A25"
-  line: "#D4DEDF"
-  home-background: "#01061a"
+  background: "#000000"
+  surface: "#111315"
+  ink: "#F1F2F3"
+  muted: "#A3A6AD"
+  primary: "#80DEDC"
+  signal: "#F1B87A"
+  line: "#FFFFFF24"
+  home-background: "#000000"
   home-ink: "#ffffff"
-  home-navigation: "rgba(238,242,255,.9)"
-  home-subheading: "rgba(226,233,255,.74)"
-  home-secondary: "rgba(212,236,255,.77)"
-  home-hairline: "rgba(255,255,255,.19)"
+  home-navigation: "#f3f3f3"
+  home-subheading: "#9a9a9a"
+  home-secondary: "#d8d8d8"
+  home-hairline: "rgba(255,255,255,.16)"
   home-focus: "#7fd4ff"
   home-button-ink: "#0a0a0a"
 typography:
   sans:
-    fontFamily: '"DM Sans Variable", Arial, sans-serif'
+    fontFamily: '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
   display:
-    fontFamily: '"Instrument Serif", Georgia, serif'
+    fontFamily: '"Inter", system-ui, sans-serif'
   cinematic:
-    fontFamily: '"Google Sans", "Product Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+    fontFamily: '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
 rounded:
   control: "0.375rem"
   instrument: "0.75rem"
@@ -34,8 +34,8 @@ spacing:
 components:
   button:
     height: "2.75rem"
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.surface}"
+    backgroundColor: "{colors.home-ink}"
+    textColor: "{colors.home-button-ink}"
     rounded: "{rounded.control}"
   scientific-figure:
     backgroundColor: "{colors.surface}"
@@ -65,67 +65,53 @@ components:
     backgroundColor: "{colors.home-hairline}"
 ---
 
-# Nano Virtual Lab design context
+# NanoLab design context
 
 ## Overview
 
-The platform is an independent public Nanotechnology Virtual Laboratory. Its primary task is to connect an atomic structure, its electronic properties and a device response. The current user brief authorizes a substantial presentation redesign while preserving the scientific content and calculation model.
-
-Use the visual language of a materials exhibition and a measurement bench: a generous scientific title, tangible atomic diagrams, readable technical prose and clearly separated instrument controls. The homepage is expressive; the knowledge and research routes are editorial; Device, Simulator and Comparison are tools. English is the public language. No university affiliation or course identity is implied.
-
-The homepage is a cinematic, single-viewport gateway specified by the owner's Vexel brief: a compact white NanoLab vector wordmark, centered three-link masthead and the two-line statement "Nanomaterials. Beyond graphene." above the exact supplied atmospheric video. Interior scientific pages retain the materials-exhibition and measurement-bench register. Avoid a generic card dashboard, a newspaper imitation, cream-and-clay styling, neon effects or extra homepage sections.
+An independent public Nanotechnology Virtual Laboratory. English is the sole UI language; no course or university identity is implied. This is a hybrid: an expressive single-viewport marketing gateway, editorial science/research and usable scientific instruments. The 13 October 2026 brief supersedes the prior Vexel homepage and light exhibition palette.
 
 ## Colors
 
-Runtime CSS in `src/app/globals.css` remains the canonical token source (mapping model B). Frontmatter mirrors the accepted values. `--bg`, `--surface`, `--ink`, `--muted`, `--primary`, `--orange-ink` and `--line` map respectively to background, surface, ink, muted, primary, signal and line above. Tailwind's existing `@theme inline` maps these variables to utilities; shared components consume the same roles.
+Runtime ownership is model B: src/app/globals.css holds semantic CSS variables and Tailwind mappings; src/app/experience.css holds the shared metal treatments. Frontmatter mirrors background, surface, ink, muted, primary, signal and line. Homepage.module.css owns measured homepage geometry. Black #000 is forced in the first rule and body inline style. --text is white, --ink is #f1f2f3, --muted is #a3a6ad; surfaces are charcoal. Cyan/teal and violet distinguish material/selected scientific roles; orange separates comparison curves. Text and line styles supplement color.
 
-Paper-white content on a mineral-gray document surface supports scientific reading. Deep green-black text carries structure; teal indicates actions and selection. Orange distinguishes a second curve or a physical caution. Existing violet/cyan atom colors remain meaningful material encodings, not decorative page washes. Status and scientific chart colors retain text or line-style alternatives.
-
-The homepage's separate semantic tokens are the --home-* variables in globals.css. They map directly to the matching home-* frontmatter colors; --home-font maps to typography.cinematic. homepage.module.css consumes these roles. The exact sky gradient is --home-sky: 90deg, #00061a at 0%, #01071b at 22%, #01071a at 45%, #010718 at 62%, #010614 at 80%, #020511 at 100%. This is an explicit, owner-requested homepage exception to the interior no-gradient rule, not a global theme replacement.
+Deprecated --home-\* frontmatter entries remain descriptive aliases for the homepage black/white/gray roles. The live homepage uses the shared palette and scoped dimension tokens; it has no separate sky-gradient palette. Gradient metal is for navigation, buttons and instrument depth, not behind every paragraph. Borders are thin silver. No excessive glow or repeated floating cards.
 
 ## Typography
 
-The homepage uses locally hosted Google Sans 400 and 500, with the supplied fallback stack and font-display: block. Its two font files are preloaded; the SIL OFL licence ships beside them. The shared NanoLab wordmark uses original inline outlines from weight 500. The homepage's regular two-line headline follows the supplied --u scaling and restrained negative tracking; interior prose retains the families below.
-
-`--font-sans` owns DM Sans, already hosted locally. `--font-display` owns Instrument Serif, also already installed and locally hosted; use it for page-level display headings, not form labels or numeric output. Headings align left, body lines stay near 65–78 characters, and numerical controls/readouts use tabular digits. Use normal case for navigation and scientific labels. No tracked uppercase ornament labels.
+Inter variable roman is self-hosted with font-display: swap. It owns UI, logo, prose and every interior heading. Instrument Serif Italic is self-hosted and used only for the word nanomaterials in the homepage H1. Both are preloaded with complete OFL files in public/assets. Numeric readouts use tabular figures. Long science prose aligns left and stays near 65–80 characters.
 
 ## Layout
 
-The container is at most 1440 px with 48 px desktop insets, 24 px tablet and 16 px narrow-phone insets. The document owns vertical scrolling. Ordinary prose grows with content; no large minimum-height sections.
+Home adapts the supplied Vesper parameters to NanoLab: a three-column header, four metallic navigation pills, bottom-centered two-line copy, two actions and three capability links. Desktop >=901 px locks to one viewport; mobile <=900 px grows naturally and uses a full-screen menu. The explicit 1600/1920/2560, 1280–1599, 901–1279, short-height, <=900 and <=560 rules remain; a <=360 fit rule prevents narrow-phone collisions.
 
-Home alone owns one viewport and has no document scrolling. Its centered masthead/copy and flexible bottom video field use the exact 1280×800 scale model, 82.98/318.68 flex weights, safe-area insets and tablet/portrait/short-landscape rules. The .cinematic-home marker scopes the chrome/scroll exceptions through :has; leaving Home restores the full shared navigation, footer and normal scrolling. Foundations has a quiet side directory and an article stream with embedded experiments. Research separates study prose from contextual links. Challenges pairs a mechanism diagram with its explanation. Simulator places the plot/readouts before a 300 px parameter rail; under 900 px, the plot, controls and save bar stack. Device pairs a bounded 3D stage with a part inspector. Tables have their own visible horizontal scroll on narrow screens.
-
-The base spacing rhythm is 6, 12, 18, 24, 36 and 48 px. Section gaps are usually 48 px; internal groups use 12–24 px. A two-column scientific diagram never crops its axes or annotations. Media geometry is reserved from verified intrinsic dimensions when available.
+Interior pages keep the document as scroll owner, with a 1440 px container and 48/24/16 px insets. Editorial research uses indexed chapters and open text rows. MoS₂ has a material workbench and a featured discovery; old fragments/widgets remain in a disclosure that fragment navigation opens. Tools reserve stage/plot geometry, then place controls and an inspector. Under 900 px the inspector follows the stage. Tables own horizontal overflow. Native selectors remain platform-owned.
 
 ## Elevation & Depth
 
-Static articles, navigation lists, references and related links have no shadows. Borders communicate section boundaries, not a box around every paragraph. Instruments can have one contained neutral surface. Dropdown menus use a small shadow to indicate their overlay relationship. No background gradients, glass effects or gratuitous hover lifts.
+Only navigation/buttons, selected elements and scientific instruments use metallic or frosted surfaces. Articles use rules and whitespace. Source figures stay complete on a white plate when needed; never invert, crop or recolor a licensed NC-ND image. Scientific ball-and-stick visuals use real geometry rather than raster artwork. The homepage uses only the supplied remote video at 100% opacity, with a pure-black fallback and no added overlay/background asset.
 
 ## Shapes
 
-6 px radius is for controls; 12 px radius is for an instrument surface. Articles and figures are open layouts. Material atoms, sphere demonstrations and circular physical diagrams preserve their meaningful shape. A source image remains complete, unmodified and legible; NC-ND figures are never cropped or recolored.
+Controls and navigation use 6/7 px corners; instruments use 12 px. Sphere sizes and device thicknesses are explicitly illustrative. No imaginary particle-orbit decorations, paid components, Lottie or video-driven scientific models.
 
 ## Components
 
-Shared owners: `PageShell` for page titles, `SectionHeading` for article headings, `ScientificFigure` for evidence/media/rights, `ParameterControl` for numerical controls, `IVChart` for curves, `ReferenceBrowser` for source lookup, and `SiteHeader`/`SiteFooter` for navigation.
+Canonical owners: NanoNavigation for all four-category navigation, Brand for the Inter NanoLab mark, PageShell/SectionHeading for article titles, ParameterControl and IVChart for existing models, AtomicWorkbench/DeviceViewer for science controls, ScientificStage/ScientificCanvas for deferred WebGL, and ScientificFigure/ReferenceBrowser for evidence and rights. UX-CONTRACT.md defines native selection, forms, storage and source lookup.
 
-The shared Brand component displays a filled NanoLab SVG with the accessible home-link name "NanoLab home"; it has no explanatory subtitle. Home uses three real destinations: Explore and the primary action go to /foundations, Simulator and the secondary action go to /simulator, and Research goes to /research. All deeper content stays accessible through the interior navigation.
+Links: Materials /foundations; 3D Lab /lab; Simulators /simulator; Discoveries /research. The silver header action goes to /foundations. Footer/context links preserve all original routes. Buttons perform actions; real links navigate. Menus close on Escape, navigation and desktop resize; background becomes inert while open, focus stays in the header and Escape restores the burger. Selection and visibility are distinct operations. Hover/focus increase contrast; labels, checked states and descriptions remain visible.
 
-Primary buttons are solid teal; secondary buttons are a quiet outlined surface. Hover increases contrast, focus-visible uses an offset teal outline, disabled controls remain noninteractive, and pressed controls have text/ARIA state as well as color. Native selects keep platform-owned popups; the product does not promise custom popup geometry. Search includes an accessible clear action. Inputs keep real labels, help text and names.
+## Motion & resilience
 
-Global scrollbar roles live in `globals.css`: visible thumb/track, hover/active tokens, standard properties and WebKit fallback, with a forced-colors path. No opt-in scrollbar utility is required.
+Homepage CSS entrances copy the supplied delays/easing, keep resting opacity 1, finish to is-in and recover after two requestAnimationFrames if animation APIs do not run. Reduced motion removes the sequence and stops decorative video; available playback has an accessible pause control. No Three.js or Anime.js enters the homepage bundle.
 
-Scientific images use Next.js optimization, descriptive alternatives and accessible captions. All source, author, licence and modification metadata remains available. Existing remote-source hosting restrictions are a verification limitation, not a reason to substitute images or remove attribution.
-
-Motion answers an interaction or depicts carrier flow. No floating hero animation or scrolling reveal sequence. Reduced motion disables nonessential animation. Instrument drag has keyboard and button alternatives. Existing mathematical units, model boundaries, saving, comparison, URL state and storage contracts stay intact; see `docs/scientific-evidence.md` and `UX-CONTRACT.md`.
+Scientific routes defer Three.js/Anime.js until a stage approaches view. Anime.js 4 animates assembly reveal, inspection separation/explosion and camera positioning, not physical particle dynamics. Frames are requested only for interaction/resize/animation; offscreen or hidden motion pauses. Reduced motion finalizes immediately. Instanced geometry, bounded DPR, antialiasing, procedural lighting/environment and disposal keep the scene sharp and bounded. WebGL/chunk/context failures offer a static schematic with native controls/descriptions. Touch orbit is opt-in; page scrolling remains available. Keyboard arrows, zoom and camera buttons provide gesture alternatives.
 
 ## Do's and Don'ts
 
-The requested homepage entrance is the only brand-motion exception: native Web Animations use the exact supplied delays/easing and masked .l/.li headline spans. It starts after font/video readiness or 900 ms, has a 3500 ms visibility guard, runs once per full page load and yields to focus/pointer interaction. Reduced motion stops the decorative video and bypasses the intro. A discreet pause/play control appears only when video playback is available; the video has no native controls and never receives focus. No video download, proxy, replacement image or poster is used.
-
-- Do choose layout by content: article, material figure, plot, parameter rail or bibliography.
-- Do keep an experimental figure separate from the unfitted educational simulation.
-- Do retain Silicon scientific content; NanoLab branding is consistent across Home and the interior shell.
-- Don't turn every section into an equal rounded card or center long technical paragraphs.
-- Don't change formulas, parameters, model defaults or state behavior to support a visual treatment.
-- Do publish checked website updates to the original production address under the owner's standing authorization recorded in AGENTS.md.
+- Preserve the classical solver, storage schema, saved comparisons and existing science widgets.
+- Keep experiment, illustration and model results visibly distinct; citation and measurement context accompany quantitative claims.
+- Treat EOT as capacitance-equivalent, not physical film thickness; distinguish gate, channel and transfer lengths.
+- Do not reconstruct unavailable experimental coordinates, invent curves or use generated images as evidence.
+- Research cutoff is 13 October 2026, not a claim to list every latest paper.
+- Publish checked updates through main to the original production URL under AGENTS.md standing authorization.

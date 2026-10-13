@@ -2,21 +2,32 @@ export const site = {
   name: "NanoLab",
   url: "https://nano-virtual-lab.vercel.app",
   topic: "Nanomaterials",
-  subtitle: "From Graphene to Next-Generation 2D Semiconductor Transistors",
+  subtitle: "Beyond the visible",
   identity: "Nanotechnology Virtual Laboratory",
   description:
-    "An independent nanotechnology virtual laboratory. Explore nanoscale properties, graphene and MoS₂ through interactive experiments, transistor simulations and published research.",
+    "Discover nanomaterials through immersive atomic structures, interactive science and verified research. An independent nanotechnology virtual laboratory.",
 };
 export const navigation = [
   { href: "/", title: "Home" },
   { href: "/foundations", title: "Foundations" },
-  { href: "/why-mos2", title: "From Graphene to MoS₂" },
+  { href: "/lab", title: "3D Lab" },
+  { href: "/why-mos2", title: "MoS₂" },
   { href: "/device", title: "Device" },
   { href: "/simulator", title: "Simulator" },
   { href: "/comparison", title: "Comparison" },
   { href: "/challenges", title: "Engineering Challenges" },
   { href: "/research", title: "Research Frontier" },
+  {
+    href: "/discoveries/mos2-interface-breakthrough",
+    title: "The Interface Breakthrough",
+  },
   { href: "/about", title: "About & References" },
+] as const;
+export const primaryNavigation = [
+  { href: "/foundations", title: "Materials" },
+  { href: "/lab", title: "3D Lab" },
+  { href: "/simulator", title: "Simulators" },
+  { href: "/research", title: "Discoveries" },
 ] as const;
 export const journey = [
   {

@@ -10,7 +10,13 @@ import { researchCategories, studies } from "@/data/research";
 import { references } from "@/data/references";
 import { ReferenceLink } from "@/components/reference-link";
 import { queryValue, type Query } from "@/lib/site";
-export const metadata: Metadata = { title: "Research Frontier" };
+import { InterfaceFeature } from "@/components/research/interface-feature";
+import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
+export const metadata: Metadata = {
+  title: "Discoveries",
+  description:
+    "Connect verified MoS₂ research across interfaces, stacking, contacts, scaling, deformable devices and circuit integration.",
+};
 export default async function Page({
   searchParams,
 }: {
@@ -22,40 +28,42 @@ export default async function Page({
     study = queryValue(query, "study");
   return (
     <PageShell
-      title="Research Frontier"
-      intro="Explore 2024–2026 developments in MoS₂-based two-dimensional semiconductor transistors, alongside the earlier material and device milestones that underpin them."
+      title="Small structures. Big questions."
+      intro="Discover what changes when interfaces, atomic registry and device architecture become design variables. Follow the evidence from a single layer to an interconnected system."
     >
-      <section className="section research-introduction">
-        <SectionHeading title="Research Overview" />
-        <p>
-          MoS₂ research spans material physics, gate-controlled devices and
-          manufacturing. These {studies.length} studies connect the
-          nanomaterials foundation to transistor research, including verified
-          2024–2026 publications and the earlier milestones behind them. Explore
-          the research problem, demonstration, novelty and limitations of each
-          study. Transfer, self-aligned scaling and interconnected processors
-          provide three focused engineering cases.
-        </p>
+      <InterfaceFeature from="/research" />
+      <section className="section">
+        <SectionHeading
+          title="Six directions. One connected frontier."
+          description="Selected research reviewed through 13 October 2026. Dates establish a cutoff, not a claim to cover every new publication."
+        />
+        <DiscoverySynthesis />
       </section>
-      <ResearchExplorer
-        key={JSON.stringify(query)}
-        initialYear={
-          studies.some(
-            (item) =>
-              String(
-                references.find((ref) => ref.id === item.reference)?.year,
-              ) === year,
-          )
-            ? year
-            : ""
-        }
-        initialCategory={
-          researchCategories.some((item) => item === category) ? category : ""
-        }
-        initialStudy={
-          studies.some((item) => item.reference === study) ? study : ""
-        }
-      />
+      <section className="section" id="catalogue">
+        <SectionHeading
+          title="Browse the evidence"
+          description="Keep exploring the original study catalogue, source details and URL-linked filters, including earlier milestones."
+        />
+        <ResearchExplorer
+          key={JSON.stringify(query)}
+          initialYear={
+            studies.some(
+              (item) =>
+                String(
+                  references.find((ref) => ref.id === item.reference)?.year,
+                ) === year,
+            )
+              ? year
+              : ""
+          }
+          initialCategory={
+            researchCategories.some((item) => item === category) ? category : ""
+          }
+          initialStudy={
+            studies.some((item) => item.reference === study) ? study : ""
+          }
+        />
+      </section>
       <section
         className="section institutional-research"
         id="institutional-research"

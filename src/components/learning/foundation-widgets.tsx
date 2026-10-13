@@ -156,7 +156,7 @@ function QuantumExplorer() {
           <path
             d="M65 18v145h235V18"
             fill="none"
-            stroke="#536480"
+            stroke="#8391a7"
             strokeWidth="3"
           />
           {[1, 2, 3].map((n) => {
@@ -166,7 +166,7 @@ function QuantumExplorer() {
               <g key={n}>
                 <path
                   d={"M70 " + y + "H293"}
-                  stroke={n === 1 ? "#076b7d" : "#7652c8"}
+                  stroke={n === 1 ? "var(--cyan-ink)" : "var(--violet-ink)"}
                   strokeDasharray={
                     n === 2 ? "6 3" : n === 3 ? "2 2" : undefined
                   }
@@ -319,29 +319,42 @@ function CharacterizationExplorer() {
         role="img"
         aria-label={technique.id + " measurement target: " + technique.measure}
       >
-        <path d="M35 95H385V120H35Z" fill="#edf1fb" stroke="#536480" />
+        <path d="M35 95H385V120H35Z" fill="#1b2331" stroke="#8391a7" />
         {selected === "TEM" ? (
           <g>
             {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
               <g key={i}>
-                <circle cx={75 + i * 38} cy="65" r="5" fill="#076b7d" />
-                <circle cx={75 + i * 38} cy="80" r="5" fill="#7652c8" />
+                <circle cx={75 + i * 38} cy="65" r="5" fill="var(--cyan-ink)" />
+                <circle
+                  cx={75 + i * 38}
+                  cy="80"
+                  r="5"
+                  fill="var(--violet-ink)"
+                />
               </g>
             ))}
           </g>
         ) : selected === "AFM" || selected === "STM" ? (
           <g>
-            <path d="M70 95V82H190V72H310V95" fill="#cff1f5" stroke="#076b7d" />
-            <path d="M175 20H235L205 57Z" fill="#7652c8" />
-            <path d="M205 60V70" stroke="#b87910" strokeDasharray="3 2" />
+            <path
+              d="M70 95V82H190V72H310V95"
+              fill="#17383e"
+              stroke="var(--cyan-ink)"
+            />
+            <path d="M175 20H235L205 57Z" fill="var(--violet-ink)" />
+            <path d="M205 60V70" stroke="#e6c781" strokeDasharray="3 2" />
           </g>
         ) : (
           <g>
-            <path d="M105 85H315V95H105Z" fill="#cff1f5" stroke="#076b7d" />
+            <path
+              d="M105 85H315V95H105Z"
+              fill="#17383e"
+              stroke="var(--cyan-ink)"
+            />
             <path
               d="M185 15 205 75 225 15"
               fill="none"
-              stroke={selected === "SEM" ? "#7652c8" : "#b87910"}
+              stroke={selected === "SEM" ? "var(--violet-ink)" : "#e6c781"}
               strokeWidth="2"
             />
           </g>

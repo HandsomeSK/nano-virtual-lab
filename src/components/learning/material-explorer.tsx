@@ -27,17 +27,17 @@ export function GrapheneLattice({
                 .map(([x, y]) => x.toFixed(2) + "," + y.toFixed(2))
                 .join(" ")}
               fill="none"
-              stroke="#076b7d"
+              stroke="var(--cyan-ink)"
               strokeWidth={highlight === "bonds" ? 3 : 1.5}
             />
             {vertices.map(([x, y], n) => (
               <circle
                 key={n}
-                cx={x}
-                cy={y}
+                cx={x.toFixed(2)}
+                cy={y.toFixed(2)}
                 r={highlight === "bonds" ? 2.8 : 4}
-                fill={highlight === "basis" && n % 2 ? "#4f46e5" : "#06b6d4"}
-                stroke="#076b7d"
+                fill={highlight === "basis" && n % 2 ? "#b4bffa" : "#06b6d4"}
+                stroke="var(--cyan-ink)"
                 strokeWidth=".7"
               />
             ))}
@@ -85,7 +85,7 @@ export function MaterialStructure({ material }: { material: MaterialId }) {
                 cy="73"
                 r="10"
                 fill="#8b5cf6"
-                stroke="#7652c8"
+                stroke="var(--violet-ink)"
               />
               <circle
                 cx={40 + i * 40}
@@ -99,7 +99,7 @@ export function MaterialStructure({ material }: { material: MaterialId }) {
           <text x="322" y="39" fill="var(--color-muted)" fontSize="12">
             S
           </text>
-          <text x="307" y="77" fill="#7652c8" fontSize="12">
+          <text x="307" y="77" fill="var(--violet-ink)" fontSize="12">
             Mo
           </text>
           <text x="322" y="115" fill="var(--color-muted)" fontSize="12">
@@ -110,8 +110,8 @@ export function MaterialStructure({ material }: { material: MaterialId }) {
         <g>
           <path
             d="M85 32 170 8 265 40 180 70Z M85 32v70l95 34V70 M180 136l85-35V40"
-            fill="#edf1fb"
-            stroke="#4f46e5"
+            fill="#1b2331"
+            stroke="#b4bffa"
             strokeWidth="2"
           />
           <text x="110" y="93" fill="var(--color-ink)" fontSize="15">

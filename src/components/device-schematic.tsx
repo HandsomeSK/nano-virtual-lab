@@ -30,7 +30,7 @@ export function DeviceSchematic({ on = true }: { on?: boolean }) {
         <path
           d="M90 244 301 196 421 241 210 294Z"
           fill={on ? "#8b5cf6" : "#c4b5fd"}
-          stroke="#7652c8"
+          stroke="var(--violet-ink)"
         />
         <path
           d="M87 215 164 195 209 213 131 235Z"
@@ -59,11 +59,11 @@ export function DeviceSchematic({ on = true }: { on?: boolean }) {
         <path d="M157 82v17l87 34v-15l131-36v17l-131 34" fill="#b2934c" />
       </g>
       <g
-        fill="#202d53"
+        fill="var(--ink)"
         fontFamily="monospace"
         fontSize="12"
         strokeWidth="1"
-        stroke="#536480"
+        stroke="#8391a7"
       >
         <path d="M347 70h55" />
         <text x="410" y="74" stroke="none">

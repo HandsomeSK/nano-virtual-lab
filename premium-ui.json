@@ -1,8 +1,13 @@
 {
-  "profile": "product-admin",
+  "profile": "marketing-site",
   "sourceRoots": ["src"],
   "locale": "en",
   "canonicalMap": "UX-CONTRACT.md",
   "requiredCapabilities": ["Select/Listbox", "Form", "Scrollbar", "Toast"],
-  "ownership": { "Select/Listbox": "native" }
+  "ownership": { "Select/Listbox": "native" },
+  "commands": {
+    "typecheck": "npm run typecheck",
+    "lint": "npm run lint",
+    "build": "npm run build"
+  }
 }

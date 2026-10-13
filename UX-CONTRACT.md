@@ -25,4 +25,4 @@ This record preserves existing behavior during the public-platform redesign. The
 
 Public content and mathematical experiments require no account or remote data mutation. Local-storage failure must not block calculation; recorded scenarios remain local to this browser. The website has no billing, server CRUD, sessions or permission flow. Error, loading and not-found routes retain navigation. Reduced-motion, keyboard focus and mobile alternatives apply throughout. English is the sole public UI language in this change.
 
-Production publication is a separate user decision after reviewing this branch/preview.
+The owner has authorized checked updates to be published to the original production address. Follow the standing release instruction in AGENTS.md.

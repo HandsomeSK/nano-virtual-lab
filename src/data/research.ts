@@ -235,4 +235,79 @@ export const studies: Study[] = [
     conceptLabel: "Review thin-body electrostatics",
     challenge: "scaling",
   },
+
+  {
+    reference: "wong2026",
+    category: "Devices",
+    summary: "Carbon-dot assembly assists HfO₂ integration on MoS₂.",
+    question:
+      "How can an oxide grow continuously on a chemically inert basal surface?",
+    boundary:
+      "EOT is capacitance-equivalent; the viewer does not reproduce a fabricated device or measured current curve.",
+    whyMatters: "Connects interface chemistry with gate-stack engineering.",
+    concept: "/discoveries/mos2-interface-breakthrough",
+    conceptLabel: "Explore the interface",
+    challenge: "interfaces",
+    problem: "Sparse nucleation sites complicate ultrathin oxide deposition.",
+    demonstration:
+      "An insulating carbon-dot assembly supports ultrathin HfO₂ growth.",
+    novelty: "Engineers the interfacial layer as part of the gate stack.",
+  },
+  {
+    reference: "yang-stacking2026",
+    category: "Materials",
+    summary:
+      "Engineered bilayer registry supports a direct gap in CVD-grown 1H MoS₂.",
+    question: "How does atomic alignment affect a bilayer's bands?",
+    boundary:
+      "The public abstract does not establish that every bilayer is direct-gap or provide an exact structure for this viewer.",
+    whyMatters: "Makes stacking a materials design variable.",
+    concept: "/lab?material=mos2",
+    conceptLabel: "Inspect ideal stacking",
+    challenge: "interfaces",
+    problem:
+      "Conventional bilayers are usually interpreted through an indirect-gap picture.",
+    demonstration:
+      "Photoemission, calculations and optical measurements support the engineered alignment.",
+    novelty:
+      "Connects a controlled growth sequence with a specific bilayer electronic structure.",
+  },
+  {
+    reference: "yang-contacts2026",
+    category: "Devices",
+    summary:
+      "Operando cross-sectional STM/STS probes current injection near a Bi/MoS₂ contact.",
+    question: "What region of the contact injects carriers into the channel?",
+    boundary:
+      "Transfer length is contact-specific and is not the gate or channel length.",
+    whyMatters:
+      "Contact scaling requires a measurement of injection, not only electrode dimensions.",
+    concept: "/device",
+    conceptLabel: "Inspect the contacts",
+    challenge: "contacts",
+    problem: "Nanoscale injection regions are difficult to probe directly.",
+    demonstration:
+      "Cross-sectional measurements resolve the contact transfer region.",
+    novelty:
+      "Provides spatial evidence alongside model-based contact characterization.",
+  },
+  {
+    reference: "kim-stretch2026",
+    category: "Devices",
+    summary:
+      "MoS₂ flake networks retain transport pathways as the device stretches.",
+    question: "How can a deformable network maintain electrical connectivity?",
+    boundary:
+      "Interflake motion does not imply uniform stretching of Mo–S bonds; device history and contacts remain important.",
+    whyMatters: "Connects thin-film architecture with deformable electronics.",
+    concept: "/challenges",
+    conceptLabel: "Explore engineering limits",
+    challenge: "interfaces",
+    problem:
+      "A stretchable transistor needs a mechanically connected semiconductor and electrodes.",
+    demonstration:
+      "Relative flake motion accommodates strain in the channel network.",
+    novelty:
+      "Uses network organization rather than a homogeneous single-crystal strain assumption.",
+  },
 ];
