@@ -217,8 +217,7 @@ function QuantumExplorer() {
           Electrons behave as waves. A crystal’s periodic lattice potential
           organizes allowed states into energy bands; a forbidden interval is
           the band gap. A metal has available states at the Fermi level. In
-          ideal graphene, bands touch at the Dirac point.{" "}
-          <ReferenceLink id="course-bands" from="/foundations#bands" />
+          ideal graphene, bands touch at the Dirac point.
         </p>
         <Link href="/why-mos2#band-gap" className="text-link">
           Why does the gap matter for switching? →

@@ -13,14 +13,14 @@ export default function Page() {
       title="Engineering Challenges"
       intro="An atomically thin channel is only one part of a reliable transistor. Explore the interfaces, electrostatics and processes that shape a device."
     >
-      <section className="section">
+      <section className="section challenges-overview">
         <SectionHeading
           title="Challenges Overview"
           description="Choose a problem, explore its mechanism and device impact, then follow the related experiment or research direction."
         />
         <ChallengeExplorer />
       </section>
-      <section className="section">
+      <section className="section challenges-outlook">
         <SectionHeading
           title="Bringing the Pieces Together"
           description="Progress requires materials, device design and process engineering together."

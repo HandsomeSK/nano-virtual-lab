@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/dm-sans";
+import "@fontsource/instrument-serif/400.css";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -7,6 +8,7 @@ import { AnchorNavigation } from "@/components/anchor-navigation";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.topic} | ${site.name}`,
     template: `%s | ${site.topic} | ${site.name}`,
@@ -15,11 +17,17 @@ export const metadata: Metadata = {
   applicationName: site.name,
 };
 
+export const viewport: Viewport = {
+  themeColor: "#F5F7F7",
+  colorScheme: "light",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    // The homepage bootstrap sets only root intro attributes before hydration.
+    <html lang="en" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col antialiased">
         <a
           href="#main-content"

@@ -79,7 +79,7 @@ export const studies: Study[] = [
     question:
       "What controls transport and electrostatics as gate dimensions approach the atomic scale?",
     boundary:
-      "Physical gate length differs from effective channel length. The long-channel teaching simulator does not reproduce this device.",
+      "Physical gate length differs from effective channel length. The long-channel educational simulator does not reproduce this device.",
     whyMatters:
       "Connects atomically thin channels with the challenge of preserving gate control at very small dimensions.",
     concept: "/foundations#quantum",

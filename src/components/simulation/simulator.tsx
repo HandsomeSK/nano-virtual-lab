@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   currentA,
   defaultParameters,
@@ -25,6 +25,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
   const [parameters, setParameters] = useState(initial);
   const [mode, setMode] = useState<CurveMode>("transfer");
   const [name, setName] = useState("My configuration");
+  const nameInput = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const [saveError, setSaveError] = useState("");
   const [adjustment, setAdjustment] = useState<{
@@ -53,6 +54,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
     setMessage("");
     if (!name.trim()) {
       setSaveError("Enter a configuration name.");
+      nameInput.current?.focus();
       return;
     }
     if (configurations.length >= 20) {
@@ -77,71 +79,16 @@ export function Simulator({ initial }: { initial: Parameters }) {
   }
   return (
     <>
-      <div className="simulator-layout">
-        <section
-          className="panel controls-panel"
-          aria-label="Parameter Controls"
-        >
-          <h2>Parameter Controls</h2>
-          <p className="text-sm mt-2">
-            Adjust an assumed device and bias point.
-          </p>
-          {parameterControls.map((control) => (
-            <ParameterControl
-              key={control.key}
-              control={control}
-              value={parameters[control.key]}
-              onChange={change}
-            />
-          ))}
-          <label htmlFor="config-name" className="block text-sm mt-5">
-            Configuration name
-          </label>
-          <input
-            id="config-name"
-            type="text"
-            maxLength={80}
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            className="w-full mt-2"
-          />
-          <div className="actions">
-            <button
-              className="button-secondary"
-              onClick={() => {
-                setParameters({ ...defaultParameters });
-                setAdjustment(null);
-                setMessage("");
-                window.history.replaceState(
-                  null,
-                  "",
-                  "/simulator?" + parametersQuery(defaultParameters),
-                );
-              }}
-            >
-              Reset Parameters
-            </button>
-            <button className="button-primary" onClick={save}>
-              Save Configuration
-            </button>
-          </div>
-          <p aria-live="polite" className="success-text mt-3">
-            {message}
-          </p>
-          <p role={saveError ? "alert" : undefined} className="error-text">
-            {saveError}
-          </p>
-          {issue ? <p className="error-text mt-3">{issue}</p> : null}
-        </section>
-        <section className="panel">
-          <div className="chart-heading">
+      <div className="instrument-console">
+        <section className="instrument-stage" aria-label="Calculated response">
+          <div className="chart-heading instrument-heading">
             <div>
               <h2>I–V Characteristics</h2>
               <p className="text-sm mt-2">
                 Calculated curves. No experimental data.
               </p>
             </div>
-            <div className="tabs" aria-label="Curve type">
+            <div className="tabs" role="group" aria-label="Curve type">
               <button
                 aria-pressed={mode === "transfer"}
                 onClick={() => setMode("transfer")}
@@ -159,10 +106,14 @@ export function Simulator({ initial }: { initial: Parameters }) {
           <IVChart
             mode={mode}
             series={[
-              { name: "Current configuration", parameters, color: "#4f46e5" },
+              {
+                name: "Current configuration",
+                parameters,
+                color: "var(--primary)",
+              },
             ]}
           />
-          <div className="metrics-grid" aria-live="polite">
+          <div className="metrics-grid instrument-readouts" aria-live="polite">
             <div>
               <span>Drain current</span>
               <strong data-metric="current">
@@ -180,7 +131,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
               <strong>{result.region}</strong>
             </div>
           </div>
-          <details className="mt-4">
+          <details className="instrument-state mt-4">
             <summary>
               Device State Visualization ·{" "}
               {currentA(parameters) > 0 ? "ON" : "OFF"}
@@ -193,7 +144,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
               </p>
             </div>
           </details>
-          <div className="actions">
+          <div className="actions instrument-links">
             <Link
               href={
                 "/comparison?" +
@@ -209,9 +160,96 @@ export function Simulator({ initial }: { initial: Parameters }) {
             </Link>
           </div>
         </section>
+        <section
+          className="controls-panel instrument-controls"
+          aria-label="Parameter Controls"
+        >
+          <h2>Parameter Controls</h2>
+          <p className="text-sm mt-2">
+            Adjust an assumed device and bias point.
+          </p>
+          <fieldset className="parameter-group">
+            <legend>Bias</legend>
+            {parameterControls.slice(0, 2).map((control) => (
+              <ParameterControl
+                key={control.key}
+                control={control}
+                value={parameters[control.key]}
+                onChange={change}
+              />
+            ))}
+          </fieldset>
+          <fieldset className="parameter-group">
+            <legend>Device assumptions</legend>
+            {parameterControls.slice(2).map((control) => (
+              <ParameterControl
+                key={control.key}
+                control={control}
+                value={parameters[control.key]}
+                onChange={change}
+              />
+            ))}
+          </fieldset>
+          <button
+            className="button-secondary reset-parameters"
+            onClick={() => {
+              setParameters({ ...defaultParameters });
+              setAdjustment(null);
+              setMessage("");
+              window.history.replaceState(
+                null,
+                "",
+                "/simulator?" + parametersQuery(defaultParameters),
+              );
+            }}
+          >
+            Reset Parameters
+          </button>
+        </section>
       </div>
       <section
-        className="section panel result-insights"
+        className="configuration-bar"
+        aria-label="Save this configuration"
+      >
+        <div className="configuration-field">
+          <label htmlFor="config-name">Configuration name</label>
+          <input
+            ref={nameInput}
+            id="config-name"
+            name="configuration-name"
+            type="text"
+            autoComplete="off"
+            maxLength={80}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            aria-invalid={
+              saveError === "Enter a configuration name." ? true : undefined
+            }
+            aria-describedby={saveError ? "configuration-error" : undefined}
+          />
+        </div>
+        <button className="button-primary" onClick={save}>
+          Save Configuration
+        </button>
+        <p className="configuration-note text-sm">
+          Save locally, then compare assumptions.
+        </p>
+        <div className="configuration-feedback">
+          <p aria-live="polite" className="success-text">
+            {message}
+          </p>
+          <p
+            id="configuration-error"
+            role={saveError ? "alert" : undefined}
+            className="error-text"
+          >
+            {saveError}
+          </p>
+          {issue ? <p className="error-text">{issue}</p> : null}
+        </div>
+      </section>
+      <section
+        className="section result-insights instrument-analysis"
         id="understanding-results"
       >
         <h2>Understanding the Results</h2>
@@ -248,8 +286,8 @@ export function Simulator({ initial }: { initial: Parameters }) {
           response.
         </p>
       </section>
-      <div className="two-column section">
-        <div className="panel">
+      <div className="two-column section instrument-model-notes">
+        <div>
           <details>
             <summary>Model & Equations</summary>
             <p className="formula" id="model">
@@ -273,12 +311,12 @@ export function Simulator({ initial }: { initial: Parameters }) {
             </details>
           </details>
         </div>
-        <div className="panel">
+        <div>
           <details>
             <summary>Assumptions & Limitations</summary>
             <p className="text-sm">
-              Long-channel, quasi-static n-channel teaching model with constant
-              mobility and ohmic series contacts. No Schottky barriers,
+              Long-channel, quasi-static n-channel educational model with
+              constant mobility and ohmic series contacts. No Schottky barriers,
               subthreshold transport, tunnelling, velocity saturation, quantum
               capacitance, self-heating or traps. It does not predict
               experimental MoS₂ performance.

@@ -1,11 +1,14 @@
 import Link from "next/link";
-export function Brand() {
+import { NanoLabWordmark } from "./nanolab-wordmark";
+
+export function Brand({ className = "" }: { className?: string }) {
   return (
-    <Link href="/" className="brand" aria-label="NanoLab: Beyond Silicon home">
-      <strong>
-        NanoLab<span className="text-cyan">.</span>
-      </strong>
-      <span>Beyond Silicon</span>
+    <Link
+      href="/"
+      className={`brand ${className}`.trim()}
+      aria-label="NanoLab home"
+    >
+      <NanoLabWordmark />
     </Link>
   );
 }

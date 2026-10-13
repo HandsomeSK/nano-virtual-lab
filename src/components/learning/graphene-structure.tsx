@@ -29,7 +29,7 @@ export function GrapheneStructureExplorer() {
   return (
     <div className="panel structure-explorer" id="materials">
       <h3>Explore the carbon sheet</h3>
-      <div className="tabs mt-4" aria-label="Carbon structure">
+      <div className="tabs mt-4" role="group" aria-label="Carbon structure">
         {(Object.keys(structures) as (keyof typeof structures)[]).map((id) => (
           <button
             key={id}
@@ -123,7 +123,11 @@ export function GrapheneStructureExplorer() {
               from="/foundations#graphene-structure"
             />
           </p>
-          <div className="tabs mt-5" aria-label="Highlight lattice feature">
+          <div
+            className="tabs mt-5"
+            role="group"
+            aria-label="Highlight lattice feature"
+          >
             {(
               [
                 { id: "atoms", name: "Carbon atoms" },

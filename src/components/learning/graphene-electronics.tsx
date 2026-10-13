@@ -308,7 +308,11 @@ function TransportExplorer() {
         <summary>
           Does fast transport guarantee a low-leakage digital OFF state?
         </summary>
-        <div className="tabs mt-3" aria-label="Compare electronic goals">
+        <div
+          className="tabs mt-3"
+          role="group"
+          aria-label="Compare electronic goals"
+        >
           <button
             aria-pressed={goal === "transport"}
             onClick={() => setGoal("transport")}
@@ -348,9 +352,9 @@ export function GrapheneElectronicsExplorer() {
         <h3>Explore bands near the Dirac point</h3>
         <p className="text-sm mt-2">
           Change the Fermi energy to explore carrier character. Compare touching
-          bands with a finite-gap teaching schematic.
+          bands with a finite-gap educational schematic.
         </p>
-        <div className="tabs mt-4" aria-label="Select dispersion">
+        <div className="tabs mt-4" role="group" aria-label="Select dispersion">
           <button
             aria-pressed={kind === "graphene"}
             onClick={() => setKind("graphene")}

@@ -1,6 +1,6 @@
 # Scientific evidence and image decisions
 
-Source review date: **12 October 2026**. This ledger complements [the baseline inventory](content-audit.md), the append-only reference list, and the public image registry on About & References.
+Source review date: **12 October 2026**. This ledger complements [the baseline inventory](content-audit.md), the scientific reference list, and the public image registry on About & References.
 
 ## Page changes
 
@@ -27,9 +27,9 @@ The complete structured records, captions and actual HTTPS asset URLs are in `sr
 | MoS₂ crystal phases                 | [Stephanmsutter / Commons](https://commons.wikimedia.org/wiki/File:Crystal_structures_of_the_1T_and_2H_phases_of_MoS2.png) | CC BY-SA 4.0; full crystallographic illustration, not microscopy                                |
 | Experimental monolayer FET          | [Macucci et al. 2017, Figure 1](https://www.nature.com/articles/s41598-017-11930-6/figures/1)                              | CC BY 4.0; full micrograph and inset, monolayer/Au/270 nm SiO₂/global Si back gate              |
 | Experimental transfer hysteresis    | [Shimazu et al. 2016, Figure 1](https://www.nature.com/articles/srep30084/figures/1)                                       | CC BY 4.0; full four-panel figure; specimen, bias, sweep rate and author scaling/offsets stated |
-| Two-inch selenium-assisted transfer | [Zhang et al. 2025, Figure 1](https://www.nature.com/articles/s41467-025-59803-1/figures/1)                                | CC BY-NC-ND 4.0; complete figure, no adaptation, non-commercial course use                      |
+| Two-inch selenium-assisted transfer | [Zhang et al. 2025, Figure 1](https://www.nature.com/articles/s41467-025-59803-1/figures/1)                                | CC BY-NC-ND 4.0; complete figure, no adaptation, non-commercial public science education        |
 | Crystalline dielectric fabrication  | [Zeng et al. publisher correction, Figure 1](https://www.nature.com/articles/s41586-024-08001-y/figures/1)                 | CC BY 4.0; corrected full figure, including the amended crystalline-oxide label                 |
-| Self-aligned sidewall gate/channel  | [Wang et al. 2026, Figure 1](https://www.nature.com/articles/s41467-026-75409-7/figures/1)                                 | CC BY-NC-ND 4.0; complete figure, no adaptation, non-commercial course use                      |
+| Self-aligned sidewall gate/channel  | [Wang et al. 2026, Figure 1](https://www.nature.com/articles/s41467-026-75409-7/figures/1)                                 | CC BY-NC-ND 4.0; complete figure, no adaptation, non-commercial public science education        |
 
 Images remain uncropped/unannotated. `object-fit: contain` preserves each complete figure, including panels, scale bars and legends. Next.js performs technical resizing/format optimization; it does not extract or redraw experimental data. Share-alike licences remain attached to the images. Non-commercial/no-derivatives figures require separate permission before commercial reuse or adaptation.
 
@@ -70,5 +70,5 @@ Du contact figures, Guo/Fan processor photos, the engineering/benchmarking revie
 ## Human review and further work
 
 - A subject expert can review the concise paraphrases, especially the early-version 2026 scaling claims, against the final articles and supplementary methods.
-- Full MECH6045 lecture files have not been independently reviewed; the stated lecture pages were supplied by the project author.
+- General fundamentals are explained directly; the independent open textbook and scholarly sources remain available for further reading.
 - Browser coverage and actual image-loading results are recorded above. Remote source hosting and non-commercial image conditions remain practical limits.

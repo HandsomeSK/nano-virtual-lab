@@ -28,7 +28,10 @@ export function ParameterControl({
     onChange(control.key, next);
   }
   return (
-    <div className="parameter" id={"parameter-" + control.key}>
+    <div
+      className="parameter instrument-parameter"
+      id={"parameter-" + control.key}
+    >
       <label htmlFor={control.key + "-number"}>
         {control.label}
         <span>{control.unit}</span>
@@ -36,6 +39,8 @@ export function ParameterControl({
       <div className="parameter-inputs">
         <input
           aria-label={control.label + " slider"}
+          aria-valuetext={value + " " + control.unit}
+          name={control.key + "-slider"}
           type="range"
           min={control.min}
           max={control.max}
@@ -47,7 +52,9 @@ export function ParameterControl({
         />
         <input
           id={control.key + "-number"}
+          name={control.key}
           type="number"
+          autoComplete="off"
           min={control.min}
           max={control.max}
           step="any"
@@ -57,7 +64,7 @@ export function ParameterControl({
           aria-describedby={control.key + "-help"}
         />
       </div>
-      <details>
+      <details className="parameter-help">
         <summary>Parameter explanation</summary>
         <p id={control.key + "-help"} className="text-xs">
           {control.description}

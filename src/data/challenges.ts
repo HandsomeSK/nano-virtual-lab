@@ -71,7 +71,7 @@ export const challenges = [
     impact:
       "Variations in threshold, current and contact quality reduce circuit yield. A good single transistor does not guarantee that many connected devices work together.",
     modelBoundary:
-      "Saved simulator configurations explore assumptions for one teaching model; they do not calculate wafer variation or fabrication yield.",
+      "Saved simulator configurations explore assumptions for one educational model; they do not calculate wafer variation or fabrication yield.",
     solution:
       "Improve uniform growth, cleaner transfer and repeatable integration; use characterization and circuit-level testing to track variability and yield.",
     foundation: "/foundations#characterization",

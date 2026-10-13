@@ -13,6 +13,8 @@ export type ScientificImage = {
   title: string;
   kind: "Scientific illustration" | "Microscopy" | "Experimental figure";
   imageUrl: string;
+  width?: number;
+  height?: number;
   sourceUrl: string;
   authors: string;
   doi?: string;
@@ -32,6 +34,8 @@ export const figures: Record<FigureId, ScientificImage> = {
     kind: "Scientific illustration",
     imageUrl:
       "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Graphene.svg/960px-Graphene.svg.png",
+    width: 960,
+    height: 1042,
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Graphene.svg",
     authors: "J_Alves / OpenClipArt",
     license: "CC0 1.0",
@@ -39,7 +43,7 @@ export const figures: Record<FigureId, ScientificImage> = {
     attribution:
       "Graphene.svg by J_Alves, via Wikimedia Commons; dedicated to the public domain under CC0 1.0.",
     modification:
-      "Full illustration; Wikimedia's PNG rendering of the original SVG. Display size only; no scientific annotations added.",
+      "Full illustration; Wikimedia's 960 × 1042 px PNG rendering, as listed on the original Commons file page. Display size only; no scientific annotations added.",
     alt: "Perspective illustration of carbon atoms connected in a graphene honeycomb lattice",
     caption:
       "The honeycomb structure has two carbon sites per primitive cell. This external illustration supports the lattice picture; it is not a microscopy image or a band-structure calculation.",
@@ -50,6 +54,8 @@ export const figures: Record<FigureId, ScientificImage> = {
     kind: "Microscopy",
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/7/7d/Graphene_HRTEM.jpg",
+    width: 1024,
+    height: 1024,
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Graphene_HRTEM.jpg",
     authors: "materialesnano.com / Materialesnano2",
     license: "CC BY-SA 3.0",
@@ -57,7 +63,7 @@ export const figures: Record<FigureId, ScientificImage> = {
     attribution:
       "Graphene HRTEM.jpg by materialesnano.com (Materialesnano2), Wikimedia Commons, CC BY-SA 3.0.",
     modification:
-      "Full image, uncropped and unannotated; display resizing/format optimization only. The image retains its CC BY-SA 3.0 licence.",
+      "Full 1024 × 1024 px image, as listed on the original Commons file page; uncropped and unannotated. Display resizing/format optimization only. The image retains its CC BY-SA 3.0 licence.",
     alt: "High-resolution transmission electron micrograph described by its creator as graphene",
     caption:
       "A real HRTEM image, as identified by its creator. The Commons record does not provide a complete preparation or measurement protocol: this image alone does not establish monolayer identity, carrier mobility or a zero band gap.",
@@ -68,6 +74,8 @@ export const figures: Record<FigureId, ScientificImage> = {
     kind: "Scientific illustration",
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/b/ba/Crystal_structures_of_the_1T_and_2H_phases_of_MoS2.png",
+    width: 2707,
+    height: 1522,
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Crystal_structures_of_the_1T_and_2H_phases_of_MoS2.png",
     authors: "Stephanmsutter",
@@ -76,7 +84,7 @@ export const figures: Record<FigureId, ScientificImage> = {
     attribution:
       "Crystal structures of the 1T and 2H phases of MoS₂ by Stephanmsutter, Wikimedia Commons, CC BY-SA 4.0.",
     modification:
-      "Full illustration, uncropped and unannotated; display resizing/format optimization only. The image retains its CC BY-SA 4.0 licence.",
+      "Full 2707 × 1522 px illustration, as listed on the original Commons file page; uncropped and unannotated. Display resizing/format optimization only. The image retains its CC BY-SA 4.0 licence.",
     alt: "Side-by-side crystallographic illustrations of layered 1T and 2H MoS₂ with sulfur and molybdenum atoms",
     caption:
       "View along the b axis, with two layers shown for each phase. Strong bonding is within each S–Mo–S sheet; adjacent sheets are weakly coupled. The 2H-derived semiconducting structure is the channel context here. This crystallographic illustration is not a micrograph.",
@@ -135,7 +143,7 @@ export const figures: Record<FigureId, ScientificImage> = {
     license: "CC BY-NC-ND 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
     attribution:
-      "Figure 1 from Zhang et al., Se-mediated dry transfer of wafer-scale 2D semiconductors for advanced electronics, Nature Communications 16, 4468 (2025), CC BY-NC-ND 4.0. Reproduced for this non-commercial MECH6045 educational project.",
+      "Figure 1 from Zhang et al., Se-mediated dry transfer of wafer-scale 2D semiconductors for advanced electronics, Nature Communications 16, 4468 (2025), CC BY-NC-ND 4.0. Reproduced for non-commercial public science education.",
     modification:
       "Full original figure; no cropping, annotations, panel extraction or adaptation. Technical display resizing/format optimization only. Non-commercial use; no endorsement implied.",
     alt: "Complete published figure containing the selenium-assisted transfer process, two-inch MoS₂ film photographs, optical images and AFM comparisons",
@@ -176,7 +184,7 @@ export const figures: Record<FigureId, ScientificImage> = {
     license: "CC BY-NC-ND 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
     attribution:
-      "Figure 1 from Wang et al., Wafer-scale 2D MoS₂ transistors with self-aligned angstrom gate length and nanometer channel length, Nature Communications 17, 8556 (2026), CC BY-NC-ND 4.0. Reproduced for this non-commercial MECH6045 educational project.",
+      "Figure 1 from Wang et al., Wafer-scale 2D MoS₂ transistors with self-aligned angstrom gate length and nanometer channel length, Nature Communications 17, 8556 (2026), CC BY-NC-ND 4.0. Reproduced for non-commercial public science education.",
     modification:
       "Full original figure; no cropping, annotations, panel extraction or adaptation. Technical display resizing/format optimization only. Non-commercial use; no endorsement implied.",
     alt: "Complete fabrication figure with graphene-edge gate schematics, sidewall TEM, channel SEM and measured channel-length versus deposition-angle data",

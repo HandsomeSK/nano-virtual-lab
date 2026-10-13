@@ -1,14 +1,14 @@
-# Nanomaterials
+# NanoLab
 
-**From Graphene to Next-Generation 2D Semiconductor Transistors**
+**Nanomaterials. Beyond graphene.**
 
-NanoLab: Beyond Silicon is an interactive educational project for **MECH6045: Nanotechnology — Fundamentals and Applications**. Nanomaterials is the overall course topic; two-dimensional nanomaterials are the research focus, with graphene and MoS₂ as representative materials and MoS₂-based semiconductor transistors as the advanced application. The learning journey connects nanoscale properties → two-dimensional materials and graphene → the zero-band-gap challenge → MoS₂ → transistors → simulation → 2024–2026 research and earlier milestones → future applications and engineering challenges.
+NanoLab is an independent **Nanotechnology Virtual Laboratory** for a public audience. Nanomaterials is its overall theme; two-dimensional nanomaterials are the research focus, with graphene and MoS₂ as representative materials and MoS₂-based semiconductor transistors as the advanced application. The learning journey connects nanoscale properties → two-dimensional materials and graphene → the zero-band-gap challenge → MoS₂ → transistors → simulation → 2024–2026 research and earlier milestones → future applications and engineering challenges.
 
 [Production website](https://nano-virtual-lab.vercel.app) · [GitHub repository](https://github.com/HandsomeSK/nano-virtual-lab)
 
 ## Stack and local development
 
-Next.js 16 App Router, React 19, strict TypeScript and Tailwind CSS 4. DM Sans is bundled locally. No API keys, environment variables, accounts or database are required. Production builds use Next.js’s supported Webpack compiler because Turbopack’s native temporary-port binding is restricted in this cloud environment. The `npm run build` command and Vercel configuration remain standard.
+Next.js 16 App Router, React 19, strict TypeScript and Tailwind CSS 4. The cinematic homepage embeds Google Sans 400/500 from Fontsource 5.3.2 under the SIL OFL licence in `public/assets/google-sans-OFL.txt`. Interior pages retain locally bundled DM Sans and Instrument Serif. No website dependencies were added for the homepage. No API keys, environment variables, accounts or database are required. Production builds use Next.js’s supported Webpack compiler because Turbopack’s native temporary-port binding is restricted in this cloud environment. The `npm run build` command and Vercel configuration remain standard.
 
 Use **Node.js 24 LTS** (Node 22.13+ supports the test command) and npm:
 
@@ -29,19 +29,19 @@ npm start          # Serve the production build
 
 ## Connected pages
 
-| Route          | Content and interactions                                                                                                           |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `/`            | Nanomaterials hero, course-to-research introduction, eight clickable learning nodes, tools and 2024–2026 research previews         |
-| `/foundations` | Six modules: nanoscale/surfaces, quantum/bands, graphene structure, interactive Dirac/transport lab, characterization, transistors |
-| `/why-mos2`    | From Graphene to MoS₂: transport, zero-gap challenge, interactive bands, layered structures and device connections                 |
-| `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF                           |
-| `/simulator`   | Five live parameters, calculated I–V curves, save/reset, result explanations from actual calculations and collapsed model details  |
-| `/comparison`  | Qualitative material properties plus two teaching-model scenarios; overlay/side-by-side with shared axes                           |
-| `/challenges`  | Contacts, interfaces, scaling and manufacturing; foundation, simulator and research links                                          |
-| `/research`    | Ten verified MoS₂ studies through 2026, filters/timeline, experimental figures and a separate industry announcement                |
-| `/about`       | Reference search/filter, highlighted citations and return links, scope, course resources and credits                               |
+| Route          | Content and interactions                                                                                                                        |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`            | Single-viewport cinematic gateway; Explore, Simulator and Research navigation, two-line headline, exact supplied video and masked entrance      |
+| `/foundations` | Six interactive sections: nanoscale/surfaces, quantum/bands, graphene structure, interactive Dirac/transport lab, characterization, transistors |
+| `/why-mos2`    | From Graphene to MoS₂: transport, zero-gap challenge, interactive bands, layered structures and device connections                              |
+| `/device`      | Original CSS 3D top-gate FET; orbit, zoom, reset, parts, visibility, exploded view and conceptual ON/OFF                                        |
+| `/simulator`   | Five live parameters, calculated I–V curves, save/reset, result explanations from actual calculations and collapsed model details               |
+| `/comparison`  | Qualitative material properties plus two educational-model scenarios; overlay/side-by-side with shared axes                                     |
+| `/challenges`  | Contacts, interfaces, scaling and manufacturing; foundation, simulator and research links                                                       |
+| `/research`    | Ten verified MoS₂ studies through 2026, filters/timeline, experimental figures and a separate industry announcement                             |
+| `/about`       | Reference search/filter, highlighted citations and return links, public laboratory scope, scientific evidence and credits                       |
 
-The legacy `/explore` route redirects to `/device`. Every canonical page has shared navigation and at least two contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands`, `#graphene-structure`, `#graphene-electronics` and `#transistors`; previous `#materials` links still work.
+The legacy `/explore` route redirects to `/device`. The homepage links to `/foundations`, `/simulator` and `/research`; every interior page retains shared navigation and contextual Continue Exploring links. Mobile navigation, visible keyboard focus, SVG descriptions/data tables and reduced-motion support are included. Learning anchors include `/foundations#surfaces`, `#quantum`, `#bands`, `#graphene-structure`, `#graphene-electronics` and `#transistors`; previous `#materials` links still work.
 
 ## Model and saved configurations
 
@@ -68,36 +68,38 @@ src/components/simulation/ Parameter controls, charts, simulator and comparison 
 src/components/          Navigation, device viewer, challenge/research/reference components
 src/data/                Knowledge, materials, device geometry, challenges, studies and references
 src/lib/simulation/      Unchanged physical model and persistence; calculated interpretation helper
-src/lib/graphene.ts       Pure normalized teaching dispersion and transport helpers
+src/lib/graphene.ts       Pure normalized educational dispersion and transport helpers
 src/lib/site.ts          Shared identity, navigation, journey and safe return paths
-tests/*.test.mjs         Model, units, contacts, URLs, persistence and new teaching-logic checks
+tests/*.test.mjs         Model, units, contacts, URLs, persistence and new educational-logic checks
 ```
 
-Add sources to `src/data/references.ts` before adding a new scientific claim. Citation numbers are shared globally; keep existing source IDs stable and append new references. Research summaries reference those IDs. Extend `knowledge.ts` and learning widgets for new concepts; keep model changes in `model.ts` and update its tests and assumptions together. New material performance models require justification and their own calibration, not merely a material selector.
+Add sources to `src/data/references.ts` before adding a new scientific claim. Citation numbers are assigned from the shared reference array; use stable source IDs instead of hardcoded numbers. Removed background references may change display numbering without changing scientific links. Research summaries reference those IDs. Extend `knowledge.ts` and learning widgets for new concepts; keep model changes in `model.ts` and update its tests and assumptions together. New material performance models require justification and their own calibration, not merely a material selector.
 
 ## Scientific scope and attribution
 
 Graphene explanations cite Castro Neto et al. (2009), Novoselov et al. (2004, 2005) and Schwierz (2010). The MoS₂ timeline spans 2010–2026, including publisher-verified 2025 dry-transfer and 2026 microprocessor studies. This is a curated selection, not a comprehensive or automatically updated literature review.
 
-Course connections use the project author's supplied lecture topics and page locations: **Lecture 2: Nanomaterials**, including **pp. 18–19** for energy bands and band gap, and **Lecture 3: Carbon-Based Nanomaterials**, including **p. 26** for graphene electronic properties. The MoS₂ transistor case study extends the course theory through scientific literature; it does not claim that Lectures 2–3 teach these devices in detail. The 2024–2026 papers form a separate recent-research layer. No lecture quotations or additional page numbers are invented. The full lecture files have not been independently reviewed; linked scientific literature supports the explanations.
+The scientific foundations explain surfaces, quantum confinement, energy bands and graphene directly, without institutional identity or citations to internal materials. OpenStax provides public background for the infinite well, and the independently accessible COCOA open textbook supports the general transistor square-law equations. COCOA Section 2.1 and its linear/saturation equations were verified against the source on 12 October 2026. Specific research results, experimental figures and image rights retain their original scholarly sources.
 
 The Dirac lab uses relative energy/wave-vector units and a low-energy schematic near a graphene Dirac point, not a full band calculation. Moving Fermi energy changes carrier occupancy, without opening an intrinsic graphene gap. Mobility, group velocity and mean free path are distinct quantities. The transport activity uses an illustrative length/mean-free-path ratio and does not predict measured conductance. Gapped/metal diagrams are qualitative. A finite gap can help switching; it does not guarantee a device's leakage or outperform silicon.
 
-Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage illustration is AI-generated conceptual artwork, optimized locally as WebP; it is not an atomistic simulation or experimental image. Licensed external scientific figures are separately identified and credited; their measured datasets are not fitted or imported into the current solver. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
+Interactive diagrams are original SVG/CSS schematics, not to scale. The homepage atmosphere is decorative footage at the exact owner-supplied remote video URL, rather than scientific evidence. It is streamed directly without a download, proxy, replacement image or poster. The previous conceptual WebP remains an unused asset. Licensed external scientific figures are separately identified and credited; their measured datasets are not fitted or imported into the current solver. AI also assisted design concepts, implementation and testing. Constants and everyday scale examples are explicitly illustrative. Credits appear on About & References.
 
 ## Scientific evidence update
 
-All nine existing pages retain their learning tools and receive concise, cited scientific explanations. The seven original studies and first 17 citation numbers remain stable. Three 2026 papers, contact/dielectric studies, a benchmarking perspective and an engineering review are appended; imec's institutional announcement has its own category. The total is **10 studies and 27 references**.
+All nine existing pages retain their learning tools and cited scientific explanations. The seven original studies and three newer 2026 papers remain, together with contact/dielectric studies, a benchmarking perspective and an engineering review; imec’s institutional announcement has its own category. After removing unnecessary institutional background citations, the total is **10 studies and 24 references**. Scientific source IDs and DOI links remain stable.
 
 Eight licensed external images include graphene lattice/HRTEM evidence, MoS₂ crystal phases, an experimental back-gated transistor, measured transfer hysteresis, wafer-transfer evidence, a corrected crystalline-dielectric figure and self-aligned gate/channel microscopy. `src/data/figures.ts` holds every image's creator, source, DOI/figure identifier, licence, attribution and modification status. `ScientificFigure` uses Next.js Image with a small HTTPS host/path allowlist and `object-fit: contain` to display full figures.
 
-The managed executor blocks source-host downloads, so the images use controlled remote URLs and Vercel image optimization rather than claiming local `public` copies. Image hosting remains an external dependency. CC BY-SA images retain their licences; the two CC BY-NC-ND figures are complete/unadapted and limited to non-commercial course use. Commercial reuse needs separate permission. Unverified image permissions result in source links rather than rehosting.
+The three Commons records verify intrinsic dimensions for the graphene lattice PNG (960 × 1042), HRTEM image (1024 × 1024) and MoS₂ phases illustration (2707 × 1522). Those values are recorded with their provenance. The five publisher figures have no independently verified width/height values; their complete scientific information remains protected by full-image display.
+
+The managed executor blocks source-host downloads, so the images use controlled remote URLs and Vercel image optimization rather than claiming local `public` copies. Image hosting remains an external dependency. CC BY-SA images retain their licences; the two CC BY-NC-ND figures are complete/unadapted and limited to non-commercial public science education. Commercial reuse needs separate permission. Unverified image permissions result in source links rather than rehosting.
 
 See [the content inventory](docs/content-audit.md) and [the scientific evidence ledger](docs/scientific-evidence.md) for page changes, licensing decisions, paper corrections, model audit and remaining subject review. The simulator's physical equations, inputs, defaults, result calculations, storage and comparison remain unchanged; experimental plots provide qualitative context rather than numerical validation.
 
 ## Visual system
 
-The light theme uses a cool `#F7FAFF` background, white learning panels, navy `#202D53` text and `#536480` secondary text. Indigo `#4F46E5` marks actions, cyan `#06B6D4` graphene and transport, violet `#8B5CF6` MoS₂, and orange `#F59E0B` learning questions. Darker cyan/violet variants keep small text readable. Shared CSS variables, soft borders/shadows and rounded interaction cards apply across all nine pages. Charts include labels, legends and distinct line styles; state is not communicated by color alone.
+Home uses the supplied midnight-blue gradient, compact inline NanoLab wordmark, centered Google Sans typography and viewport scaling. Native Web Animations preserve the specified entrance timings, with readiness bounded at 900 ms and a 3500 ms visibility guard. Reduced motion stops the decorative video and bypasses the intro; a small accessible pause/play control appears only when playback is available. Scientific routes retain the light exhibit palette and readable editorial/instrument layouts. Shared runtime tokens live in `src/app/globals.css`; `DESIGN.md` records the visual intent and token ownership. Charts retain labels, legends and distinct line styles; state is not communicated by color alone.
 
 ## Project-local Codex skills
 
@@ -133,29 +135,19 @@ User instructions take precedence over skill guidance.
 
 ## Verification
 
+The cinematic homepage is documented in [the homepage report](docs/cinematic-homepage.md). Production-build browser checks cover 13 viewport sizes, preserved interior scrolling, native navigation, intro/failure states and reduced motion. Screenshots show the gradient fallback because the cloud environment blocks the supplied media host; the exact video remains embedded for unrestricted browsers. The production address continues to be https://nano-virtual-lab.vercel.app/.
+
 Model checks exercise analytic linear/saturation limits, SI conversions, self-consistent contact drops, mobility/length scaling, finite curves, malformed parameter URLs, versioned stored data and safe citation return links. Run the commands above after model changes.
 
-The redesign passed ESLint with zero warnings, standalone TypeScript validation, all **13 named automated tests**, and `npm run build`. Production-build browser validation used Playwright Chromium because the Browser plugin was unavailable:
+The public-laboratory redesign uses the actual **agent-browser CLI 0.39.0 with Chromium**. Its final verification and source-host limitations are recorded in [the redesign report](docs/public-lab-redesign.md). The scientific solver, Graphene calculations and persistence implementations remain unchanged. All **15 tests**, lint, TypeScript and the production build pass.
 
-- All nine pages at **320, 390, 768 and 1440 px**: 36 route/layout checks, with no horizontal overflow.
-- **76 unique internal destinations**, including knowledge anchors, citation targets and parameter links.
-- **15 interaction flows**: desktop/mobile navigation and keyboard focus; six foundation widgets and the Dirac/Fermi/transport lab; material switching; 3D rotation, zoom, selection, visibility, exploded view and ON/OFF; simulator controls, calculated explanations, save/compare/edit/reload and malformed storage; research filters/timeline; reference search/filter/return; challenge deep links; direct/refreshed model anchors; redirects, 404 and reduced motion.
-- No unexpected console warnings, application errors or framework overlays. The intentional missing-page check produced its expected 404 response.
-- A computed foreground/background review covered **1,366 text samples** across the nine pages with no flagged contrast failures. Gradients and all possible interactive states are not exhaustively resolved by this review.
-- Visual checks at **1536 × 1024** and **390 × 844** compared design concepts with rendered screenshots. Fixed narrow-screen overflow, cyan label contrast, diagram annotations, quantum-level label overlap and topic-number wrapping.
-- Fragment positioning completes immediately so rapid cross-page navigation does not interrupt a pending smooth scroll. Direct links, refreshes and the zero-gap → Dirac lab → learning-question return flow were checked in the production build.
-
-The core physical solver, storage schema/key, dependency manifests and route definitions remain unchanged. Temporary browser scripts and screenshots are kept outside the repository.
-
-The scientific evidence update passes lint, all **15 tests**, TypeScript checking and the production build. Production-build Chromium checks cover all nine routes at four widths (36 checks), 105 unique internal destinations, the retained 3D/simulator/save/compare/research/citation flows and new scientific disclosures. The Vercel preview returned **HTTP 200 and valid image content types for all eight images at 640 and 828 px** (16 responses). Local image downloads remain restricted; local layout checks do not claim that result. The evidence ledger records the source/licence decisions and verification scope.
+Design intent and canonical component ownership are recorded in [DESIGN.md](DESIGN.md) and [UX-CONTRACT.md](UX-CONTRACT.md). The official DESIGN.md lint and strict premium static audit pass. Static audits do not establish full accessibility compliance or replace browser checks. Screenshots and temporary browser dependencies remain outside the repository.
 
 Browser coverage uses Chromium; Safari and Firefox are not included. Configurations remain browser-local; the transistor model remains educational and uncalibrated.
 
-The Nanomaterials topic update also passed lint, type checking, all 13 tests and the production build. Its production-build Chromium check covered **44 checks**: all nine pages at the four widths above, exact homepage copy and metadata, **93 internal destinations**, the retained Graphene/3D/simulator/save/compare/edit/reload flows, recent-year research filters and citation search/return. All seven studies and 17 references remain available. No unexpected browser errors or warnings were recorded. Only introduction copy, shared metadata, learning-node labels/order, course context and subtitle spacing changed; scientific data, model parameters, interaction implementations and deployment configuration were verified unchanged.
-
 ## GitHub and Vercel
 
-Keep changes reviewable on a branch, then merge a validated pull request into `main`:
+Keep changes reviewable on a branch. Merge a validated pull request into `main` only after the site owner approves publishing it:
 
 ```sh
 git switch main
@@ -167,7 +159,7 @@ git commit -m "Describe your change"
 git push -u origin feature/your-change
 ```
 
-The existing Git integration deploys `main` automatically to the stable production domain. Check GitHub's Vercel commit status and the Vercel deployment's READY state, then verify the live site. [Vercel dashboard](https://vercel.com/handsome-sk/nano-virtual-lab).
+The existing Git integration deploys `main` automatically to https://nano-virtual-lab.vercel.app/. The owner has authorized this redesign and future website updates to be published after appropriate checks; no further routine release confirmation is required unless that instruction changes. Check GitHub's Vercel commit status, the deployment's READY state and production domain assignment, then verify the live site. The standing release instruction is recorded in `AGENTS.md`. [Vercel dashboard](https://vercel.com/handsome-sk/nano-virtual-lab).
 
 | Setting               | Value                            |
 | --------------------- | -------------------------------- |

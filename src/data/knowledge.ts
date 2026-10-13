@@ -18,10 +18,10 @@ export const knowledge = [
       "Electrons have wave-like behaviour. Confinement restricts allowed states. In a solid, the periodic lattice potential organizes electron states into energy bands, sometimes separated by forbidden gaps. A semiconductor can modulate carrier density for switching.",
     connectionTitle: "From allowed states to switching",
     connection:
-      "A band gap is an energy interval without allowed states in an ideal crystal. It helps a gate suppress carrier density, while contacts, defects and architecture determine the actual OFF current. This topic connects to MECH6045 Lecture 2, pages 18–19.",
+      "A band gap is an energy interval without allowed states in an ideal crystal. It helps a gate suppress carrier density, while contacts, defects and architecture determine the actual OFF current.",
     href: "/why-mos2#band-gap",
     link: "Explore why the gap matters",
-    reference: "course-bands",
+    reference: "quantum",
   },
   {
     id: "graphene-structure",
@@ -42,10 +42,10 @@ export const knowledge = [
       "Near the K and K′ points, ideal monolayer graphene has approximately linear energy–wave-vector dispersion. Its bands meet at the Dirac point. Clean graphene can support high mobility and long mean free paths, creating opportunities for high-speed electronics.",
     connectionTitle: "A natural next question",
     connection:
-      "Moving charge efficiently and switching a digital transistor to a low-leakage OFF state are different goals. Explore how graphene’s zero gap motivates interest in semiconducting 2D materials. This learning connection begins with MECH6045 Lecture 3, page 26.",
+      "Moving charge efficiently and switching a digital transistor to a low-leakage OFF state are different goals. Explore how graphene’s zero gap motivates interest in semiconducting 2D materials.",
     href: "/why-mos2#zero-gap",
     link: "From graphene to MoS₂",
-    reference: "course-graphene",
+    reference: "neto2009",
   },
   {
     id: "characterization",

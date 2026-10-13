@@ -7,7 +7,6 @@ export type Reference = {
   category:
     | "Paper"
     | "Learning resource"
-    | "Course material"
     | "Data & assets"
     | "Institutional announcement";
   doi?: string;
@@ -47,7 +46,7 @@ export const references: Reference[] = [
     category: "Paper",
     doi: "10.1126/science.aah4698",
     url: "https://foundry.lbl.gov/2016/10/16/mos2-transistors-with-1-nanometer-gate-lengths/",
-    note: "A carbon-nanotube gate research device. Physical gate length is distinct from effective channel length; the teaching simulator does not reproduce this experiment.",
+    note: "A carbon-nanotube gate research device. Physical gate length is distinct from effective channel length; the educational simulator does not reproduce this experiment.",
   },
   {
     id: "tang2023",
@@ -84,32 +83,24 @@ export const references: Reference[] = [
   },
   {
     id: "mosfet",
-    title: "Microelectronic Devices and Circuits — Lecture Notes",
-    authors: "C. Fonstad / MIT OpenCourseWare",
-    year: 2009,
-    venue: "6.012, Fall 2009; Lectures 10–11",
+    title: "First-Order MOSFET Model",
+    authors: "B. Murmann (curator) & COCOA contributors",
+    year: 2024,
+    venue:
+      "COCOA: Collaborative Compendium on Analog Integrated Circuits, Section 2.1; living open textbook",
     category: "Learning resource",
-    url: "https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2009/pages/lecture-notes/",
-    note: "Background for gradual-channel transistor equations. The simulator adapts a long-channel square-law model with a symmetric series-resistance correction; it is not calibrated to a MoS₂ experiment.",
-  },
-  {
-    id: "course",
-    title: "MECH6045 — Nanotechnology: Fundamentals and Applications",
-    authors: "Course teaching materials",
-    year: 2026,
-    venue: "Nanotechnology: Fundamentals and Applications",
-    category: "Course material",
-    note: "Course context for NanoLab. The project author identifies Lecture 2, pages 18–19, for energy bands and band gaps, and Lecture 3, page 26, for graphene electronic properties. Linked literature supports the scientific explanations.",
+    url: "https://bmurmann.github.io/COCOA/contents/partI/partI.2.html#first-order-mosfet-model",
+    note: "An independently accessible open-textbook derivation of the gradual-channel square-law equations, checked 12 October 2026. The book began in 2024 and continues to evolve. NanoLab adds symmetric ohmic series resistance to this general model; it is not calibrated to a MoS₂ experiment. No textbook figures are reproduced.",
   },
   {
     id: "assets",
     title: "NanoLab diagrams, model defaults & interface assets",
     authors: "Project-created educational material",
     year: 2026,
-    venue: "NanoLab: Beyond Silicon",
+    venue: "NanoLab",
     category: "Data & assets",
     url: "https://github.com/HandsomeSK/nano-virtual-lab",
-    note: "Original interactive SVG/CSS schematics; not to scale. The AI-generated homepage illustration is conceptual, not an atomistic calculation or microscopy image. Model defaults and everyday length examples are illustrative assumptions; actual specimens vary. External licensed figures have a separate image registry; their measured curves are not imported into the simulator.",
+    note: "Original interactive SVG/CSS schematics; not to scale. The homepage atmosphere is decorative, not scientific evidence. Model defaults and everyday length examples are illustrative assumptions; actual specimens vary. External licensed figures have a separate image registry; their measured curves are not imported into the simulator.",
   },
   {
     id: "neto2009",
@@ -183,24 +174,6 @@ export const references: Reference[] = [
     note: "Published 26 February 2026; publisher metadata and abstract checked. A research demonstration linking fabrication yield with interconnected MoS₂ circuits. It does not establish superiority over present-day silicon processors.",
   },
   {
-    id: "course-bands",
-    title: "MECH6045 Lecture 2 — Energy Bands and Band Gap",
-    authors: "Course teaching materials",
-    year: 2026,
-    venue: "Lecture 2, pages 18–19",
-    category: "Course material",
-    note: "Page reference supplied by the project author for the energy-band learning section. Scientific explanations use the linked literature; this entry is not a transcription of the lecture slides.",
-  },
-  {
-    id: "course-graphene",
-    title: "MECH6045 Lecture 3 — Electronic Properties of Graphene",
-    authors: "Course teaching materials",
-    year: 2026,
-    venue: "Lecture 3, page 26",
-    category: "Course material",
-    note: "Page reference supplied by the project author for graphene's electronic properties and the learning route towards MoS₂. Scientific explanations use the linked graphene literature.",
-  },
-  {
     id: "shimazu2016",
     title:
       "Environmental Effects on Hysteresis of Transfer Characteristics in Molybdenum Disulfide Field-Effect Transistors",
@@ -222,7 +195,7 @@ export const references: Reference[] = [
     category: "Paper",
     doi: "10.1038/s41598-017-11930-6",
     url: "https://www.nature.com/articles/s41598-017-11930-6",
-    note: "Current transients interpreted in terms of oxide and surface trapping. Figure 1, CC BY 4.0, shows a monolayer back-gated research device, separate from the original top-gate teaching model and from Shimazu's multilayer device.",
+    note: "Current transients interpreted in terms of oxide and surface trapping. Figure 1, CC BY 4.0, shows a monolayer back-gated research device, separate from the original top-gate educational model and from Shimazu's multilayer device.",
   },
   {
     id: "benchmark2022",
