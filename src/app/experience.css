@@ -785,6 +785,9 @@ html:has(.nano-home) {
   border-bottom: 1px solid var(--line);
   padding: 64px 0;
 }
+.research-chapter > div {
+  min-width: 0;
+}
 .chapter-index {
   color: #6f747d;
   font-size: 13px;
@@ -1042,7 +1045,7 @@ html:has(.nano-home) {
     margin: 0;
   }
   .research-chapter {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
   }
   .process-steps {
