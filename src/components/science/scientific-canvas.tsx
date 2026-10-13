@@ -236,7 +236,7 @@ export default function ScientificCanvas(props: SceneProps) {
       controls.maxDistance = distance / 0.5;
       const target = view.focus
         ? model.center(view.focus)
-        : spec.kind === "device"
+        : spec.kind === "device" && latest.current.options.exploded
           ? activeBounds().center.clone()
           : new THREE.Vector3();
       const yaw = THREE.MathUtils.degToRad(view.yaw),

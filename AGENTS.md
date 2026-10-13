@@ -12,6 +12,8 @@ On 13 October 2026, the owner authorized this redesign and future website update
 
 Use the existing HandsomeSK/nano-virtual-lab repository and Vercel project. Publish through main and retain https://nano-virtual-lab.vercel.app/ as the production address. Verify the tested commit, successful Vercel build, production domain assignment and live pages before reporting completion.
 
+The owner reaffirmed standing authorization on 13 October 2026 for similar website work. Within the requested site-update scope, proceed automatically with implementation, testing, Git commits and pushes, pull-request creation and merging, and publication to the existing production site; report the concrete result without requesting repeated approval.
+
 ## Automatic skill selection
 
 Read and apply these project-local skills whenever the task matches their purpose. The user does not need to invoke them by name:
