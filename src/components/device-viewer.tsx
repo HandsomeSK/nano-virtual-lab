@@ -21,22 +21,29 @@ const interfacePart = {
   id: "interface",
   name: "Carbon-dot interface",
   color: "#80dedc",
+  material: "Insulating carbon-dot assembly",
   role: "An insulating carbon-dot assembly sits between MoS₂ and HfO₂. Edge functional groups assist oxide nucleation. In the paper, the interfacial layer is about 0.4–0.6 nm physically; this schematic exaggerates thickness and uses illustrative dot placement.",
   concept: "/discoveries/mos2-interface-breakthrough#breakthrough",
 };
 export function DeviceViewer({
   interfaceResearch = false,
+  from = interfaceResearch
+    ? "/discoveries/mos2-interface-breakthrough#interactive-stack"
+    : "/device",
 }: {
   interfaceResearch?: boolean;
+  from?: string;
 }) {
   const [withInterface, setWithInterface] = useState(interfaceResearch);
   const [options, setOptions] = useState({
     ...initialOptions,
     selected: interfaceResearch ? "interface" : "channel",
   });
-  const [camera, setCamera] = useState(defaultCamera);
+  const [camera, setCamera] = useState({ ...defaultCamera, pitch: 30 });
   const parts = [...deviceParts, ...(withInterface ? [interfacePart] : [])];
-  const part = parts.find((p) => p.id === options.selected) ?? deviceParts[1];
+  const part =
+    parts.find((p) => p.id === options.selected) ??
+    deviceParts.find((p) => p.id === "channel")!;
   function select(id: string) {
     setOptions((p) => ({
       ...p,
@@ -45,7 +52,7 @@ export function DeviceViewer({
     }));
   }
   function reset() {
-    setCamera({ ...defaultCamera, revision: camera.revision + 1 });
+    setCamera({ ...defaultCamera, pitch: 30, revision: camera.revision + 1 });
     setOptions({
       ...initialOptions,
       selected: withInterface ? "interface" : "channel",
@@ -132,7 +139,7 @@ export function DeviceViewer({
           onCameraChange={setCamera}
         />
         <div className="stage-caption">
-          <span>Drag to orbit · scroll / pinch to zoom</span>
+          <span>360° orbit · drag / pinch to inspect every side</span>
           <span>Arrows and +/− work on the focused model.</span>
         </div>
         <CameraControls
@@ -251,8 +258,28 @@ export function DeviceViewer({
         </div>
         <section className="science-selection" aria-live="polite">
           <h4>{part.name}</h4>
+          <p className="device-material">
+            <span>
+              {part.id === "interface"
+                ? "Interface material"
+                : "Material example"}
+            </span>
+            <strong>{part.material}</strong>
+            <ReferenceLink
+              id={part.id === "interface" ? "wong2026" : "radis2011"}
+              from={from}
+            />
+          </p>
           <p>
             {part.role}
+            {part.id === "channel" ? (
+              <>
+                {" "}
+                Violet spheres mark Mo; gold spheres mark S. The enlarged ideal
+                S–Mo–S motif follows the lattice geometry source.
+                <ReferenceLink id="ridolfi2015" from={from} />
+              </>
+            ) : null}
             {withInterface &&
             (part.id === "dielectric" || part.id === "interface") ? (
               <ReferenceLink
@@ -266,8 +293,12 @@ export function DeviceViewer({
           </Link>
         </section>
         <p className="text-xs">
-          Conceptual layer geometry; not an exact experimental device. Carrier
-          injection, spatial fields and trapped charge are not computed.
+          {interfaceResearch
+            ? "Support and electrode examples come from the 2011 stack; the carbon-dot/HfO₂ comparison illustrates the 2026 interface study. "
+            : "Material examples follow the 2011 monolayer device: Au contacts, Cr/Au top gate and HfO₂ on MoS₂/SiO₂/Si. "}
+          Colours, transparency, atomic magnification and lead shapes aid
+          inspection. Geometry is not to scale; no spatial fields or current are
+          computed.
         </p>
       </aside>
     </div>

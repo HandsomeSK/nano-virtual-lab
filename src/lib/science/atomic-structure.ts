@@ -100,3 +100,36 @@ export function createAtomicStructure(
   ];
   return { atoms, bonds, unitCell, latticeConstant: a };
 }
+
+export function carbonDetail(detail: "bond" | "coordination"): AtomicStructure {
+  const sheet = createAtomicStructure("graphene");
+  const center = sheet.atoms.findIndex(
+    (atom) =>
+      atom.cell[0] === 0 && atom.cell[1] === 0 && atom.position[0] === 0,
+  );
+  const neighbours = sheet.bonds
+    .filter((bond) => bond.a === center || bond.b === center)
+    .map((bond) => (bond.a === center ? bond.b : bond.a));
+  const ids = [
+    center,
+    ...(detail === "bond" ? neighbours.slice(0, 1) : neighbours),
+  ];
+  const origin: Point3 = [0, 0, 0];
+  ids.forEach((id) =>
+    sheet.atoms[id].position.forEach((v, i) => {
+      origin[i] += v / ids.length;
+    }),
+  );
+  const atoms = ids.map((id) => ({
+    ...sheet.atoms[id],
+    position: sheet.atoms[id].position.map((v, i) => v - origin[i]) as Point3,
+  }));
+  return {
+    atoms,
+    bonds: neighbours
+      .slice(0, ids.length - 1)
+      .map((_, i) => ({ a: 0, b: i + 1 })),
+    unitCell: [],
+    latticeConstant: sheet.latticeConstant,
+  };
+}

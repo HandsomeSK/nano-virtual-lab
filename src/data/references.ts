@@ -35,7 +35,7 @@ export const references: Reference[] = [
     category: "Paper",
     doi: "10.1038/nnano.2010.279",
     url: "https://www.nature.com/articles/nnano.2010.279",
-    note: "A specific monolayer device demonstration, not universal mobility or switching performance. Provides the approximately 0.65 nm monolayer thickness and 1.8 eV band-gap context used here.",
+    note: "Primary author-hosted PDF checked 13 October 2026, pp. 147–149 and Fig. 3a: monolayer MoS₂ on degenerately doped Si / 270 nm SiO₂, 50 nm Au contacts, 30 nm ALD HfO₂ and a Cr/Au top gate. Materials guide the illustrative 3D stack; displayed thicknesses, colours and lattice magnification are not experimental geometry. Reported performance is device-specific.",
   },
   {
     id: "desai2016",

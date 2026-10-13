@@ -1,6 +1,7 @@
 import {
   createAtomicStructure,
   atomicColors,
+  carbonDetail,
 } from "@/lib/science/atomic-structure";
 import { deviceParts } from "@/data/device";
 import type { SceneSpec } from "./types";
@@ -15,7 +16,9 @@ export function SceneFallback({
 }) {
   const structure =
     spec.kind === "atomic"
-      ? createAtomicStructure(spec.material, spec.layers, spec.stacking, 2)
+      ? spec.material === "graphene" && spec.detail && spec.detail !== "lattice"
+        ? carbonDetail(spec.detail)
+        : createAtomicStructure(spec.material, spec.layers, spec.stacking, 2)
       : undefined;
   return (
     <div className="scene-fallback">
@@ -66,7 +69,7 @@ export function SceneFallback({
               ))}
           </g>
         ) : (
-          <g transform="translate(90 280) scale(1 -1)">
+          <g transform="translate(90 290) scale(1 -1)">
             {deviceParts
               .filter((part) => !hidden.includes(part.id))
               .map((part) => (
@@ -77,13 +80,14 @@ export function SceneFallback({
                   width={part.w}
                   height={Math.max(6, part.h * 2)}
                   fill={part.color}
+                  opacity={part.id === "dielectric" ? 0.5 : 1}
                   stroke="#111"
                 />
               ))}
             {spec.kind === "device" &&
             spec.interface &&
             !hidden.includes("interface") ? (
-              <rect x="110" y="62" width="180" height="8" fill="#80dedc" />
+              <rect x="110" y="148" width="180" height="8" fill="#80dedc" />
             ) : null}
           </g>
         )}

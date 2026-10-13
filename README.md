@@ -61,7 +61,9 @@ Add evidence to the bibliography before citing it. Add a study and/or a themed s
 
 ## Scientific scope
 
-The atomic model is an ideal finite ball-and-stick lattice, not electron density or molecular dynamics. Graphene has a two-carbon basis. Semiconducting MoS₂ has one Mo and two S atoms per primitive cell, with trigonal-prismatic coordination. Sphere radii, assembly transitions and expanded spacing aid inspection. The 3R view holds representative spacing fixed to compare registry; it does not reconstruct the 2026 engineered bilayer.
+The atomic model is an ideal finite ball-and-stick lattice, not electron density or molecular dynamics. Graphene has a two-carbon basis, plus inspectable single-bond and three-neighbour close-ups. Full yaw and above/below orbit are available with mouse, touch and keyboard controls. Semiconducting MoS₂ has one Mo and two S atoms per primitive cell, with trigonal-prismatic coordination. Sphere radii, assembly transitions and expanded spacing aid inspection. The 3R view holds representative spacing fixed to compare registry; it does not reconstruct the 2026 engineered bilayer.
+
+The lab directly embeds the shared transistor used on Device and the interface discovery. Its gold electrodes, transparent HfO₂, enlarged atomic channel and separate SiO₂/Si support use cited material examples. See [materials and geometry provenance](docs/nanoscale-depth.md). The homepage projects a continuously twisting, depth-lit silver particle volume through one Canvas pixel upload per frame, with no video rewind.
 
 Device layers and carbon-dot placement are original concept schematics, with exaggerated thicknesses. They do not compute spatial fields, injection or transport. The ON/OFF toggle illustrates charge control. The existing simulator remains an uncalibrated classical long-channel model; it omits subthreshold leakage, quantum transport, traps, self-heating and short-channel effects.
 

@@ -83,8 +83,8 @@ export default function Home() {
             },
             {
               icon: "layers" as const,
-              label: "Interact With Materials",
-              href: "/lab?material=mos2",
+              label: "Inspect a Transistor",
+              href: "/device",
             },
             {
               icon: "discovery" as const,

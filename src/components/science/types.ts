@@ -17,8 +17,13 @@ export type AtomicSpec = {
   material: AtomicMaterial;
   layers: 1 | 2;
   stacking: "2H" | "3R";
+  detail?: "lattice" | "bond" | "coordination";
 };
-export type DeviceSpec = { kind: "device"; interface: boolean; roughOxide?: boolean };
+export type DeviceSpec = {
+  kind: "device";
+  interface: boolean;
+  roughOxide?: boolean;
+};
 export type SceneSpec = AtomicSpec | DeviceSpec;
 export type SceneOptions = {
   selected: string;

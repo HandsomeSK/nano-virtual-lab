@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import {
   createAtomicStructure,
+  carbonDetail,
   atomicColors,
   type Atom,
 } from "@/lib/science/atomic-structure";
@@ -26,6 +27,7 @@ export function buildScientificModel(spec: SceneSpec) {
   const pickables: THREE.Object3D[] = [];
   const geometries = new Set<THREE.BufferGeometry>();
   const materials = new Set<THREE.Material>();
+  const textures = new Set<THREE.Texture>();
   const sphere = new THREE.SphereGeometry(1, 32, 24);
   const cylinder = new THREE.CylinderGeometry(1, 1, 1, 14, 1);
   const slab = new RoundedBoxGeometry(1, 1, 1, 2, 0.035);
@@ -48,12 +50,13 @@ export function buildScientificModel(spec: SceneSpec) {
   let cell: THREE.Line | undefined;
   let atomicBonds: THREE.InstancedMesh | undefined;
   let structure: ReturnType<typeof createAtomicStructure> | undefined;
+  let deviceAtomCount = 0,
+    deviceBondCount = 0;
   if (spec.kind === "atomic") {
-    structure = createAtomicStructure(
-      spec.material,
-      spec.layers,
-      spec.stacking,
-    );
+    structure =
+      spec.material === "graphene" && spec.detail && spec.detail !== "lattice"
+        ? carbonDetail(spec.detail)
+        : createAtomicStructure(spec.material, spec.layers, spec.stacking);
     const sets = new Map<string, Atom[]>();
     structure.atoms.forEach((atom) => {
       const key = atom.kind + ":" + atom.layer;
@@ -117,7 +120,7 @@ export function buildScientificModel(spec: SceneSpec) {
               color: "#80dedc",
               x: 110,
               y: 50,
-              z: 31,
+              z: 74,
               w: 180,
               d: 140,
               h: 4,
@@ -128,20 +131,112 @@ export function buildScientificModel(spec: SceneSpec) {
     for (const part of parts) {
       const group = new THREE.Group();
       const mat = physical(
-        part.id === "substrate" ? "#373f4a" : part.color,
+        part.color,
         ["gate", "source", "drain"].includes(part.id) ? 0.8 : 0.2,
         part.id === "gate" ? 0.23 : 0.38,
       );
       if (part.id === "dielectric") {
         mat.transparent = true;
-        mat.opacity = 0.73;
+        mat.opacity = 0.42;
+        mat.roughness = 0.13;
+        mat.ior = 1.9;
         mat.depthWrite = false;
       }
       const mesh = new THREE.Mesh(slab, mat);
       mesh.scale.set(part.w / 50, part.h / 50, part.d / 50);
-      mesh.castShadow = true;
+      mesh.castShadow = part.id !== "dielectric";
       mesh.receiveShadow = true;
       mesh.userData.part = part.id;
+      if (part.id === "channel") {
+        mesh.visible = false;
+        // Scaled ideal S–Mo–S motif, enlarged to expose bonding in the device.
+        // It does not imply an experimental atom count or lattice-to-device scale.
+        const sheet = createAtomicStructure("mos2", 1, "2H", 7);
+        const kept = new Set(
+          sheet.atoms.map((a, i) =>
+            Math.abs(a.position[0] * 0.21) < part.w / 100 - 0.12 &&
+            Math.abs(a.position[2] * 0.21) < part.d / 100 - 0.12
+              ? i
+              : -1,
+          ),
+        );
+        kept.delete(-1);
+        deviceAtomCount = kept.size;
+        for (const element of ["Mo", "S"]) {
+          const atoms = sheet.atoms.filter(
+            (a, i) => kept.has(i) && a.element === element,
+          );
+          const atomMaterial =
+            element === "Mo" ? mat : physical("#e2c566", 0.38, 0.25);
+          const atomMesh = new THREE.InstancedMesh(
+            sphere,
+            atomMaterial,
+            atoms.length,
+          );
+          atoms.forEach((a, i) => {
+            matrix.compose(
+              new THREE.Vector3(...a.position).multiplyScalar(0.21),
+              new THREE.Quaternion(),
+              new THREE.Vector3().setScalar(element === "Mo" ? 0.125 : 0.105),
+            );
+            atomMesh.setMatrixAt(i, matrix);
+          });
+          atomMesh.userData.part = "channel";
+          atomMesh.castShadow = true;
+          group.add(atomMesh);
+          pickables.push(atomMesh);
+        }
+        const bonds = sheet.bonds.filter((b) => kept.has(b.a) && kept.has(b.b));
+        deviceBondCount = bonds.length;
+        const sticks = new THREE.InstancedMesh(
+          cylinder,
+          physical("#a9a9b1", 0.65, 0.32),
+          bonds.length,
+        );
+        bonds.forEach((b, i) => {
+          const first = new THREE.Vector3(
+            ...sheet.atoms[b.a].position,
+          ).multiplyScalar(0.21);
+          const second = new THREE.Vector3(
+            ...sheet.atoms[b.b].position,
+          ).multiplyScalar(0.21);
+          matrix.compose(
+            first.clone().add(second).multiplyScalar(0.5),
+            new THREE.Quaternion().setFromUnitVectors(
+              new THREE.Vector3(0, 1, 0),
+              second.clone().sub(first).normalize(),
+            ),
+            new THREE.Vector3(0.026, first.distanceTo(second), 0.026),
+          );
+          sticks.setMatrixAt(i, matrix);
+        });
+        sticks.userData.part = "channel";
+        group.add(sticks);
+        pickables.push(sticks);
+      }
+      if (["source", "drain", "gate"].includes(part.id)) {
+        const grain = new Uint8Array(128 * 128 * 4);
+        let seed = 6045;
+        for (let i = 0; i < grain.length; i += 4) {
+          seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+          grain[i] = grain[i + 1] = grain[i + 2] = 100 + (seed % 100);
+          grain[i + 3] = 255;
+        }
+        const texture = new THREE.DataTexture(grain, 128, 128);
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(5, 5);
+        texture.needsUpdate = true;
+        textures.add(texture);
+        mat.bumpMap = texture;
+        mat.bumpScale = 0.025;
+        mat.roughness = 0.27;
+        const lead = new THREE.Mesh(cylinder, mat);
+        lead.scale.set(0.055, 0.72, 0.055);
+        lead.position.set(0, part.h / 100 + 0.36, -part.d / 150);
+        lead.userData.part = part.id;
+        group.add(lead);
+        pickables.push(lead);
+      }
       if (part.id === "dielectric" && spec.roughOxide) {
         mesh.visible = false;
         const islands = new THREE.InstancedMesh(slab, mat, 9);
@@ -149,7 +244,7 @@ export function buildScientificModel(spec: SceneSpec) {
           matrix.compose(
             new THREE.Vector3(
               ((i % 3) - 1) * 1.1,
-              0,
+              -(part.h / 100) + (0.2 + (i % 3) * 0.025) / 2,
               (Math.floor(i / 3) - 1) * 0.87,
             ),
             new THREE.Quaternion(),
@@ -181,12 +276,13 @@ export function buildScientificModel(spec: SceneSpec) {
       const rank = (
         {
           substrate: 0,
-          channel: 1,
-          source: 2,
-          drain: 2,
-          interface: 3,
-          dielectric: 4,
-          gate: 5,
+          oxide: 1,
+          channel: 2,
+          source: 3,
+          drain: 3,
+          interface: 4,
+          dielectric: 5,
+          gate: 6,
         } as Record<string, number>
       )[part.id];
       units.push({
@@ -239,8 +335,16 @@ export function buildScientificModel(spec: SceneSpec) {
       unit.material.emissiveIntensity = unit.id === options.selected ? 0.18 : 0;
       if (spec.kind === "device") {
         unit.group.position.y = unit.baseY + state.explosion * unit.rank * 0.75;
-        if (unit.id === "channel")
-          unit.material.color.set(options.on ? "#80dedc" : "#8b5cf6");
+        if (unit.id === "channel") {
+          unit.material.emissive.set(
+            options.on
+              ? "#80dedc"
+              : unit.id === options.selected
+                ? "#5a7b85"
+                : "#000000",
+          );
+          unit.material.emissiveIntensity = options.on ? 0.55 : 0.18;
+        }
       } else {
         const sheetOffset =
           spec.layers === 2
@@ -338,11 +442,12 @@ export function buildScientificModel(spec: SceneSpec) {
     pickables,
     update,
     center,
-    atomCount: structure?.atoms.length ?? 0,
-    bondCount: structure?.bonds.length ?? 0,
+    atomCount: structure?.atoms.length ?? deviceAtomCount,
+    bondCount: structure?.bonds.length ?? deviceBondCount,
     dispose() {
       geometries.forEach((g) => g.dispose());
       materials.forEach((m) => m.dispose());
+      textures.forEach((t) => t.dispose());
       root.clear();
     },
   };

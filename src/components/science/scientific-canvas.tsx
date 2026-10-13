@@ -58,8 +58,8 @@ export default function ScientificCanvas(props: SceneProps) {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = false;
     controls.enablePan = false;
-    controls.minPolarAngle = 0.12;
-    controls.maxPolarAngle = Math.PI / 2 - 0.08;
+    controls.minPolarAngle = 0.01;
+    controls.maxPolarAngle = Math.PI - 0.01;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     const model = buildScientificModel(spec);
     const state: DisplayState = {
@@ -72,10 +72,28 @@ export default function ScientificCanvas(props: SceneProps) {
     const bounds = new THREE.Box3()
       .setFromObject(model.root)
       .getBoundingSphere(new THREE.Sphere());
+    let explodedBounds = bounds;
+    if (spec.kind === "device") {
+      model.update(
+        { ...latest.current.options, hidden: [] },
+        { ...state, explosion: 1 },
+      );
+      explodedBounds = new THREE.Box3()
+        .setFromObject(model.root)
+        .getBoundingSphere(new THREE.Sphere());
+      model.update(latest.current.options, state);
+    }
+    const activeBounds = () =>
+      latest.current.options.exploded ? explodedBounds : bounds;
     const fitDistance = () =>
       Math.max(
-        spec.kind === "atomic" ? 20 : 12,
-        (bounds.radius * 2.3) /
+        spec.kind === "atomic" && (!spec.detail || spec.detail === "lattice")
+          ? 20
+          : 3,
+        (activeBounds().radius *
+          (spec.kind === "device" && latest.current.options.exploded
+            ? 3.25
+            : 2.3)) /
           Math.min(1, container.clientWidth / container.clientHeight / 1.5),
       );
     let distance = fitDistance();
@@ -143,7 +161,24 @@ export default function ScientificCanvas(props: SceneProps) {
         frame = 0;
         try {
           model.update(latest.current.options, state);
+          floor.visible =
+            spec.kind === "device" && camera.position.y > floor.position.y;
           renderer.render(scene, camera);
+          container.dataset.pitch = String(
+            THREE.MathUtils.radToDeg(
+              Math.asin(
+                camera.position.clone().sub(controls.target).normalize().y,
+              ),
+            ),
+          );
+          container.dataset.yaw = String(
+            THREE.MathUtils.radToDeg(
+              Math.atan2(
+                camera.position.x - controls.target.x,
+                camera.position.z - controls.target.z,
+              ),
+            ),
+          );
           container.dataset.frames = String(++frames);
           if (annotation.current) {
             const point = model
@@ -196,9 +231,14 @@ export default function ScientificCanvas(props: SceneProps) {
       if (!visible || document.hidden) animation.pause();
     }
     function move(view: CameraView, instant = false) {
+      distance = fitDistance();
+      controls.minDistance = distance / 1.8;
+      controls.maxDistance = distance / 0.5;
       const target = view.focus
         ? model.center(view.focus)
-        : new THREE.Vector3();
+        : spec.kind === "device"
+          ? activeBounds().center.clone()
+          : new THREE.Vector3();
       const yaw = THREE.MathUtils.degToRad(view.yaw),
         pitch = THREE.MathUtils.degToRad(view.pitch);
       const r = distance / view.zoom;
@@ -268,7 +308,11 @@ export default function ScientificCanvas(props: SceneProps) {
           state.assembly = 0;
           transition("assembly", state, { assembly: 1 }, 1200);
         }
-        if (p.camera !== previousCamera) move(p.camera);
+        if (
+          p.camera !== previousCamera ||
+          options.exploded !== previousOptions.exploded
+        )
+          move(p.camera);
         previousOptions = options;
         previousCamera = p.camera;
         invalidate();
@@ -396,9 +440,9 @@ export default function ScientificCanvas(props: SceneProps) {
           v.yaw +
           (e.key === "ArrowLeft" ? -12 : e.key === "ArrowRight" ? 12 : 0),
         pitch: Math.max(
-          8,
+          -89,
           Math.min(
-            80,
+            89,
             v.pitch +
               (e.key === "ArrowUp" ? 10 : e.key === "ArrowDown" ? -10 : 0),
           ),

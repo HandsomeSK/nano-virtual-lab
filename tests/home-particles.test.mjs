@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   createHomeParticles,
   homeParticlePosition,
+  rasterizeHomeParticles,
 } from "../src/lib/home-particles.ts";
 
 test("ambient dots keep a deterministic field with bounded, finite appearance", () => {
@@ -16,6 +17,22 @@ test("ambient dots keep a deterministic field with bounded, finite appearance", 
       assert(state.size > 0 && state.size < 2);
     }
   }
+});
+
+test("particle rasterization clips edges and refreshes a finite silver frame", () => {
+  const image = {
+    width: 80,
+    height: 100,
+    data: new Uint8ClampedArray(80 * 100 * 4),
+  };
+  const field = createHomeParticles(2000);
+  rasterizeHomeParticles(field, 0, image, 1);
+  const first = image.data.slice();
+  assert(first.some((v, i) => i % 4 === 3 && v > 0));
+  rasterizeHomeParticles(field, 12, image, 1);
+  assert.notDeepEqual(image.data, first);
+  rasterizeHomeParticles([], 12, image, 1);
+  assert(image.data.every((v) => v === 0));
 });
 
 test("continuous drift does not jump or restart at elapsed-time boundaries", () => {
