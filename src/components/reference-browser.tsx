@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { references, referenceNumber } from "@/data/references";
+import { ReferenceAccess } from "./reference-access";
 const categories = [
   "All sources",
   "Paper",
@@ -83,13 +84,12 @@ export function ReferenceBrowser({
         <div className="notice mt-5">
           Selected citation [{referenceNumber(selectedRef.id)}]:{" "}
           {selectedRef.title}.{" "}
-          {/* Native navigation preserves the source fragment on return. */}
-          <a className="text-link" href={returnPath}>
-            Return to source page →
-          </a>
           {!filtered.includes(selectedRef) ? (
             <p className="text-sm mt-2">
-              Your filters hide this citation. Clear filters to show it.
+              Your filters hide this citation. Clear filters to show it.{" "}
+              <a className="text-link" href={returnPath}>
+                Return to source page
+              </a>
             </p>
           ) : null}
         </div>
@@ -117,27 +117,13 @@ export function ReferenceBrowser({
               {ref.authors}. {ref.venue}.
             </p>
             <p className="muted text-sm mt-4">{ref.note}</p>
+            {ref.doi ? (
+              <p className="reference-doi text-sm mt-3">
+                DOI: <span>{ref.doi}</span>
+              </p>
+            ) : null}
             <div className="actions">
-              {ref.doi ? (
-                <a
-                  className="text-link break-all"
-                  href={"https://doi.org/" + ref.doi}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  DOI: {ref.doi} ↗
-                </a>
-              ) : null}
-              {ref.url ? (
-                <a
-                  className="text-link"
-                  href={ref.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Original source ↗
-                </a>
-              ) : null}
+              <ReferenceAccess reference={ref} />
               {selected === ref.id ? (
                 <a className="button-secondary" href={returnPath}>
                   Return to source page

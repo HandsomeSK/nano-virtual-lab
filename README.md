@@ -24,13 +24,13 @@ npm run build
 npm start
 ```
 
-The production build uses Next.js's supported Webpack compiler. Keep dev and production build processes separate; both use .next. Generated build artifacts, local secrets, node_modules and Vercel local configuration are ignored.
+Run typecheck and build sequentially because both depend on generated .next type files. The production build uses Next.js's supported Webpack compiler. Keep dev and production build processes separate; both use .next. Generated build artifacts, local secrets, node_modules and Vercel local configuration are ignored.
 
 ## Routes
 
 | Route                                      | Experience                                                                                        |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| `/`                                        | Single-viewport black/metal gateway; natural scrolling on mobile                                  |
+| `/`                                        | Single-viewport midnight-blue/metal gateway; natural scrolling on mobile                                  |
 | `/foundations`                             | Six science topics, graphene geometry/electronics and existing experiments                        |
 | `/lab?material=graphene`                   | Orbit a honeycomb lattice, show the primitive cell and replay assembly                            |
 | `/lab?material=mos2`                       | S–Mo–S geometry, monolayer/bilayer, ideal 2H/3R registry and inspection separation                |
@@ -38,7 +38,7 @@ The production build uses Next.js's supported Webpack compiler. Keep dev and pro
 | `/device`                                  | Top-gated FET with selection, visibility, orbit/zoom/focus/reset, explosion and conceptual ON/OFF |
 | `/simulator`                               | Classical current model, bounded parameters, URL state and browser-local saves                    |
 | `/comparison`                              | Shared-scale A/B curves, scenario inspection and edit links                                       |
-| `/research`                                | Themed discoveries followed by the original URL-filterable study catalogue                        |
+| `/research`                                | Knowledge overview, six connected research directions and compact URL-filterable evidence catalogue                        |
 | `/discoveries/mos2-interface-breakthrough` | Carbon-dot interface research, structural before/after, 3D stack and attributed EOT plot          |
 | `/challenges`                              | Mechanisms and evidence behind engineering constraints                                            |
 | `/about`                                   | Searchable references, citation return links, model boundaries and asset rights                   |
@@ -50,7 +50,9 @@ The production build uses Next.js's supported Webpack compiler. Keep dev and pro
 - `src/app`: server-rendered routes, shared layout and global styling.
 - `src/components/science`: deferred renderer, instanced model construction, camera controls, workbench and static fallback.
 - `src/lib/science/atomic-structure.ts`: pure ideal geometry in Å; independent of rendering.
-- `src/components/research`: source-attributed feature, discovery synthesis and EOT plot.
+- `src/components/research`: source-attributed feature, explanation-led research synthesis and EOT plot.
+- `src/lib/navigation.ts`: the five real route categories and grouped submenu destinations. `AnchorNavigation` and `navigation-scroll.ts` own explicit-link scroll intent; framework/browser history restoration remains in control.
+- `ReferenceLink`, `ReferenceBrowser` and `ReferenceAccess`: visible numbered citations, full metadata and deduplicated external publication resources.
 - `src/data/references.ts`, `research.ts`, `discoveries.ts`: bibliography, catalogue and themed evidence.
 - `src/lib/simulation`: unchanged calculation, insights and versioned browser-local storage.
 - `src/components/learning`: original learning widgets, recolored for the dark theme.
@@ -94,3 +96,5 @@ git push -u origin feat/your-change
 Open/review a pull request, verify its Vercel preview, merge to main, and verify the main deployment and original alias. A preview URL is not the permanent production address. Do not manually point the production alias at an unverified preview.
 
 Latest homepage/navigation/reading refinements are recorded in `docs/home-reading-feedback.md`. Scientific source and model verification for the broader redesign are in `docs/beyond-visible.md`. Earlier documents record previous releases; their screenshots/check counts are historical.
+
+The content, citation, submenu and scroll refinements are documented in [the research hub update](docs/research-hub-update.md). Browser screenshots and interaction coverage are reported only when a real browser could be run.

@@ -28,9 +28,6 @@ export default function Device() {
           <Link href="/foundations#bands" className="text-link">
             Review Band Gap →
           </Link>
-          <Link href="/why-mos2#meet-mos2" className="text-link">
-            From Graphene to MoS₂ →
-          </Link>
         </div>
       </section>
       <DeviceViewer />
@@ -75,9 +72,6 @@ export default function Device() {
               exaggerated. Contact barriers and electric-field distributions are
               not computed.
             </p>
-            <Link href="/simulator" className="button-primary mt-5">
-              Launch Simulator →
-            </Link>
           </div>
         </div>
       </section>

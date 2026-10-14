@@ -74,9 +74,9 @@ export default function Why() {
                 from="/why-mos2#possibilities"
               />
             </p>
-            <Link className="text-link" href="/device">
-              Inspect the device
-            </Link>
+            <a className="text-link" href="#engineering-limits">
+              Connect the material to engineering limits
+            </a>
           </article>
         </div>
       </section>
@@ -93,9 +93,6 @@ export default function Why() {
           </p>
         </div>
         <div className="actions">
-          <Link href="/device" className="metal-button metal-solid">
-            Explore the transistor
-          </Link>
           <Link href="/challenges" className="metal-button metal-ghost">
             Read the engineering limits
           </Link>
@@ -177,12 +174,6 @@ export default function Why() {
                   electronics, sensing and other applications. A digital
                   switching limitation does not erase those opportunities.
                 </p>
-                <Link
-                  href="/foundations#graphene-electronics"
-                  className="text-link"
-                >
-                  Try fast transport vs digital switching →
-                </Link>
               </div>
             </div>
           </section>
@@ -367,12 +358,6 @@ export default function Why() {
       </details>
       <RelatedTopics
         links={[
-          {
-            href: "/foundations#graphene-electronics",
-            title: "Graphene Electronic Properties",
-            description:
-              "Return to the cone, Fermi energy and transport activities.",
-          },
           {
             href: "/comparison",
             title: "Material Comparison",

@@ -107,7 +107,7 @@ export default async function SimulatorPage({
         links={[
           {
             href: "/comparison",
-            title: "Material Comparison",
+            title: "Compare device assumptions",
             description: "Compare the same model under different assumptions.",
           },
           {

@@ -1,53 +1,53 @@
 "use client";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import {
+  createNavigationScroll,
+  navigationIntent,
+} from "@/lib/navigation-scroll";
 
 export function AnchorNavigation() {
   const pathname = usePathname();
+  const search = useSearchParams().toString();
+  const manager = useRef<ReturnType<typeof createNavigationScroll> | null>(null);
   useEffect(() => {
-    // Streamed route content can arrive after the browser's initial fragment scroll.
-    const observer = new MutationObserver(reveal);
-    let frame = 0;
-    function reveal() {
-      let id: string;
-      try {
-        id = decodeURIComponent(window.location.hash.slice(1));
-      } catch {
-        return false;
-      }
-      if (!id) return false;
-      const target = document.getElementById(id);
-      if (!target) return false;
-      for (
-        let ancestor = target.parentElement;
-        ancestor;
-        ancestor = ancestor.parentElement
-      ) {
-        if (ancestor instanceof HTMLDetailsElement) ancestor.open = true;
-      }
-      // Position after hydration's layout and browser scroll restoration settle.
-      frame = requestAnimationFrame(() => {
-        target.scrollIntoView({ block: "start", behavior: "instant" });
+    const scroll = createNavigationScroll(window, document);
+    manager.current = scroll;
+    function activate(event: MouseEvent) {
+      const link =
+        event.target instanceof Element
+          ? event.target.closest<HTMLAnchorElement>("a[href]")
+          : null;
+      if (!link) return;
+      const intent = navigationIntent(window.location.href, link.href, {
+        button: event.button,
+        ctrlKey: event.ctrlKey,
+        metaKey: event.metaKey,
+        shiftKey: event.shiftKey,
+        altKey: event.altKey,
+        defaultPrevented: event.defaultPrevented,
+        target: link.target,
+        download: link.hasAttribute("download"),
       });
-      observer.disconnect();
-      return true;
+      if (!intent) return;
+      // Keep Next/native route links intact; handle only same-document fragments.
+      if (intent.kind === "anchor") event.preventDefault();
+      scroll.activate(intent);
     }
-    function seek() {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      if (window.location.hash && !reveal())
-        observer.observe(document.getElementById("main-content")!, {
-          childList: true,
-          subtree: true,
-        });
-    }
-    seek();
-    window.addEventListener("hashchange", seek);
+    scroll.initialize();
+    document.addEventListener("click", activate, true);
+    window.addEventListener("popstate", scroll.restore);
+    window.addEventListener("hashchange", scroll.hashChanged);
     return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener("hashchange", seek);
+      scroll.dispose();
+      manager.current = null;
+      document.removeEventListener("click", activate, true);
+      window.removeEventListener("popstate", scroll.restore);
+      window.removeEventListener("hashchange", scroll.hashChanged);
     };
-  }, [pathname]);
+  }, []);
+  useLayoutEffect(() => {
+    manager.current?.commit(pathname, search);
+  }, [pathname, search]);
   return null;
 }

@@ -6,6 +6,7 @@ import {
   SectionHeading,
 } from "@/components/page-shell";
 import { ChallengeExplorer } from "@/components/challenge-explorer";
+import { ReferenceLink } from "@/components/reference-link";
 export const metadata: Metadata = { title: "Engineering Challenges" };
 export default function Page() {
   return (
@@ -20,7 +21,7 @@ export default function Page() {
         />
         <ChallengeExplorer />
       </section>
-      <section className="section challenges-outlook">
+      <section className="section challenges-outlook" id="outlook">
         <SectionHeading
           title="Bringing the Pieces Together"
           description="Progress requires materials, device design and process engineering together."
@@ -29,6 +30,16 @@ export default function Page() {
           Contact and dielectric engineering can improve individual devices.
           Scalable growth, repeatable integration and careful characterization
           are needed to translate those gains into circuits.
+        </p>
+        <p className="mt-4">
+          These constraints interact. A more conductive channel cannot recover
+          voltage lost at a resistive contact; a thinner gate stack is useful
+          only if leakage and reliability remain acceptable. Growth and transfer
+          must preserve those interfaces consistently across devices. This is
+          why a promising material or a best-performing transistor does not
+          establish circuit yield.
+          <ReferenceLink id="engineering2024" from="/challenges#outlook" />
+          <ReferenceLink id="benchmark2022" from="/challenges#outlook" />
         </p>
         <Link className="text-link" href="/research">
           Follow selected research directions →
@@ -40,11 +51,6 @@ export default function Page() {
             href: "/simulator#parameter-contactResistance",
             title: "Simulator",
             description: "Isolate a contact-resistance assumption.",
-          },
-          {
-            href: "/research",
-            title: "Research Frontier",
-            description: "Connect each challenge with a published study.",
           },
         ]}
       />

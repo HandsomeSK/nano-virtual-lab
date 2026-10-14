@@ -65,9 +65,10 @@ export default function Foundations() {
               "Follow the band-gap question from graphene to a 2D semiconductor.",
           },
           {
-            href: "/device",
-            title: "Device Explorer",
-            description: "Connect the concepts to a complete gate stack.",
+            href: "/comparison#band-structure",
+            title: "Compare electronic bands",
+            description:
+              "See how graphene, MoS₂ and silicon differ without treating the sketches as device benchmarks.",
           },
         ]}
       />

@@ -39,17 +39,10 @@ export default function InterfaceDiscovery() {
           <a href="#interactive-stack" className="metal-button metal-solid">
             Inspect the 3D stack
           </a>
-          <a
-            href={paper.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="metal-button metal-ghost"
-          >
-            Read the primary paper
-          </a>
         </div>
         <p className="research-context">
-          Wong et al. · DOI {paper.doi} · Evidence reviewed 13 October 2026
+          Wong et al. · Evidence reviewed 13 October 2026
+          <ReferenceLink id="wong2026" from={route} />
         </p>
       </header>
       <nav className="chapter-nav" aria-label="Story chapters">
@@ -243,17 +236,11 @@ export default function InterfaceDiscovery() {
         <span className="eyebrow">Primary source</span>
         <h2>{paper.title}</h2>
         <p>
-          {paper.authors} · {paper.venue}
+          Open the reference for publication details and the original study.
+          Its reported values describe this particular hybrid stack and its
+          measurement conditions.
+          <ReferenceLink id="wong2026" from={route + "#primary-source"} />
         </p>
-        <p>DOI: {paper.doi}</p>
-        <a
-          href={paper.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-link"
-        >
-          Read the source and experimental conditions
-        </a>
         <p className="text-xs">
           Original NanoLab schematics and geometry. No publisher figure is
           adapted; the reported EOT value is attributed to the paper. Public
