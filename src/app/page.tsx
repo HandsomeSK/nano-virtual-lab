@@ -19,6 +19,7 @@ export default function Home() {
       className={styles.home + " nano-home"}
       aria-labelledby="home-headline"
     >
+      <div className={styles.techBackdrop} aria-hidden="true" />
       <HomeMotion className={styles.media + " hero-photo"} />
       <div className={styles.page}>
         <NanoNavigation entrance />
@@ -41,7 +42,7 @@ export default function Home() {
             <h1 id="home-headline" className={styles.headline}>
               <span className={styles.line}>
                 <span className="appear appear--mask" style={delay(0.42)}>
-                  Explore nanomaterials
+                  Explore Nanomaterials
                 </span>
               </span>
             </h1>

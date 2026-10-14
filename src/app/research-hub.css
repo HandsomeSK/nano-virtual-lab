@@ -1,5 +1,4 @@
-.research-hub-nav,
-.research-direction-nav {
+.research-hub-nav {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 24px;
@@ -7,8 +6,7 @@
   padding: 12px 0;
 }
 
-.research-hub-nav a,
-.research-direction-nav a {
+.research-hub-nav a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -17,19 +15,22 @@
 }
 
 .research-hub-nav a:hover,
-.research-direction-nav a:hover,
 .research-connection-path a:hover {
   color: var(--primary);
 }
 
-.research-overview-prose {
-  max-width: 76ch;
+.research-overview-lead {
+  max-width: 90ch;
+  margin-bottom: 28px;
+  color: var(--prose);
+  font-size: 16px;
+  line-height: 1.8;
 }
 
 .research-overview-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 1fr);
-  gap: 36px;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.25fr);
+  gap: 40px;
   align-items: start;
 }
 
@@ -56,25 +57,47 @@
   margin-block: 16px;
 }
 
-.research-system-links {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 16px;
-  border-top: 1px solid var(--input-line);
+.research-overview-step {
+  padding-block: 18px;
+  border-bottom: 1px solid var(--line);
 }
 
-.research-system-links a {
+.research-overview-step:first-child {
+  padding-top: 0;
+}
+
+.research-overview-step h3 {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.research-overview-step p {
+  margin-top: 8px;
+  color: var(--prose);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 76ch;
+}
+
+.research-overview-step nav {
   display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin-top: 4px;
+}
+
+.research-overview-step a {
+  display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding-block: 8px;
   color: var(--primary);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
   text-underline-offset: 4px;
 }
 
-.research-system-links a:hover {
+.research-overview-step a:hover {
   color: var(--primary-hover);
   text-decoration: underline;
 }
@@ -86,7 +109,6 @@
   line-height: 1.7;
 }
 
-.research-overview-prose > p,
 .research-direction > div > p,
 .research-connection p,
 .research-reading-note,
@@ -96,15 +118,16 @@
   line-height: 1.8;
 }
 
-.research-overview-prose > p + p,
 .research-direction > div > p + p {
   margin-top: 18px;
 }
 
-.research-overview-prose .research-editorial-note {
-  margin-top: 24px;
+.research-overview .research-editorial-note {
+  margin-top: 20px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 110ch;
 }
 
 .research-direction {
@@ -239,6 +262,13 @@
   .research-overview-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
+  }
+
+  .research-system-map {
+    width: 100%;
+    max-width: 640px;
+    justify-self: center;
+    padding: 16px;
   }
 
   .research-direction,

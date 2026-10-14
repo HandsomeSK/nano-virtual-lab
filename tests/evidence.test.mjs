@@ -8,6 +8,7 @@ import { foundationDetails } from "../src/data/foundation-details.ts";
 import {
   challengeChecks,
   challengeEvidence,
+  operatingHistoryCases,
 } from "../src/data/challenge-evidence.ts";
 import { materials } from "../src/data/materials.ts";
 import { challenges } from "../src/data/challenges.ts";
@@ -68,6 +69,7 @@ test("scientific content preserves research sources and resolves citations after
     ...Object.values(materials),
     ...challenges,
     ...Object.values(challengeEvidence),
+    ...operatingHistoryCases,
     ...Object.values(foundationDetails),
   ]) {
     assert.ok(refIds.has(item.reference), item.reference);

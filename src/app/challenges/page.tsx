@@ -7,6 +7,7 @@ import {
 } from "@/components/page-shell";
 import { ChallengeExplorer } from "@/components/challenge-explorer";
 import { ReferenceLink } from "@/components/reference-link";
+import { operatingHistoryCases, stressSequence } from "@/data/challenge-evidence";
 export const metadata: Metadata = { title: "Engineering Challenges" };
 export default function Page() {
   return (
@@ -20,6 +21,112 @@ export default function Page() {
           description="Choose a problem, explore its mechanism and device impact, then follow the related experiment or research direction."
         />
         <ChallengeExplorer />
+      </section>
+      <section className="section challenge-history" id="operating-history">
+        <SectionHeading
+          title="What Happens After the First Sweep"
+          description="Time, temperature and the injection path reveal different kinds of instability."
+        />
+        <ol className="challenge-stress-sequence" aria-label="Bias-stress measurement sequence">
+          {stressSequence.map((step) => (
+            <li key={step.title}>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="challenge-source-note">
+          Measurement sequence explained from Illarionov et al.; choose conditions
+          for the device under test.
+          <ReferenceLink id="illarionov2024" from="/challenges#operating-history" />
+        </p>
+        <div className="challenge-history-grid">
+          {operatingHistoryCases.map((item) => (
+            <article className="challenge-history-case" key={item.id}>
+              <h3>{item.title}</h3>
+              <p className="challenge-observation-label">{item.observation}</p>
+              <p>
+                {item.explanation}
+                <ReferenceLink id={item.reference} from="/challenges#operating-history" />
+              </p>
+              <p className="challenge-takeaway">{item.takeaway}</p>
+            </article>
+          ))}
+        </div>
+        <p className="challenge-source-note">
+          These examples describe particular fabricated devices. The simulator
+          uses fixed parameters and constant series resistance; it does not model
+          trapping, noise, recovery or device lifetime.
+        </p>
+      </section>
+      <section className="section challenge-complementary" id="complementary-logic">
+        <SectionHeading
+          title="Two Carrier Types, One Logic Function"
+          description="Complementary logic adds a materials-and-process question: how do you make electron and hole devices work together?"
+        />
+        <div className="challenge-complementary-layout">
+          <figure className="challenge-logic-figure">
+            <svg viewBox="0 0 520 300" role="img" aria-label="Conceptual complementary inverter: one input drives a p-type and an n-type transistor; their shared output connects to the supply or ground.">
+              <g fill="none" stroke="var(--muted)" strokeWidth="3">
+                <path d="M310 32V64M310 136V164H448M310 164V184M310 256V276" />
+                <path d="M66 164H176V100H222M176 164V220H222" stroke="var(--primary)" />
+              </g>
+              <rect x="222" y="64" width="176" height="72" rx="6" fill="var(--orange-soft)" stroke="var(--orange-ink)" strokeWidth="2" />
+              <rect x="222" y="184" width="176" height="72" rx="6" fill="var(--cyan-soft)" stroke="var(--cyan-ink)" strokeWidth="2" />
+              <g fill="var(--ink)" textAnchor="middle" fontSize="19">
+                <text x="310" y="24">Supply</text>
+                <text x="310" y="94">p-type transistor</text>
+                <text x="310" y="214">n-type transistor</text>
+                <text x="310" y="296">Ground</text>
+                <text x="72" y="146">Input</text>
+                <text x="464" y="146">Output</text>
+              </g>
+              <g fill="var(--prose)" textAnchor="middle" fontSize="15">
+                <text x="310" y="119">Hole channel</text>
+                <text x="310" y="239">Electron channel</text>
+              </g>
+              <circle cx="310" cy="164" r="5" fill="var(--ink)" />
+              <circle cx="176" cy="164" r="5" fill="var(--primary)" />
+            </svg>
+            <figcaption>
+              Original circuit block diagram, not a device cross-section or measured response.
+              <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
+            </figcaption>
+            <table className="challenge-logic-table">
+              <caption>Ideal inverter states</caption>
+              <thead><tr><th scope="col">Input</th><th scope="col">Conducting device</th><th scope="col">Output</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Low</th><td>p-type</td><td>High</td></tr>
+                <tr><th scope="row">High</th><td>n-type</td><td>Low</td></tr>
+              </tbody>
+            </table>
+          </figure>
+          <div className="challenge-complementary-prose">
+            <h3>Control the Carrier Type</h3>
+            <p>
+              Pan et al. patterned niobium-doped p-type and rhenium-doped n-type
+              regions in few-layer 2H-MoTe₂, then connected them into inverter
+              arrays. This is a complementary-material example, rather than
+              a demonstration using the MoS₂ model here.
+              <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
+            </p>
+            <h3>Match the Whole Pair</h3>
+            <p>
+              Their inverter fabrication used different contact metals for the two
+              carrier types. Controlled doping helped match their on-currents:
+              changing carrier polarity alone does not finish the circuit.
+              <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
+            </p>
+            <p className="challenge-source-note">
+              The table shows ideal stable logic levels. Real switching passes
+              through an intermediate region with current and finite voltage gain.
+              NanoLab does not compute this circuit.
+            </p>
+            <Link className="text-link" href="/research#discovery-integration">
+              Connect this question to circuit integration →
+            </Link>
+          </div>
+        </div>
       </section>
       <section className="section challenges-outlook" id="outlook">
         <SectionHeading

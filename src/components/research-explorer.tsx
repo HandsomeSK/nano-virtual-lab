@@ -2,7 +2,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { references } from "@/data/references";
-import { studies, researchCategories } from "@/data/research";
+import {
+  studies,
+  researchCategories,
+  groupStudiesByCategory,
+} from "@/data/research";
 import { discoveryThemes } from "@/data/discoveries";
 import { ReferenceLink } from "./reference-link";
 import { SectionHeading } from "./page-shell";
@@ -179,99 +183,124 @@ export function ResearchExplorer({
       <section className="section research-studies" id="studies">
         <SectionHeading
           title="Study catalogue"
-          description="Scan the studies by year and topic. Open a study for its complete analysis, evidence and limits."
+          description="Browse studies by research category. Open a study for its complete analysis, evidence and limits."
         />
-        <div className="study-list evidence-catalogue">
-          {filtered.map((paper) => (
-            <article
-              key={paper.reference.id}
-              className="study-card"
-              id={"study-" + paper.reference.id}
-              data-selected={active === paper.reference.id}
+        <div className="catalogue-categories">
+          {groupStudiesByCategory(filtered).map((group) => (
+            <section
+              className="catalogue-category"
+              key={group.category}
+              aria-labelledby={"study-category-" + group.category.toLowerCase()}
             >
-              <header className="study-heading">
-                <p className="study-meta">
-                  <span>{paper.reference.year}</span>
-                  <span>{paper.direction ?? paper.category}</span>
-                </p>
-                <h3>{paper.reference.title}</h3>
+              <header className="catalogue-category-heading">
+                <h3 id={"study-category-" + group.category.toLowerCase()}>
+                  {group.category}
+                </h3>
+                <span className="muted text-sm">
+                  {group.studies.length}{" "}
+                  {group.studies.length === 1 ? "study" : "studies"}
+                </span>
               </header>
-              <p className="study-summary">
-                {paper.summary}{" "}
-                <ReferenceLink
-                  id={paper.reference.id}
-                  from={
-                    "/research?" +
-                    new URLSearchParams({
-                      ...(year ? { year } : {}),
-                      ...(category ? { category } : {}),
-                      study: paper.reference.id,
-                    }) +
-                    "#study-" +
-                    paper.reference.id
-                  }
-                />
-              </p>
-              <details
-                className="study-analysis"
-                open={active === paper.reference.id}
-                onToggle={(event) => {
-                  if (
-                    event.currentTarget.open &&
-                    active !== paper.reference.id
-                  ) {
-                    update(year, category, paper.reference.id);
-                  } else if (
-                    !event.currentTarget.open &&
-                    active === paper.reference.id
-                  ) {
-                    update(year, category, "");
-                  }
-                }}
-              >
-                <summary>
-                  {active === paper.reference.id
-                    ? "Close study analysis"
-                    : "View study analysis"}
-                  <span className="sr-only">: {paper.reference.title}</span>
-                </summary>
-                <div className="study-byline">
-                  {paper.reference.authors} · {paper.reference.venue}
-                </div>
-                <div className="study-layout">
-                  <div className="study-body">
-                    <h4>Research question</h4>
-                    <p>{paper.problem}</p>
-                    <p>{paper.question}</p>
-                    <h4>Method or evidence</h4>
-                    <p>{paper.demonstration}</p>
-                    <h4>Main findings</h4>
-                    <p>{paper.novelty}</p>
-                    {paper.figure ? (
-                      <ScientificFigure id={paper.figure} />
-                    ) : null}
-                    <h4>Limitations</h4>
-                    <p className="study-boundary">{paper.boundary}</p>
-                  </div>
-                  <aside className="study-context">
-                    <h4>Significance</h4>
-                    <p>{paper.whyMatters}</p>
-                    <h4>Related topics</h4>
-                    <Link className="text-link" href={paper.concept}>
-                      {paper.conceptLabel} →
-                    </Link>
-                    <Link
-                      className="text-link"
-                      href={"/challenges#" + paper.challenge}
+              <div className="study-list evidence-catalogue">
+                {group.studies.map((paper) => (
+                  <article
+                    key={paper.reference.id}
+                    className="study-card"
+                    id={"study-" + paper.reference.id}
+                    data-selected={active === paper.reference.id}
+                  >
+                    <header className="study-heading">
+                      <p className="study-meta">
+                        <span>{paper.reference.year}</span>
+                        <span>{paper.direction ?? paper.category}</span>
+                      </p>
+                      <h4>{paper.reference.title}</h4>
+                    </header>
+                    <p className="study-summary">
+                      {paper.summary}{" "}
+                      <ReferenceLink
+                        id={paper.reference.id}
+                        from={
+                          "/research?" +
+                          new URLSearchParams({
+                            ...(year ? { year } : {}),
+                            ...(category ? { category } : {}),
+                            study: paper.reference.id,
+                          }) +
+                          "#study-" +
+                          paper.reference.id
+                        }
+                      />
+                    </p>
+                    <details
+                      className="study-analysis"
+                      open={active === paper.reference.id}
+                      onToggle={(event) => {
+                        if (
+                          event.currentTarget.open &&
+                          active !== paper.reference.id
+                        ) {
+                          update(year, category, paper.reference.id);
+                        } else if (
+                          !event.currentTarget.open &&
+                          active === paper.reference.id
+                        ) {
+                          update(year, category, "");
+                        }
+                      }}
                     >
-                      Related engineering challenge →
-                    </Link>
-                  </aside>
-                </div>
-              </details>
-            </article>
+                      <summary>
+                        {active === paper.reference.id
+                          ? "Close study analysis"
+                          : "View study analysis"}
+                        <span className="sr-only">: {paper.reference.title}</span>
+                      </summary>
+                      <div className="study-byline">
+                        {paper.reference.authors} · {paper.reference.venue}
+                      </div>
+                      <div className="study-layout">
+                        <div className="study-body">
+                          <h5>Research question</h5>
+                          <p>{paper.problem}</p>
+                          <p>{paper.question}</p>
+                          <h5>Method or evidence</h5>
+                          <p>{paper.demonstration}</p>
+                          <h5>Main findings</h5>
+                          <p>{paper.novelty}</p>
+                          {paper.figure ? (
+                            <ScientificFigure id={paper.figure} />
+                          ) : null}
+                          <h5>Limitations</h5>
+                          <p className="study-boundary">{paper.boundary}</p>
+                        </div>
+                        <aside className="study-context">
+                          <h5>Significance</h5>
+                          <p>{paper.whyMatters}</p>
+                          <h5>Related topics</h5>
+                          <Link className="text-link" href={paper.concept}>
+                            {paper.conceptLabel} →
+                          </Link>
+                          <Link
+                            className="text-link"
+                            href={"/challenges#" + paper.challenge}
+                          >
+                            Related engineering challenge →
+                          </Link>
+                        </aside>
+                      </div>
+                    </details>
+                  </article>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
+        {!filtered.length ? (
+          <p className="muted">
+            No studies match the current filters. Clear the filters above to browse
+            every category.
+          </p>
+        ) : null}
       </section>
     </>
   );

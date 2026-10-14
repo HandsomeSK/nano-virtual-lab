@@ -376,6 +376,42 @@ export const references: Reference[] = [
     url: "https://www.nature.com/articles/s41467-020-19053-9",
     note: "Commentary on statistical evaluation and integration. Publisher PDF checked 14 October 2026, pp. 2–4: yield requires stated pass criteria; device distributions, operational stress and environmental/storage drift describe different aspects of qualification. NanoLab paraphrases this framework; no figures or measured datasets are reproduced.",
   },
+  {
+    id: "illarionov2024",
+    title:
+      "Process implications on the stability and reliability of 300 mm FAB MoS₂ field-effect transistors",
+    authors: "Yu. Yu. Illarionov, A. Karl, Q. Smets et al.",
+    year: 2024,
+    venue: "npj 2D Materials and Applications 8, 8; published 2 February 2024",
+    category: "Paper",
+    doi: "10.1038/s41699-024-00445-0",
+    url: "https://www.nature.com/articles/s41699-024-00445-0",
+    note: "Full publisher article checked 14 October 2026: analysis of hysteresis and bias-temperature instability, and device characterization methods. Opposing oxide-trap contributions can reduce the observed loop in the studied scaled devices. NanoLab's stress sequence is a qualitative guide; it reproduces no curves and predicts no lifetime.",
+  },
+  {
+    id: "panarella2024",
+    title:
+      "Evidence of contact-induced variability in industrially-fabricated highly-scaled MoS₂ FETs",
+    authors: "L. Panarella, B. Kaczer, Q. Smets et al.",
+    year: 2024,
+    venue: "npj 2D Materials and Applications 8, 44; published 14 July 2024",
+    category: "Paper",
+    doi: "10.1038/s41699-024-00482-9",
+    url: "https://imec-publications.be/server/api/core/bitstreams/269f5af3-c6d0-4e8b-b28a-46bcb2ffd122/content",
+    note: "Full published article retrieved from imec on 14 October 2026, pp. 1–4. Time traces and drain-polarity dependence support contact-impacting traps in the stated MoS₂ devices. NanoLab paraphrases these observations without generating experimental noise or importing a Schottky-barrier model.",
+  },
+  {
+    id: "pan2024",
+    title:
+      "Precise p-type and n-type doping of two-dimensional semiconductors for monolithic integrated circuits",
+    authors: "Y. Pan, T. Jian, P. Gu et al.",
+    year: 2024,
+    venue: "Nature Communications 15, 9631; published 7 November 2024",
+    category: "Paper",
+    doi: "10.1038/s41467-024-54050-2",
+    url: "https://d-nb.info/1354411528/34",
+    note: "Full published article retrieved from the German National Library on 14 October 2026, pp. 2–6. Nb- and Re-doped few-layer 2H-MoTe₂ form complementary inverter arrays. The NanoLab block diagram and logic table are original idealized explanations, not the experimental geometry or measured voltage-transfer curve.",
+  },
 ];
 export function referenceNumber(id: string) {
   return references.findIndex((ref) => ref.id === id) + 1;

@@ -30,6 +30,45 @@
   min-height: 100vh;
   min-height: 100dvh;
 }
+.techBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.techBackdrop::before,
+.techBackdrop::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.techBackdrop::before {
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 0% 70%, rgba(133, 215, 255, 0.08), transparent 38%),
+    radial-gradient(ellipse at 100% 80%, rgba(112, 224, 210, 0.045), transparent 34%);
+  animation: ambientLight 24s ease-in-out infinite alternate;
+}
+.techBackdrop::after {
+  inset: 64% -25% -45%;
+  background-image:
+    linear-gradient(rgba(133, 215, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(133, 215, 255, 0.12) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transform: perspective(640px) rotateX(62deg);
+  transform-origin: center top;
+  opacity: 0.38;
+  mask-image: radial-gradient(ellipse at 50% 0%, transparent 35%, #000 75%, transparent 100%);
+}
+@keyframes ambientLight {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
 .media {
   position: absolute;
   inset: 0;
@@ -342,6 +381,10 @@
   .page {
     min-height: 100svh;
   }
+  .techBackdrop::after {
+    opacity: 0.24;
+    background-size: 48px 48px;
+  }
 }
 @media (max-width: 560px) {
   .home {
@@ -371,5 +414,11 @@
 @media (max-width: 900px) and (max-height: 500px) {
   .hero {
     min-height: 400px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .techBackdrop::before {
+    animation: none;
+    opacity: 0.6;
   }
 }

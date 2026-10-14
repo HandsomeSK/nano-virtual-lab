@@ -1,6 +1,35 @@
 import type { FigureId } from "./figures";
 import type { challenges } from "./challenges";
 
+export const operatingHistoryCases = [
+  {
+    id: "bias-stress",
+    title: "A Small Loop Can Conceal Traps",
+    observation: "Compare sweep history with stress and recovery",
+    explanation:
+      "Illarionov et al. studied MoS₂ transistors made with a 300 mm FAB-compatible process. Some scaled devices showed a small hysteresis loop because opposing trapping contributions partly cancelled. Temperature and sweep time exposed the competing behaviour; a small loop alone did not demonstrate a defect-free gate stack.",
+    takeaway:
+      "Track threshold drift during a stated bias stress and after its removal. Recovery gives information that a single forward/reverse sweep misses.",
+    reference: "illarionov2024",
+  },
+  {
+    id: "contact-noise",
+    title: "Noise Can Start at the Contact",
+    observation: "Hold bias fixed and watch current over time",
+    explanation:
+      "Panarella et al. observed random telegraph noise: abrupt current changes as individual defects captured or released charge. In their scaled MoS₂ devices, changing drain polarity helped connect the fluctuations to injection barriers near side contacts, rather than treating every change as a channel threshold shift.",
+    takeaway:
+      "Check time traces and both drain polarities. A contact can be a fluctuating injection bottleneck, not simply a constant resistance.",
+    reference: "panarella2024",
+  },
+] as const;
+
+export const stressSequence = [
+  { title: "Baseline", description: "Record the initial transfer curve and measurement conditions." },
+  { title: "Stress", description: "Apply a stated gate bias for a stated duration and temperature." },
+  { title: "Recovery", description: "Remove the stress and track how the threshold changes with time." },
+] as const;
+
 export const challengeChecks: Record<
   (typeof challenges)[number]["id"],
   {

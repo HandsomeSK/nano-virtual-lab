@@ -72,8 +72,138 @@
   margin-top: 18px;
 }
 
+.challenge-stress-sequence {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  list-style-position: inside;
+  margin: 28px 0 12px;
+}
+
+.challenge-stress-sequence li {
+  border-top: 2px solid var(--primary);
+  padding-top: 16px;
+  color: var(--primary);
+}
+
+.challenge-stress-sequence h3 {
+  display: inline;
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.challenge-stress-sequence p,
+.challenge-history-case p,
+.challenge-complementary-prose p {
+  color: var(--prose);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 12px;
+}
+
+.challenge-history-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  margin: 32px 0 20px;
+}
+
+.challenge-history-case,
+.challenge-complementary-prose {
+  min-width: 0;
+}
+
+.challenge-history-case h3,
+.challenge-complementary-prose h3 {
+  font-size: 20px;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.challenge-history-case .challenge-observation-label {
+  color: var(--primary);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.challenge-history-case .challenge-takeaway {
+  border-left: 2px solid var(--primary);
+  padding-left: 16px;
+}
+
+.challenge-history .challenge-source-note,
+.challenge-complementary .challenge-source-note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.challenge-complementary-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.challenge-logic-figure {
+  min-width: 0;
+  margin: 0;
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 20px;
+}
+
+.challenge-logic-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.challenge-logic-figure figcaption {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  margin-top: 16px;
+}
+
+.challenge-logic-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: var(--prose);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.challenge-logic-table caption {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.challenge-logic-table th,
+.challenge-logic-table td {
+  border-top: 1px solid var(--line);
+  padding: 10px 6px 10px 0;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+.challenge-complementary-prose h3:not(:first-child) {
+  margin-top: 28px;
+}
+
+.challenge-complementary-prose .text-link {
+  margin-top: 20px;
+}
+
 @media (max-width: 900px) {
-  .challenge-qualification-layout {
+  .challenge-qualification-layout,
+  .challenge-history-grid,
+  .challenge-complementary-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
@@ -82,5 +212,12 @@
     border-left: 0;
     border-top: 1px solid var(--line);
     padding: 20px 0 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .challenge-stress-sequence {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
   }
 }

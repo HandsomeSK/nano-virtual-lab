@@ -21,6 +21,26 @@ export const metadata: Metadata = {
   description:
     "Connect verified MoS₂ research across interfaces, stacking, contacts, scaling, deformable devices and circuit integration.",
 };
+const overviewSteps = [
+  {
+    title: "Material structure",
+    explanation:
+      "Stacking changes the electronic structure. How atomic sheets meet matters as well as how many layers are present.",
+    directions: ["stacking"],
+  },
+  {
+    title: "Device control",
+    explanation:
+      "Dielectrics couple the gate to the channel; contacts inject carriers. Shrinking dimensions tests whether the gate can maintain control.",
+    directions: ["interfaces", "contacts", "scaling"],
+  },
+  {
+    title: "System integration",
+    explanation:
+      "Motion must preserve connected paths. Circuits require many devices to work together through a repeatable fabrication process.",
+    directions: ["stretchable", "integration"],
+  },
+];
 export default async function Page({
   searchParams,
 }: {
@@ -47,54 +67,46 @@ export default async function Page({
             title="Research Overview"
             description="From material properties to working devices"
           />
+          <p className="research-overview-lead">
+            An atomically thin channel is a starting point. A working transistor
+            also needs reliable insulation, efficient carrier injection and a
+            repeatable fabrication process. These requirements meet at interfaces,
+            where an oxide, an electrode or another atomic sheet can change the
+            finished device.
+            <ReferenceLink id="engineering2024" from="/research#research-overview" />
+          </p>
           <div className="research-overview-layout">
-            <div className="research-overview-prose">
-              <p>
-                An atomically thin semiconductor changes how a gate can control a
-                channel, but a useful transistor also needs reliable insulation,
-                efficient carrier injection and a repeatable fabrication process.
-                Those requirements meet at interfaces: the boundary with an oxide,
-                an electrode or another atomic sheet can change the behaviour of
-                the finished device.
-                <ReferenceLink
-                  id="engineering2024"
-                  from="/research#research-overview"
-                />
-              </p>
-              <p>
-                The six directions below follow those dependencies. Stacking changes
-                the electronic structure; dielectrics and contacts determine how
-                that structure is used. Scaling tests electrostatic control.
-                Deformable devices add a requirement to preserve connections under
-                motion, while circuit integration asks whether many devices can work
-                together. An advance in one direction creates new tests for the others.
-              </p>
-              <p className="research-editorial-note">
-                NanoLab provides the explanatory framework and cross-topic synthesis.
-                Numbered citations identify the supporting sources; reported results
-                remain tied to their devices and methods. Selected research was
-                reviewed through 13 October 2026, rather than claiming complete
-                coverage of the field.
-              </p>
-            </div>
             <ResearchSystemMap />
+            <div className="research-overview-steps">
+              {overviewSteps.map((step) => (
+                <article className="research-overview-step" key={step.title}>
+                  <h3>{step.title}</h3>
+                  <p>{step.explanation}</p>
+                  <nav aria-label={step.title + " research directions"}>
+                    {step.directions.map((id) => {
+                      const direction = researchDirections.find((item) => item.id === id)!;
+                      return (
+                        <a key={id} href={"#discovery-" + id}>
+                          {direction.label}
+                        </a>
+                      );
+                    })}
+                  </nav>
+                </article>
+              ))}
+            </div>
           </div>
+          <p className="research-editorial-note">
+            NanoLab synthesis, supported by the numbered sources. Reported results
+            remain specific to their devices and methods. Selected research
+            reviewed through 13 October 2026.
+          </p>
         </section>
         <section className="section" id="research-directions">
           <SectionHeading
             title="Research Directions"
             description="Follow each scientific question through its mechanism, engineering challenge, selected evidence and unresolved limits."
           />
-          <nav
-            className="research-direction-nav"
-            aria-label="Six research directions"
-          >
-            {researchDirections.map((direction) => (
-              <a key={direction.id} href={"#discovery-" + direction.id}>
-                {direction.label}
-              </a>
-            ))}
-          </nav>
           <DiscoverySynthesis />
         </section>
         <section className="section" id="research-connections">

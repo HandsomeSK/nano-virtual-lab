@@ -22,6 +22,16 @@ type Study = {
   novelty: string;
   figure?: FigureId;
 };
+export function groupStudiesByCategory<T extends Pick<Study, "category">>(
+  items: readonly T[],
+) {
+  return researchCategories
+    .map((category) => ({
+      category,
+      studies: items.filter((study) => study.category === category),
+    }))
+    .filter((group) => group.studies.length > 0);
+}
 export const studies: Study[] = [
   {
     reference: "mak2010",
