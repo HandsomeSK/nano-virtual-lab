@@ -8,6 +8,29 @@ import { foundationDetails } from "../src/data/foundation-details.ts";
 import { challengeEvidence } from "../src/data/challenge-evidence.ts";
 import { materials } from "../src/data/materials.ts";
 import { challenges } from "../src/data/challenges.ts";
+import { discoveryThemes } from "../src/data/discoveries.ts";
+import {
+  researchDirections,
+  researchConnections,
+} from "../src/data/research-knowledge.ts";
+
+test("research explanations keep the six legacy directions and trace their connections to existing evidence", () => {
+  const directionIds = new Set(researchDirections.map((direction) => direction.id));
+  assert.deepEqual(
+    researchDirections.map((direction) => direction.id),
+    discoveryThemes.map((story) => story.id),
+  );
+  assert.equal(directionIds.size, 6);
+  for (const direction of researchDirections) {
+    assert.ok(directionIds.has(direction.connectedId));
+    assert.notEqual(direction.id, direction.connectedId);
+  }
+  for (const connection of researchConnections) {
+    assert.ok(directionIds.has(connection.fromId));
+    assert.ok(directionIds.has(connection.toId));
+    assert.ok(references.some((reference) => reference.id === connection.reference));
+  }
+});
 
 test("scientific content preserves research sources and resolves citations after identity cleanup", () => {
   const originalIds = [

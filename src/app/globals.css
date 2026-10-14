@@ -126,7 +126,7 @@ body:has(.nano-home) {
   background: var(--home-background, #0c1524) !important;
 }
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 90px;
 }
 body {

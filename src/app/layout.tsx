@@ -1,8 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import "./experience.css";
 import "./size-scale-feedback.css";
 import "./instrument-feedback.css";
+import "./navigation-menu.css";
+import "./research-hub.css";
+import "./research-evidence.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AnchorNavigation } from "@/components/anchor-navigation";
@@ -28,7 +32,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en">
       <head>
         <link
           rel="preload"
@@ -53,7 +57,9 @@ export default function RootLayout({
           {children}
         </main>
         <SiteFooter />
-        <AnchorNavigation />
+        <Suspense fallback={null}>
+          <AnchorNavigation />
+        </Suspense>
       </body>
     </html>
   );

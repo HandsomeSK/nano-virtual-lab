@@ -16,7 +16,7 @@ function selectedChallenge() {
 function selectChallenge(id: string) {
   if (window.location.hash === "#" + id) return;
   window.history.replaceState(
-    null,
+    window.history.state,
     "",
     window.location.pathname + window.location.search + "#" + id,
   );
@@ -364,7 +364,13 @@ export function ChallengeExplorer() {
               selectChallenge(item.id);
               document
                 .getElementById(item.id)
-                ?.scrollIntoView({ block: "start" });
+                ?.scrollIntoView({
+                  block: "start",
+                  behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                    .matches
+                    ? "instant"
+                    : "smooth",
+                });
             }}
           >
             <span className="challenge-category">{item.tag}</span>
@@ -385,7 +391,13 @@ export function ChallengeExplorer() {
             <header className="challenge-heading">
               <p className="challenge-category">{item.tag}</p>
               <h2>{item.title}</h2>
-              <p>{item.summary}</p>
+              <p>
+                {item.summary}
+                <ReferenceLink
+                  id={item.reference}
+                  from={"/challenges#" + item.id}
+                />
+              </p>
             </header>
             <div className="challenge-layout">
               <div className="challenge-visual">
@@ -437,33 +449,20 @@ export function ChallengeExplorer() {
                 {challengeEvidence[item.id].boundary}
               </p>
               <ScientificFigure id={challengeEvidence[item.id].figure} />
-              <a
-                className="text-link"
-                href={challengeEvidence[item.id].source}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read the research case ↗
-              </a>
             </details>
             <div className="actions challenge-actions">
               {"simulator" in item ? (
                 <Link className="button-secondary" href={item.simulator}>
                   {item.simLabel} →
                 </Link>
-              ) : null}
-              <Link className="text-link" href={item.research}>
-                Related research →
-              </Link>
-              <span className="inline-source">
+              ) : (
                 <Link className="text-link" href={item.foundation}>
                   Review the foundation →
                 </Link>
-                <ReferenceLink
-                  id={item.reference}
-                  from={"/challenges#" + item.id}
-                />
-              </span>
+              )}
+              <Link className="text-link" href={item.research}>
+                Related research →
+              </Link>
             </div>
           </section>
         ))}

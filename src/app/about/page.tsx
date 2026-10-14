@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   PageShell,
-  RelatedTopics,
   SectionHeading,
 } from "@/components/page-shell";
 import { ReferenceBrowser } from "@/components/reference-browser";
@@ -244,20 +243,6 @@ export default async function Page({
           </Link>
         </div>
       </section>
-      <RelatedTopics
-        links={[
-          {
-            href: "/",
-            title: "Home",
-            description: "Restart the connected learning journey.",
-          },
-          {
-            href: "/research",
-            title: "Research Frontier",
-            description: "Explore the studies behind this platform.",
-          },
-        ]}
-      />
     </PageShell>
   );
 }

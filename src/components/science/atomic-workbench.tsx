@@ -81,7 +81,7 @@ export function AtomicWorkbench({
     if (syncUrl) {
       const url = new URL(window.location.href);
       url.searchParams.set("material", next);
-      history.replaceState(null, "", url);
+      history.replaceState(history.state, "", url);
     }
   }
   return (

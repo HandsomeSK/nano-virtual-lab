@@ -43,10 +43,7 @@ export function RelatedTopics({
 }) {
   return (
     <section className="related-topics">
-      <SectionHeading
-        title="Continue Exploring"
-        description="Connect this idea to the next part of the platform."
-      />
+      <SectionHeading title="Related topics" />
       <div className="related-grid">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="related-link">

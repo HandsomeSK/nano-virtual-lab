@@ -74,7 +74,11 @@ export function Comparison({
     else setB(id);
     const url = new URL(window.location.href);
     url.searchParams.set(slot, id);
-    window.history.replaceState(null, "", url.pathname + url.search + url.hash);
+    window.history.replaceState(
+      window.history.state,
+      "",
+      url.pathname + url.search + url.hash,
+    );
   }
   function remove(id: string) {
     try {

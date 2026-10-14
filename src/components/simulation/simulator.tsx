@@ -44,7 +44,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
     setParameters(next);
     setMessage("");
     window.history.replaceState(
-      null,
+      window.history.state,
       "",
       "/simulator?" + parametersQuery(next) + window.location.hash,
     );
@@ -197,7 +197,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
               setAdjustment(null);
               setMessage("");
               window.history.replaceState(
-                null,
+                window.history.state,
                 "",
                 "/simulator?" + parametersQuery(defaultParameters),
               );
@@ -330,16 +330,13 @@ export function Simulator({ initial }: { initial: Parameters }) {
         </div>
       </div>
       <section className="section">
-        <h2>Related Knowledge</h2>
+        <h2>Understand the model</h2>
         <div className="actions">
           <Link href="/foundations#bands" className="text-link">
             Energy Bands →
           </Link>
           <Link href="/foundations#transistors" className="text-link">
             Transistor Basics →
-          </Link>
-          <Link href="/comparison" className="text-link">
-            Material Comparison →
           </Link>
         </div>
       </section>
