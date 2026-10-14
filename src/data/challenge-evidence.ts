@@ -1,4 +1,48 @@
 import type { FigureId } from "./figures";
+import type { challenges } from "./challenges";
+
+export const challengeChecks: Record<
+  (typeof challenges)[number]["id"],
+  {
+    measurement: string;
+    measurementReference: string;
+    tradeoff: string;
+    tradeoffReference: string;
+  }
+> = {
+  contacts: {
+    measurement:
+      "Compare otherwise consistent devices with different channel lengths at low drain bias and the same carrier density. Transfer-length-method fitting separates channel resistance from the two-contact contribution. State whether a value describes one contact, both contacts, or a width-normalized resistance.",
+    measurementReference: "benchmark2022",
+    tradeoff:
+      "A contact must inject efficiently at a small footprint and survive later processing. Low resistance before annealing does not establish thermal compatibility of the completed stack.",
+    tradeoffReference: "engineering2024",
+  },
+  interfaces: {
+    measurement:
+      "Record forward and reverse gate sweeps with their rate, hold time and bias range; measure gate leakage separately from drain current. Compare like measurement conditions before attributing a change to the interface.",
+    measurementReference: "benchmark2022",
+    tradeoff:
+      "Adsorbed molecules can change trapping and the apparent hysteresis. State humidity, gas environment and temperature: a narrow loop under one condition does not establish stability in another.",
+    tradeoffReference: "shimazu2016",
+  },
+  scaling: {
+    measurement:
+      "Compare transfer curves at low and high drain bias. A drain-dependent threshold shift probes drain-induced barrier lowering; evaluate off-current and subthreshold behaviour too. Report physical gate length, channel length and contact dimensions separately.",
+    measurementReference: "benchmark2022",
+    tradeoff:
+      "Reducing the gate dimension leaves less room for contacts and alignment. Higher device density requires the complete layout to shrink while gate control is preserved; a short gate is only one dimension.",
+    tradeoffReference: "engineering2024",
+  },
+  manufacturing: {
+    measurement:
+      "Map threshold voltage, contact resistance and leakage across multiple devices and wafer positions. Report distributions, the number tested and explicit pass criteria. Film coverage alone cannot establish electrical uniformity or functional yield.",
+    measurementReference: "lanza2020",
+    tradeoff:
+      "Track properties after growth, transfer and patterning. Residues, wrinkles and process-induced defects can change local behaviour, so assess the complete fabrication sequence rather than only the starting film.",
+    tradeoffReference: "lanza2020",
+  },
+};
 
 export const challengeEvidence: Record<
   string,

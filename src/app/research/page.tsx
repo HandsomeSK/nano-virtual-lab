@@ -11,6 +11,7 @@ import { ReferenceLink } from "@/components/reference-link";
 import { queryValue, type Query } from "@/lib/site";
 import { InterfaceFeature } from "@/components/research/interface-feature";
 import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
+import { ResearchSystemMap } from "@/components/research/research-system-map";
 import {
   researchConnections,
   researchDirections,
@@ -46,34 +47,37 @@ export default async function Page({
             title="Research Overview"
             description="From material properties to working devices"
           />
-          <div className="research-overview-prose">
-            <p>
-              An atomically thin semiconductor changes how a gate can control a
-              channel, but a useful transistor also needs reliable insulation,
-              efficient carrier injection and a repeatable fabrication process.
-              Those requirements meet at interfaces: the boundary with an oxide,
-              an electrode or another atomic sheet can change the behaviour of
-              the finished device.
-              <ReferenceLink
-                id="engineering2024"
-                from="/research#research-overview"
-              />
-            </p>
-            <p>
-              The six directions below follow those dependencies. Stacking changes
-              the electronic structure; dielectrics and contacts determine how
-              that structure is used. Scaling tests electrostatic control.
-              Deformable devices add a requirement to preserve connections under
-              motion, while circuit integration asks whether many devices can work
-              together. An advance in one direction creates new tests for the others.
-            </p>
-            <p className="research-editorial-note">
-              NanoLab provides the explanatory framework and cross-topic synthesis.
-              Numbered citations identify the supporting sources; reported results
-              remain tied to their devices and methods. Selected research was
-              reviewed through 13 October 2026, rather than claiming complete
-              coverage of the field.
-            </p>
+          <div className="research-overview-layout">
+            <div className="research-overview-prose">
+              <p>
+                An atomically thin semiconductor changes how a gate can control a
+                channel, but a useful transistor also needs reliable insulation,
+                efficient carrier injection and a repeatable fabrication process.
+                Those requirements meet at interfaces: the boundary with an oxide,
+                an electrode or another atomic sheet can change the behaviour of
+                the finished device.
+                <ReferenceLink
+                  id="engineering2024"
+                  from="/research#research-overview"
+                />
+              </p>
+              <p>
+                The six directions below follow those dependencies. Stacking changes
+                the electronic structure; dielectrics and contacts determine how
+                that structure is used. Scaling tests electrostatic control.
+                Deformable devices add a requirement to preserve connections under
+                motion, while circuit integration asks whether many devices can work
+                together. An advance in one direction creates new tests for the others.
+              </p>
+              <p className="research-editorial-note">
+                NanoLab provides the explanatory framework and cross-topic synthesis.
+                Numbered citations identify the supporting sources; reported results
+                remain tied to their devices and methods. Selected research was
+                reviewed through 13 October 2026, rather than claiming complete
+                coverage of the field.
+              </p>
+            </div>
+            <ResearchSystemMap />
           </div>
         </section>
         <section className="section" id="research-directions">
