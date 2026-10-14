@@ -179,7 +179,7 @@ export function ResearchExplorer({
       <section className="section research-studies" id="studies">
         <SectionHeading
           title="Study catalogue"
-          description="Each contribution links to its full citation. Expand an analysis to inspect the evidence and its limits."
+          description="Scan the studies by year and topic. Open a study for its complete analysis, evidence and limits."
         />
         <div className="study-list evidence-catalogue">
           {filtered.map((paper) => (
@@ -229,7 +229,12 @@ export function ResearchExplorer({
                   }
                 }}
               >
-                <summary>View study analysis</summary>
+                <summary>
+                  {active === paper.reference.id
+                    ? "Close study analysis"
+                    : "View study analysis"}
+                  <span className="sr-only">: {paper.reference.title}</span>
+                </summary>
                 <div className="study-byline">
                   {paper.reference.authors} · {paper.reference.venue}
                 </div>

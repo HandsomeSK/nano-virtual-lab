@@ -1,0 +1,86 @@
+.challenges-outlook {
+  max-width: none;
+}
+
+.challenge-observation {
+  min-width: 0;
+}
+
+.challenge-check {
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+  padding-top: 18px;
+}
+
+.challenge-check h3,
+.challenge-qualification h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.challenge-check p {
+  color: var(--prose);
+  font-size: 15px;
+  line-height: 1.75;
+  margin-top: 10px;
+}
+
+.challenge-qualification-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 36px;
+}
+
+.challenge-outlook-prose {
+  min-width: 0;
+}
+
+.challenge-outlook-prose p {
+  max-width: 74ch;
+}
+
+.challenge-qualification {
+  border-left: 1px solid var(--line);
+  padding-left: 28px;
+  min-width: 0;
+}
+
+.challenge-qualification dl {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.challenge-qualification dt {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.challenge-qualification dd {
+  color: var(--prose);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 6px;
+}
+
+.challenge-qualification .qualification-source {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  margin-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .challenge-qualification-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .challenge-qualification {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 20px 0 0;
+  }
+}

@@ -5,7 +5,10 @@ import { references } from "../src/data/references.ts";
 import { studies } from "../src/data/research.ts";
 import { knowledge } from "../src/data/knowledge.ts";
 import { foundationDetails } from "../src/data/foundation-details.ts";
-import { challengeEvidence } from "../src/data/challenge-evidence.ts";
+import {
+  challengeChecks,
+  challengeEvidence,
+} from "../src/data/challenge-evidence.ts";
 import { materials } from "../src/data/materials.ts";
 import { challenges } from "../src/data/challenges.ts";
 import { discoveryThemes } from "../src/data/discoveries.ts";
@@ -71,6 +74,11 @@ test("scientific content preserves research sources and resolves citations after
     if (item.figure) assert.ok(figures[item.figure], item.figure);
   }
   for (const item of knowledge) assert.ok(foundationDetails[item.id], item.id);
+  for (const [id, checks] of Object.entries(challengeChecks)) {
+    assert.ok(challenges.some((challenge) => challenge.id === id), id);
+    assert.ok(refIds.has(checks.measurementReference), checks.measurementReference);
+    assert.ok(refIds.has(checks.tradeoffReference), checks.tradeoffReference);
+  }
   for (const figure of Object.values(figures)) {
     if (figure.doi)
       assert.ok(

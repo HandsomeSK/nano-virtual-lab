@@ -26,11 +26,7 @@ export default function InterfaceDiscovery() {
         <span className="eyebrow">
           Research story · Nature Communications · 7 October 2026
         </span>
-        <h1>
-          The Interface
-          <br />
-          Breakthrough
-        </h1>
+        <h1>The Interface Breakthrough</h1>
         <p>
           How a nanometre-scale interfacial layer helps unlock the potential of
           MoS₂ transistors.

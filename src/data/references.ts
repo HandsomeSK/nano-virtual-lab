@@ -364,6 +364,18 @@ export const references: Reference[] = [
     url: "https://pubs.acs.org/doi/10.1021/acsomega.9b04360",
     note: "Structural lattice table supports representative 2H c ≈ 12.29 Å and sheet spacing ≈ 6.15 Å. The viewer holds spacing fixed for the ideal 3R registry comparison and does not claim a relaxed 3R structure.",
   },
+  {
+    id: "lanza2020",
+    title:
+      "Yield, variability, reliability, and stability of two-dimensional materials based solid-state electronic devices",
+    authors: "M. Lanza, Q. Smets, C. Huyghebaert & L.-J. Li",
+    year: 2020,
+    venue: "Nature Communications 11, 5689; published 10 November 2020",
+    category: "Paper",
+    doi: "10.1038/s41467-020-19053-9",
+    url: "https://www.nature.com/articles/s41467-020-19053-9",
+    note: "Commentary on statistical evaluation and integration. Publisher PDF checked 14 October 2026, pp. 2–4: yield requires stated pass criteria; device distributions, operational stress and environmental/storage drift describe different aspects of qualification. NanoLab paraphrases this framework; no figures or measured datasets are reproduced.",
+  },
 ];
 export function referenceNumber(id: string) {
   return references.findIndex((ref) => ref.id === id) + 1;

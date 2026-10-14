@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useSyncExternalStore } from "react";
 import { challenges } from "@/data/challenges";
 import { ReferenceLink } from "./reference-link";
-import { challengeEvidence } from "@/data/challenge-evidence";
+import { challengeChecks, challengeEvidence } from "@/data/challenge-evidence";
 import { ScientificFigure } from "./scientific-figure";
 function subscribe(callback: () => void) {
   window.addEventListener("hashchange", callback);
@@ -400,8 +400,20 @@ export function ChallengeExplorer() {
               </p>
             </header>
             <div className="challenge-layout">
-              <div className="challenge-visual">
-                <ChallengeDiagram id={item.id} description={item.diagram} />
+              <div className="challenge-observation">
+                <div className="challenge-visual">
+                  <ChallengeDiagram id={item.id} description={item.diagram} />
+                </div>
+                <div className="challenge-check">
+                  <h3>What to measure</h3>
+                  <p>
+                    {challengeChecks[item.id].measurement}
+                    <ReferenceLink
+                      id={challengeChecks[item.id].measurementReference}
+                      from={"/challenges#" + item.id}
+                    />
+                  </p>
+                </div>
               </div>
               <div className="challenge-analysis">
                 <details
@@ -430,6 +442,16 @@ export function ChallengeExplorer() {
                     {item.solution}
                     <ReferenceLink
                       id="engineering2024"
+                      from={"/challenges#" + item.id}
+                    />
+                  </p>
+                </div>
+                <div className="challenge-check">
+                  <h3>Design consideration</h3>
+                  <p>
+                    {challengeChecks[item.id].tradeoff}
+                    <ReferenceLink
+                      id={challengeChecks[item.id].tradeoffReference}
                       from={"/challenges#" + item.id}
                     />
                   </p>
