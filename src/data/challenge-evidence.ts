@@ -1,6 +1,22 @@
 import type { FigureId } from "./figures";
 import type { challenges } from "./challenges";
 
+export const thermalBoundaryCase = {
+  reference: "huang-thermal2025",
+  explanation:
+    "Huang et al. tested heat removal from CVD-grown monolayer MoS₂ through untreated SiO₂ and molecularly modified surfaces. An NH₂-terminated self-assembled monolayer (SAM) improved thermal coupling across the interface.",
+  measurements: [
+    { surface: "Pristine SiO₂", conductance: "16.4 ± 2.3" },
+    { surface: "NH₂-SAM on SiO₂", conductance: "35.7 ± 2.5" },
+  ],
+  conditions:
+    "Raman thermometry in vacuum; electrically heated channels 1.8–2.2 µm long and 8 µm wide. Reported variation across five devices; these values are interface conductance, not bulk thermal conductivity.",
+  method:
+    "Calibrated Raman shifts distinguish channel and substrate temperatures. The extraction subtracts contact heating and the oxide contribution to isolate the thermal boundary.",
+  boundary:
+    "The comparison concerns this stack and measurement method; it does not establish a universal material constant or operating lifetime. NanoLab fixes mobility and does not solve temperature or heat flow.",
+} as const;
+
 export const operatingHistoryCases = [
   {
     id: "bias-stress",

@@ -7,7 +7,11 @@ import {
 } from "@/components/page-shell";
 import { ChallengeExplorer } from "@/components/challenge-explorer";
 import { ReferenceLink } from "@/components/reference-link";
-import { operatingHistoryCases, stressSequence } from "@/data/challenge-evidence";
+import {
+  operatingHistoryCases,
+  stressSequence,
+  thermalBoundaryCase,
+} from "@/data/challenge-evidence";
 export const metadata: Metadata = { title: "Engineering Challenges" };
 export default function Page() {
   return (
@@ -20,7 +24,94 @@ export default function Page() {
           title="Challenges Overview"
           description="Choose a problem, explore its mechanism and device impact, then follow the related experiment or research direction."
         />
+        <nav className="challenge-section-links" aria-label="Further engineering challenges">
+          <span>Further challenges</span>
+          <Link href="#thermal-management">Self-Heating & Heat Removal</Link>
+          <Link href="#operating-history">Instability Over Time</Link>
+          <Link href="#complementary-logic">Complementary Logic</Link>
+        </nav>
         <ChallengeExplorer />
+      </section>
+      <section className="section challenge-thermal" id="thermal-management">
+        <SectionHeading
+          title="Heat Must Leave the Channel"
+          description="A transistor needs a heat path as well as an electrical path."
+        />
+        <div className="challenge-thermal-layout">
+          <figure className="challenge-thermal-figure">
+            <svg viewBox="0 0 520 300" role="img" aria-label="Conceptual heat path from the MoS₂ channel across a molecularly modified interface, through silicon dioxide and into the silicon support.">
+              <defs>
+                <marker id="thermal-heat-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0 0L6 3L0 6" fill="var(--orange-ink)" />
+                </marker>
+              </defs>
+              <rect x="34" y="114" width="452" height="66" rx="4" fill="var(--orange-soft)" stroke="var(--orange-ink)" />
+              <rect x="34" y="180" width="452" height="82" rx="4" fill="var(--indigo-soft)" stroke="var(--muted)" />
+              <rect x="42" y="82" width="436" height="12" rx="3" fill="var(--cyan-soft)" stroke="var(--cyan-ink)" strokeWidth="2" />
+              <path d="M44 104H476" fill="none" stroke="var(--primary)" strokeWidth="3" strokeDasharray="6 6" />
+              <rect x="42" y="45" width="98" height="36" rx="4" fill="var(--muted)" />
+              <rect x="380" y="45" width="98" height="36" rx="4" fill="var(--muted)" />
+              <g fill="var(--ink)" fontSize="18" textAnchor="middle">
+                <text x="91" y="32">Source</text>
+                <text x="429" y="32">Drain</text>
+                <text x="260" y="65">MoS₂ channel</text>
+                <text x="107" y="152">SiO₂</text>
+                <text x="114" y="228">Silicon</text>
+              </g>
+              <g fill="none" stroke="var(--orange-ink)" strokeWidth="3" markerEnd="url(#thermal-heat-arrow)">
+                <path d="M221 90V240" />
+                <path d="M260 90V240" />
+                <path d="M299 90V240" />
+              </g>
+              <path d="M327 105H370L388 126" fill="none" stroke="var(--primary)" strokeWidth="1.5" />
+              <text x="376" y="146" fill="var(--ink)" fontSize="16">SAM interface</text>
+              <text x="260" y="287" textAnchor="middle" fill="var(--orange-ink)" fontSize="16">Heat flows into the supporting stack</text>
+            </svg>
+            <figcaption>
+              Original heat-path schematic; layers are illustrative, with no calculated temperature field.
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </figcaption>
+          </figure>
+          <div className="challenge-thermal-prose">
+            <h3>A Molecular Layer Changes the Heat Path</h3>
+            <p>
+              {thermalBoundaryCase.explanation}
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </p>
+            <table className="challenge-thermal-table">
+              <caption>Measured thermal boundary conductance (MW m⁻² K⁻¹)</caption>
+              <thead><tr><th scope="col">Supporting surface</th><th scope="col">Conductance</th></tr></thead>
+              <tbody>
+                {thermalBoundaryCase.measurements.map((measurement) => (
+                  <tr key={measurement.surface}>
+                    <th scope="row">{measurement.surface}</th>
+                    <td>{measurement.conductance}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="challenge-source-note">
+              {thermalBoundaryCase.conditions}
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </p>
+          </div>
+        </div>
+        <div className="challenge-thermal-notes">
+          <div>
+            <h3>Separate the Interface from the Whole Stack</h3>
+            <p>
+              {thermalBoundaryCase.method}
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </p>
+          </div>
+          <div>
+            <h3>What This Model Leaves Open</h3>
+            <p>
+              {thermalBoundaryCase.boundary}
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </p>
+          </div>
+        </div>
       </section>
       <section className="section challenge-history" id="operating-history">
         <SectionHeading

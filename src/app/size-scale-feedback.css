@@ -53,22 +53,22 @@
 }
 .size-scale-examples {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin-top: 20px;
 }
 .size-scale-examples button {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
-  padding: 14px 10px;
+  padding: 12px 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: transparent;
   color: var(--ink);
-  text-align: center;
+  text-align: left;
   cursor: pointer;
 }
 .size-scale-examples button:hover {
@@ -82,12 +82,16 @@
 .size-scale-example-preview {
   display: grid;
   place-items: center;
-  height: 72px;
+  height: 54px;
+}
+.size-scale-example-preview .size-scale-dot {
+  max-width: 52px;
+  max-height: 52px;
 }
 .size-scale-example-copy {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
   font-size: 12px;
   line-height: 1.45;
 }
@@ -95,8 +99,23 @@
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+.size-scale-source {
+  min-height: 1.5em;
+}
 @media (max-width: 560px) {
   .size-scale-examples {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .size-scale-examples button {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .size-scale-example-preview {
+    height: 44px;
+  }
+  .size-scale-example-preview .size-scale-dot {
+    max-width: 42px;
+    max-height: 42px;
   }
 }

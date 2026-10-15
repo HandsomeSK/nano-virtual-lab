@@ -9,6 +9,7 @@ import {
   challengeChecks,
   challengeEvidence,
   operatingHistoryCases,
+  thermalBoundaryCase,
 } from "../src/data/challenge-evidence.ts";
 import { materials } from "../src/data/materials.ts";
 import { challenges } from "../src/data/challenges.ts";
@@ -59,6 +60,10 @@ test("scientific content preserves research sources and resolves citations after
   );
   const refIds = new Set(references.map((ref) => ref.id));
   assert.equal(refIds.size, references.length);
+  const sourceDois = references.flatMap((reference) =>
+    reference.doi ? [reference.doi.toLowerCase()] : [],
+  );
+  assert.equal(new Set(sourceDois).size, sourceDois.length);
   assert.equal(
     new Set(studies.map((study) => study.reference)).size,
     studies.length,
@@ -70,6 +75,7 @@ test("scientific content preserves research sources and resolves citations after
     ...challenges,
     ...Object.values(challengeEvidence),
     ...operatingHistoryCases,
+    thermalBoundaryCase,
     ...Object.values(foundationDetails),
   ]) {
     assert.ok(refIds.has(item.reference), item.reference);
