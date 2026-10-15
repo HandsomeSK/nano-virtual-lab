@@ -4,16 +4,26 @@ import {
 } from "@/lib/science/atomic-structure";
 import styles from "./home-material-motifs.module.css";
 
+const structures = {
+  graphene: createAtomicStructure("graphene", 1, "2H", 1),
+  mos2: createAtomicStructure("mos2", 1, "2H", 1),
+};
 const motifs = [
   {
-    material: "graphene" as const,
-    label: "C",
-    structure: createAtomicStructure("graphene", 1, "2H", 1),
+    className: styles.graphene,
+    structure: structures.graphene,
   },
   {
-    material: "mos2" as const,
-    label: "MoS₂",
-    structure: createAtomicStructure("mos2", 1, "2H", 1),
+    className: styles.mos2,
+    structure: structures.mos2,
+  },
+  {
+    className: styles.graphene + " " + styles.echo,
+    structure: structures.graphene,
+  },
+  {
+    className: styles.mos2 + " " + styles.echo,
+    structure: structures.mos2,
   },
 ];
 
@@ -21,8 +31,8 @@ const motifs = [
 export function HomeMaterialMotifs() {
   return (
     <div className={styles.field} aria-hidden="true">
-      {motifs.map(({ material, label, structure }) => (
-        <div key={material} className={styles.motif + " " + styles[material]}>
+      {motifs.map(({ className, structure }) => (
+        <div key={className} className={styles.motif + " " + className}>
           <div className={styles.turn}>
             <svg viewBox="-145 -110 290 220" fill="none" focusable="false">
               <g stroke="#9cbed1" strokeWidth="1.3" strokeLinecap="round">
@@ -59,7 +69,6 @@ export function HomeMaterialMotifs() {
                 ))}
             </svg>
           </div>
-          <span className={styles.label}>{label}</span>
         </div>
       ))}
     </div>
