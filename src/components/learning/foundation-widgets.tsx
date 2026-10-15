@@ -5,21 +5,17 @@ import { BandDiagram } from "./band-diagram";
 import { GrapheneStructureExplorer } from "./graphene-structure";
 import { GrapheneElectronicsExplorer } from "./graphene-electronics";
 import { ReferenceLink } from "@/components/reference-link";
+import {
+  formatScaleLength,
+  selectedScaleExample,
+  sizeScaleExamples,
+} from "@/data/size-scale";
 
 function ScaleExplorer() {
   const [power, setPower] = useState(0);
   const size = 10 ** power;
-  const examples = [
-    { label: "MoS₂ layer", nm: 0.65 },
-    { label: "DNA diameter", nm: 2 },
-    { label: "Virus (example)", nm: 100 },
-    { label: "Hair (example)", nm: 80000 },
-  ];
-  const selected = examples.find((item) => Math.abs(size - item.nm) < 0.01);
-  const sizeLabel =
-    size < 1000
-      ? size.toFixed(2) + " nm"
-      : (size / 1000).toFixed(2) + " µm";
+  const selected = selectedScaleExample(power);
+  const sizeLabel = formatScaleLength(size);
   const previewDiameter = 12 + Math.log10(size + 1) * 12;
   return (
     <div className="panel size-scale-explorer">
@@ -30,9 +26,13 @@ function ScaleExplorer() {
       </p>
       <div className="size-scale-reading">
         <label htmlFor="scale-range">
-          Selected size
+          Selected length
           <output htmlFor="scale-range">{sizeLabel}</output>
-          <span>{selected?.label ?? "Custom size"}</span>
+          <span>
+            {selected
+              ? `${selected.label} · ${selected.measurement.toLowerCase()}`
+              : "Custom length"}
+          </span>
         </label>
         <span className="size-scale-preview" aria-hidden="true">
           <span
@@ -49,7 +49,11 @@ function ScaleExplorer() {
         step={0.01}
         value={power}
         aria-describedby="scale-instructions scale-illustration-note"
-        aria-valuetext={sizeLabel}
+        aria-valuetext={
+          selected
+            ? `${sizeLabel}, ${selected.label}, ${selected.measurement.toLowerCase()}`
+            : sizeLabel
+        }
         onChange={(event) => setPower(Number(event.target.value))}
       />
       <div className="size-scale-axis" aria-hidden="true">
@@ -59,7 +63,7 @@ function ScaleExplorer() {
         <span>100 µm</span>
       </div>
       <div className="size-scale-examples" role="group" aria-label="Size examples">
-        {examples.map((item) => (
+        {sizeScaleExamples.map((item) => (
           <button
             key={item.label}
             type="button"
@@ -77,17 +81,26 @@ function ScaleExplorer() {
             </span>
             <span className="size-scale-example-copy">
               <strong>{item.label}</strong>
-              <span>
-                ≈ {item.nm >= 1000 ? item.nm / 1000 + " µm" : item.nm + " nm"}
-              </span>
+              <span>{item.measurement}</span>
+              <span>≈ {formatScaleLength(item.nm)}</span>
             </span>
           </button>
         ))}
       </div>
+      <p className="text-xs muted mt-4 size-scale-source">
+        {selected ? (
+          <>
+            {selected.label}: {selected.measurement.toLowerCase()}.{" "}
+            <ReferenceLink id={selected.reference} from="/foundations#nanoscale" />
+          </>
+        ) : (
+          <>Choose an example to see its measurement type and source.</>
+        )}
+      </p>
       <p className="text-xs muted mt-4" id="scale-illustration-note">
-        Examples are approximate; specimens vary. Preview circles are
-        illustrative, not linearly to scale.{" "}
-        <ReferenceLink id="assets" from="/foundations#nanoscale" />
+        Representative lengths compare bonds, spacings, thicknesses, wavelengths
+        and object sizes; they are not all diameters. Biological sizes vary.
+        Preview circles indicate length, not shape, and are not linearly to scale.
       </p>
     </div>
   );

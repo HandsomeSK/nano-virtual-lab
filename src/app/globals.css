@@ -2085,6 +2085,15 @@ th {
   border: 0;
   padding: 0;
 }
+#graphene-structure > .scientific-figure {
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+  gap: 24px;
+  padding-block: 20px;
+  border-block: 1px solid var(--line);
+}
+#graphene-structure > .scientific-figure .scientific-image {
+  margin-bottom: 0;
+}
 .instrument-console {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
@@ -2802,6 +2811,14 @@ th {
   .knowledge-section .scientific-figure {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
+  }
+  #graphene-structure > .scientific-figure {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  #graphene-structure > .scientific-figure .scientific-image {
+    width: min(100%, 240px);
+    justify-self: center;
   }
   .knowledge-section .scientific-figure figcaption {
     border-top: 1px solid var(--line);

@@ -2,6 +2,117 @@
   max-width: none;
 }
 
+.challenge-section-links {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin: 24px 0 32px;
+  padding: 16px 0;
+  border-block: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.challenge-section-links span {
+  color: var(--muted);
+}
+
+.challenge-section-links a {
+  color: var(--primary);
+  text-underline-offset: 5px;
+}
+
+.challenge-section-links a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.challenge-thermal-layout,
+.challenge-thermal-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 36px;
+}
+
+.challenge-thermal-figure {
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: 6px;
+}
+
+.challenge-thermal-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.challenge-thermal-figure figcaption {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+  margin-top: 12px;
+}
+
+.challenge-thermal-prose,
+.challenge-thermal-notes > div {
+  min-width: 0;
+}
+
+.challenge-thermal h3 {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.challenge-thermal p {
+  color: var(--prose);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 12px;
+}
+
+.challenge-thermal-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  color: var(--prose);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.challenge-thermal-table caption {
+  color: var(--ink);
+  font-weight: 600;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.challenge-thermal-table th,
+.challenge-thermal-table td {
+  padding: 10px 8px 10px 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+
+.challenge-thermal-table td {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.challenge-thermal .challenge-source-note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.challenge-thermal-notes {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
 .challenge-observation {
   min-width: 0;
 }
@@ -201,6 +312,8 @@
 }
 
 @media (max-width: 900px) {
+  .challenge-thermal-layout,
+  .challenge-thermal-notes,
   .challenge-qualification-layout,
   .challenge-history-grid,
   .challenge-complementary-layout {

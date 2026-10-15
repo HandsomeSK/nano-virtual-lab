@@ -412,6 +412,30 @@ export const references: Reference[] = [
     url: "https://d-nb.info/1354411528/34",
     note: "Full published article retrieved from the German National Library on 14 October 2026, pp. 2–6. Nb- and Re-doped few-layer 2H-MoTe₂ form complementary inverter arrays. The NanoLab block diagram and logic table are original idealized explanations, not the experimental geometry or measured voltage-transfer curve.",
   },
+  {
+    id: "huang-thermal2025",
+    title:
+      "Enhancement of Thermal Boundary Conductance between MoS₂ and Dielectric Layer by Self-Assembled Monolayers",
+    authors: "J. Huang, X. Yu, X. Wang et al.",
+    year: 2025,
+    venue:
+      "Advanced Electronic Materials 11(3), 2400244 (2025 issue); first published online 28 June 2024",
+    category: "Paper",
+    doi: "10.1002/aelm.202400244",
+    url: "https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/aelm.202400244",
+    note: "Publisher full text checked 15 October 2026, §2.2 and Figure 3. Vacuum Raman thermometry separates channel/substrate heating and subtracts contact and oxide contributions; five devices support each reported boundary-conductance comparison. The original NanoLab schematic reproduces no experimental figure or temperature field.",
+  },
+  {
+    id: "iin-nanoscale",
+    title: "What Is Nanotechnology?",
+    authors:
+      "Northwestern University International Institute for Nanotechnology",
+    year: 2026,
+    venue: "Institutional learning page; undated, accessed 15 October 2026",
+    category: "Learning resource",
+    url: "https://www.iinano.org/what-is-nanotechnology/",
+    note: "Undated institutional learning page; 2026 is the access year, not a publication date. Length-scale examples are approximate and specimens vary: DNA width ≈ 2.5 nm, red blood cell ≈ 7 µm and hair ≈ 80–100 µm. The representative green-light wavelength of 550 nm lies within its stated 400–750 nm visible band.",
+  },
 ];
 export function referenceNumber(id: string) {
   return references.findIndex((ref) => ref.id === id) + 1;

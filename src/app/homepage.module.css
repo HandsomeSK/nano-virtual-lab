@@ -99,6 +99,7 @@
   transition: opacity 0.6s ease;
 }
 .hero {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: center;

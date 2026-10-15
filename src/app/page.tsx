@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { NanoNavigation } from "@/components/site-header";
 import { HomeMotion } from "@/components/home-motion";
+import { HomeMaterialMotifs } from "@/components/home-material-motifs";
 import { ScienceIcon } from "@/components/science-icon";
 import styles from "./homepage.module.css";
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function Home() {
       <div className={styles.page}>
         <NanoNavigation entrance />
         <div className={styles.hero} data-menu-background>
+          <HomeMaterialMotifs />
           <div className={styles.copy}>
             <span
               className={styles.badge + " appear appear--pop"}
