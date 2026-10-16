@@ -29,7 +29,7 @@ export default function Home() {
             <h1 id="home-headline" className={styles.headline}>
               <span className={styles.line}>
                 <span className="appear appear--mask" style={delay(0.22)}>
-                  Explore Nanomaterials
+                  <span className={styles.metalText}>Explore Nanomaterials</span>
                 </span>
               </span>
             </h1>
@@ -47,7 +47,7 @@ export default function Home() {
                 className="metal-button metal-solid appear appear--btn"
                 style={delay(0.64)}
               >
-                Explore Nanomaterials
+                Let’s start
               </Link>
               <Link
                 href="/lab"

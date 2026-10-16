@@ -2,29 +2,69 @@
   max-width: none;
 }
 
-.challenge-section-links {
+.challenge-overview.challenge-grouped-overview {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 40px;
+  margin-top: 24px;
+}
+
+.challenge-overview-group {
+  min-width: 0;
+}
+
+.challenge-overview-group h3 {
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.challenge-overview-group ul {
+  list-style: none;
+}
+
+.challenge-overview-link {
   display: flex;
   align-items: baseline;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  margin: 24px 0 32px;
-  padding: 16px 0;
-  border-block: 1px solid var(--line);
-  font-size: 14px;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+  line-height: 1.5;
 }
 
-.challenge-section-links span {
+.challenge-overview-link strong {
+  min-width: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.challenge-overview-link span {
+  flex: 0 1 42%;
   color: var(--muted);
+  font-size: 13px;
+  text-align: right;
 }
 
-.challenge-section-links a {
+.challenge-overview-link:hover,
+.challenge-overview-link[aria-current="location"] {
+  border-color: var(--primary);
+}
+
+.challenge-overview-link:hover strong,
+.challenge-overview-link[aria-current="location"] strong {
   color: var(--primary);
-  text-underline-offset: 5px;
 }
 
-.challenge-section-links a:hover {
+.challenge-overview-link:hover span {
   color: var(--ink);
-  text-decoration: underline;
+}
+
+.challenge-overview-synthesis {
+  grid-column: 1 / -1;
+  justify-self: start;
+  font-size: 14px;
+  margin: 2px 0 12px;
 }
 
 .challenge-thermal-layout,
@@ -312,6 +352,10 @@
 }
 
 @media (max-width: 900px) {
+  .challenge-overview.challenge-grouped-overview {
+    gap: 12px 24px;
+  }
+
   .challenge-thermal-layout,
   .challenge-thermal-notes,
   .challenge-qualification-layout,
@@ -329,6 +373,21 @@
 }
 
 @media (max-width: 600px) {
+  .challenge-overview.challenge-grouped-overview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .challenge-overview-link {
+    flex-wrap: wrap;
+    gap: 2px 12px;
+  }
+
+  .challenge-overview-link span {
+    flex: 1 1 100%;
+    text-align: left;
+  }
+
   .challenge-stress-sequence {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;

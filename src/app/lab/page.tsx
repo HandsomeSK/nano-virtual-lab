@@ -19,18 +19,8 @@ export default async function Lab({
     queryValue(query, "material") === "mos2" ? "mos2" : "graphene";
   return (
     <PageShell
-      title="Meet matter. Atom by atom"
-      intro="Turn an abstract structure into something you can inspect. Orbit the lattice, reveal its primitive cell and connect atomic arrangement with material properties."
-      contentsLayout="inline"
-      contents={[
-        {
-          title: "3D models",
-          items: [
-            { id: "atomic-structure", label: "Atomic structure" },
-            { id: "transistor", label: "From a sheet to a switch" },
-          ],
-        },
-      ]}
+      title="Nanomaterials in 3D"
+      intro="Explore graphene and MoS₂ atomic structures in three dimensions, then inspect how a layered transistor is built. Rotate the models, reveal their structure and connect each layer with its role."
     >
       <div id="atomic-structure">
         <AtomicWorkbench key={material} initialMaterial={material} syncUrl />
