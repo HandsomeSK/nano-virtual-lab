@@ -18,18 +18,33 @@ export default function Page() {
     <PageShell
       title="Engineering Challenges"
       intro="An atomically thin channel is only one part of a reliable transistor. Explore the interfaces, electrostatics and processes that shape a device."
+      contents={[
+        { items: [{ id: "challenges-overview", label: "Challenges overview" }] },
+        {
+          title: "Device physics",
+          items: [
+            { id: "contacts", label: "Contact resistance" },
+            { id: "interfaces", label: "Gate dielectric & interface" },
+            { id: "scaling", label: "Short-channel effects" },
+          ],
+        },
+        {
+          title: "Integration & operation",
+          items: [
+            { id: "manufacturing", label: "Manufacturing & integration" },
+            { id: "thermal-management", label: "Heat removal" },
+            { id: "operating-history", label: "Instability over time" },
+            { id: "complementary-logic", label: "Complementary logic" },
+          ],
+        },
+        { items: [{ id: "outlook", label: "Bringing the pieces together" }] },
+      ]}
     >
-      <section className="section challenges-overview">
+      <section className="section challenges-overview" id="challenges-overview">
         <SectionHeading
           title="Challenges Overview"
           description="Choose a problem, explore its mechanism and device impact, then follow the related experiment or research direction."
         />
-        <nav className="challenge-section-links" aria-label="Further engineering challenges">
-          <span>Further challenges</span>
-          <Link href="#thermal-management">Self-Heating & Heat Removal</Link>
-          <Link href="#operating-history">Instability Over Time</Link>
-          <Link href="#complementary-logic">Complementary Logic</Link>
-        </nav>
         <ChallengeExplorer />
       </section>
       <section className="section challenge-thermal" id="thermal-management">

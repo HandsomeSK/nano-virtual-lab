@@ -1,13 +1,21 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon } from "./icon";
+import {
+  PageContentsLayout,
+  type PageContentsGroup,
+} from "./page-contents";
 export function PageShell({
   title,
   intro,
+  contents,
+  contentsLayout = "sidebar",
   children,
 }: {
   title: string;
   intro: string;
+  contents?: PageContentsGroup[];
+  contentsLayout?: "sidebar" | "inline";
   children: ReactNode;
 }) {
   return (
@@ -16,7 +24,13 @@ export function PageShell({
         <h1>{title}</h1>
         <p>{intro}</p>
       </div>
-      {children}
+      {contents?.length ? (
+        <PageContentsLayout groups={contents} layout={contentsLayout}>
+          {children}
+        </PageContentsLayout>
+      ) : (
+        children
+      )}
     </div>
   );
 }

@@ -11,6 +11,12 @@ This record preserves existing behavior during the public-platform redesign. The
 | Scrollbar      | src/app/globals.css                                                     | DESIGN.md runtime tokens                                          | document, horizontal table overflow | Computed styles and narrow viewport                |
 | Toast          | Inline status/error regions in use-configurations consumers             | Existing local-storage outcomes                                   | success, recoverable error          | Save feedback and storage failure checks           |
 
+## Page indices and appreciation
+
+The owner’s 16 October 2026 annotations establish a shared On this page index on non-home content routes. PageContents owns grouped native fragment links: editorial pages use a desktop rail and tools use a compact inline variant. Narrow screens return the index to document flow. Existing IDs, URL query state, citation returns and collapsed-ancestor navigation remain compatible. No index creates a new viewport lock or content scroller.
+
+AppreciationButton replaces the repeated header destination with a reversible Like NanoLab button. It exposes aria-pressed, keeps the visible label stable and remembers this device’s choice under nanolab-like:v1. Blocked storage leaves an ephemeral choice for the current visit; appreciation state never overwrites saved experiment scenarios. There is no shared or remote like count.
+
 ## Preserved flows
 
 - Shared navigation and scroll rules come from the owner’s 14 October 2026 content/navigation/UX brief; the existing route set and research parameter values define compatibility.

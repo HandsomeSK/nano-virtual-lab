@@ -8,6 +8,7 @@ import {
   navigationCategories,
 } from "@/lib/navigation";
 import { Brand } from "./brand";
+import { AppreciationButton } from "./appreciation-button";
 
 export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
   const pathname = usePathname();
@@ -300,17 +301,7 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
             );
           })}
         </nav>
-        <Link
-          href="/foundations"
-          {...motion("scale", 0.34)}
-          className={
-            "metal-button metal-solid header-cta " +
-            motion("scale", 0.34).className
-          }
-          onClick={closeNavigation}
-        >
-          Explore NanoLab
-        </Link>
+        <AppreciationButton {...motion("scale", 0.34)} />
         <button
           ref={burger}
           type="button"

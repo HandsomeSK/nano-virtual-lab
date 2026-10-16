@@ -1,0 +1,41 @@
+.button {
+  touch-action: manipulation;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--primary, #85d7ff);
+  outline-offset: 4px;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  transition: transform 220ms ease;
+}
+
+.button[aria-pressed="true"] .icon {
+  color: #0b5b81;
+  transform: scale(1.1);
+}
+
+.button:active .icon {
+  transform: scale(0.84);
+}
+
+@media (max-width: 360px) {
+  .button {
+    gap: 5px;
+  }
+
+  .icon svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon {
+    transition: none;
+    transform: none !important;
+  }
+}
