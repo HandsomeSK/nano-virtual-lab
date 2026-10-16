@@ -5,13 +5,39 @@ import { challenges } from "@/data/challenges";
 import { ReferenceLink } from "./reference-link";
 import { challengeChecks, challengeEvidence } from "@/data/challenge-evidence";
 import { ScientificFigure } from "./scientific-figure";
+const challengeGroups = [
+  {
+    title: "Device physics",
+    items: challenges.slice(0, 3),
+  },
+  {
+    title: "Integration & operation",
+    items: [
+      challenges[3],
+      { id: "thermal-management", title: "Heat Removal", tag: "Heat transport" },
+      {
+        id: "operating-history",
+        title: "Instability over Time",
+        tag: "Operating history",
+      },
+      {
+        id: "complementary-logic",
+        title: "Complementary Logic",
+        tag: "Electron & hole devices",
+      },
+    ],
+  },
+];
 function subscribe(callback: () => void) {
   window.addEventListener("hashchange", callback);
   return () => window.removeEventListener("hashchange", callback);
 }
 function selectedChallenge() {
   const id = window.location.hash.slice(1);
-  return challenges.some((item) => item.id === id) ? id : "contacts";
+  return id === "outlook" ||
+    challengeGroups.some((group) => group.items.some((item) => item.id === id))
+    ? id
+    : "contacts";
 }
 function selectChallenge(id: string) {
   if (window.location.hash === "#" + id) return;
@@ -350,36 +376,42 @@ export function ChallengeExplorer() {
   );
   return (
     <>
-      <div
-        className="challenge-overview"
-        role="group"
-        aria-label="Challenge categories"
+      <nav
+        className="challenge-overview challenge-grouped-overview"
+        aria-label="Explore engineering challenges"
       >
-        {challenges.map((item) => (
-          <button
-            key={item.id}
-            className="challenge-index-item"
-            aria-pressed={selected === item.id}
-            onClick={() => {
-              selectChallenge(item.id);
-              document
-                .getElementById(item.id)
-                ?.scrollIntoView({
-                  block: "start",
-                  behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-                    .matches
-                    ? "instant"
-                    : "smooth",
-                });
-            }}
-          >
-            <span className="challenge-category">{item.tag}</span>
-            <strong>{item.title}</strong>
-            <span className="muted text-sm">{item.summary}</span>
-            <span className="text-cyan text-sm">Explore challenge ↓</span>
-          </button>
+        {challengeGroups.map((group) => (
+          <div className="challenge-overview-group" key={group.title}>
+            <h3>{group.title}</h3>
+            <ul>
+              {group.items.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={"#" + item.id}
+                    className="challenge-overview-link"
+                    aria-current={selected === item.id ? "location" : undefined}
+                    onClick={() => {
+                      // Shared anchor navigation writes history without a native hashchange.
+                      window.dispatchEvent(new Event("hashchange"));
+                    }}
+                  >
+                    <strong>{item.title}</strong>
+                    <span>{item.tag}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </div>
+        <a
+          className="challenge-overview-synthesis text-link"
+          href="#outlook"
+          aria-current={selected === "outlook" ? "location" : undefined}
+          onClick={() => window.dispatchEvent(new Event("hashchange"))}
+        >
+          Bringing the pieces together →
+        </a>
+      </nav>
       <div className="challenge-list">
         {challenges.map((item) => (
           <section

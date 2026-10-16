@@ -13,7 +13,7 @@ This record preserves existing behavior during the public-platform redesign. The
 
 ## Page indices and appreciation
 
-The owner’s 16 October 2026 annotations establish a shared On this page index on non-home content routes. PageContents owns grouped native fragment links: editorial pages use a desktop rail and tools use a compact inline variant. Narrow screens return the index to document flow. Existing IDs, URL query state, citation returns and collapsed-ancestor navigation remain compatible. No index creates a new viewport lock or content scroller.
+The owner’s latest 16 October 2026 annotations refine the index scope: Lab, Simulator and Challenges omit the added On this page index. Challenges organizes its original overview links instead. Research presents its existing grouped links in a default-closed, left-side modal drawer, with Escape, backdrop and section-selection dismissal, focus restoration and temporary body-scroll locking. Foundations and About retain sidebar indices; Device, Comparison, Why MoS₂ and the discovery retain inline indices. Existing IDs, URL query state, citation returns and collapsed-ancestor navigation remain compatible. The document remains the normal scroll owner; a closed drawer reserves no article column.
 
 AppreciationButton replaces the repeated header destination with a reversible Like NanoLab button. It exposes aria-pressed, keeps the visible label stable and remembers this device’s choice under nanolab-like:v1. Blocked storage leaves an ephemeral choice for the current visit; appreciation state never overwrites saved experiment scenarios. There is no shared or remote like count.
 

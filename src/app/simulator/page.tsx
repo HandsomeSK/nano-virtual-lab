@@ -20,29 +20,6 @@ export default async function SimulatorPage({
     <PageShell
       title="Transistor Simulator"
       intro="Turn a material idea into a device experiment. Adjust bias, channel geometry and contacts, then follow the calculated response and its explanation."
-      contentsLayout="inline"
-      contents={[
-        {
-          title: "Use the simulator",
-          items: [
-            { id: "simulation", label: "I–V Characteristics" },
-            {
-              id: "understanding-results",
-              label: "Understanding the Results",
-            },
-          ],
-        },
-        {
-          title: "Read the context",
-          items: [
-            { id: "model-assumptions", label: "Model Assumptions & Units" },
-            {
-              id: "experimental-evidence",
-              label: "Experimental Evidence: History Matters",
-            },
-          ],
-        },
-      ]}
     >
       <p className="model-note text-sm mb-6">
         <strong>Simplified Educational Model.</strong> A MoS₂-context,
