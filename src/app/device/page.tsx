@@ -14,7 +14,6 @@ export default function Device() {
     <PageShell
       title="Device Explorer"
       intro="Explore a simplified top-gated MoS₂ field-effect transistor. Orbit the model, reveal the layers and discover what each component does."
-      contentsLayout="inline"
       contents={[
         {
           title: "Explore the device",

@@ -9,29 +9,26 @@ export function PageShell({
   title,
   intro,
   contents,
-  contentsLayout = "sidebar",
   children,
 }: {
   title: string;
   intro: string;
   contents?: PageContentsGroup[];
-  contentsLayout?: "sidebar" | "inline";
   children: ReactNode;
 }) {
-  return (
+  const page = (
     <div className="container page-shell">
       <div className="page-heading">
         <h1>{title}</h1>
         <p>{intro}</p>
       </div>
-      {contents?.length ? (
-        <PageContentsLayout groups={contents} layout={contentsLayout}>
-          {children}
-        </PageContentsLayout>
-      ) : (
-        children
-      )}
+      {children}
     </div>
+  );
+  return contents?.length ? (
+    <PageContentsLayout groups={contents}>{page}</PageContentsLayout>
+  ) : (
+    page
   );
 }
 export function SectionHeading({

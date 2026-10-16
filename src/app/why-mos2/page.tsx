@@ -25,7 +25,6 @@ export default function Why() {
     <PageShell
       title="MoS₂ — Engineering the Next Atomic Layer"
       intro="A two-dimensional semiconductor where atomic structure, interfaces, and device design redefine electronic possibilities."
-      contentsLayout="inline"
       contents={[
         {
           title: "Explore MoS₂",
