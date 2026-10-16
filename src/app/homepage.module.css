@@ -136,8 +136,8 @@
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   .metalText {
     background-image:
-      linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.92) 49%, #ffffff 50%, rgba(255, 255, 255, 0.92) 51%, transparent 60%),
-      linear-gradient(112deg, #ffffff 5%, #e1ecfa 35%, #afd4ed 52%, #f5f8ff 66%, #d4e2f1 100%);
+      linear-gradient(110deg, transparent 39%, rgba(63, 79, 105, 0.25) 43%, #ffffff 48%, #ffffff 52%, rgba(63, 79, 105, 0.25) 57%, transparent 61%),
+      linear-gradient(180deg, #f5f8ff 0%, #c0ccde 30%, #8b9cb5 47%, #e8f0fc 52%, #a3b3cb 68%, #f5f8ff 100%);
     background-size: 300% 100%, 100% 100%;
     background-position: 100% 0, 0 0;
     background-repeat: no-repeat;
@@ -145,14 +145,14 @@
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    animation: metalSweep 7.2s ease-in-out 1.1s infinite;
+    animation: metalSweep 4.8s ease-in-out 0.35s infinite;
   }
 }
 @keyframes metalSweep {
-  0%, 18% {
+  0%, 8% {
     background-position: 100% 0, 0 0;
   }
-  48%, 100% {
+  58%, 100% {
     background-position: 0 0, 0 0;
   }
 }
