@@ -23,15 +23,42 @@ export default async function ComparisonPage({
     <PageShell
       title="Material Comparison"
       intro="Explore what makes graphene, MoS₂ and silicon different, then test two device assumptions. Material properties and simulated device response answer different questions."
+      contentsLayout="inline"
+      contents={[
+        {
+          title: "Compare materials",
+          items: [
+            { id: "material-selector", label: "Material Selector" },
+            {
+              id: "electronic-properties",
+              label: "Electronic Properties Comparison",
+            },
+            { id: "band-structure", label: "Band Structure Comparison" },
+          ],
+        },
+        {
+          title: "Compare devices",
+          items: [
+            {
+              id: "benchmarking",
+              label: "Material Properties Are Not Device Benchmarks",
+            },
+            {
+              id: "device-comparison",
+              label: "Simulator Results Comparison",
+            },
+          ],
+        },
+      ]}
     >
-      <section>
+      <section id="material-selector">
         <SectionHeading
           title="Material Selector"
           description="Select a material to connect its atomic structure, electronic bands and possible applications."
         />
         <MaterialExplorer from="/comparison" />
       </section>
-      <section className="section">
+      <section className="section" id="electronic-properties">
         <SectionHeading
           title="Electronic Properties Comparison"
           description="A qualitative comparison of material context, rather than a device-performance ranking."
@@ -149,16 +176,18 @@ export default async function ComparisonPage({
           not assign a new calibrated transport model.
         </p>
       </section>
-      <Comparison
-        key={JSON.stringify(query)}
-        incoming={
-          queryValue(query, "source") === "simulator"
-            ? normalizeParameters(query)
-            : null
-        }
-        initialA={queryValue(query, "a")}
-        initialB={queryValue(query, "b")}
-      />
+      <div id="device-comparison">
+        <Comparison
+          key={JSON.stringify(query)}
+          incoming={
+            queryValue(query, "source") === "simulator"
+              ? normalizeParameters(query)
+              : null
+          }
+          initialA={queryValue(query, "a")}
+          initialB={queryValue(query, "b")}
+        />
+      </div>
       <RelatedTopics
         links={[
           {

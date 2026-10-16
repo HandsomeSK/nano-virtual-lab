@@ -26,8 +26,26 @@ export default async function Page({
     <PageShell
       title="About & References"
       intro="An independent virtual laboratory for exploring nanomaterials, understanding devices and reading the evidence behind them."
+      contents={[
+        {
+          title: "About NanoLab",
+          items: [
+            { id: "about-nanolab", label: "Science you can explore" },
+            { id: "learning", label: "From fundamentals to research" },
+          ],
+        },
+        {
+          title: "Sources & scope",
+          items: [
+            { id: "references", label: "Scientific references" },
+            { id: "sources", label: "Evidence & model boundaries" },
+            { id: "figure-sources", label: "Scientific image registry" },
+            { id: "credits", label: "Development & credits" },
+          ],
+        },
+      ]}
     >
-      <section className="section about-overview">
+      <section className="section about-overview" id="about-nanolab">
         <SectionHeading title="Science You Can Explore" />
         <div className="about-layout">
           <div>

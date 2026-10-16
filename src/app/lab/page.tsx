@@ -21,8 +21,20 @@ export default async function Lab({
     <PageShell
       title="Meet matter. Atom by atom"
       intro="Turn an abstract structure into something you can inspect. Orbit the lattice, reveal its primitive cell and connect atomic arrangement with material properties."
+      contentsLayout="inline"
+      contents={[
+        {
+          title: "3D models",
+          items: [
+            { id: "atomic-structure", label: "Atomic structure" },
+            { id: "transistor", label: "From a sheet to a switch" },
+          ],
+        },
+      ]}
     >
-      <AtomicWorkbench key={material} initialMaterial={material} syncUrl />
+      <div id="atomic-structure">
+        <AtomicWorkbench key={material} initialMaterial={material} syncUrl />
+      </div>
       <section className="section" id="transistor">
         <div className="lab-next">
           <div>

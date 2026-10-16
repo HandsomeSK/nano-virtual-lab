@@ -55,13 +55,35 @@ export default async function Page({
       <PageShell
         title="Research Knowledge Hub"
         intro="Understand the problems connecting two-dimensional materials, working transistors and useful circuits. Start with the physics, then examine the evidence."
+        contents={[
+          {
+            title: "The bigger picture",
+            items: [
+              { id: "research-overview", label: "Research overview" },
+              { id: "research-connections", label: "Connections" },
+            ],
+          },
+          {
+            title: "Research directions",
+            items: researchDirections.map(({ id, label }) => ({
+              id: "discovery-" + id,
+              label,
+            })),
+          },
+          {
+            title: "Evidence & studies",
+            items: [
+              { id: "featured-discovery", label: "Featured discovery" },
+              { id: "timeline", label: "Research timeline" },
+              { id: "studies", label: "Studies by category" },
+              { id: "institutional-research", label: "Industry research" },
+            ],
+          },
+          {
+            items: [{ id: "research-outlook", label: "Future outlook" }],
+          },
+        ]}
       >
-        <nav className="research-hub-nav" aria-label="Research sections">
-          <a href="#research-overview">Overview</a>
-          <a href="#research-directions">Research directions</a>
-          <a href="#research-connections">Connections</a>
-          <a href="#research-evidence">Evidence & studies</a>
-        </nav>
         <section className="section research-overview" id="research-overview">
           <SectionHeading
             title="Research Overview"
@@ -213,7 +235,7 @@ export default async function Page({
             guarantee that a complete circuit meets reliability requirements.
           </p>
         </section>
-        <section className="section research-outlook">
+        <section className="section research-outlook" id="research-outlook">
           <SectionHeading title="Challenges & Future Outlook" />
           <p>
             Better electrostatic control must be balanced with contact quality,
