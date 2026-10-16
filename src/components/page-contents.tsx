@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PageContentsPanel } from "./page-contents-panel";
 import styles from "./page-contents.module.css";
 
 export type PageContentsGroup = {
@@ -6,10 +7,16 @@ export type PageContentsGroup = {
   items: { id: string; label: string }[];
 };
 
-export function PageContents({ groups }: { groups: PageContentsGroup[] }) {
+export function PageContents({
+  groups,
+  title = "On this page",
+}: {
+  groups: PageContentsGroup[];
+  title?: string;
+}) {
   return (
-    <nav className={styles.contents} aria-label="On this page">
-      <h2 className={styles.title}>On this page</h2>
+    <nav className={styles.contents} aria-label={title}>
+      <h2 className={styles.title}>{title}</h2>
       <div className={styles.groups}>
         {groups.map((group) => (
           <div className={styles.group} key={group.title ?? group.items[0]?.id}>
@@ -30,17 +37,19 @@ export function PageContents({ groups }: { groups: PageContentsGroup[] }) {
 
 export function PageContentsLayout({
   groups,
-  layout = "sidebar",
+  title = "On this page",
   children,
 }: {
   groups: PageContentsGroup[];
-  layout?: "sidebar" | "inline";
+  title?: string;
   children: ReactNode;
 }) {
   return (
-    <div className={layout === "inline" ? styles.inline : styles.sidebar}>
-      <PageContents groups={groups} />
-      <div className={styles.body}>{children}</div>
-    </div>
+    <PageContentsPanel
+      title={title}
+      navigation={<PageContents groups={groups} title={title} />}
+    >
+      {children}
+    </PageContentsPanel>
   );
 }

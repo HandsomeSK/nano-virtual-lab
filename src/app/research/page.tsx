@@ -5,8 +5,7 @@ import {
   SectionHeading,
 } from "@/components/page-shell";
 import { ResearchExplorer } from "@/components/research-explorer";
-import { PageContents, type PageContentsGroup } from "@/components/page-contents";
-import { ResearchContentsDrawer } from "@/components/research-contents-drawer";
+import type { PageContentsGroup } from "@/components/page-contents";
 import { researchCategories, studies } from "@/data/research";
 import { references } from "@/data/references";
 import { ReferenceLink } from "@/components/reference-link";
@@ -85,10 +84,8 @@ export default async function Page({
       <PageShell
         title="Research Knowledge Hub"
         intro="Understand the problems connecting two-dimensional materials, working transistors and useful circuits. Start with the physics, then examine the evidence."
+        contents={contentsGroups}
       >
-        <ResearchContentsDrawer>
-          <PageContents groups={contentsGroups} />
-        </ResearchContentsDrawer>
         <section className="section research-overview" id="research-overview">
           <SectionHeading
             title="Research Overview"

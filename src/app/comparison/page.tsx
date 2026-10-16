@@ -23,7 +23,6 @@ export default async function ComparisonPage({
     <PageShell
       title="Material Comparison"
       intro="Explore what makes graphene, MoS₂ and silicon different, then test two device assumptions. Material properties and simulated device response answer different questions."
-      contentsLayout="inline"
       contents={[
         {
           title: "Compare materials",
