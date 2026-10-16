@@ -11,7 +11,24 @@ import {
 import { usePathname } from "next/navigation";
 import styles from "./research-contents-drawer.module.css";
 
-export function ResearchContentsDrawer({ children }: { children: ReactNode }) {
+const contentsIcon = (
+  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+    <path
+      d="M3 5h8M3 10h6M3 15h8m2-8 3 3-3 3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+export function ResearchContentsDrawer({
+  children,
+  title = "Research contents",
+}: {
+  children: ReactNode;
+  title?: string;
+}) {
   const pathname = usePathname();
   const id = useId();
   const dialog = useRef<HTMLDialogElement>(null);
@@ -85,14 +102,18 @@ export function ResearchContentsDrawer({ children }: { children: ReactNode }) {
         aria-controls={id}
         onClick={openDrawer}
       >
-        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
-          <path
-            d="M4 5h12M4 10h8M4 15h12"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
+        {contentsIcon}
+        Page contents
+      </button>
+      <button
+        type="button"
+        className={styles.trigger + " " + styles.edgeTrigger}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={openDrawer}
+      >
+        {contentsIcon}
         Contents
       </button>
       <dialog
@@ -110,8 +131,8 @@ export function ResearchContentsDrawer({ children }: { children: ReactNode }) {
         onClick={closeOnBackdrop}
       >
         <header className={styles.heading}>
-          <h2 id={id + "-title"}>Research contents</h2>
-          <button type="button" onClick={closeDrawer} aria-label="Close research contents">
+          <h2 id={id + "-title"}>{title}</h2>
+          <button type="button" onClick={closeDrawer} aria-label={"Close " + title.toLowerCase()}>
             <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true">
               <path
                 d="m5 5 10 10M15 5 5 15"

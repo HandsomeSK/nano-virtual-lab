@@ -1,30 +1,41 @@
 .trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--line));
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.edgeTrigger {
   position: fixed;
   z-index: 35;
   inset-inline-start: 0;
   inset-block-start: 50%;
   transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 44px;
   padding: 14px 10px;
-  border: 1px solid var(--line);
   border-inline-start: 0;
   border-radius: 0 7px 7px 0;
-  background: var(--surface);
-  color: var(--prose);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
   writing-mode: vertical-rl;
-  cursor: pointer;
-  touch-action: manipulation;
 }
 
 .trigger:hover {
   color: var(--ink);
   border-color: var(--primary);
+}
+
+.trigger:active {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--surface) 85%, var(--primary));
 }
 
 .trigger:focus-visible,
@@ -138,25 +149,9 @@
   to { opacity: 1; }
 }
 
-@media (max-height: 420px) {
-  .trigger {
-    inset-block-start: auto;
-    inset-block-end: max(12px, env(safe-area-inset-bottom));
-    transform: none;
-    writing-mode: horizontal-tb;
-    padding: 10px 12px;
-  }
-}
-
-@media (max-width: 900px) {
-  .trigger {
-    position: static;
-    min-height: 44px;
-    padding: 10px 14px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    writing-mode: horizontal-tb;
-    transform: none;
+@media (max-width: 900px), (max-height: 360px) {
+  .edgeTrigger {
+    display: none;
   }
 }
 
