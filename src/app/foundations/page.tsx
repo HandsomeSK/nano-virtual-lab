@@ -13,7 +13,13 @@ export default function Foundations() {
       title="Foundations"
       intro="Begin with nanomaterials and their size-dependent properties, then explore energy bands, graphene and the path from two-dimensional materials to transistors. Investigate six connected scientific ideas."
       contents={[
-        { items: knowledge.map(({ id, title }) => ({ id, label: title })) },
+        {
+          items: knowledge.map(({ id, title }, index) => ({
+            id,
+            label: title,
+            number: String(index + 1).padStart(2, "0"),
+          })),
+        },
       ]}
     >
       {knowledge.map((item, i) => (

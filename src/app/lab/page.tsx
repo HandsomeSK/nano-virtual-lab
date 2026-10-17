@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell, RelatedTopics } from "@/components/page-shell";
 import { AtomicWorkbench } from "@/components/science/atomic-workbench";
-import { DeviceViewer } from "@/components/device-viewer";
 import { queryValue, type Query } from "@/lib/site";
 export const metadata: Metadata = {
   title: "3D Lab",
@@ -20,7 +19,7 @@ export default async function Lab({
   return (
     <PageShell
       title="Nanomaterials in 3D"
-      intro="Explore graphene and MoS₂ atomic structures in three dimensions, then inspect how a layered transistor is built. Rotate the models, reveal their structure and connect each layer with its role."
+      intro="Explore graphene and MoS₂ atomic structures in three dimensions. Rotate the lattices, reveal their primitive cells and compare stacking, then continue to the Device Explorer to inspect a transistor."
     >
       <div id="atomic-structure">
         <AtomicWorkbench key={material} initialMaterial={material} syncUrl />
@@ -32,11 +31,18 @@ export default async function Lab({
             <h2>From a sheet to a switch</h2>
             <p>
               Contacts, a dielectric and a gate give the semiconductor a device
-              architecture. Rotate the device below, expose its atomic channel
-              and inspect the material and role of each layer.
+              architecture. Continue to the Device Explorer to rotate the stack,
+              expose its atomic channel and inspect the material and role of each
+              layer.
             </p>
           </div>
           <div className="actions">
+            <Link
+              href="/device#interactive-device"
+              className="metal-button metal-solid"
+            >
+              Inspect the transistor
+            </Link>
             <Link
               href="/discoveries/mos2-interface-breakthrough#interactive-stack"
               className="metal-button metal-ghost"
@@ -45,7 +51,6 @@ export default async function Lab({
             </Link>
           </div>
         </div>
-        <DeviceViewer from="/lab#transistor" />
       </section>
       <RelatedTopics
         links={[

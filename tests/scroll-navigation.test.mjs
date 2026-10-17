@@ -9,7 +9,8 @@ import {
 const origin = "https://nano-virtual-lab.vercel.app";
 
 function browser(path = "/research", navigationType = "navigate") {
-  const targets = new Map(), frames = new Map(), observers = [], scrolls = [];
+  const targets = new Map(), frames = new Map(), observers = [], scrolls = [], historyEntries = [];
+  const events = new EventTarget();
   let frameId = 0;
   class Element {
     parentElement = null;
@@ -35,10 +36,14 @@ function browser(path = "/research", navigationType = "navigate") {
     history: {
       state: { readingNote: "preserve" },
       pushState: (state, _title, url) => {
+        historyEntries.push({ state, url });
         win.history.state = state;
         win.location = new URL(url, win.location);
       },
     },
+    Event,
+    addEventListener: events.addEventListener.bind(events),
+    dispatchEvent: events.dispatchEvent.bind(events),
     matchMedia: () => ({ matches: false }),
     MutationObserver: Observer,
     HTMLElement: Element,
@@ -49,8 +54,9 @@ function browser(path = "/research", navigationType = "navigate") {
   };
   const doc = { body: new Element(), getElementById: (id) => targets.get(id) ?? null };
   const manager = createNavigationScroll(win, doc);
+  win.addEventListener("hashchange", manager.hashChanged);
   return {
-    manager, win, targets, observers, scrolls, Element, Details,
+    manager, win, targets, observers, scrolls, historyEntries, Element, Details,
     flush() { const pending = [...frames.values()]; frames.clear(); pending.forEach((callback) => callback()); },
     mutate() { observers.filter((observer) => observer.connected).forEach((observer) => observer.callback()); },
     activate(href) { const intent = navigationIntent(win.location.href, href); assert.ok(intent); manager.activate(intent); },
@@ -123,6 +129,36 @@ test("same-document anchors use smooth motion, with an immediate reduced-motion 
   page.activate("#bands");
   page.flush();
   assert.equal(page.scrolls[1].behavior, "instant");
+});
+
+test("same-document links notify hash subscribers once without a second scroll or history entry", () => {
+  const page = browser("/challenges");
+  const notifications = [];
+  page.targets.set("interfaces", new page.Element());
+  page.win.addEventListener("hashchange", (event) => {
+    notifications.push({
+      hash: page.win.location.hash,
+      state: page.win.history.state,
+      trusted: event.isTrusted,
+    });
+  });
+  page.activate("#interfaces");
+  assert.deepEqual(notifications, [{
+    hash: "#interfaces",
+    state: { readingNote: "preserve" },
+    trusted: false,
+  }]);
+  assert.equal(page.historyEntries.length, 1);
+  page.flush();
+  assert.equal(page.scrolls.length, 1);
+  assert.equal(page.scrolls[0].behavior, "smooth");
+  page.flush();
+  assert.equal(page.scrolls.length, 1, "synthetic notifications must not schedule another scroll");
+  page.activate("#interfaces");
+  page.flush();
+  assert.equal(notifications.length, 1, "the unchanged hash does not notify again");
+  assert.equal(page.historyEntries.length, 1, "the unchanged URL does not create another history entry");
+  assert.equal(page.scrolls.length, 2, "a repeated user click still scrolls once");
 });
 
 test("back and forward cancel an incoming route correction and retain a hash reading position", () => {

@@ -11,7 +11,6 @@ const categoryGroups: Record<
     {
       title: "Material fundamentals",
       links: [
-        { href: "/foundations", title: "Materials overview" },
         { href: "/foundations#nanoscale", title: "Understanding the nanoscale" },
         { href: "/foundations#quantum", title: "Quantum mechanics & energy bands" },
         { href: "/foundations#characterization", title: "Material characterization" },
@@ -31,17 +30,13 @@ const categoryGroups: Record<
     {
       title: "Atomic structures",
       links: [
-        { href: "/lab", title: "3D Lab overview" },
-        { href: "/lab?material=graphene", title: "Graphene & carbon bonds" },
-        { href: "/lab?material=mos2", title: "MoS₂ layers & stacking" },
+        { href: "/lab#atomic-structure", title: "Graphene & MoS₂ structures" },
       ],
     },
     {
       title: "Device inspection",
       links: [
-        { href: "/lab#transistor", title: "Inspect the transistor stack" },
-        { href: "/device", title: "Device explorer" },
-        { href: "/device#working-principle", title: "How the gate controls a channel" },
+        { href: "/device#interactive-device", title: "Transistor stack" },
       ],
     },
   ],
@@ -49,7 +44,6 @@ const categoryGroups: Record<
     {
       title: "Interactive models",
       links: [
-        { href: "/simulator", title: "Simulator overview" },
         { href: "/simulator#parameter-gateVoltage", title: "Explore bias & device parameters" },
         { href: "/simulator#understanding-results", title: "Interpret the model results" },
         { href: "/simulator#model-assumptions", title: "Device physics & model assumptions" },
@@ -69,7 +63,6 @@ const categoryGroups: Record<
     {
       title: "Research knowledge hub",
       links: [
-        { href: "/research#research-overview", title: "Research overview" },
         { href: "/research#research-directions", title: "Six research directions" },
         { href: "/research#research-connections", title: "How the directions connect" },
         { href: "/research#research-evidence", title: "Research evidence" },
@@ -89,7 +82,6 @@ const categoryGroups: Record<
     {
       title: "Device physics",
       links: [
-        { href: "/challenges", title: "Challenges overview" },
         { href: "/challenges#contacts", title: "Contact resistance" },
         { href: "/challenges#interfaces", title: "Gate dielectric & interface" },
         { href: "/challenges#scaling", title: "Short-channel effects" },

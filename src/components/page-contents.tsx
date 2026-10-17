@@ -1,10 +1,8 @@
-import type { ReactNode } from "react";
-import { PageContentsPanel } from "./page-contents-panel";
 import styles from "./page-contents.module.css";
 
 export type PageContentsGroup = {
   title?: string;
-  items: { id: string; label: string }[];
+  items: { id: string; label: string; number?: string }[];
 };
 
 export function PageContents({
@@ -24,7 +22,14 @@ export function PageContents({
             <ul>
               {group.items.map((item) => (
                 <li key={item.id}>
-                  <a href={"#" + item.id}>{item.label}</a>
+                  <a href={"#" + item.id}>
+                    {item.number ? (
+                      <>
+                        <span className={styles.number}>{item.number}</span>{" "}
+                      </>
+                    ) : null}
+                    <span>{item.label}</span>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -32,24 +37,5 @@ export function PageContents({
         ))}
       </div>
     </nav>
-  );
-}
-
-export function PageContentsLayout({
-  groups,
-  title = "On this page",
-  children,
-}: {
-  groups: PageContentsGroup[];
-  title?: string;
-  children: ReactNode;
-}) {
-  return (
-    <PageContentsPanel
-      title={title}
-      navigation={<PageContents groups={groups} title={title} />}
-    >
-      {children}
-    </PageContentsPanel>
   );
 }

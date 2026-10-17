@@ -145,8 +145,11 @@ export function createNavigationScroll(
           position: { top: win.scrollY, left: win.scrollX },
         };
       if (intent.kind === "anchor") {
-        if (win.location.href !== intent.destination.href)
+        if (win.location.href !== intent.destination.href) {
           win.history.pushState(win.history.state, "", intent.destination.href);
+          // pushState does not notify hash-backed widget state.
+          win.dispatchEvent(new win.Event("hashchange"));
+        }
         seek(
           intent.destination,
           win.matchMedia("(prefers-reduced-motion: reduce)").matches

@@ -25,30 +25,6 @@ export default function Why() {
     <PageShell
       title="MoS₂ — Engineering the Next Atomic Layer"
       intro="A two-dimensional semiconductor where atomic structure, interfaces, and device design redefine electronic possibilities."
-      contents={[
-        {
-          title: "Explore MoS₂",
-          items: [
-            { id: "atomic-structure", label: "Atomic structure" },
-            {
-              id: "possibilities",
-              label: "Atomic thickness changes the design space",
-            },
-            {
-              id: "engineering-limits",
-              label: "The next layer is an engineering decision",
-            },
-          ],
-        },
-        {
-          title: "Foundations: deeper reading",
-          items: [
-            { id: "beyond-silicon", label: "Two-Dimensional Nanomaterials" },
-            { id: "band-gap", label: "Why Band Gap Matters" },
-            { id: "layer-evidence", label: "Layer evidence" },
-          ],
-        },
-      ]}
     >
       <section className="material-arrival" id="atomic-structure">
         <AtomicWorkbench initialMaterial="mos2" fixedMaterial />
