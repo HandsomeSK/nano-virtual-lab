@@ -45,6 +45,7 @@ export default function Page() {
       <section className="section challenge-thermal" id="thermal-management">
         <SectionHeading
           title="Heat Must Leave the Channel"
+          number="05"
           description="A transistor needs a heat path as well as an electrical path."
         />
         <div className="challenge-thermal-layout">
@@ -126,6 +127,7 @@ export default function Page() {
       <section className="section challenge-history" id="operating-history">
         <SectionHeading
           title="What Happens After the First Sweep"
+          number="06"
           description="Time, temperature and the injection path reveal different kinds of instability."
         />
         <ol className="challenge-stress-sequence" aria-label="Bias-stress measurement sequence">
@@ -163,6 +165,7 @@ export default function Page() {
       <section className="section challenge-complementary" id="complementary-logic">
         <SectionHeading
           title="Two Carrier Types, One Logic Function"
+          number="07"
           description="Complementary logic adds a materials-and-process question: how do you make electron and hole devices work together?"
         />
         <div className="challenge-complementary-layout">
@@ -232,6 +235,7 @@ export default function Page() {
       <section className="section challenges-outlook" id="outlook">
         <SectionHeading
           title="Bringing the Pieces Together"
+          number="08"
           description="Progress requires materials, device design and process engineering together."
         />
         <div className="challenge-qualification-layout">

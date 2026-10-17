@@ -87,18 +87,22 @@ const categoryGroups: Record<
   ],
   "/challenges": [
     {
-      title: "Control the device",
+      title: "Device physics",
       links: [
         { href: "/challenges", title: "Challenges overview" },
         { href: "/challenges#contacts", title: "Contact resistance" },
         { href: "/challenges#interfaces", title: "Gate dielectric & interface" },
+        { href: "/challenges#scaling", title: "Short-channel effects" },
       ],
     },
     {
-      title: "Build reliable circuits",
+      title: "Integration & operation",
       links: [
-        { href: "/challenges#scaling", title: "Short-channel effects" },
         { href: "/challenges#manufacturing", title: "Manufacturing & integration" },
+        { href: "/challenges#thermal-management", title: "Heat removal" },
+        { href: "/challenges#operating-history", title: "Instability over time" },
+        { href: "/challenges#complementary-logic", title: "Complementary logic" },
+        { href: "/challenges#outlook", title: "Bringing the pieces together" },
       ],
     },
   ],

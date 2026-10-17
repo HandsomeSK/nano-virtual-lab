@@ -770,8 +770,10 @@ td {
   align-items: baseline;
 }
 .knowledge-title > span {
-  font-family: monospace;
-  font-size: 23px;
+  flex-shrink: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-variant-numeric: tabular-nums;
   color: var(--primary);
 }
 .knowledge-title h2 {
@@ -1915,8 +1917,7 @@ th {
 .knowledge-toc a:hover {
   color: var(--primary);
 }
-.knowledge-toc a span,
-.knowledge-title > span {
+.knowledge-toc a span {
   font-family: var(--font-sans);
   font-size: 14px;
   color: var(--primary);
@@ -1924,9 +1925,11 @@ th {
 .knowledge-title {
   gap: 16px;
   align-items: baseline;
+  font-size: 27px;
+  line-height: 1.15;
 }
 .knowledge-title h2 {
-  font-size: 27px;
+  font-size: inherit;
 }
 .theory {
   font-size: 17px;
@@ -2560,6 +2563,20 @@ th {
   font-size: 28px;
   margin-top: 8px;
 }
+.page-shell .numbered-section-title {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 16px;
+  font-size: 28px;
+}
+.section-number {
+  color: var(--primary);
+  font-size: inherit;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
 .challenge-heading p {
   margin-top: 12px;
 }
@@ -2856,7 +2873,8 @@ th {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0 12px;
   }
-  .knowledge-title h2 {
+  .knowledge-title,
+  .page-shell .numbered-section-title {
     font-size: 24px;
   }
   .knowledge-section .panel {

@@ -35,14 +35,23 @@ export function SectionHeading({
   title,
   description,
   id,
+  number,
 }: {
   title: string;
   description?: string;
   id?: string;
+  number?: string;
 }) {
   return (
     <div className="section-heading" id={id}>
-      <h2>{title}</h2>
+      <h2 className={number ? "numbered-section-title" : undefined}>
+        {number ? (
+          <>
+            <span className="section-number">{number}</span>{" "}
+            <span>{title}</span>
+          </>
+        ) : title}
+      </h2>
       {description ? <p>{description}</p> : null}
     </div>
   );
