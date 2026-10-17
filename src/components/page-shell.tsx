@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon } from "./icon";
 import {
-  PageContentsLayout,
+  PageContents,
   type PageContentsGroup,
 } from "./page-contents";
 export function PageShell({
@@ -16,19 +16,15 @@ export function PageShell({
   contents?: PageContentsGroup[];
   children: ReactNode;
 }) {
-  const page = (
+  return (
     <div className="container page-shell">
       <div className="page-heading">
         <h1>{title}</h1>
         <p>{intro}</p>
       </div>
+      {contents?.length ? <PageContents groups={contents} /> : null}
       {children}
     </div>
-  );
-  return contents?.length ? (
-    <PageContentsLayout groups={contents}>{page}</PageContentsLayout>
-  ) : (
-    page
   );
 }
 export function SectionHeading({

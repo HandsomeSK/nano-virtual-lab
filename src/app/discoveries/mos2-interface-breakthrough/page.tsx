@@ -5,38 +5,9 @@ import { EotChart } from "@/components/research/eot-chart";
 import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
 import { ReferenceLink } from "@/components/reference-link";
 import { RelatedTopics } from "@/components/page-shell";
-import {
-  PageContentsLayout,
-  type PageContentsGroup,
-} from "@/components/page-contents";
 import { references } from "@/data/references";
 const route = "/discoveries/mos2-interface-breakthrough";
 const paper = references.find((r) => r.id === "wong2026")!;
-const contentsGroups: PageContentsGroup[] = [
-  {
-    title: "The interface story",
-    items: [
-      { id: "challenge", label: "The challenge" },
-      { id: "breakthrough", label: "The interface" },
-      { id: "interactive-stack", label: "Explore the 3D stack" },
-    ],
-  },
-  {
-    title: "Interpreting the result",
-    items: [
-      { id: "measurements", label: "The evidence" },
-      { id: "significance", label: "What changes" },
-      { id: "limits", label: "What remains" },
-    ],
-  },
-  {
-    title: "Context & sources",
-    items: [
-      { id: "connected-discoveries", label: "Connected discoveries" },
-      { id: "primary-source", label: "Primary source" },
-    ],
-  },
-];
 export const metadata: Metadata = {
   title: "The Interface Breakthrough",
   description:
@@ -276,9 +247,5 @@ export default function InterfaceDiscovery() {
         />
     </article>
   );
-  return (
-    <PageContentsLayout groups={contentsGroups} title="Discovery contents">
-      {article}
-    </PageContentsLayout>
-  );
+  return article;
 }

@@ -1,145 +1,80 @@
-.frame {
-  --contents-width: clamp(240px, 20vw, 280px);
-  display: grid;
-  grid-template-columns: 0 minmax(0, 1fr);
-  align-items: start;
-}
-
-.frame[data-open="true"] {
-  grid-template-columns: var(--contents-width) minmax(0, 1fr);
-}
-
-.body {
-  grid-column: 2;
-  grid-row: 1;
-  min-width: 0;
-  container-type: inline-size;
-  container-name: page-content;
-}
-
-.trigger {
-  position: fixed;
-  z-index: 35;
-  inset-inline-start: 0;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 44px;
-  min-height: 116px;
-  padding: 12px 8px;
-  border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--line));
-  border-inline-start: 0;
-  border-radius: 0 7px 7px 0;
-  background: var(--surface);
-  color: var(--ink);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
-  writing-mode: vertical-rl;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-.trigger:hover,
-.trigger[aria-expanded="true"] {
-  border-color: var(--primary);
-}
-
-.trigger:active,
-.trigger[aria-expanded="true"] {
-  background: color-mix(in srgb, var(--surface) 85%, var(--primary));
-}
-
-.trigger[aria-expanded="true"] svg {
-  transform: rotate(180deg);
-}
-
-.trigger:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: -3px;
-}
-
-.panel {
-  grid-column: 1;
-  grid-row: 1;
-  position: sticky;
-  align-self: start;
-  inset-block-start: 90px;
-  width: calc(var(--contents-width) - 44px);
-  max-height: calc(100vh - 114px);
-  max-height: calc(100dvh - 114px);
-  margin-inline-start: 44px;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-inline-start: 0;
-  border-radius: 0 8px 8px 0;
-  background: var(--surface);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-  scroll-margin-top: 106px;
-}
-
-.panel[hidden] {
-  display: none;
-}
-
-.panel:not([hidden]) {
-  animation: panel-in 180ms ease-out;
-}
-
 .contents {
-  min-width: 0;
-  color: var(--muted);
+  margin-bottom: 40px;
+  padding-block: 22px;
+  border-block: 1px solid var(--line);
+  color: var(--prose);
 }
 
 .contents .title {
+  margin: 0 0 18px;
   color: var(--ink);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.02em;
   line-height: 1.5;
-  margin: 0 0 20px;
+  letter-spacing: -0.02em;
 }
 
 .groups {
   display: grid;
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 36px;
+}
+
+.group {
+  min-width: 0;
+}
+
+.group:only-child {
+  grid-column: 1 / -1;
 }
 
 .group h3 {
+  margin: 0 0 10px;
   color: var(--prose);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.5;
-  letter-spacing: 0;
-  margin: 0 0 5px;
 }
 
 .group ul {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
-.group li + li {
+.group:only-child ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 28px;
+}
+
+.group li {
   border-top: 1px solid var(--line);
 }
 
 .group a {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   min-height: 44px;
   padding: 11px 0;
-  color: var(--muted);
-  font-size: 13.5px;
+  color: var(--prose);
+  font-size: 14px;
   line-height: 1.6;
   text-decoration: none;
   overflow-wrap: anywhere;
   cursor: pointer;
+}
+
+.group a > span:last-child {
+  min-width: 0;
+}
+
+.number {
+  flex: 0 0 auto;
+  color: var(--primary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
 .group a:hover,
@@ -157,39 +92,20 @@
   color: var(--ink);
 }
 
-@keyframes panel-in {
-  from { opacity: 0; transform: translateX(-8px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@media (max-width: 900px) {
-  .frame,
-  .frame[data-open="true"] {
-    display: block;
-    padding-inline-start: 44px;
-  }
-
-  .panel {
-    position: static;
-    width: auto;
-    max-height: 45vh;
-    max-height: 45dvh;
-    margin: 24px 16px 0;
-    border: 1px solid var(--line);
-    border-radius: 8px;
+@media (max-width: 1050px) {
+  .group:only-child ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-height: 360px) {
-  .trigger {
-    inset-block-start: auto;
-    inset-block-end: 12px;
-    transform: none;
+@media (max-width: 700px) {
+  .groups,
+  .group:only-child ul {
+    grid-template-columns: 1fr;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .panel:not([hidden]) {
-    animation: none;
+  .contents {
+    margin-bottom: 32px;
+    padding-block: 18px;
   }
 }

@@ -14,25 +14,6 @@ export default function Device() {
     <PageShell
       title="Device Explorer"
       intro="Explore a simplified top-gated MoS₂ field-effect transistor. Orbit the model, reveal the layers and discover what each component does."
-      contents={[
-        {
-          title: "Explore the device",
-          items: [
-            { id: "channel-choice", label: "Why a MoS₂ channel?" },
-            { id: "interactive-device", label: "Interactive 3D viewer" },
-          ],
-        },
-        {
-          title: "Connect model and experiment",
-          items: [
-            {
-              id: "experimental-device",
-              label: "From the Model to an Experimental Device",
-            },
-            { id: "working-principle", label: "Working Principle" },
-          ],
-        },
-      ]}
     >
       <section className="panel mb-6" id="channel-choice">
         <h2>Why a MoS₂ channel?</h2>

@@ -24,30 +24,22 @@ export const metadata: Metadata = {
 };
 const contentsGroups: PageContentsGroup[] = [
   {
-    title: "The bigger picture",
+    title: "Explore the research",
     items: [
-      { id: "research-overview", label: "Research overview" },
-      { id: "research-connections", label: "Connections" },
+      { id: "research-overview", label: "Research framework" },
+      { id: "research-directions", label: "Six research directions" },
+      { id: "research-connections", label: "How the directions connect" },
+      { id: "featured-discovery", label: "Featured discovery" },
     ],
   },
   {
-    title: "Research directions",
-    items: researchDirections.map(({ id, label }) => ({
-      id: "discovery-" + id,
-      label,
-    })),
-  },
-  {
-    title: "Evidence & studies",
+    title: "Studies & outlook",
     items: [
-      { id: "featured-discovery", label: "Featured discovery" },
       { id: "timeline", label: "Research timeline" },
       { id: "studies", label: "Studies by category" },
       { id: "institutional-research", label: "Industry research" },
+      { id: "research-outlook", label: "Future outlook" },
     ],
-  },
-  {
-    items: [{ id: "research-outlook", label: "Future outlook" }],
   },
 ];
 const overviewSteps = [

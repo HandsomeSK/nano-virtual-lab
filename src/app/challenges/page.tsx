@@ -22,21 +22,21 @@ export default function Page() {
         {
           title: "Device physics",
           items: [
-            { id: "contacts", label: "Contact resistance" },
-            { id: "interfaces", label: "Gate dielectric & interface" },
-            { id: "scaling", label: "Short-channel effects" },
+            { id: "contacts", label: "Contact resistance", number: "01" },
+            { id: "interfaces", label: "Gate dielectric & interface", number: "02" },
+            { id: "scaling", label: "Short-channel effects", number: "03" },
           ],
         },
         {
           title: "Integration & operation",
           items: [
-            { id: "manufacturing", label: "Manufacturing & integration" },
-            { id: "thermal-management", label: "Heat removal" },
-            { id: "operating-history", label: "Instability over time" },
-            { id: "complementary-logic", label: "Complementary logic" },
+            { id: "manufacturing", label: "Manufacturing & integration", number: "04" },
+            { id: "thermal-management", label: "Heat removal", number: "05" },
+            { id: "operating-history", label: "Instability over time", number: "06" },
+            { id: "complementary-logic", label: "Complementary logic", number: "07" },
+            { id: "outlook", label: "Bringing the pieces together", number: "08" },
           ],
         },
-        { items: [{ id: "outlook", label: "Bringing the pieces together" }] },
       ]}
     >
       <section className="section challenges-overview" id="challenges-overview">

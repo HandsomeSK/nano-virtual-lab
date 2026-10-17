@@ -8,7 +8,6 @@ import "./navigation-menu.css";
 import "./research-hub.css";
 import "./research-evidence.css";
 import "./challenge-depth.css";
-import "./contents-responsive.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AnchorNavigation } from "@/components/anchor-navigation";
