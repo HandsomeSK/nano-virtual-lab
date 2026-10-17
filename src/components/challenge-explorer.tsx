@@ -350,7 +350,7 @@ export function ChallengeExplorer() {
   return (
     <>
       <div className="challenge-list">
-        {challenges.map((item) => (
+        {challenges.map((item, index) => (
           <section
             key={item.id}
             className="challenge-article"
@@ -359,7 +359,12 @@ export function ChallengeExplorer() {
           >
             <header className="challenge-heading">
               <p className="challenge-category">{item.tag}</p>
-              <h2>{item.title}</h2>
+              <h2 className="numbered-section-title">
+                <span className="section-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>{" "}
+                <span>{item.title}</span>
+              </h2>
               <p>
                 {item.summary}
                 <ReferenceLink
