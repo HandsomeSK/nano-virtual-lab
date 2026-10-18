@@ -5,7 +5,7 @@ export const site = {
   subtitle: "Beyond the visible",
   identity: "Nanotechnology Virtual Laboratory",
   description:
-    "Discover nanomaterials through immersive atomic structures, interactive science and verified research. An independent nanotechnology virtual laboratory.",
+    "Learn nanomaterial principles, explore four scientific models in one 3D Lab, and test transistor parameters with numerical simulations and verified research.",
 };
 export const navigation = [
   { href: "/", title: "Home" },
@@ -16,7 +16,7 @@ export const navigation = [
   { href: "/simulator", title: "Simulator" },
   { href: "/comparison", title: "Comparison" },
   { href: "/challenges", title: "Engineering Challenges" },
-  { href: "/research", title: "Research Frontier" },
+  { href: "/research", title: "Research" },
   {
     href: "/discoveries/mos2-interface-breakthrough",
     title: "The Interface Breakthrough",
@@ -57,8 +57,8 @@ export const journey = [
   },
   {
     href: "/device",
-    title: "MoS₂ transistors",
-    description: "Explore the layers of a transistor.",
+    title: "Transistor principles",
+    description: "Understand how a gate controls the channel.",
     tone: "violet",
   },
   {

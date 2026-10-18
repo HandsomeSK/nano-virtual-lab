@@ -17,32 +17,19 @@ const categoryGroups: Record<
       ],
     },
     {
-      title: "Two-dimensional materials",
+      title: "Materials & devices",
       links: [
         { href: "/foundations#graphene-structure", title: "Graphene crystal structure" },
         { href: "/foundations#graphene-electronics", title: "Graphene electronic properties" },
         { href: "/why-mos2", title: "From graphene to MoS₂" },
-        { href: "/why-mos2#possibilities", title: "MoS₂ properties & opportunities" },
+        { href: "/device", title: "Transistor working principle" },
       ],
     },
   ],
-  "/lab": [
-    {
-      title: "Atomic structures",
-      links: [
-        { href: "/lab#atomic-structure", title: "Graphene & MoS₂ structures" },
-      ],
-    },
-    {
-      title: "Device inspection",
-      links: [
-        { href: "/device#interactive-device", title: "Transistor stack" },
-      ],
-    },
-  ],
+  "/lab": [],
   "/simulator": [
     {
-      title: "Interactive models",
+      title: "Numerical model",
       links: [
         { href: "/simulator#parameter-gateVoltage", title: "Explore bias & device parameters" },
         { href: "/simulator#understanding-results", title: "Interpret the model results" },

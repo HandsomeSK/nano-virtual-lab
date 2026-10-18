@@ -35,11 +35,13 @@ export function CameraControls({
   update,
   reset,
   focus,
+  label = "Model",
 }: {
   camera: CameraView;
   update: Dispatch<SetStateAction<CameraView>>;
   reset: () => void;
   focus?: () => void;
+  label?: string;
 }) {
   const rotate = (yaw: number, pitch: number) =>
     update((current) => ({
@@ -49,7 +51,11 @@ export function CameraControls({
       pitch: Math.max(-89, Math.min(89, current.pitch + pitch)),
     }));
   return (
-    <div className="science-camera-controls">
+    <div
+      className="science-camera-controls"
+      role="group"
+      aria-label={label + " camera controls"}
+    >
       <div role="group" aria-label="Rotate model">
         {(["left", "right", "up", "down"] as const).map((kind) => (
           <button

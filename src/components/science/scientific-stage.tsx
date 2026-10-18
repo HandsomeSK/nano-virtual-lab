@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import { SceneFallback } from "./scene-fallback";
+import { observeSceneResidency } from "./scene-residency";
 import type { SceneProps } from "./types";
 const Canvas = dynamic(() => import("./scientific-canvas"), {
   ssr: false,
@@ -28,17 +29,7 @@ export function ScientificStage(props: SceneProps) {
   const [nearby, setNearby] = useState(false);
   useEffect(() => {
     if (!host.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setNearby(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" },
-    );
-    observer.observe(host.current);
-    return () => observer.disconnect();
+    return observeSceneResidency(host.current, setNearby);
   }, []);
   return (
     <div ref={host}>
@@ -58,7 +49,7 @@ export function ScientificStage(props: SceneProps) {
           <SceneFallback
             spec={props.spec}
             hidden={props.options.hidden}
-            message="Structure preview. The interactive view is preparing."
+            message="Structure preview. Scroll closer to interact with the model."
           />
         )}
       </SceneBoundary>

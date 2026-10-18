@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DeviceViewer } from "@/components/device-viewer";
+import { InterfaceComparisonFigure } from "@/components/science/teaching-figures";
 import { EotChart } from "@/components/research/eot-chart";
 import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
 import { ReferenceLink } from "@/components/reference-link";
@@ -31,11 +31,6 @@ export default function InterfaceDiscovery() {
           How a nanometre-scale interfacial layer helps unlock the potential of
           MoS₂ transistors.
         </p>
-        <div className="actions">
-          <a href="#interactive-stack" className="metal-button metal-solid">
-            Inspect the 3D stack
-          </a>
-        </div>
         <p className="research-context">
           Wong et al. · Evidence reviewed 13 October 2026
           <ReferenceLink id="wong2026" from={route} />
@@ -97,15 +92,17 @@ export default function InterfaceDiscovery() {
       </section>
       <section id="interactive-stack" className="section">
         <div className="section-heading">
-          <span className="eyebrow">An original interactive explanation</span>
           <h2>Find the layer between the layers</h2>
           <p>
-            Compare the architectures, select the carbon-dot layer, then
-            separate the stack. This structural model explains placement and
-            function; it does not reproduce a measured device.
+            Compare oxide growth on a bare surface with growth on an insulating
+            carbon-dot assembly. The diagrams explain placement and function;
+            the measurements below describe the reported electrical result.
           </p>
         </div>
-        <DeviceViewer interfaceResearch />
+        <InterfaceComparisonFigure />
+        <Link href="/lab#interface-engineering" className="text-link mt-5 inline-block">
+          Inspect the interface layers in 3D Lab
+        </Link>
       </section>
       <section id="measurements" className="research-chapter">
         <div className="chapter-index">03</div>
@@ -198,7 +195,7 @@ export default function InterfaceDiscovery() {
             </div>
             <p className="text-sm">
               These are engineering questions for interpreting the result. The
-              NanoLab viewer does not test them, predict wafer yield or fit the
+              NanoLab schematics do not test them, predict wafer yield or fit the
               paper’s experimental transport data.
             </p>
           </div>

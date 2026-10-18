@@ -179,6 +179,7 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
         >
           {navigationCategories.map((category, i) => {
             const { href, title, groups } = category;
+            const hasSubmenu = groups.length > 0;
             const panelId = `${navId}-category-${i}`;
             const isExpanded = expanded === href;
             return (
@@ -194,11 +195,12 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                   ) {
                     cancelClose();
                     keyboardInteraction.current = false;
-                    setExpanded(href);
+                    setExpanded(hasSubmenu ? href : null);
                   }
                 }}
                 onPointerLeave={(event) => {
                   if (
+                    hasSubmenu &&
                     event.pointerType === "mouse" &&
                     matchMedia("(min-width: 901px)").matches
                   )
@@ -224,7 +226,7 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                     aria-current={pathname === href ? "page" : undefined}
                     onClick={closeNavigation}
                     onKeyDown={(event) => {
-                      if (event.key !== "ArrowDown") return;
+                      if (!hasSubmenu || event.key !== "ArrowDown") return;
                       event.preventDefault();
                       cancelClose();
                       keyboardInteraction.current = true;
@@ -239,64 +241,68 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                   >
                     {title}
                   </Link>
-                  <button
-                    type="button"
-                    className="nav-category-toggle"
-                    aria-label={`${isExpanded ? "Close" : "Open"} ${title} submenu`}
-                    aria-expanded={isExpanded}
-                    aria-controls={panelId}
-                    data-submenu-toggle={href}
-                    onClick={(event) => {
-                      cancelClose();
-                      keyboardInteraction.current = event.detail === 0;
-                      setExpanded((current) => (current === href ? null : href));
-                    }}
-                  >
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      aria-hidden="true"
+                  {hasSubmenu ? (
+                    <button
+                      type="button"
+                      className="nav-category-toggle"
+                      aria-label={`${isExpanded ? "Close" : "Open"} ${title} submenu`}
+                      aria-expanded={isExpanded}
+                      aria-controls={panelId}
+                      data-submenu-toggle={href}
+                      onClick={(event) => {
+                        cancelClose();
+                        keyboardInteraction.current = event.detail === 0;
+                        setExpanded((current) => (current === href ? null : href));
+                      }}
                     >
-                      <path
-                        d="m2.5 4.5 3.5 3 3.5-3"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      />
-                    </svg>
-                  </button>
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="m2.5 4.5 3.5 3 3.5-3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
+                    </button>
+                  ) : null}
                 </div>
-                <div
-                  id={panelId}
-                  className="nav-submenu"
-                  role="region"
-                  aria-label={`${title} sections`}
-                  aria-hidden={!isExpanded}
-                  inert={!isExpanded}
-                >
-                  {groups.map((group, groupIndex) => (
-                    <div className="nav-submenu-group" key={group.title}>
-                      <h2 id={`${panelId}-group-${groupIndex}`}>{group.title}</h2>
-                      <ul aria-labelledby={`${panelId}-group-${groupIndex}`}>
-                        {group.links.map((link) => (
-                          <li key={link.href}>
-                            <Link
-                              href={link.href}
-                              prefetch={false}
-                              aria-current={
-                                pathname === link.href ? "page" : undefined
-                              }
-                              onClick={closeNavigation}
-                            >
-                              {link.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+                {hasSubmenu ? (
+                  <div
+                    id={panelId}
+                    className="nav-submenu"
+                    role="region"
+                    aria-label={`${title} sections`}
+                    aria-hidden={!isExpanded}
+                    inert={!isExpanded}
+                  >
+                    {groups.map((group, groupIndex) => (
+                      <div className="nav-submenu-group" key={group.title}>
+                        <h2 id={`${panelId}-group-${groupIndex}`}>{group.title}</h2>
+                        <ul aria-labelledby={`${panelId}-group-${groupIndex}`}>
+                          {group.links.map((link) => (
+                            <li key={link.href}>
+                              <Link
+                                href={link.href}
+                                prefetch={false}
+                                aria-current={
+                                  pathname === link.href ? "page" : undefined
+                                }
+                                onClick={closeNavigation}
+                              >
+                                {link.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             );
           })}

@@ -253,7 +253,7 @@ export const studies: Study[] = [
     question:
       "How can an oxide grow continuously on a chemically inert basal surface?",
     boundary:
-      "EOT is capacitance-equivalent; the viewer does not reproduce a fabricated device or measured current curve.",
+      "EOT is capacitance-equivalent; the conceptual diagrams do not reproduce a fabricated device or measured current curve.",
     whyMatters: "Connects interface chemistry with gate-stack engineering.",
     concept: "/discoveries/mos2-interface-breakthrough",
     conceptLabel: "Explore the interface",
@@ -272,7 +272,7 @@ export const studies: Study[] = [
     boundary:
       "The public abstract does not establish that every bilayer is direct-gap or provide an exact structure for this viewer.",
     whyMatters: "Makes stacking a materials design variable.",
-    concept: "/lab?material=mos2",
+    concept: "/lab#mos2",
     conceptLabel: "Inspect ideal stacking",
     challenge: "interfaces",
     problem:

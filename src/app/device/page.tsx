@@ -5,15 +5,22 @@ import {
   SectionHeading,
   RelatedTopics,
 } from "@/components/page-shell";
-import { DeviceViewer } from "@/components/device-viewer";
+import {
+  DeviceComponentRoles,
+  TransistorStructureFigure,
+} from "@/components/science/teaching-figures";
 import { ReferenceLink } from "@/components/reference-link";
 import { ScientificFigure } from "@/components/scientific-figure";
-export const metadata: Metadata = { title: "Device Explorer" };
+export const metadata: Metadata = {
+  title: "MoS₂ Transistor Principles",
+  description:
+    "Read a labeled MoS₂ transistor cross-section, understand its gate and contacts, and compare the teaching structure with a published experimental device.",
+};
 export default function Device() {
   return (
     <PageShell
-      title="Device Explorer"
-      intro="Explore a simplified top-gated MoS₂ field-effect transistor. Orbit the model, reveal the layers and discover what each component does."
+      title="MoS₂ Transistor Principles"
+      intro="Follow the path from a thin semiconductor to a working switch. Understand how the contacts, channel and gate stack act together."
     >
       <section className="panel mb-6" id="channel-choice">
         <h2>Why a MoS₂ channel?</h2>
@@ -24,25 +31,33 @@ export default function Device() {
           Contact and dielectric engineering still determine how well a real
           device performs. <ReferenceLink id="radis2011" from="/device" />
         </p>
-        <div className="actions">
-          <Link href="/foundations#bands" className="text-link">
-            Review Band Gap →
-          </Link>
-        </div>
       </section>
-      <div id="interactive-device">
-        <DeviceViewer />
-      </div>
+      <section id="interactive-device" className="section">
+        <SectionHeading
+          title="Read the device from top to bottom"
+          description="The gate controls the channel through an insulator; source and drain connect the channel to the rest of the circuit."
+        />
+        <TransistorStructureFigure />
+        <DeviceComponentRoles />
+        <p className="text-sm mt-5">
+          Component roles use the same material examples as the 3D Lab.
+          <ReferenceLink id="radis2011" from="/device#interactive-device" />
+          <ReferenceLink id="engineering2024" from="/device#interactive-device" />
+        </p>
+        <Link href="/lab#transistor" className="text-link mt-4 inline-block">
+          Operate the transistor model in 3D Lab
+        </Link>
+      </section>
       <section className="section" id="experimental-device">
         <SectionHeading
-          title="From the Model to an Experimental Device"
+          title="From the Schematic to an Experimental Device"
           description="Compare a conceptual top-gate stack with a separately published back-gated transistor."
         />
         <ScientificFigure id="macucci-device" />
         <p>
           The metal electrodes supply and collect carriers; the MoS₂ flake
           between them forms the channel. Here the global gate is below the
-          oxide, rather than above the channel as in the 3D model. Contact
+          oxide, rather than above the channel as in the schematic. Contact
           shape, oxide thickness and channel dimensions belong to this
           experiment.
           <ReferenceLink id="macucci2017" from="/device#experimental-device" />

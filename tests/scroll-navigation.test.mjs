@@ -9,7 +9,7 @@ import {
 const origin = "https://nano-virtual-lab.vercel.app";
 
 function browser(path = "/research", navigationType = "navigate") {
-  const targets = new Map(), frames = new Map(), observers = [], scrolls = [], historyEntries = [];
+  const targets = new Map(), frames = new Map(), observers = [], scrolls = [], historyEntries = [], historyReplacements = [];
   const events = new EventTarget();
   let frameId = 0;
   class Element {
@@ -40,6 +40,11 @@ function browser(path = "/research", navigationType = "navigate") {
         win.history.state = state;
         win.location = new URL(url, win.location);
       },
+      replaceState: (state, _title, url) => {
+        historyReplacements.push({ state, url });
+        win.history.state = state;
+        win.location = new URL(url, win.location);
+      },
     },
     Event,
     addEventListener: events.addEventListener.bind(events),
@@ -56,7 +61,7 @@ function browser(path = "/research", navigationType = "navigate") {
   const manager = createNavigationScroll(win, doc);
   win.addEventListener("hashchange", manager.hashChanged);
   return {
-    manager, win, targets, observers, scrolls, historyEntries, Element, Details,
+    manager, win, targets, observers, scrolls, historyEntries, historyReplacements, Element, Details,
     flush() { const pending = [...frames.values()]; frames.clear(); pending.forEach((callback) => callback()); },
     mutate() { observers.filter((observer) => observer.connected).forEach((observer) => observer.callback()); },
     activate(href) { const intent = navigationIntent(win.location.href, href); assert.ok(intent); manager.activate(intent); },
@@ -72,6 +77,50 @@ test("links distinguish another page, a same-page fragment and filter state", ()
   assert.equal(navigationIntent(current, "/research?year=2025#study-b").kind, "state-anchor");
   assert.equal(navigationIntent(origin + "/research", "#").kind, "anchor");
   assert.equal(navigationIntent(origin + "/research", "/research"), null);
+});
+
+test("legacy Lab material bookmarks focus the existing model without another history entry", () => {
+  for (const material of ["graphene", "mos2"]) {
+    const page = browser(`/lab?material=${material}&note=keep`);
+    const target = new page.Element();
+    page.targets.set(material, target);
+    page.manager.initialize();
+    page.flush();
+    assert.equal(page.win.location.hash, `#${material}`);
+    assert.equal(page.win.location.searchParams.get("note"), "keep");
+    assert.equal(page.win.history.state.readingNote, "preserve");
+    assert.equal(page.historyEntries.length, 0);
+    assert.equal(page.historyReplacements.length, 1);
+    assert.equal(page.scrolls.length, 1);
+    assert.equal(page.scrolls[0].target, target);
+  }
+  for (const [path, navigationType] of [
+    ["/lab?material=mos2#transistor", "navigate"],
+    ["/lab?material=unknown", "navigate"],
+    ["/research?material=mos2", "navigate"],
+    ["/lab?material=mos2", "back_forward"],
+  ]) {
+    const page = browser(path, navigationType);
+    page.manager.initialize();
+    assert.equal(page.historyReplacements.length, 0, path);
+    assert.equal(page.win.location.href, origin + path);
+  }
+});
+
+test("legacy material links from another page enter the corresponding Lab section", () => {
+  const page = browser("/research");
+  page.activate("/lab?material=mos2");
+  page.win.location = new URL("/lab?material=mos2", origin);
+  const target = new page.Element();
+  page.targets.set("mos2", target);
+  page.manager.commit("/lab", "material=mos2");
+  page.flush();
+  assert.equal(page.win.location.hash, "#mos2");
+  assert.equal(page.historyReplacements.length, 1);
+  assert.equal(page.scrolls[0].target, target);
+  page.manager.commit("/lab", "material=mos2");
+  page.flush();
+  assert.equal(page.scrolls.length, 1);
 });
 
 test("new tabs, downloads, prevented clicks and external or unsafe URLs stay native", () => {

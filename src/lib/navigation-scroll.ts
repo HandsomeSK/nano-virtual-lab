@@ -78,6 +78,20 @@ export function createNavigationScroll(
   let observer: MutationObserver | null = null;
   let frame = 0;
 
+  function resolveLegacyMaterial() {
+    const destination = new URL(win.location.href);
+    const material = destination.searchParams.get("material");
+    if (
+      destination.pathname === "/lab" &&
+      !destination.hash &&
+      (material === "graphene" || material === "mos2")
+    ) {
+      destination.hash = material;
+      win.history.replaceState(win.history.state, "", destination.href);
+    }
+    return destination;
+  }
+
   function cancel() {
     if (frame) win.cancelAnimationFrame(frame);
     frame = 0;
@@ -132,8 +146,9 @@ export function createNavigationScroll(
       const navigation = win.performance.getEntriesByType(
         "navigation",
       )[0] as PerformanceNavigationTiming | undefined;
-      if (win.location.hash && navigation?.type !== "back_forward")
-        seek(new URL(win.location.href), "instant");
+      if (navigation?.type === "back_forward") return;
+      const destination = resolveLegacyMaterial();
+      if (destination.hash) seek(destination, "instant");
     },
     activate(intent: NavigationIntent) {
       cancel();
@@ -175,7 +190,8 @@ export function createNavigationScroll(
         win.scrollTo({ ...position, behavior: "instant" });
         return;
       }
-      if (intent.destination.hash) seek(intent.destination, "instant");
+      const destination = resolveLegacyMaterial();
+      if (destination.hash) seek(destination, "instant");
       else win.scrollTo({ top: 0, left: 0, behavior: "instant" });
     },
     restore() {

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import Link from "next/link";
 import { deviceParts } from "@/data/device";
 import { ScientificStage } from "./science/scientific-stage";
@@ -28,12 +28,19 @@ const interfacePart = {
 export function DeviceViewer({
   interfaceResearch = false,
   from = interfaceResearch
-    ? "/discoveries/mos2-interface-breakthrough#interactive-stack"
-    : "/device",
+    ? "/lab#interface-engineering"
+    : "/lab#transistor",
+  heading = interfaceResearch ? "Interface engineering" : "MoS₂ transistor",
+  description,
 }: {
   interfaceResearch?: boolean;
   from?: string;
+  heading?: string;
+  description?: string;
 }) {
+  const instanceId = useId();
+  const headingId = instanceId + "-heading";
+  const inspectorId = instanceId + "-inspector";
   const [withInterface, setWithInterface] = useState(interfaceResearch);
   const [options, setOptions] = useState({
     ...initialOptions,
@@ -68,13 +75,12 @@ export function DeviceViewer({
   }
   return (
     <div className="science-workbench device-instrument">
-      <section className="science-stage">
+      <section className="science-stage" aria-labelledby={headingId}>
         <div className="workbench-heading">
-          <h2>
-            {interfaceResearch
-              ? "Engineer the interface"
-              : "Interactive 3D viewer"}
-          </h2>
+          <div>
+            <h2 id={headingId}>{heading}</h2>
+            {description ? <p className="text-sm">{description}</p> : null}
+          </div>
           {interfaceResearch ? (
             <div
               className="tabs"
@@ -144,6 +150,7 @@ export function DeviceViewer({
         </div>
         <CameraControls
           camera={camera}
+          label={heading}
           update={setCamera}
           reset={reset}
           focus={() =>
@@ -158,7 +165,7 @@ export function DeviceViewer({
           <label>
             <input
               type="checkbox"
-              name="exploded-view"
+              name={instanceId + "-exploded-view"}
               checked={options.exploded}
               onChange={(e) =>
                 setOptions({ ...options, exploded: e.target.checked })
@@ -169,7 +176,7 @@ export function DeviceViewer({
           <label>
             <input
               type="checkbox"
-              name="layer-labels"
+              name={instanceId + "-layer-labels"}
               checked={options.labels}
               onChange={(e) =>
                 setOptions({ ...options, labels: e.target.checked })
@@ -180,7 +187,7 @@ export function DeviceViewer({
           <label className="touch-orbit">
             <input
               type="checkbox"
-              name="device-touch-orbit"
+              name={instanceId + "-device-touch-orbit"}
               checked={options.touchOrbit}
               onChange={(e) =>
                 setOptions({ ...options, touchOrbit: e.target.checked })
@@ -196,7 +203,7 @@ export function DeviceViewer({
             oxide islands; the carbon-dot assembly helps form a continuous film.
             <ReferenceLink
               id="wong2026"
-              from="/discoveries/mos2-interface-breakthrough#interactive-stack"
+              from={from}
             />
           </p>
         ) : (
@@ -221,8 +228,8 @@ export function DeviceViewer({
           </p>
         ) : null}
       </section>
-      <aside className="science-inspector">
-        <h3>Device components</h3>
+      <aside className="science-inspector" aria-labelledby={inspectorId}>
+        <h3 id={inspectorId}>Device components</h3>
         <p className="text-xs">
           Select a layer to inspect its role. Checkboxes control visibility.
         </p>
@@ -239,7 +246,7 @@ export function DeviceViewer({
               </button>
               <label>
                 <input
-                  name={"show-" + item.id}
+                  name={instanceId + "-show-" + item.id}
                   type="checkbox"
                   aria-label={"Show " + item.name}
                   checked={!options.hidden.includes(item.id)}
@@ -284,10 +291,7 @@ export function DeviceViewer({
               ) : null}
               {withInterface &&
               (part.id === "dielectric" || part.id === "interface") ? (
-                <ReferenceLink
-                  id="wong2026"
-                  from="/discoveries/mos2-interface-breakthrough#interactive-stack"
-                />
+                <ReferenceLink id="wong2026" from={from} />
               ) : null}
             </p>
           </details>

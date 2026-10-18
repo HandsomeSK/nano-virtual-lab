@@ -48,7 +48,7 @@ test("graphene has a planar two-atom basis and three nearest neighbours per inte
       Math.abs(distance(atoms[a].position, atoms[b].position) - 1.42) < 0.005,
     );
 });
-test("MoS₂ is one trigonal-prismatic S–Mo–S sheet with six Mo neighbours and no S–S bonds", () => {
+test("MoS₂ is one trigonal-prismatic S–Mo–S sheet with six S neighbours per Mo and no S–S bonds", () => {
   const { atoms, bonds } = createAtomicStructure("mos2");
   assert.equal(
     atoms.filter((a) => a.element === "S").length,
@@ -102,6 +102,36 @@ test("bilayer registry changes orientation while preserving sheet coordination a
     ).position;
   assert.ok(mo(twoH, 1)[0] - mo(twoH, 0)[0] < 0);
   assert.ok(mo(threeR, 1)[0] - mo(threeR, 0)[0] > 0);
+});
+test("2H places upper sulfur above lower molybdenum, while 3R places it above a molybdenum hollow site", () => {
+  const sameProjection = (a, b) =>
+    Math.hypot(a.position[0] - b.position[0], a.position[2] - b.position[2]) <
+    1e-9;
+  for (const stacking of ["2H", "3R"]) {
+    const { atoms, latticeConstant } = createAtomicStructure("mos2", 2, stacking);
+    const upperMo = atoms.find(
+      (a) => a.layer === 1 && a.element === "Mo" && a.cell.every((v) => v === 0),
+    );
+    const upperS = atoms.find(
+      (a) => a.layer === 1 && a.kind === "sulfur-bottom" && a.cell.every((v) => v === 0),
+    );
+    const lowerMo = atoms.filter((a) => a.layer === 0 && a.element === "Mo");
+    const lowerS = atoms.filter((a) => a.layer === 0 && a.kind === "sulfur-top");
+    assert.ok(lowerS.some((a) => sameProjection(a, upperMo)));
+    assert.ok(Math.abs(upperMo.position[1] - lowerMo[0].position[1] - 6.15) < 1e-9);
+    if (stacking === "2H") {
+      assert.ok(lowerMo.some((a) => sameProjection(a, upperS)));
+    } else {
+      assert.ok(!lowerMo.some((a) => sameProjection(a, upperS)));
+      const distances = lowerMo
+        .map((a) => Math.hypot(a.position[0] - upperS.position[0], a.position[2] - upperS.position[2]))
+        .sort((a, b) => a - b);
+      assert.equal(
+        distances.filter((d) => Math.abs(d - latticeConstant / Math.sqrt(3)) < 1e-9).length,
+        3,
+      );
+    }
+  }
 });
 test("featured evidence resolves primary citations and keeps EOT independent of geometric film thickness", () => {
   const ids = new Set(references.map((r) => r.id));

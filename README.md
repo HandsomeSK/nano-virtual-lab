@@ -32,18 +32,19 @@ Run typecheck and build sequentially because both depend on generated .next type
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | `/`                                        | Single-viewport midnight-blue/metal gateway; natural scrolling on mobile                                  |
 | `/foundations`                             | Six science topics, graphene geometry/electronics and existing experiments                        |
-| `/lab?material=graphene`                   | Orbit a honeycomb lattice, show the primitive cell and replay assembly                            |
-| `/lab?material=mos2`                       | S–Mo–S geometry, monolayer/bilayer, ideal 2H/3R registry and inspection separation                |
-| `/why-mos2`                                | MoS₂ landing, structural workbench, material/device context and featured discovery                |
-| `/device`                                  | Top-gated FET with selection, visibility, orbit/zoom/focus/reset, explosion and conceptual ON/OFF |
+| `/lab`                                    | Four continuous, independently controlled 3D models: graphene, MoS₂, transistor and interface engineering |
+| `/why-mos2`                                | Static MoS₂ structures, material properties, band explanations and featured discovery              |
+| `/device`                                  | Static transistor cross-section, component roles, gate operation and experimental-device evidence |
 | `/simulator`                               | Classical current model, bounded parameters, URL state and browser-local saves                    |
 | `/comparison`                              | Shared-scale A/B curves, scenario inspection and edit links                                       |
 | `/research`                                | Knowledge overview, six connected research directions and compact URL-filterable evidence catalogue                        |
-| `/discoveries/mos2-interface-breakthrough` | Carbon-dot interface research, structural before/after, 3D stack and attributed EOT plot          |
+| `/discoveries/mos2-interface-breakthrough` | Carbon-dot interface research, static before/after schematics and attributed EOT plot            |
 | `/challenges`                              | Mechanisms and evidence behind engineering constraints                                            |
 | `/about`                                   | Searchable references, citation return links, model boundaries and asset rights                   |
 
-`/explore` continues to redirect to `/device`. Existing material fragments, citation IDs, research query parameters and saved configurations remain supported. The old MoS₂ foundations are retained in a disclosure; fragment navigation opens it automatically.
+`/explore` continues to redirect to `/device`. Existing material fragments, citation IDs, research query parameters and saved configurations remain supported. On initial entry or explicit navigation from another route, legacy `/lab?material=graphene` and `/lab?material=mos2` URLs without a fragment focus the corresponding section of the complete Lab. All four models stay present; no model is hidden or reordered. The compatible fragment is added with `history.replaceState`, preserving queries and history state without another history entry. An explicit fragment takes precedence, unknown material values are unchanged, and browser back/forward restoration remains native. The old MoS₂ foundations are retained in a disclosure; fragment navigation opens it automatically.
+
+Foundations/Materials explains science; Lab owns every interactive scientific 3D viewer; Simulator/Comparison owns numerical calculations and 2D curves; Research/Challenges explains evidence and engineering limits. The 3D Lab header item is a direct link with no model submenu. Foundations, Research and Challenges retain visible page indices beneath their introductions; Lab has no index, model tabs or model-hiding disclosures.
 
 ## Code owners and extension points
 
@@ -65,7 +66,7 @@ Add evidence to the bibliography before citing it. Add a study and/or a themed s
 
 The atomic model is an ideal finite ball-and-stick lattice, not electron density or molecular dynamics. Graphene has a two-carbon basis, plus inspectable single-bond and three-neighbour close-ups. Full yaw and above/below orbit are available with mouse, touch and keyboard controls. Semiconducting MoS₂ has one Mo and two S atoms per primitive cell, with trigonal-prismatic coordination. Sphere radii, assembly transitions and expanded spacing aid inspection. The 3R view holds representative spacing fixed to compare registry; it does not reconstruct the 2026 engineered bilayer.
 
-The lab directly embeds the shared transistor used on Device and the interface discovery. Its gold electrodes, transparent HfO₂, enlarged atomic channel and separate SiO₂/Si support use cited material examples. See [materials and geometry provenance](docs/nanoscale-depth.md). The homepage projects a continuously twisting, depth-lit silver particle volume through one Canvas pixel upload per frame, with no video rewind.
+The Lab directly embeds four models in this order: Graphene atomic structure, MoS₂ atomic structure, MoS₂ transistor and Interface engineering. Two fixed-material AtomicWorkbench instances and two DeviceViewer instances reuse the existing geometry and renderer; each owns its controls, selection and camera state. Scroll to any model to use it without leaving the page or selecting a model category. Device, Why MoS₂ and the interface discovery retain static scientific explanations instead of duplicate WebGL viewers. The transistor's gold electrodes, transparent HfO₂, enlarged atomic channel and separate SiO₂/Si support use cited material examples. See [the unified Lab architecture](docs/unified-3d-lab.md) and [materials and geometry provenance](docs/nanoscale-depth.md). The homepage projects a continuously twisting, depth-lit silver particle volume through one Canvas pixel upload per frame, with no video rewind.
 
 Device layers and carbon-dot placement are original concept schematics, with exaggerated thicknesses. They do not compute spatial fields, injection or transport. The ON/OFF toggle illustrates charge control. The existing simulator remains an uncalibrated classical long-channel model; it omits subthreshold leakage, quantum transport, traps, self-heating and short-channel effects.
 
@@ -97,4 +98,4 @@ Open/review a pull request, verify its Vercel preview, merge to main, and verify
 
 Latest homepage/navigation/reading refinements are recorded in `docs/home-reading-feedback.md`. Scientific source and model verification for the broader redesign are in `docs/beyond-visible.md`. Earlier documents record previous releases; their screenshots/check counts are historical.
 
-The content, citation, submenu and scroll refinements are documented in [the research hub update](docs/research-hub-update.md). Browser screenshots and interaction coverage are reported only when a real browser could be run.
+The content, citation, submenu and scroll refinements are documented in [the research hub update](docs/research-hub-update.md). That report records an earlier release; [the unified Lab architecture](docs/unified-3d-lab.md) defines current 3D ownership and navigation. Browser screenshots and interaction coverage are reported only when a real browser could be run.
