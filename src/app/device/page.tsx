@@ -11,6 +11,7 @@ import {
 } from "@/components/science/teaching-figures";
 import { ReferenceLink } from "@/components/reference-link";
 import { ScientificFigure } from "@/components/scientific-figure";
+import styles from "./device.module.css";
 export const metadata: Metadata = {
   title: "MoS₂ Transistor Principles",
   description:
@@ -105,7 +106,7 @@ export default function Device() {
           </div>
         </details>
       </section>
-      <section className="section" id="experimental-device">
+      <section className={`section ${styles.experiment}`} id="experimental-device">
         <SectionHeading
           title="From the Schematic to an Experimental Device"
           description="Compare a conceptual top-gate stack with a separately published back-gated transistor."
