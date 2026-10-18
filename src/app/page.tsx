@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: { absolute: "NanoLab — Explore Nanomaterials" },
   description:
-    "Discover the structures, properties, and possibilities of matter at the nanoscale through immersive 3D exploration and interactive science.",
+    "Learn nanomaterial principles, inspect atomic structures and devices in the 3D Lab, and test transistor parameters with numerical simulations.",
 };
 export const viewport: Viewport = { themeColor: "#0c1524" };
 const delay = (seconds: number) => ({ "--d": seconds + "s" }) as CSSProperties;
@@ -37,9 +37,8 @@ export default function Home() {
               className={styles.lede + " appear appear--soft"}
               style={{ ...delay(0.46), animationDuration: "1.25s" }}
             >
-              Discover the structures, properties, and possibilities of matter
-              at the nanoscale through immersive 3D exploration and interactive
-              science.
+              Learn the materials, inspect atomic structures and devices in the
+              3D Lab, and test transistor parameters with numerical simulations.
             </p>
             <div className={styles.actions}>
               <Link

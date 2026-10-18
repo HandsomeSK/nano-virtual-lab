@@ -25,7 +25,7 @@ export const researchDirections = [
       "The next engineering test is whether a controlled stack can retain its intended structure and useful electrical behaviour after contacts and dielectrics are added.",
     connectedId: "interfaces",
     connectedLabel: "Dielectric Integration",
-    relatedHref: "/lab?material=mos2",
+    relatedHref: "/lab#mos2",
     relatedLabel: "Compare ideal layer registries in 3D",
   },
   {

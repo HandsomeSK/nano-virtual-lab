@@ -44,7 +44,7 @@ export const discoveryThemes = [
       "Layer count is only part of the description. Atomic registry also shapes the band structure.",
     limit:
       "This is an engineered bilayer, not a universal result for conventional 2H bilayers. Exact reconstructed coordinates are not inferred from an abstract.",
-    href: "/lab?material=mos2",
+    href: "/lab#mos2",
     action: "Inspect ideal stacking",
   },
   {

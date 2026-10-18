@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { animate, type JSAnimation } from "animejs";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { buildScientificModel, type DisplayState } from "./build-scene";
 import { SceneFallback } from "./scene-fallback";
 import { atomNames, type SceneProps, type CameraView } from "./types";
@@ -13,6 +13,7 @@ type Runtime = {
   camera: (v: CameraView) => void;
 };
 export default function ScientificCanvas(props: SceneProps) {
+  const instructionsId = useId();
   const host = useRef<HTMLDivElement>(null),
     annotation = useRef<HTMLSpanElement>(null);
   const latest = useRef(props),
@@ -140,9 +141,11 @@ export default function ScientificCanvas(props: SceneProps) {
       "Interactive " +
         (spec.kind === "atomic"
           ? spec.material + " atomic structure"
-          : "MoS₂ transistor") +
-        ". Drag to orbit; arrows rotate; plus and minus zoom.",
+          : spec.interface || spec.roughOxide
+            ? "interface engineering comparison"
+            : "MoS₂ transistor"),
     );
+    canvas.setAttribute("aria-describedby", instructionsId);
     canvas.setAttribute("role", "img");
     canvas.tabIndex = 0;
     container.prepend(canvas);
@@ -152,13 +155,14 @@ export default function ScientificCanvas(props: SceneProps) {
     container.dataset.bonds = String(model.bondCount);
     let frame = 0,
       disposed = false,
-      visible = true,
+      visible = typeof IntersectionObserver === "undefined",
       frames = 0;
     const animations = new Map<string, JSAnimation>();
     function invalidate() {
       if (disposed || frame || !visible || document.hidden) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
+        if (disposed || !visible || document.hidden) return;
         try {
           model.update(latest.current.options, state);
           floor.visible =
@@ -343,18 +347,25 @@ export default function ScientificCanvas(props: SceneProps) {
     const resize = new ResizeObserver(resizeScene);
     resize.observe(container);
     window.addEventListener("resize", resizeScene);
-    const intersection = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      pausePolicy();
-      if (visible) invalidate();
-    });
-    intersection.observe(container);
+    const intersection =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(([entry]) => {
+            visible = entry.isIntersecting;
+            pausePolicy();
+          });
+    intersection?.observe(container);
     function pausePolicy() {
+      controls.enabled = visible && !document.hidden;
       animations.forEach((animation) => {
         if (document.hidden || !visible) animation.pause();
         else animation.resume();
       });
       if (visible && !document.hidden) invalidate();
+      else {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
     }
     function reducePolicy() {
       if (reduced.matches) {
@@ -396,10 +407,15 @@ export default function ScientificCanvas(props: SceneProps) {
     const down = (e: PointerEvent) => {
       pointerStart = { x: e.clientX, y: e.clientY };
     };
+    const cancelPointer = () => {
+      pointerStart = null;
+    };
     const up = (e: PointerEvent) => {
+      const start = pointerStart;
+      pointerStart = null;
       if (
-        !pointerStart ||
-        Math.hypot(e.clientX - pointerStart.x, e.clientY - pointerStart.y) > 5
+        !start ||
+        Math.hypot(e.clientX - start.x, e.clientY - start.y) > 5
       )
         return;
       const rect = canvas.getBoundingClientRect(),
@@ -416,7 +432,6 @@ export default function ScientificCanvas(props: SceneProps) {
       )[0];
       if (hit?.object.userData.part)
         latest.current.onSelect(hit.object.userData.part as string);
-      pointerStart = null;
     };
     function keyboard(e: KeyboardEvent) {
       const v = latest.current.camera;
@@ -459,6 +474,7 @@ export default function ScientificCanvas(props: SceneProps) {
     }
     canvas.addEventListener("pointerdown", down);
     canvas.addEventListener("pointerup", up);
+    canvas.addEventListener("pointercancel", cancelPointer);
     canvas.addEventListener("keydown", keyboard);
     return () => {
       disposed = true;
@@ -468,24 +484,31 @@ export default function ScientificCanvas(props: SceneProps) {
       animations.clear();
       resize.disconnect();
       window.removeEventListener("resize", resizeScene);
-      intersection.disconnect();
+      intersection?.disconnect();
       document.removeEventListener("visibilitychange", pausePolicy);
       reduced.removeEventListener("change", reducePolicy);
       canvas.removeEventListener("webglcontextlost", lost);
       canvas.removeEventListener("pointerdown", down);
       canvas.removeEventListener("pointerup", up);
+      canvas.removeEventListener("pointercancel", cancelPointer);
       canvas.removeEventListener("keydown", keyboard);
+      controls.removeEventListener("start", start);
+      controls.removeEventListener("change", invalidate);
+      controls.removeEventListener("end", end);
       controls.dispose();
       model.dispose();
       floorGeometry.dispose();
       floorMaterial.dispose();
+      key.shadow.dispose();
+      scene.environment = null;
       environment.dispose();
+      scene.clear();
       renderer.renderLists.dispose();
       renderer.dispose();
       renderer.forceContextLoss();
       canvas.remove();
     };
-  }, [specKey, fault]);
+  }, [specKey, fault, instructionsId]);
   const name =
     props.spec.kind === "atomic"
       ? atomNames[props.options.selected as keyof typeof atomNames]
@@ -507,6 +530,11 @@ export default function ScientificCanvas(props: SceneProps) {
       data-renderer="three"
       data-webgl="loading"
     >
+      <p id={instructionsId} className="sr-only">
+        Drag to orbit. Use the arrow keys to rotate and plus or minus to zoom.
+        Use the model controls to focus a selection or reset the view. On a
+        touchscreen, drag with two fingers, or enable one-finger orbit.
+      </p>
       <span
         ref={annotation}
         className="scene-annotation"

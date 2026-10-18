@@ -28,7 +28,11 @@ export function SceneFallback({
         aria-label={
           spec.kind === "atomic"
             ? "Static projection of the " + spec.material + " lattice"
-            : "Static section of a conceptual top-gated MoS₂ transistor"
+            : spec.interface
+              ? "Static transistor section with a carbon-dot interlayer and continuous dielectric"
+              : spec.roughOxide
+                ? "Static transistor section without carbon dots, showing discontinuous oxide islands"
+                : "Static section of a conceptual top-gated MoS₂ transistor"
         }
       >
         {structure ? (
@@ -72,18 +76,41 @@ export function SceneFallback({
           <g transform="translate(90 290) scale(1 -1)">
             {deviceParts
               .filter((part) => !hidden.includes(part.id))
-              .map((part) => (
-                <rect
-                  key={part.id}
-                  x={part.x}
-                  y={part.z * 2}
-                  width={part.w}
-                  height={Math.max(6, part.h * 2)}
-                  fill={part.color}
-                  opacity={part.id === "dielectric" ? 0.5 : 1}
-                  stroke="#111"
-                />
-              ))}
+              .map((part) =>
+                part.id === "dielectric" &&
+                spec.kind === "device" &&
+                spec.roughOxide ? (
+                  <g key={part.id} fill={part.color} opacity="0.5" stroke="#111">
+                    {[0, 1, 2].map((island) => (
+                      <rect
+                        key={island}
+                        x={part.x + (part.w / 3) * island + 5}
+                        y={part.z * 2}
+                        width={part.w / 3 - 10}
+                        height={20 + island * 2}
+                      />
+                    ))}
+                  </g>
+                ) : (
+                  <rect
+                    key={part.id}
+                    x={part.x}
+                    y={
+                      part.z * 2 +
+                      (spec.kind === "device" &&
+                      spec.interface &&
+                      (part.id === "dielectric" || part.id === "gate")
+                        ? 8
+                        : 0)
+                    }
+                    width={part.w}
+                    height={Math.max(6, part.h * 2)}
+                    fill={part.color}
+                    opacity={part.id === "dielectric" ? 0.5 : 1}
+                    stroke="#111"
+                  />
+                ),
+              )}
             {spec.kind === "device" &&
             spec.interface &&
             !hidden.includes("interface") ? (

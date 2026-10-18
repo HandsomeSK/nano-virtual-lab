@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useId, useState } from "react";
 import {
   atomicColors,
   type AtomicMaterial,
@@ -34,11 +34,16 @@ export function AtomicWorkbench({
   initialMaterial = "graphene",
   fixedMaterial = false,
   syncUrl = false,
+  heading,
+  description,
 }: {
   initialMaterial?: AtomicMaterial;
   fixedMaterial?: boolean;
   syncUrl?: boolean;
+  heading?: string;
+  description?: string;
 }) {
+  const instanceId = useId();
   const [material, setMaterial] = useState(initialMaterial),
     [layers, setLayers] = useState<1 | 2>(1),
     [stacking, setStacking] = useState<"2H" | "3R">("2H");
@@ -54,6 +59,12 @@ export function AtomicWorkbench({
     material === "graphene"
       ? ["carbon"]
       : ["sulfur-top", "molybdenum", "sulfur-bottom"];
+  const title =
+    heading ??
+    (material === "graphene"
+      ? "A single carbon sheet"
+      : "One sheet. Three atomic planes");
+  const from = `/lab#${material}`;
   const select = (id: string) =>
     setOptions((p) => ({
       ...p,
@@ -61,6 +72,9 @@ export function AtomicWorkbench({
       hidden: p.hidden.filter((k) => k !== id),
     }));
   function reset() {
+    setDetail("lattice");
+    setLayers(1);
+    setStacking("2H");
     setCamera({ ...defaultCamera, revision: camera.revision + 1 });
     setOptions({
       ...initialOptions,
@@ -87,16 +101,12 @@ export function AtomicWorkbench({
   return (
     <section
       className="atomic-workbench"
-      aria-label="Atomic structure workbench"
+      aria-labelledby={`${instanceId}-heading`}
     >
       <div className="workbench-heading">
         <div>
-          <span className="eyebrow">Atomic structure</span>
-          <h2>
-            {material === "graphene"
-              ? "A single carbon sheet"
-              : "One sheet. Three atomic planes"}
-          </h2>
+          <h2 id={`${instanceId}-heading`}>{title}</h2>
+          {description ? <p>{description}</p> : null}
         </div>
         {!fixedMaterial ? (
           <div
@@ -153,6 +163,7 @@ export function AtomicWorkbench({
             <span>Arrows and +/− work on the focused model.</span>
           </div>
           <CameraControls
+            label={`${title} camera`}
             camera={camera}
             update={setCamera}
             reset={reset}
@@ -164,9 +175,13 @@ export function AtomicWorkbench({
               })
             }
           />
-          <div className="science-options">
+          <div
+            className="science-options"
+            role="group"
+            aria-label={`${title} options`}
+          >
             {material === "graphene" ? (
-              <div className="tabs" role="group" aria-label="Graphene detail">
+              <div className="tabs" role="group" aria-label={`${title} detail`}>
                 {(["lattice", "bond", "coordination"] as const).map((view) => (
                   <button
                     type="button"
@@ -194,10 +209,11 @@ export function AtomicWorkbench({
                 ))}
               </div>
             ) : null}
-            <label>
+            <label htmlFor={`${instanceId}-unit-cell`}>
               <input
+                id={`${instanceId}-unit-cell`}
                 type="checkbox"
-                name="unit-cell"
+                name={`${instanceId}-unit-cell`}
                 checked={options.unitCell}
                 disabled={material === "graphene" && detail !== "lattice"}
                 onChange={(e) =>
@@ -206,10 +222,11 @@ export function AtomicWorkbench({
               />
               Primitive cell
             </label>
-            <label>
+            <label htmlFor={`${instanceId}-atom-labels`}>
               <input
+                id={`${instanceId}-atom-labels`}
                 type="checkbox"
-                name="atom-labels"
+                name={`${instanceId}-atom-labels`}
                 checked={options.labels}
                 onChange={(e) =>
                   setOptions({ ...options, labels: e.target.checked })
@@ -217,10 +234,11 @@ export function AtomicWorkbench({
               />
               Selection label
             </label>
-            <label className="touch-orbit">
+            <label className="touch-orbit" htmlFor={`${instanceId}-touch-orbit`}>
               <input
+                id={`${instanceId}-touch-orbit`}
                 type="checkbox"
-                name="touch-orbit"
+                name={`${instanceId}-touch-orbit`}
                 checked={options.touchOrbit}
                 onChange={(e) =>
                   setOptions({ ...options, touchOrbit: e.target.checked })
@@ -250,11 +268,14 @@ export function AtomicWorkbench({
             atomic dynamics or electronic bands.
           </p>
         </div>
-        <aside className="science-inspector">
-          <h3>Inspect the structure</h3>
+        <aside
+          className="science-inspector"
+          aria-labelledby={`${instanceId}-heading ${instanceId}-inspector`}
+        >
+          <h3 id={`${instanceId}-inspector`}>Inspect the structure</h3>
           {material === "mos2" ? (
             <div className="structure-controls">
-              <div className="tabs" role="group" aria-label="Layer number">
+              <div className="tabs" role="group" aria-label={`${title} layer number`}>
                 <button
                   type="button"
                   aria-pressed={layers === 1}
@@ -275,10 +296,11 @@ export function AtomicWorkbench({
               </div>
               {layers === 2 ? (
                 <>
-                  <label>
+                  <label htmlFor={`${instanceId}-stacking-registry`}>
                     Stacking registry
                     <select
-                      name="stacking-registry"
+                      id={`${instanceId}-stacking-registry`}
+                      name={`${instanceId}-stacking-registry`}
                       value={stacking}
                       onChange={(e) =>
                         setStacking(e.target.value as "2H" | "3R")
@@ -288,11 +310,12 @@ export function AtomicWorkbench({
                       <option value="3R">3R · same orientation</option>
                     </select>
                   </label>
-                  <label>
+                  <label htmlFor={`${instanceId}-inspection-spacing`}>
                     Expand sheet spacing
                     <input
+                      id={`${instanceId}-inspection-spacing`}
                       type="range"
-                      name="inspection-spacing"
+                      name={`${instanceId}-inspection-spacing`}
                       min="0"
                       max="6"
                       step=".5"
@@ -312,10 +335,11 @@ export function AtomicWorkbench({
                   </label>
                 </>
               ) : null}
-              <label>
+              <label htmlFor={`${instanceId}-split-atomic-planes`}>
                 <input
+                  id={`${instanceId}-split-atomic-planes`}
                   type="checkbox"
-                  name="split-atomic-planes"
+                  name={`${instanceId}-split-atomic-planes`}
                   checked={options.exploded}
                   onChange={(e) =>
                     setOptions({ ...options, exploded: e.target.checked })
@@ -336,10 +360,11 @@ export function AtomicWorkbench({
                   <i style={{ background: atomicColors[kind] }} />
                   {atomNames[kind]}
                 </button>
-                <label>
+                <label htmlFor={`${instanceId}-show-${kind}`}>
                   <input
+                    id={`${instanceId}-show-${kind}`}
                     type="checkbox"
-                    name={"show-" + kind}
+                    name={`${instanceId}-show-${kind}`}
                     aria-label={"Show " + atomNames[kind]}
                     checked={!options.hidden.includes(kind)}
                     onChange={(e) =>
@@ -387,10 +412,10 @@ export function AtomicWorkbench({
             Ideal geometry sources
             <ReferenceLink
               id={material === "graphene" ? "neto2009" : "ridolfi2015"}
-              from="/lab"
+              from={from}
             />
             {layers === 2 ? (
-              <ReferenceLink id="polytypes2020" from="/lab" />
+              <ReferenceLink id="polytypes2020" from={from} />
             ) : null}
             .
             {material === "mos2"

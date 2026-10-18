@@ -1,0 +1,86 @@
+.figure {
+  margin: 0;
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  border-radius: var(--radius, 0.75rem);
+  background: var(--surface);
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.diagram {
+  min-width: 0;
+}
+
+.diagram h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+}
+
+.diagram svg,
+.crossSection {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+}
+
+.crossSection {
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+.diagram p,
+.figure figcaption {
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.diagram p {
+  margin-top: 0.75rem;
+}
+
+.figure figcaption {
+  margin-top: 1.5rem;
+  max-width: 80ch;
+  color: var(--muted);
+}
+
+.roles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.roles > div {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.roles dt {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.roles dd {
+  margin: 0.5rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+  .comparison,
+  .roles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .comparison {
+    gap: 2rem;
+  }
+}

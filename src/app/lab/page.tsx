@@ -1,70 +1,71 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageShell, RelatedTopics } from "@/components/page-shell";
 import { AtomicWorkbench } from "@/components/science/atomic-workbench";
-import { queryValue, type Query } from "@/lib/site";
+import { DeviceViewer } from "@/components/device-viewer";
+import styles from "./lab.module.css";
+
 export const metadata: Metadata = {
   title: "3D Lab",
   description:
-    "Orbit graphene and MoS₂ atomic structures. Reveal primitive cells, compare stacking and inspect a transistor in NanoLab.",
+    "Explore graphene, MoS₂ layers, a transistor and carbon-dot interface engineering in one continuous, interactive 3D laboratory.",
 };
-export default async function Lab({
-  searchParams,
-}: {
-  searchParams: Promise<Query>;
-}) {
-  const query = await searchParams;
-  const material =
-    queryValue(query, "material") === "mos2" ? "mos2" : "graphene";
+
+export default function Lab() {
   return (
     <PageShell
-      title="Nanomaterials in 3D"
-      intro="Explore graphene and MoS₂ atomic structures in three dimensions. Rotate the lattices, reveal their primitive cells and compare stacking, then continue to the Device Explorer to inspect a transistor."
+      title="3D Lab"
+      intro="Explore four models as you scroll. Drag to rotate, pinch to zoom, or use the camera buttons. Each model has its own selection, controls and reset."
     >
-      <div id="atomic-structure">
-        <AtomicWorkbench key={material} initialMaterial={material} syncUrl />
-      </div>
-      <section className="section" id="transistor">
-        <div className="lab-next">
-          <div>
-            <span className="eyebrow">The next scale</span>
-            <h2>From a sheet to a switch</h2>
-            <p>
-              Contacts, a dielectric and a gate give the semiconductor a device
-              architecture. Continue to the Device Explorer to rotate the stack,
-              expose its atomic channel and inspect the material and role of each
-              layer.
-            </p>
-          </div>
-          <div className="actions">
-            <Link
-              href="/device#interactive-device"
-              className="metal-button metal-solid"
-            >
-              Inspect the transistor
-            </Link>
-            <Link
-              href="/discoveries/mos2-interface-breakthrough#interactive-stack"
-              className="metal-button metal-ghost"
-            >
-              Explore the 2026 interface study
-            </Link>
+      <div id="atomic-structure" className={styles.models}>
+        <div id="graphene" className={styles.model}>
+          <AtomicWorkbench
+            initialMaterial="graphene"
+            fixedMaterial
+            heading="Graphene atomic structure"
+            description="Inspect the honeycomb sheet, a single carbon–carbon bond and three-neighbour coordination. Reveal the two-atom primitive cell or replay assembly."
+          />
+        </div>
+        <div id="mos2" className={styles.model}>
+          <AtomicWorkbench
+            initialMaterial="mos2"
+            fixedMaterial
+            heading="MoS₂ atomic structure"
+            description="Inspect an S–Mo–S monolayer, then compare ideal 2H and 3R bilayers. Separate atomic planes or expand the spacing between sheets."
+          />
+        </div>
+        <div id="transistor" className={styles.model}>
+          <div id="interactive-device">
+            <DeviceViewer
+              heading="MoS₂ transistor"
+              description="Select a component to inspect its material and role. Reveal the stack with an exploded view and compare conceptual ON and OFF states."
+              from="/lab#transistor"
+            />
           </div>
         </div>
-      </section>
+        <div id="interface-engineering" className={styles.model}>
+          <div id="interactive-stack">
+            <DeviceViewer
+              interfaceResearch
+              heading="Interface engineering"
+              description="Compare oxide coverage with and without a carbon-dot interlayer. Select the interface or dielectric to inspect the structural explanation and its limits."
+              from="/lab#interface-engineering"
+            />
+          </div>
+        </div>
+      </div>
       <RelatedTopics
         links={[
           {
             href: "/foundations#graphene-structure",
-            title: "Read the geometry",
+            title: "Understand the atomic geometry",
             description:
-              "Keep exploring with the original 2D lattice and unit-cell activity.",
+              "Connect the structures to bonding, primitive cells and material properties.",
           },
           {
-            href: "/why-mos2",
-            title: "Explore MoS₂",
+            href: "/device#working-principle",
+            title: "Understand transistor operation",
             description:
-              "Connect the three-plane structure with electronic possibilities.",
+              "Follow how the gate, channel and contacts work together before exploring numerical curves.",
           },
         ]}
       />

@@ -29,7 +29,7 @@ test("five category homes stay stable and related routes select one category", (
     ["/foundations", "/foundations"],
     ["/why-mos2", "/foundations"],
     ["/lab", "/lab"],
-    ["/device", "/lab"],
+    ["/device", "/foundations"],
     ["/simulator", "/simulator"],
     ["/comparison", "/simulator"],
     ["/research", "/research"],
@@ -48,6 +48,14 @@ test("five category homes stay stable and related routes select one category", (
     navigationCategories.some((category) => isActiveCategory(category, "/about")),
     false,
   );
+});
+
+test("3D Lab has one direct entry while transistor theory belongs to Materials", () => {
+  const lab = navigationCategories.find(({ href }) => href === "/lab");
+  const materials = navigationCategories.find(({ href }) => href === "/foundations");
+  assert.deepEqual(lab.groups, []);
+  assert.ok(materials.groups.some(({ links }) => links.some(({ href }) => href === "/device")));
+  assert.equal(isActiveCategory(lab, "/device"), false);
 });
 
 test("every secondary destination resolves an actual route and section", () => {

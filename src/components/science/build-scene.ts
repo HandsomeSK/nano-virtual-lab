@@ -5,8 +5,8 @@ import {
   carbonDetail,
   atomicColors,
   type Atom,
-} from "@/lib/science/atomic-structure";
-import { deviceParts } from "@/data/device";
+} from "../../lib/science/atomic-structure.ts";
+import { deviceParts } from "../../data/device.ts";
 import type { SceneSpec, SceneOptions } from "./types";
 export type DisplayState = {
   explosion: number;
@@ -416,7 +416,11 @@ export function buildScientificModel(spec: SceneSpec) {
       atomicBonds.instanceMatrix.needsUpdate = true;
       if (!atomicBonds.boundingSphere) atomicBonds.computeBoundingSphere();
     }
-    if (cell) cell.visible = options.unitCell && spec.kind === "atomic";
+    if (cell) {
+      cell.visible = options.unitCell && spec.kind === "atomic";
+      cell.position.y =
+        spec.kind === "atomic" && spec.layers === 2 ? -state.separation / 2 : 0;
+    }
   }
   function center(id: string) {
     const matches = units.filter(
@@ -445,9 +449,16 @@ export function buildScientificModel(spec: SceneSpec) {
     atomCount: structure?.atoms.length ?? deviceAtomCount,
     bondCount: structure?.bonds.length ?? deviceBondCount,
     dispose() {
+      root.traverse((object) => {
+        // Instance buffers are owned by each mesh, not its shared geometry.
+        if (object instanceof THREE.InstancedMesh) object.dispose();
+      });
       geometries.forEach((g) => g.dispose());
       materials.forEach((m) => m.dispose());
       textures.forEach((t) => t.dispose());
+      geometries.clear();
+      materials.clear();
+      textures.clear();
       root.clear();
     },
   };

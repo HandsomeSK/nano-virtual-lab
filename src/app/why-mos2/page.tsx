@@ -12,12 +12,14 @@ import {
 import { BandDiagram } from "@/components/learning/band-diagram";
 import { ReferenceLink } from "@/components/reference-link";
 import { ScientificFigure } from "@/components/scientific-figure";
-import { AtomicWorkbench } from "@/components/science/atomic-workbench";
+import { Mos2StructureFigure } from "@/components/science/teaching-figures";
 import { InterfaceFeature } from "@/components/research/interface-feature";
 import { LayerBandEvidence } from "@/components/learning/layer-band-evidence";
 
 export const metadata: Metadata = {
   title: "MoS₂ — Engineering the Next Atomic Layer",
+  description:
+    "Understand MoS₂ through its S–Mo–S structure, layer-dependent bands and the interfaces that shape a real transistor.",
 };
 
 export default function Why() {
@@ -27,7 +29,14 @@ export default function Why() {
       intro="A two-dimensional semiconductor where atomic structure, interfaces, and device design redefine electronic possibilities."
     >
       <section className="material-arrival" id="atomic-structure">
-        <AtomicWorkbench initialMaterial="mos2" fixedMaterial />
+        <SectionHeading
+          title="A sheet with an internal structure"
+          description="Read the atomic planes first, then connect layer number and stacking with the electronic structure."
+        />
+        <Mos2StructureFigure />
+        <Link href="/lab#mos2" className="text-link mt-5 inline-block">
+          Rotate and compare MoS₂ structures in 3D Lab
+        </Link>
       </section>
       <section className="section material-reasons" id="possibilities">
         <SectionHeading
@@ -88,7 +97,7 @@ export default function Why() {
           <p>
             Contacts, dielectrics, transfer cleanliness and reproducible
             processing decide how much of a material’s potential survives
-            integration. Explore the structure, then experiment with the
+            integration. Understand the structure, then experiment with the
             separate classical model.
           </p>
         </div>
@@ -330,10 +339,10 @@ export default function Why() {
                 <h3>Explore the complete structure</h3>
                 <p className="mt-3">
                   See how a MoS₂ channel, source, drain, dielectric and gate fit
-                  together. Select a layer and examine its role.
+                  together, and read how each component controls the device.
                 </p>
                 <Link href="/device" className="button-primary mt-5">
-                  Explore Device →
+                  Read transistor principles →
                 </Link>
               </div>
               <div className="panel">

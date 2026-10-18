@@ -39,10 +39,10 @@ export default async function Page({
             <p className="mt-4">
               Explore the nanoscale and energy bands, discover graphene’s
               unusual electronic properties, and investigate why the finite band
-              gap of MoS₂ is useful for transistor switching. Interactive
-              diagrams, a three-dimensional device explorer and an educational
-              simulator connect these concepts with engineering challenges and
-              published research.
+              gap of MoS₂ is useful for transistor switching. Four models in
+              the 3D Lab make the structures tangible; the numerical simulator
+              explores parameter trends. Research and engineering challenges
+              connect both to published evidence and practical limits.
             </p>
           </div>
           <aside className="about-scope" aria-label="Laboratory scope">
