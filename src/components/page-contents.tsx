@@ -1,25 +1,7 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
-import { fragmentId } from "@/lib/navigation-scroll";
+import { useFragment } from "@/lib/use-fragment";
 import styles from "./page-contents.module.css";
-
-function subscribe(callback: () => void) {
-  window.addEventListener("hashchange", callback);
-  window.addEventListener("popstate", callback);
-  return () => {
-    window.removeEventListener("hashchange", callback);
-    window.removeEventListener("popstate", callback);
-  };
-}
-
-function snapshot() {
-  return fragmentId(window.location.hash);
-}
-
-function serverSnapshot() {
-  return "";
-}
 
 export type PageContentsGroup = {
   title?: string;
@@ -33,7 +15,7 @@ export function PageContents({
   groups: PageContentsGroup[];
   title?: string;
 }) {
-  const selected = useSyncExternalStore(subscribe, snapshot, serverSnapshot);
+  const selected = useFragment();
   return (
     <nav className={styles.contents} aria-label={title}>
       <h2 className={styles.title}>{title}</h2>

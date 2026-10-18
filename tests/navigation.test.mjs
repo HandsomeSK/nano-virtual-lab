@@ -13,11 +13,34 @@ import {
   navigationCategories,
   isActiveCategory,
   keepSubmenuOnPointerLeave,
+  selectedSubmenuHref,
 } from "../src/lib/navigation.ts";
+import { fragmentId } from "../src/lib/navigation-scroll.ts";
 import { knowledge } from "../src/data/knowledge.ts";
 import { challenges } from "../src/data/challenges.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+
+test("submenu selection prefers the exact section and falls back to one plain page entry", () => {
+  const links = navigationCategories.flatMap(({ groups }) => groups.flatMap(({ links }) => links));
+  for (const { href } of links) {
+    const url = new URL(href, "https://nanolab.invalid");
+    const selected = selectedSubmenuHref(url.pathname, fragmentId(url.hash));
+    assert.equal(selected, href);
+    assert.equal(links.filter((link) => link.href === selected).length, 1);
+  }
+  for (const [path, hash, expected] of [
+    ["/challenges", "#%69nterfaces", "/challenges#interfaces"],
+    ["/comparison", "#saved", "/comparison#saved"],
+    ["/comparison", "#missing", "/comparison"],
+    ["/comparison", "#%E0%A4%A", "/comparison"],
+    ["/comparison", "", "/comparison"],
+    ["/device", "#working-principle", "/device"],
+    ["/research", "#catalogue", "/research#catalogue"],
+    ["/challenges", "#missing", undefined],
+    ["/lab", "#transistor", undefined],
+  ]) assert.equal(selectedSubmenuHref(path, fragmentId(hash)), expected);
+});
 
 test("pointer leave closes mouse-opened panels despite retained button focus", () => {
   assert.equal(keepSubmenuOnPointerLeave(false, true), false);

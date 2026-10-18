@@ -6,12 +6,15 @@ import {
   isActiveCategory,
   keepSubmenuOnPointerLeave,
   navigationCategories,
+  selectedSubmenuHref,
 } from "@/lib/navigation";
+import { useFragment } from "@/lib/use-fragment";
 import { Brand } from "./brand";
 import { AppreciationButton } from "./appreciation-button";
 
 export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
   const pathname = usePathname();
+  const selectedHref = selectedSubmenuHref(pathname, useFragment());
   const navId = useId();
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -290,7 +293,9 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                                 href={link.href}
                                 prefetch={false}
                                 aria-current={
-                                  pathname === link.href ? "page" : undefined
+                                  selectedHref === link.href
+                                    ? link.href.includes("#") ? "location" : "page"
+                                    : undefined
                                 }
                                 onClick={closeNavigation}
                               >

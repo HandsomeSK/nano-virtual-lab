@@ -132,7 +132,8 @@
   touch-action: manipulation;
 }
 .nav-submenu-group a:hover,
-.nav-submenu-group a[aria-current="page"] {
+.nav-submenu-group a[aria-current="page"],
+.nav-submenu-group a[aria-current="location"] {
   background: rgba(133, 215, 255, 0.12);
   color: var(--primary);
 }

@@ -13,23 +13,31 @@ const compiled = ts.transpileModule(
   readFileSync(new URL("../src/components/page-contents.tsx", import.meta.url), "utf8"),
   { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true } },
 ).outputText;
+const compiledHook = ts.transpileModule(
+  readFileSync(new URL("../src/lib/use-fragment.ts", import.meta.url), "utf8"),
+  { compilerOptions: { module: ts.ModuleKind.CommonJS } },
+).outputText;
 const groups = [
   { title: "Learn", items: [{ id: "nanoscale", label: "Size scale", number: "01" }] },
   { title: "Explore", items: [{ id: "energy-bands", label: "Energy bands", number: "02" }] },
 ];
 
 function load(window, useSyncExternalStore) {
-  const compiledModule = { exports: {} };
-  runInNewContext(compiled, {
-    module: compiledModule, exports: compiledModule.exports, window,
-    require: (name) => {
-      if (name.endsWith(".module.css")) return {};
-      if (name === "@/lib/navigation-scroll") return { fragmentId };
-      if (name === "react" && useSyncExternalStore) return { useSyncExternalStore };
-      return require(name);
-    },
-  });
-  return compiledModule.exports.PageContents;
+  function evaluate(source) {
+    const compiledModule = { exports: {} };
+    runInNewContext(source, {
+      module: compiledModule, exports: compiledModule.exports, window,
+      require: (name) => {
+        if (name.endsWith(".module.css")) return {};
+        if (name === "./navigation-scroll") return { fragmentId };
+        if (name === "@/lib/use-fragment") return evaluate(compiledHook);
+        if (name === "react" && useSyncExternalStore) return { useSyncExternalStore };
+        return require(name);
+      },
+    });
+    return compiledModule.exports;
+  }
+  return evaluate(compiled).PageContents;
 }
 
 test("contents retain server-rendered native numbered links without reading browser state", () => {

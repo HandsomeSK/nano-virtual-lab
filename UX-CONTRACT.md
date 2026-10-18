@@ -17,6 +17,8 @@ The owner’s latest 17 October 2026 instruction removes all side indices and re
 
 PageContents marks the section selected by the URL fragment with `aria-current="location"` and a persistent Arctic accent. The selection survives focus changes and manual scrolling until another fragment is chosen or cleared; initial deep links and browser back/forward update it. These native links do not add history or scroll behavior of their own, and modified clicks retain their browser behavior.
 
+The header submenu reads the same fragment state. Reopening a category retains its selected section. An exact section match takes precedence over a plain page entry, with at most one current submenu link; unmatched fragments fall back to that page entry when available. Parent category ownership and menu closing behavior stay unchanged.
+
 AppreciationButton replaces the repeated header destination with a reversible Like NanoLab button. It exposes aria-pressed, keeps the visible label stable and remembers this device’s choice under nanolab-like:v1. Blocked storage leaves an ephemeral choice for the current visit; appreciation state never overwrites saved experiment scenarios. There is no shared or remote like count.
 
 ## Unified 3D Lab
