@@ -24,6 +24,7 @@ export type DeviceSpec = {
   interface: boolean;
   roughOxide?: boolean;
 };
+export type DeviceStructure = "standard" | "without-carbon" | "with-carbon";
 export type SceneSpec = AtomicSpec | DeviceSpec;
 export type SceneOptions = {
   selected: string;
@@ -35,6 +36,7 @@ export type SceneOptions = {
   on: boolean;
   assembly: number;
   touchOrbit: boolean;
+  deviceStructure?: DeviceStructure;
 };
 export type SceneProps = {
   spec: SceneSpec;

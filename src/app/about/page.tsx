@@ -27,6 +27,17 @@ export default async function Page({
       title="About & References"
       intro="An independent virtual laboratory for exploring nanomaterials, understanding devices and reading the evidence behind them."
     >
+      <nav className="actions mb-5" aria-label="Find sources and model information">
+        <Link className="text-link" href="#references">
+          Find a paper
+        </Link>
+        <Link className="text-link" href="#figure-sources">
+          Find an image licence
+        </Link>
+        <Link className="text-link" href="#sources">
+          Understand the evidence types
+        </Link>
+      </nav>
       <section className="section about-overview" id="about-nanolab">
         <SectionHeading title="Science You Can Explore" />
         <div className="about-layout">
@@ -39,7 +50,7 @@ export default async function Page({
             <p className="mt-4">
               Explore the nanoscale and energy bands, discover graphene’s
               unusual electronic properties, and investigate why the finite band
-              gap of MoS₂ is useful for transistor switching. Four models in
+              gap of MoS₂ is useful for transistor switching. Three models in
               the 3D Lab make the structures tangible; the numerical simulator
               explores parameter trends. Research and engineering challenges
               connect both to published evidence and practical limits.

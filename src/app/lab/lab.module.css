@@ -28,6 +28,60 @@
   grid-template-columns: minmax(0, 1fr) 300px;
 }
 
+.model :global(.science-inspector) {
+  min-width: 0;
+  padding: 20px;
+}
+
+.model :global(.science-selection) {
+  padding-block: 16px;
+}
+
+.model :global(.science-selection h4) {
+  margin-bottom: 4px;
+}
+
+.model :global(.science-selection .text-xs) {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.model :global(.science-readouts > div:last-child) {
+  margin-bottom: 0;
+}
+
+.model :global(.device-state-controls) {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 16px 24px;
+  margin-bottom: 16px;
+}
+
+.model :global(.device-state-controls fieldset) {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.model :global(.device-state-controls legend) {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.model :global(.device-state-controls .tabs) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
+.model :global(.device-state-controls button) {
+  min-height: 44px;
+}
+
 .model :global(.scientific-canvas),
 .model :global(.scene-loading),
 .model :global(.scene-fallback) {
@@ -65,6 +119,14 @@
 }
 
 @media (max-width: 560px) {
+  .model :global(.device-state-controls) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .model :global(.science-inspector) {
+    padding: 16px;
+  }
+
   .model :global(.scientific-canvas),
   .model :global(.scene-loading),
   .model :global(.scene-fallback) {

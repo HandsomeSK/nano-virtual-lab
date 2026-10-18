@@ -1,3 +1,6 @@
+import { auxiliaryPages, pageHierarchy } from "./page-hierarchy.ts";
+export { primaryNavigation } from "./page-hierarchy.ts";
+
 export const site = {
   name: "NanoLab",
   url: "https://nano-virtual-lab.vercel.app",
@@ -5,31 +8,16 @@ export const site = {
   subtitle: "Beyond the visible",
   identity: "Nanotechnology Virtual Laboratory",
   description:
-    "Learn nanomaterial principles, explore four scientific models in one 3D Lab, and test transistor parameters with numerical simulations and verified research.",
+    "Learn nanomaterial principles, explore three scientific models in one 3D Lab, and test transistor parameters with numerical simulations and verified research.",
 };
 export const navigation = [
   { href: "/", title: "Home" },
-  { href: "/foundations", title: "Foundations" },
-  { href: "/lab", title: "3D Lab" },
-  { href: "/why-mos2", title: "MoS₂" },
-  { href: "/device", title: "Device" },
-  { href: "/simulator", title: "Simulator" },
-  { href: "/comparison", title: "Comparison" },
-  { href: "/challenges", title: "Engineering Challenges" },
-  { href: "/research", title: "Research" },
-  {
-    href: "/discoveries/mos2-interface-breakthrough",
-    title: "The Interface Breakthrough",
-  },
-  { href: "/about", title: "About & References" },
-] as const;
-export const primaryNavigation = [
-  { href: "/foundations", title: "Materials" },
-  { href: "/lab", title: "3D Lab" },
-  { href: "/simulator", title: "Simulators" },
-  { href: "/research", title: "Discoveries" },
-  { href: "/challenges", title: "Engineering Challenges" },
-] as const;
+  ...pageHierarchy.flatMap(({ href, title, children }) => [
+    { href, title },
+    ...children,
+  ]),
+  ...auxiliaryPages,
+];
 export const journey = [
   {
     href: "/foundations",

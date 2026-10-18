@@ -1,0 +1,43 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.brief {
+  display: grid;
+  gap: 18px;
+  max-width: 76ch;
+  margin-block: 20px;
+}
+
+.brief dt {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.brief dd {
+  margin: 6px 0 0;
+  color: var(--prose);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.details {
+  margin-top: 20px;
+}
+
+.details > summary {
+  min-height: 44px;
+}
+
+.details p {
+  max-width: 76ch;
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.8;
+}

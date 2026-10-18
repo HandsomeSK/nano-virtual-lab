@@ -70,7 +70,7 @@ export function Mos2StructureFigure() {
 export function TransistorStructureFigure() {
   return (
     <figure className={styles.figure}>
-      <svg className={styles.crossSection} viewBox="0 0 520 280" role="img" aria-label="Conceptual top-gated MoS₂ transistor cross-section. Source and drain contact the channel. A top gate sits on HfO₂ above the channel, while a separate SiO₂ support oxide and silicon substrate sit below.">
+      <svg className={styles.crossSection} viewBox="0 0 520 280" role="img" aria-label="Conceptual top-gated MoS₂ transistor cross-section. Gold source and drain contact the channel. A chromium/gold top gate sits on HfO₂ above the channel, while a separate SiO₂ support oxide and silicon substrate sit below.">
         <rect x="140" y="195" width="310" height="60" rx="3" fill="#66717b" />
         <rect x="140" y="150" width="310" height="45" fill="#bb905d" />
         <rect x="140" y="140" width="310" height="10" fill="#b49fea" />
@@ -79,9 +79,9 @@ export function TransistorStructureFigure() {
         <rect x="208" y="87" width="164" height="53" rx="3" fill="#62b7b4" />
         <rect x="235" y="50" width="110" height="37" rx="3" fill="#d6ad55" />
         <g fill="currentColor" fontSize="18" textAnchor="middle">
-          <text x="290" y="33">Top gate</text>
-          <text x="174" y="72">Source</text>
-          <text x="406" y="72">Drain</text>
+          <text x="290" y="33">Cr/Au top gate</text>
+          <text x="174" y="72">Au source</text>
+          <text x="406" y="72">Au drain</text>
           <text x="295" y="232">Silicon substrate</text>
         </g>
         <g fill="#111e2d" fontSize="18" textAnchor="middle">

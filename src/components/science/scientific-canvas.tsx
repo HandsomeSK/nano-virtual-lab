@@ -141,9 +141,7 @@ export default function ScientificCanvas(props: SceneProps) {
       "Interactive " +
         (spec.kind === "atomic"
           ? spec.material + " atomic structure"
-          : spec.interface || spec.roughOxide
-            ? "interface engineering comparison"
-            : "MoS₂ transistor"),
+          : "MoS₂ transistor and interface engineering"),
     );
     canvas.setAttribute("aria-describedby", instructionsId);
     canvas.setAttribute("role", "img");
@@ -239,7 +237,14 @@ export default function ScientificCanvas(props: SceneProps) {
       controls.minDistance = distance / 1.8;
       controls.maxDistance = distance / 0.5;
       const target = view.focus
-        ? model.center(view.focus)
+        ? model.pickables.some(
+            (object) =>
+              object.userData.part === view.focus &&
+              object.visible &&
+              object.parent?.visible,
+          )
+          ? model.center(view.focus)
+          : controls.target.clone()
         : spec.kind === "device" && latest.current.options.exploded
           ? activeBounds().center.clone()
           : new THREE.Vector3();
@@ -295,6 +300,8 @@ export default function ScientificCanvas(props: SceneProps) {
       camera: move,
       options(p) {
         const options = p.options;
+        if (spec.kind === "device")
+          container.dataset.deviceStructure = options.deviceStructure ?? "standard";
         canvas.style.touchAction = options.touchOrbit ? "none" : "pan-y";
         controls.touches.ONE = options.touchOrbit
           ? THREE.TOUCH.ROTATE
@@ -428,7 +435,7 @@ export default function ScientificCanvas(props: SceneProps) {
         camera,
       );
       const hit = ray.intersectObjects(
-        model.pickables.filter((object) => object.parent?.visible),
+        model.pickables.filter((object) => object.visible && object.parent?.visible),
       )[0];
       if (hit?.object.userData.part)
         latest.current.onSelect(hit.object.userData.part as string);
@@ -520,6 +527,7 @@ export default function ScientificCanvas(props: SceneProps) {
       <SceneFallback
         spec={props.spec}
         hidden={props.options.hidden}
+        options={props.options}
         message={fault}
       />
     );

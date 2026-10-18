@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon } from "./icon";
+import { Breadcrumb } from "./breadcrumb";
 import {
   PageContents,
   type PageContentsGroup,
@@ -18,6 +19,7 @@ export function PageShell({
 }) {
   return (
     <div className="container page-shell">
+      <Breadcrumb />
       <div className="page-heading">
         <h1>{title}</h1>
         <p>{intro}</p>
@@ -54,12 +56,14 @@ export function SectionHeading({
 }
 export function RelatedTopics({
   links,
+  title = "Continue exploring",
 }: {
   links: { href: string; title: string; description: string }[];
+  title?: string;
 }) {
   return (
     <section className="related-topics">
-      <SectionHeading title="Related topics" />
+      <SectionHeading title={title} />
       <div className="related-grid">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="related-link">

@@ -5,7 +5,6 @@ import {
   curve,
   defaultParameters,
   metrics,
-  parametersQuery,
   parameterControls,
   type Parameters,
   type CurveMode,
@@ -17,23 +16,31 @@ import {
 import { IVChart } from "./iv-chart";
 import { SectionHeading } from "@/components/page-shell";
 import { parameterInsight } from "@/lib/simulation/insights";
+import { editScenarioHref, type ComparisonPair } from "@/lib/simulation/journey";
 type Scenario = { id: string; name: string; parameters: Parameters };
 export function Comparison({
   incoming,
   initialA,
   initialB,
+  initialPair,
+  initialMode,
+  initialLayout,
 }: {
   incoming: Parameters | null;
   initialA: string;
   initialB: string;
+  initialPair: ComparisonPair | null;
+  initialMode: CurveMode;
+  initialLayout: "overlay" | "side";
 }) {
   const { configurations, issue } = useConfigurations();
   const [a, setA] = useState(initialA),
     [b, setB] = useState(initialB);
-  const [mode, setMode] = useState<CurveMode>("transfer");
-  const [layout, setLayout] = useState("overlay");
+  const [mode, setMode] = useState<CurveMode>(initialMode);
+  const [layout, setLayout] = useState(initialLayout);
   const [error, setError] = useState("");
   const scenarios: Scenario[] = [
+    ...(initialPair ? [initialPair.a, initialPair.b] : []),
     {
       id: "example-a",
       name: "Example A · baseline assumptions",
@@ -54,12 +61,23 @@ export function Comparison({
         ]
       : []),
     ...configurations,
-  ];
+  ].filter(
+    (item, index, all) =>
+      all.findIndex((other) => other.id === item.id) === index,
+  );
   const first =
     scenarios.find((item) => item.id === a) ||
+    (initialPair
+      ? scenarios.find((item) => item.id === initialPair.a.id)
+      : null) ||
     scenarios.find((item) => item.id === "incoming") ||
     scenarios[0];
-  const second = scenarios.find((item) => item.id === b) || scenarios[1];
+  const second =
+    scenarios.find((item) => item.id === b) ||
+    (initialPair
+      ? scenarios.find((item) => item.id === initialPair.b.id)
+      : null) ||
+    scenarios[1];
   const mA = metrics(first.parameters),
     mB = metrics(second.parameters);
   const differingControls = parameterControls.filter(
@@ -80,6 +98,15 @@ export function Comparison({
       url.pathname + url.search + url.hash,
     );
   }
+  function updateView(key: "curve" | "layout", value: string) {
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    window.history.replaceState(
+      window.history.state,
+      "",
+      url.pathname + url.search + url.hash,
+    );
+  }
   function remove(id: string) {
     try {
       writeConfigurations(configurations.filter((item) => item.id !== id));
@@ -92,9 +119,15 @@ export function Comparison({
     <>
       <section className="section comparison-console">
         <SectionHeading
-          title="Simulator Results Comparison"
-          description="Compare two parameter sets in the same idealized MoS₂ device model. The qualitative material properties above do not set the parameters of these curves."
+          title="Simulator scenarios: A & B"
+          description="Compare two parameter sets in the same idealized MoS₂ teaching model. Edit either scenario in the Simulator, then return here with the other one intact."
         />
+        {initialPair ? (
+          <p className="text-sm mt-3" data-comparison-return>
+            These A/B copies travel in the URL. Your named configurations in this
+            browser have not been overwritten.
+          </p>
+        ) : null}
         <div className="scenario-selectors">
           <label className="scenario-selector scenario-a">
             Scenario A
@@ -139,13 +172,19 @@ export function Comparison({
           <div className="tabs" role="group" aria-label="Comparison curve type">
             <button
               aria-pressed={mode === "transfer"}
-              onClick={() => setMode("transfer")}
+              onClick={() => {
+                setMode("transfer");
+                updateView("curve", "transfer");
+              }}
             >
               Transfer
             </button>
             <button
               aria-pressed={mode === "output"}
-              onClick={() => setMode("output")}
+              onClick={() => {
+                setMode("output");
+                updateView("curve", "output");
+              }}
             >
               Output
             </button>
@@ -153,18 +192,32 @@ export function Comparison({
           <div className="tabs" role="group" aria-label="Comparison layout">
             <button
               aria-pressed={layout === "overlay"}
-              onClick={() => setLayout("overlay")}
+              onClick={() => {
+                setLayout("overlay");
+                updateView("layout", "overlay");
+              }}
             >
               Overlay
             </button>
             <button
               aria-pressed={layout === "side"}
-              onClick={() => setLayout("side")}
+              onClick={() => {
+                setLayout("side");
+                updateView("layout", "side");
+              }}
             >
               Side by side
             </button>
           </div>
         </div>
+        <p className="text-sm mt-3" aria-live="polite" data-comparison-sweep>
+          {mode === "transfer"
+            ? `Transfer sweeps gate voltage from 0 to 3 V. Drain bias is held at ${first.parameters.drainVoltage.toFixed(2)} V for A and ${second.parameters.drainVoltage.toFixed(2)} V for B.`
+            : `Output sweeps drain voltage from 0 to 2 V. Gate bias is held at ${first.parameters.gateVoltage.toFixed(2)} V for A and ${second.parameters.gateVoltage.toFixed(2)} V for B.`}
+          {" "}
+          The table reports each scenario’s selected bias point, which may
+          differ from the other scenario’s bias.
+        </p>
         {layout === "overlay" ? (
           <div className="comparison-chart">
             <IVChart
@@ -250,16 +303,16 @@ export function Comparison({
         </div>
         <div className="actions">
           <Link
-            href={"/simulator?" + parametersQuery(first.parameters)}
+            href={editScenarioHref("a", { a: first, b: second }, mode, layout)}
             className="button-secondary"
           >
-            Modify Scenario A
+            Edit Scenario A
           </Link>
           <Link
-            href={"/simulator?" + parametersQuery(second.parameters)}
+            href={editScenarioHref("b", { a: first, b: second }, mode, layout)}
             className="button-secondary"
           >
-            Modify Scenario B
+            Edit Scenario B
           </Link>
         </div>
       </section>
@@ -278,8 +331,8 @@ export function Comparison({
           curves cannot rank graphene, MoS₂ and silicon. Real comparisons also
           need matched architecture and measurement conditions.
         </p>
-        <Link href="/challenges" className="text-link">
-          Explore what this model omits →
+        <Link href="/challenges#contacts" className="text-link">
+          Connect the contact assumption with real interfaces
         </Link>
       </section>
       <section className="section saved-configurations" id="saved">
@@ -308,9 +361,14 @@ export function Comparison({
                   </button>
                   <Link
                     className="text-link"
-                    href={"/simulator?" + parametersQuery(item.parameters)}
+                    href={editScenarioHref(
+                      "a",
+                      { a: item, b: second },
+                      mode,
+                      layout,
+                    )}
                   >
-                    Edit in Simulator →
+                    Edit as Scenario A
                   </Link>
                   <button
                     className="text-sm text-violet p-2"

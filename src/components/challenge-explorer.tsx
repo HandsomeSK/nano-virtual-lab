@@ -5,21 +5,13 @@ import { challenges } from "@/data/challenges";
 import { ReferenceLink } from "./reference-link";
 import { challengeChecks, challengeEvidence } from "@/data/challenge-evidence";
 import { ScientificFigure } from "./scientific-figure";
+import styles from "./reading-paths.module.css";
 function subscribe(callback: () => void) {
   window.addEventListener("hashchange", callback);
   return () => window.removeEventListener("hashchange", callback);
 }
 function selectedChallenge() {
   return window.location.hash.slice(1) || "contacts";
-}
-function selectChallenge(id: string) {
-  if (window.location.hash === "#" + id) return;
-  window.history.replaceState(
-    window.history.state,
-    "",
-    window.location.pathname + window.location.search + "#" + id,
-  );
-  window.dispatchEvent(new Event("hashchange"));
 }
 function ChallengeDiagram({
   id,
@@ -390,28 +382,24 @@ export function ChallengeExplorer() {
                 </div>
               </div>
               <div className="challenge-analysis">
-                <details
-                  open={selected === item.id}
-                  onToggle={(event) => {
-                    if (event.currentTarget.open && selected !== item.id)
-                      selectChallenge(item.id);
-                  }}
-                >
-                  <summary>
-                    Why it happens & how it affects a transistor
-                  </summary>
-                  <div className="challenge-mechanism">
-                    <h3>Why it happens</h3>
-                    <p>{item.cause}</p>
-                    <h3>Device impact</h3>
-                    <p>{item.impact}</p>
+                <dl className={styles.brief}>
+                  <div>
+                    <dt>Why it happens</dt>
+                    <dd>{item.cause}</dd>
+                  </div>
+                  <div>
+                    <dt>Device impact</dt>
+                    <dd>{item.impact}</dd>
+                  </div>
+                </dl>
+                <details>
+                  <summary>What the numerical model can explain</summary>
                     <p className="challenge-model-boundary">
                       {item.modelBoundary}
                     </p>
-                  </div>
                 </details>
                 <div className="challenge-direction">
-                  <h3>Research Directions</h3>
+                  <h3>Research direction</h3>
                   <p>
                     {item.solution}
                     <ReferenceLink
@@ -457,7 +445,7 @@ export function ChallengeExplorer() {
                 </Link>
               )}
               <Link className="text-link" href={item.research}>
-                Related research →
+                  Explore the research direction
               </Link>
             </div>
           </section>

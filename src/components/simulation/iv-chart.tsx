@@ -1,13 +1,15 @@
 import type { CurveMode, Parameters } from "@/lib/simulation/model";
-import { curve } from "@/lib/simulation/model";
+import { currentA, curve } from "@/lib/simulation/model";
 export function IVChart({
   series,
   mode,
   maximumCurrent,
+  operatingPoint,
 }: {
   series: { name: string; parameters: Parameters; color: string }[];
   mode: CurveMode;
   maximumCurrent?: number;
+  operatingPoint?: Parameters;
 }) {
   const curves = series.map((item) => ({
     ...item,
@@ -24,6 +26,10 @@ export function IVChart({
     ) * 1.1;
   const x = (v: number) => 66 + (v / maxX) * 454,
     y = (v: number) => 280 - (v / maxY) * 236;
+  const selectedX = operatingPoint
+    ? operatingPoint[mode === "transfer" ? "gateVoltage" : "drainVoltage"]
+    : null;
+  const selectedCurrent = operatingPoint ? currentA(operatingPoint) * 1e6 : null;
   return (
     <figure className="iv-chart instrument-chart">
       <svg
@@ -33,7 +39,10 @@ export function IVChart({
           (mode === "transfer" ? "Transfer" : "Output") +
           " characteristic: drain current in microamps vs " +
           (mode === "transfer" ? "gate" : "drain") +
-          " voltage"
+          " voltage" +
+          (selectedX !== null && selectedCurrent !== null
+            ? `. Selected point: ${selectedX.toFixed(2)} V, ${selectedCurrent.toFixed(3)} microamps.`
+            : "")
         }
       >
         {[0, 1, 2, 3, 4].map((i) => (
@@ -82,6 +91,23 @@ export function IVChart({
             strokeDasharray={index ? "7 4" : undefined}
           />
         ))}
+        {selectedX !== null && selectedCurrent !== null ? (
+          <g data-selected-bias>
+            <path
+              d={`M${x(selectedX)} 280V${y(selectedCurrent)}`}
+              stroke="var(--muted)"
+              strokeDasharray="3 4"
+            />
+            <circle
+              cx={x(selectedX)}
+              cy={y(selectedCurrent)}
+              r="4.5"
+              fill="var(--ink)"
+              stroke="var(--surface)"
+              strokeWidth="2"
+            />
+          </g>
+        ) : null}
         <text
           x="293"
           y="325"
@@ -112,6 +138,12 @@ export function IVChart({
             {item.name}
           </span>
         ))}
+        {operatingPoint ? (
+          <span>
+            Selected bias: Vg {operatingPoint.gateVoltage.toFixed(2)} V; Vd{" "}
+            {operatingPoint.drainVoltage.toFixed(2)} V
+          </span>
+        ) : null}
       </figcaption>
       <details className="curve-data">
         <summary>View curve data</summary>

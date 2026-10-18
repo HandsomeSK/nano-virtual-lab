@@ -7,6 +7,7 @@ import {
   type Atom,
 } from "../../lib/science/atomic-structure.ts";
 import { deviceParts } from "../../data/device.ts";
+import { deviceStructureForScene } from "../../lib/science/device-state.ts";
 import type { SceneSpec, SceneOptions } from "./types";
 export type DisplayState = {
   explosion: number;
@@ -20,6 +21,7 @@ type Unit = {
   rank: number;
   material: THREE.MeshPhysicalMaterial;
   atoms?: Atom[];
+  oxide?: { continuous: THREE.Mesh; islands: THREE.InstancedMesh };
 };
 export function buildScientificModel(spec: SceneSpec) {
   const root = new THREE.Group();
@@ -112,21 +114,17 @@ export function buildScientificModel(spec: SceneSpec) {
   } else {
     const parts = [
       ...deviceParts,
-      ...(spec.interface
-        ? [
-            {
-              id: "interface",
-              name: "Carbon-dot interface",
-              color: "#80dedc",
-              x: 110,
-              y: 50,
-              z: 74,
-              w: 180,
-              d: 140,
-              h: 4,
-            },
-          ]
-        : []),
+      {
+        id: "interface",
+        name: "Carbon-dot interface",
+        color: "#80dedc",
+        x: 110,
+        y: 50,
+        z: 74,
+        w: 180,
+        d: 140,
+        h: 4,
+      },
     ];
     for (const part of parts) {
       const group = new THREE.Group();
@@ -237,8 +235,8 @@ export function buildScientificModel(spec: SceneSpec) {
         group.add(lead);
         pickables.push(lead);
       }
-      if (part.id === "dielectric" && spec.roughOxide) {
-        mesh.visible = false;
+      let oxide: Unit["oxide"];
+      if (part.id === "dielectric") {
         const islands = new THREE.InstancedMesh(slab, mat, 9);
         for (let i = 0; i < 9; i++) {
           matrix.compose(
@@ -260,14 +258,11 @@ export function buildScientificModel(spec: SceneSpec) {
         islands.castShadow = true;
         group.add(islands);
         pickables.push(islands);
+        oxide = { continuous: mesh, islands };
       }
-      const offset =
-        spec.interface && (part.id === "dielectric" || part.id === "gate")
-          ? 4
-          : 0;
       group.position.set(
         (part.x + part.w / 2 - 200) / 50,
-        (part.z + part.h / 2 + offset) / 50 - 1,
+        (part.z + part.h / 2) / 50 - 1,
         (part.y + part.d / 2 - 120) / 50,
       );
       group.add(mesh);
@@ -291,6 +286,7 @@ export function buildScientificModel(spec: SceneSpec) {
         baseY: group.position.y,
         rank,
         material: mat,
+        oxide,
       });
       if (part.id === "interface") {
         // Original qualitative dots: illustrative placement, not microscopy or
@@ -321,20 +317,35 @@ export function buildScientificModel(spec: SceneSpec) {
       options.hidden.join(","),
       options.on,
       options.unitCell,
+      options.deviceStructure,
       state.explosion,
       state.separation,
       state.assembly,
     ].join("|");
     if (signature === previousUpdate) return;
     previousUpdate = signature;
+    const deviceStructure =
+      spec.kind === "device" ? deviceStructureForScene(spec, options) : null;
     for (const unit of units) {
-      unit.group.visible = !options.hidden.includes(unit.id);
+      unit.group.visible =
+        !options.hidden.includes(unit.id) &&
+        (unit.id !== "interface" || deviceStructure === "with-carbon");
       unit.material.emissive.set(
         unit.id === options.selected ? "#5a7b85" : "#000000",
       );
       unit.material.emissiveIntensity = unit.id === options.selected ? 0.18 : 0;
       if (spec.kind === "device") {
-        unit.group.position.y = unit.baseY + state.explosion * unit.rank * 0.75;
+        unit.group.position.y =
+          unit.baseY +
+          state.explosion * unit.rank * 0.75 +
+          (deviceStructure === "with-carbon" &&
+          (unit.id === "dielectric" || unit.id === "gate")
+            ? 0.08
+            : 0);
+        if (unit.oxide) {
+          unit.oxide.continuous.visible = deviceStructure !== "without-carbon";
+          unit.oxide.islands.visible = deviceStructure === "without-carbon";
+        }
         if (unit.id === "channel") {
           unit.material.emissive.set(
             options.on

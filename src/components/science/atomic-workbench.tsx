@@ -9,6 +9,7 @@ import { ScientificStage } from "./scientific-stage";
 import { CameraControls } from "./camera-controls";
 import { atomNames, defaultCamera, type SceneOptions } from "./types";
 import { ReferenceLink } from "@/components/reference-link";
+import { ModelExplanation } from "@/components/model-explanation";
 const initialOptions: SceneOptions = {
   selected: "carbon",
   hidden: [],
@@ -22,13 +23,13 @@ const initialOptions: SceneOptions = {
 };
 const descriptions: Record<AtomKind, string> = {
   carbon:
-    "Each interior carbon has three nearest carbon neighbours in a planar honeycomb network. Two carbon atoms form a primitive cell. Ball-and-stick sizes are illustrative; the model does not calculate electron density.",
+    "Each interior carbon bonds to three nearest neighbours in the flat honeycomb sheet.",
   molybdenum:
-    "The central molybdenum plane sits between two sulfur planes. Each interior Mo has six nearest S neighbours in trigonal-prismatic coordination. One Mo and two S atoms form a primitive cell.",
+    "Each interior molybdenum sits between six sulfur neighbours in a trigonal prism.",
   "sulfur-top":
-    "The upper sulfur plane has the same in-plane registry as the lower sulfur plane within a 1H sheet. Upper and lower sulfur triangles form a trigonal prism around Mo, rather than an octahedron.",
+    "The upper sulfur plane forms the top face of the S–Mo–S sheet.",
   "sulfur-bottom":
-    "The lower sulfur plane completes a single S–Mo–S sheet. A monolayer is one three-plane sheet, not three independent monolayers. Between sheets, van der Waals interactions matter; they are not drawn as covalent bonds.",
+    "The lower sulfur plane completes the same monolayer, beneath the molybdenum plane.",
 };
 export function AtomicWorkbench({
   initialMaterial = "graphene",
@@ -263,9 +264,8 @@ export function AtomicWorkbench({
             </p>
           ) : null}
           <p className="science-boundary">
-            Finite, ideal lattice; edge atoms are not relaxed. Sphere sizes,
-            assembly and expanded spacing aid inspection; they do not simulate
-            atomic dynamics or electronic bands.
+            Ideal geometry in Å; sphere sizes and expanded spacing are
+            illustrative, not an atomic dynamics or electronic band calculation.
           </p>
         </div>
         <aside
@@ -382,11 +382,18 @@ export function AtomicWorkbench({
           </div>
           <div className="science-selection" aria-live="polite">
             <h4>{atomNames[options.selected as AtomKind]}</h4>
+            <p className="text-xs">
+              {material === "graphene"
+                ? "Carbon · graphene sheet"
+                : options.selected === "molybdenum"
+                  ? "Molybdenum · MoS₂ sheet"
+                  : "Sulfur · MoS₂ sheet"}
+            </p>
             <p>
               {material === "graphene" && detail === "bond"
-                ? "Two neighbouring carbon sites, separated by approximately 1.42 Å. This is a local bond from the graphene sheet, not an isolated C₂ molecule. The stick represents connectivity; it does not show an electron-density calculation."
+                ? "Two neighbouring carbon sites share a C–C bond of approximately 1.42 Å."
                 : material === "graphene" && detail === "coordination"
-                  ? "An interior carbon has three nearest neighbours in one plane, with 120° bond angles. Rotate underneath to inspect the planar geometry. This is a local fragment of graphene; dangling edge bonds and electronic orbitals are not modeled."
+                  ? "Three nearest carbon neighbours lie in one plane, with 120° bond angles."
                   : descriptions[options.selected as AtomKind]}
             </p>
           </div>
@@ -408,20 +415,81 @@ export function AtomicWorkbench({
               </dd>
             </div>
           </dl>
-          <p className="text-xs">
-            Ideal geometry sources
-            <ReferenceLink
-              id={material === "graphene" ? "neto2009" : "ridolfi2015"}
-              from={from}
-            />
-            {layers === 2 ? (
-              <ReferenceLink id="polytypes2020" from={from} />
-            ) : null}
-            .
-            {material === "mos2"
-              ? " The 3R illustration holds spacing fixed to isolate registry. It is not a reconstruction of the engineered 2026 bilayer."
-              : " Sphere radii are illustrative; bond lengths describe an ideal sheet."}
-          </p>
+          <ModelExplanation
+            title="Structure, scale & model limits"
+            label={`${material === "graphene" ? "Graphene" : "MoS₂"} scientific explanation`}
+          >
+            {material === "graphene" ? (
+              <>
+                <h4>Honeycomb lattice & carbon bonds</h4>
+                <p>
+                  Graphene is a single planar carbon sheet. Each interior carbon
+                  has three nearest neighbours, with approximately 120° between
+                  bonds. The C–C bond is about 1.42 Å; the in-plane lattice
+                  constant is 2.46 Å. The two distances describe different parts
+                  of the same lattice.
+                  <ReferenceLink id="neto2009" from={from} />
+                </p>
+                <h4>Primitive cell & local views</h4>
+                <p>
+                  Two carbon sites form a primitive cell; the honeycomb is a
+                  triangular Bravais lattice with this two-atom basis. Enable
+                  Primitive cell to inspect it. C–C bond and Three neighbours
+                  isolate local geometry from the sheet, rather than an isolated
+                  C₂ molecule or a separate material.
+                </p>
+                <h4>What the model represents</h4>
+                <p>
+                  Sticks show connectivity, not electron density or orbitals.
+                  This finite, ideal fragment leaves edge atoms unrelaxed and
+                  omits dangling-bond chemistry. Sphere radii and assembly motion
+                  aid inspection; no atomic dynamics, scattering, band structure
+                  or transport is calculated.
+                </p>
+              </>
+            ) : (
+              <>
+                <h4>One S–Mo–S sheet</h4>
+                <p>
+                  A 1H monolayer has one molybdenum plane between two sulfur
+                  planes, not three monolayers. Upper and lower sulfur sites
+                  share an in-plane registry. Each interior Mo has six nearest S
+                  neighbours in trigonal-prismatic coordination, rather than an
+                  octahedron; each interior S has three nearest Mo neighbours.
+                  <ReferenceLink id="ridolfi2015" from={from} />
+                </p>
+                <h4>Bilayers, stacking & interlayer interactions</h4>
+                <p>
+                  Bilayer adds a second S–Mo–S sheet. The 2H registry alternates
+                  sheet orientation; 3R preserves orientation with an in-plane
+                  shift. These controls show ideal registry, not a relaxed
+                  reconstruction. Separate S–Mo–S planes and Expand sheet spacing
+                  exaggerate distances for inspection. Between sheets, van der
+                  Waals interactions matter; no interlayer covalent bonds are
+                  drawn.
+                  <ReferenceLink id="polytypes2020" from={from} />
+                </p>
+                <h4>Dimensions & model limits</h4>
+                <p>
+                  The in-plane lattice constant is 3.16 Å. Each S plane is
+                  1.56 Å from Mo, giving an S-to-S vertical separation of 3.12 Å
+                  and a nearest Mo–S distance of about 2.40 Å. A primitive
+                  monolayer cell contains one Mo and two S atoms.
+                  <ReferenceLink id="ridolfi2015" from={from} />
+                </p>
+                <p>
+                  Representative sheet-to-sheet spacing is about 6.15 Å; this is
+                  the repeat distance, not the empty van der Waals gap. The 3R
+                  illustration holds spacing fixed to isolate registry and does
+                  not reconstruct the engineered 2026 bilayer. Sphere radii,
+                  expanded distances and assembly motion are illustrative; the
+                  finite edges are unrelaxed. Electronic bands, excitons and
+                  transport are not calculated.
+                  <ReferenceLink id="polytypes2020" from={from} />
+                </p>
+              </>
+            )}
+          </ModelExplanation>
         </aside>
       </div>
     </section>

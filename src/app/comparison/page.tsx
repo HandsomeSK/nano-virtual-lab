@@ -12,7 +12,8 @@ import { materials } from "@/data/materials";
 import { ReferenceLink } from "@/components/reference-link";
 import { normalizeParameters } from "@/lib/simulation/model";
 import { queryValue, type Query } from "@/lib/site";
-export const metadata: Metadata = { title: "Material Comparison" };
+import { comparisonPair } from "@/lib/simulation/journey";
+export const metadata: Metadata = { title: "Materials & Scenario Comparison" };
 export default async function ComparisonPage({
   searchParams,
 }: {
@@ -21,19 +22,26 @@ export default async function ComparisonPage({
   const query = await searchParams;
   return (
     <PageShell
-      title="Material Comparison"
-      intro="Explore what makes graphene, MoS₂ and silicon different, then test two device assumptions. Material properties and simulated device response answer different questions."
+      title="Materials & Scenario Comparison"
+      intro="Compare material properties and electronic bands, then compare two parameter sets in one teaching model. The A/B curves are assumed device scenarios, not a ranking of materials."
     >
+      <p className="text-sm mb-6">
+        Arriving from the Simulator?{" "}
+        <Link href="#device-comparison" className="text-link">
+          Continue with Scenario A & B
+        </Link>
+        . Your selected parameter sets appear below the material context.
+      </p>
       <section id="material-selector">
         <SectionHeading
-          title="Material Selector"
+          title="Explore the materials"
           description="Select a material to connect its atomic structure, electronic bands and possible applications."
         />
         <MaterialExplorer from="/comparison" />
       </section>
       <section className="section" id="electronic-properties">
         <SectionHeading
-          title="Electronic Properties Comparison"
+          title="Material properties"
           description="A qualitative comparison of material context, rather than a device-performance ranking."
         />
         <div className="horizontal-scroll">
@@ -70,7 +78,7 @@ export default async function ComparisonPage({
       </section>
       <section className="section" id="band-structure">
         <SectionHeading
-          title="Band Structure Comparison"
+          title="Electronic bands"
           description="Pristine graphene has touching bands. Semiconducting MoS₂ and silicon have a finite gap; the direct or indirect character also depends on the material and layer count."
         />
         <div className="three-column">
@@ -159,19 +167,26 @@ export default async function ComparisonPage({
           }
           initialA={queryValue(query, "a")}
           initialB={queryValue(query, "b")}
+          initialPair={comparisonPair(query)}
+          initialMode={
+            queryValue(query, "curve") === "output" ? "output" : "transfer"
+          }
+          initialLayout={
+            queryValue(query, "layout") === "side" ? "side" : "overlay"
+          }
         />
       </div>
       <RelatedTopics
         links={[
           {
-            href: "/why-mos2",
-            title: "From Graphene to MoS₂",
+            href: "/why-mos2#zero-gap",
+            title: "Why a band gap matters",
             description:
               "Connect remarkable transport with the band-gap question.",
           },
           {
-            href: "/challenges",
-            title: "Engineering Challenges",
+            href: "/challenges#contacts",
+            title: "Understand contact resistance",
             description:
               "Understand why material promise is not a device benchmark.",
           },

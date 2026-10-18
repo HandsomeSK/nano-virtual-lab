@@ -12,6 +12,7 @@ import {
   stressSequence,
   thermalBoundaryCase,
 } from "@/data/challenge-evidence";
+import styles from "@/components/reading-paths.module.css";
 export const metadata: Metadata = { title: "Engineering Challenges" };
 export default function Page() {
   return (
@@ -48,6 +49,26 @@ export default function Page() {
           number="05"
           description="A transistor needs a heat path as well as an electrical path."
         />
+        <dl className={styles.brief}>
+          <div>
+            <dt>Why it happens</dt>
+            <dd>
+              Heat leaving through the supporting stack crosses the
+              channel–support interface. Weak thermal coupling can impede that
+              transfer, even when the supporting material conducts heat.
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </dd>
+          </div>
+          <div>
+            <dt>Device impact</dt>
+            <dd>
+              The channel can become hotter than its support. Its electrical
+              response then depends on both charge transport and the heat path
+              through the surrounding stack.
+              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+            </dd>
+          </div>
+        </dl>
         <div className="challenge-thermal-layout">
           <figure className="challenge-thermal-figure">
             <svg viewBox="0 0 520 300" role="img" aria-label="Conceptual heat path from the MoS₂ channel across a molecularly modified interface, through silicon dioxide and into the silicon support.">
@@ -84,7 +105,7 @@ export default function Page() {
             </figcaption>
           </figure>
           <div className="challenge-thermal-prose">
-            <h3>A Molecular Layer Changes the Heat Path</h3>
+            <h3>Research direction: change the thermal boundary</h3>
             <p>
               {thermalBoundaryCase.explanation}
               <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
@@ -107,22 +128,37 @@ export default function Page() {
             </p>
           </div>
         </div>
-        <div className="challenge-thermal-notes">
-          <div>
-            <h3>Separate the Interface from the Whole Stack</h3>
-            <p>
-              {thermalBoundaryCase.method}
-              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
-            </p>
+        <details className={styles.details}>
+          <summary>How the boundary was measured and what remains open</summary>
+          <div className="challenge-thermal-notes">
+            <div>
+              <h3>Separate the Interface from the Whole Stack</h3>
+              <p>
+                {thermalBoundaryCase.method}
+                <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+              </p>
+            </div>
+            <div>
+              <h3>What This Model Leaves Open</h3>
+              <p>
+                {thermalBoundaryCase.boundary}
+                <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
+              </p>
+            </div>
           </div>
-          <div>
-            <h3>What This Model Leaves Open</h3>
-            <p>
-              {thermalBoundaryCase.boundary}
-              <ReferenceLink id={thermalBoundaryCase.reference} from="/challenges#thermal-management" />
-            </p>
-          </div>
+        </details>
+        <div className={styles.actions}>
+          <Link className="text-link" href="/lab#transistor">
+            Inspect the supporting stack in 3D Lab
+          </Link>
+          <Link className="text-link" href="/about?ref=huang-thermal2025&from=%2Fchallenges%23thermal-management#ref-huang-thermal2025">
+            Read the thermal-boundary study
+          </Link>
         </div>
+        <p className="challenge-source-note">
+          The Lab identifies the layers; neither it nor the fixed-parameter
+          Simulator calculates heat flow or channel temperature.
+        </p>
       </section>
       <section className="section challenge-history" id="operating-history">
         <SectionHeading
@@ -130,6 +166,28 @@ export default function Page() {
           number="06"
           description="Time, temperature and the injection path reveal different kinds of instability."
         />
+        <dl className={styles.brief}>
+          <div>
+            <dt>Why it happens</dt>
+            <dd>
+              Defects can capture and release charge on different time scales.
+              Changes near a contact can also alter the carrier-injection
+              barrier.
+              <ReferenceLink id="illarionov2024" from="/challenges#operating-history" />
+              <ReferenceLink id="panarella2024" from="/challenges#operating-history" />
+            </dd>
+          </div>
+          <div>
+            <dt>Device impact</dt>
+            <dd>
+              Threshold and current can depend on earlier bias and elapsed time.
+              A small forward/reverse loop does not by itself establish stable
+              operation.
+              <ReferenceLink id="illarionov2024" from="/challenges#operating-history" />
+            </dd>
+          </div>
+        </dl>
+        <h3>Research direction: separate stress, recovery and contact noise</h3>
         <ol className="challenge-stress-sequence" aria-label="Bias-stress measurement sequence">
           {stressSequence.map((step) => (
             <li key={step.title}>
@@ -148,11 +206,17 @@ export default function Page() {
             <article className="challenge-history-case" key={item.id}>
               <h3>{item.title}</h3>
               <p className="challenge-observation-label">{item.observation}</p>
-              <p>
-                {item.explanation}
+              <p className="challenge-takeaway">
+                {item.takeaway}
                 <ReferenceLink id={item.reference} from="/challenges#operating-history" />
               </p>
-              <p className="challenge-takeaway">{item.takeaway}</p>
+              <details className={styles.details}>
+                <summary>Read the study evidence and interpretation</summary>
+                <p>
+                  {item.explanation}
+                  <ReferenceLink id={item.reference} from="/challenges#operating-history" />
+                </p>
+              </details>
             </article>
           ))}
         </div>
@@ -161,6 +225,14 @@ export default function Page() {
           uses fixed parameters and constant series resistance; it does not model
           trapping, noise, recovery or device lifetime.
         </p>
+        <div className={styles.actions}>
+          <Link className="text-link" href="/simulator#experimental-evidence">
+            Examine separate measured sweep-history evidence
+          </Link>
+          <Link className="text-link" href="/about?ref=illarionov2024&from=%2Fchallenges%23operating-history#ref-illarionov2024">
+            Read the bias-stress study
+          </Link>
+        </div>
       </section>
       <section className="section challenge-complementary" id="complementary-logic">
         <SectionHeading
@@ -206,7 +278,13 @@ export default function Page() {
             </table>
           </figure>
           <div className="challenge-complementary-prose">
-            <h3>Control the Carrier Type</h3>
+            <h3>Why it happens: control the carrier type</h3>
+            <p>
+              Complementary logic needs both electron and hole transistors.
+              Creating reproducible devices of opposite polarity adds a doping,
+              contact and process-integration problem.
+              <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
+            </p>
             <p>
               Pan et al. patterned niobium-doped p-type and rhenium-doped n-type
               regions in few-layer 2H-MoTe₂, then connected them into inverter
@@ -214,7 +292,7 @@ export default function Page() {
               a demonstration using the MoS₂ model here.
               <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
             </p>
-            <h3>Match the Whole Pair</h3>
+            <h3>Device impact: match the whole pair</h3>
             <p>
               Their inverter fabrication used different contact metals for the two
               carrier types. Controlled doping helped match their on-currents:
@@ -226,11 +304,27 @@ export default function Page() {
               through an intermediate region with current and finite voltage gain.
               NanoLab does not compute this circuit.
             </p>
-            <Link className="text-link" href="/research#discovery-integration">
-              Connect this question to circuit integration →
-            </Link>
+            <h3>Research direction: integrate a matched pair</h3>
+            <p>
+              Coordinate doping, contacts and ON currents in one fabrication
+              flow, then evaluate the resulting inverter rather than each
+              transistor alone.
+              <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
+            </p>
           </div>
         </div>
+        <div className={styles.actions}>
+          <Link className="text-link" href="/research#discovery-integration">
+            Follow circuit-integration research
+          </Link>
+          <Link className="text-link" href="/lab#transistor">
+            Inspect one conceptual MoS₂ switch in 3D Lab
+          </Link>
+        </div>
+        <p className="challenge-source-note">
+          The Lab’s ON/OFF control illustrates a single MoS₂ channel. It does
+          not reproduce the MoTe₂ complementary pair or calculate CMOS switching.
+        </p>
       </section>
       <section className="section challenges-outlook" id="outlook">
         <SectionHeading
@@ -240,12 +334,14 @@ export default function Page() {
         />
         <div className="challenge-qualification-layout">
           <div className="challenge-outlook-prose">
+            <h3>Why it happens: constraints accumulate</h3>
             <p>
               Contact and dielectric engineering can improve individual devices.
               Scalable growth, repeatable integration and careful characterization
               are needed to translate those gains into circuits.
             </p>
-            <p className="mt-4">
+            <h3 className="mt-5">Device impact: one result cannot establish yield</h3>
+            <p className="mt-3">
               These constraints interact. A more conductive channel cannot recover
               voltage lost at a resistive contact; a thinner gate stack is useful
               only if leakage and reliability remain acceptable. Growth and transfer
@@ -255,16 +351,13 @@ export default function Page() {
               <ReferenceLink id="engineering2024" from="/challenges#outlook" />
               <ReferenceLink id="benchmark2022" from="/challenges#outlook" />
             </p>
-            <Link className="text-link" href="/research">
-              Follow selected research directions →
-            </Link>
           </div>
           <aside
             className="challenge-qualification"
             aria-labelledby="qualification-title"
           >
             <h3 id="qualification-title">
-              From a promising result to dependable devices
+              Research direction: from a promising result to dependable devices
             </h3>
             <dl>
               <div>
@@ -297,13 +390,33 @@ export default function Page() {
             </p>
           </aside>
         </div>
+        <div className={styles.actions}>
+          <Link className="text-link" href="/comparison#device-comparison">
+            Compare two numerical device scenarios
+          </Link>
+          <Link className="text-link" href="/research#institutional-research">
+            Examine wafer-scale integration evidence
+          </Link>
+        </div>
+        <p className="challenge-source-note">
+          A numerical comparison isolates stated assumptions. Qualification
+          needs measured distributions, process conditions and reliability
+          evidence from actual devices.
+        </p>
       </section>
       <RelatedTopics
         links={[
           {
-            href: "/simulator#parameter-contactResistance",
-            title: "Simulator",
-            description: "Isolate a contact-resistance assumption.",
+            href: "/device#working-principle",
+            title: "Review the transistor working principle",
+            description:
+              "Connect the gate field and carrier path with the components that engineering must preserve.",
+          },
+          {
+            href: "/research#studies",
+            title: "Read the study catalogue by topic",
+            description:
+              "Compare each reported advance with its measurement conditions and unresolved limits.",
           },
         ]}
       />
