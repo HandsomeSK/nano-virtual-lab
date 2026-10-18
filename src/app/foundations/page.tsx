@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageShell, RelatedTopics } from "@/components/page-shell";
 import { knowledge } from "@/data/knowledge";
 import { KnowledgeCard } from "@/components/learning/knowledge-card";
@@ -22,6 +23,20 @@ export default function Foundations() {
         },
       ]}
     >
+      <nav className="connection mb-8" aria-label="Materials learning paths">
+        <p>
+          <Link href="/why-mos2" className="text-link">
+            From Graphene to MoS₂
+          </Link>{" "}
+          Follow the band-gap question into a layered semiconductor.
+        </p>
+        <p>
+          <Link href="/device" className="text-link">
+            Transistor Working Principles
+          </Link>{" "}
+          Connect a semiconductor channel with its contacts and gate stack.
+        </p>
+      </nav>
       {knowledge.map((item, i) => (
         <KnowledgeCard key={item.id} concept={item} index={i}>
           <FoundationWidget id={item.id} />
@@ -43,21 +58,28 @@ export default function Foundations() {
             )}
           </details>
           {item.id === "graphene-structure" ? (
-            <ScientificFigure id="graphene-lattice" />
+            <>
+              <ScientificFigure id="graphene-lattice" />
+              <Link href="/lab#graphene" className="text-link">
+                Inspect graphene bonds and the primitive cell in 3D Lab
+              </Link>
+            </>
           ) : null}
           {item.id === "characterization" ? (
             <ScientificFigure id="graphene-hrtem" />
+          ) : null}
+          {item.id === "transistors" ? (
+            <p className="text-sm mt-4">
+              Structure explains where the contacts and gate act. Continue to
+              transistor principles before changing parameters in a numerical
+              I–V experiment; the 3D view and the calculated curves answer
+              different questions.
+            </p>
           ) : null}
         </KnowledgeCard>
       ))}
       <RelatedTopics
         links={[
-          {
-            href: "/why-mos2",
-            title: "From Graphene to MoS₂",
-            description:
-              "Follow the band-gap question from graphene to a 2D semiconductor.",
-          },
           {
             href: "/comparison#band-structure",
             title: "Compare electronic bands",

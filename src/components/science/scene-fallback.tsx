@@ -4,16 +4,22 @@ import {
   carbonDetail,
 } from "@/lib/science/atomic-structure";
 import { deviceParts } from "@/data/device";
-import type { SceneSpec } from "./types";
+import type { SceneOptions, SceneSpec } from "./types";
+import { deviceStructureForScene } from "@/lib/science/device-state";
 export function SceneFallback({
   spec,
   hidden = [],
   message = "Loading the interactive model…",
+  options,
 }: {
   spec: SceneSpec;
   hidden?: string[];
   message?: string;
+  options?: Pick<SceneOptions, "deviceStructure">;
 }) {
+  const deviceStructure = spec.kind === "device"
+    ? deviceStructureForScene(spec, options)
+    : null;
   const structure =
     spec.kind === "atomic"
       ? spec.material === "graphene" && spec.detail && spec.detail !== "lattice"
@@ -28,9 +34,9 @@ export function SceneFallback({
         aria-label={
           spec.kind === "atomic"
             ? "Static projection of the " + spec.material + " lattice"
-            : spec.interface
+            : deviceStructure === "with-carbon"
               ? "Static transistor section with a carbon-dot interlayer and continuous dielectric"
-              : spec.roughOxide
+              : deviceStructure === "without-carbon"
                 ? "Static transistor section without carbon dots, showing discontinuous oxide islands"
                 : "Static section of a conceptual top-gated MoS₂ transistor"
         }
@@ -79,7 +85,7 @@ export function SceneFallback({
               .map((part) =>
                 part.id === "dielectric" &&
                 spec.kind === "device" &&
-                spec.roughOxide ? (
+                deviceStructure === "without-carbon" ? (
                   <g key={part.id} fill={part.color} opacity="0.5" stroke="#111">
                     {[0, 1, 2].map((island) => (
                       <rect
@@ -98,7 +104,7 @@ export function SceneFallback({
                     y={
                       part.z * 2 +
                       (spec.kind === "device" &&
-                      spec.interface &&
+                      deviceStructure === "with-carbon" &&
                       (part.id === "dielectric" || part.id === "gate")
                         ? 8
                         : 0)
@@ -112,7 +118,7 @@ export function SceneFallback({
                 ),
               )}
             {spec.kind === "device" &&
-            spec.interface &&
+            deviceStructure === "with-carbon" &&
             !hidden.includes("interface") ? (
               <rect x="110" y="148" width="180" height="8" fill="#80dedc" />
             ) : null}

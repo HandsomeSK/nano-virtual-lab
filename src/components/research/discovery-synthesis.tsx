@@ -2,6 +2,8 @@ import Link from "next/link";
 import { discoveryThemes } from "@/data/discoveries";
 import { researchDirections } from "@/data/research-knowledge";
 import { ReferenceLink } from "@/components/reference-link";
+import { studies } from "@/data/research";
+import styles from "@/components/reading-paths.module.css";
 export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
   return (
     <div className={compact ? "discovery-synthesis" : "research-directions"}>
@@ -9,6 +11,7 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
         const direction = researchDirections.find(
           (item) => item.id === story.id,
         )!;
+        const study = studies.find((item) => item.reference === story.reference);
         return (
           <article
             key={story.id}
@@ -29,12 +32,6 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
               >
                 {story.question}
               </p>
-              {!compact ? (
-                <>
-                  <p>{direction.mechanism}</p>
-                  <p>{direction.challenge}</p>
-                </>
-              ) : null}
               <p className={compact ? undefined : "research-direction-evidence"}>
                 {!compact ? <strong>Research evidence. </strong> : null}
                 {story.finding}
@@ -56,7 +53,10 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
                 {story.limit}
               </p>
               {!compact ? (
-                <>
+                <details className={styles.details}>
+                  <summary>Mechanism & engineering context</summary>
+                  <p>{direction.mechanism}</p>
+                  <p>{direction.challenge}</p>
                   <p>{direction.next}</p>
                   <p className="research-direction-connection">
                     Connect this question to{" "}
@@ -67,14 +67,31 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
                       {direction.connectedLabel}
                     </a>.
                   </p>
-                </>
+                  <Link href={direction.relatedHref} className="text-link">
+                    {direction.relatedLabel}
+                  </Link>
+                </details>
               ) : null}
-              <Link
-                href={compact ? story.href : direction.relatedHref}
-                className="text-link"
-              >
-                {compact ? story.action : direction.relatedLabel}
-              </Link>
+              {compact ? (
+                <Link href={story.href} className="text-link">
+                  {story.action}
+                </Link>
+              ) : study ? (
+                <div className={styles.actions}>
+                  <Link
+                    href={`/research?study=${story.reference}#study-${story.reference}`}
+                    className="text-link"
+                  >
+                    Read the study analysis
+                  </Link>
+                  <Link
+                    href={"/challenges#" + study.challenge}
+                    className="text-link"
+                  >
+                    Explore the engineering challenge
+                  </Link>
+                </div>
+              ) : null}
             </div>
           </article>
         );

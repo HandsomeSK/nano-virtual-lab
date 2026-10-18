@@ -14,7 +14,7 @@ export const challenges = [
     solution:
       "Explore contact engineering, interface preparation and device-specific extraction of contact resistance.",
     foundation: "/foundations#surfaces",
-    research: "/research?category=Devices",
+    research: "/research#discovery-contacts",
     simulator: "/simulator?contactResistance=50#parameter-contactResistance",
     simLabel: "Try higher contact resistance",
     reference: "radis2011",
@@ -35,7 +35,7 @@ export const challenges = [
     solution:
       "Investigate dielectric integration and passivation, then measure hysteresis and long-term stability.",
     foundation: "/foundations#transistors",
-    research: "/research?category=Circuits",
+    research: "/research#discovery-interfaces",
     reference: "tang2023",
     diagram: "Gate → dielectric → channel charge",
   },
@@ -54,7 +54,7 @@ export const challenges = [
     solution:
       "Study thin-body electrostatics, gate geometry and transport together. Quantitative nanoscale predictions require a more complete model.",
     foundation: "/foundations#quantum",
-    research: "/research?category=Scaling",
+    research: "/research#discovery-scaling",
     simulator: "/simulator?channelLength=100#parameter-channelLength",
     simLabel: "Explore the model's 1/L scaling",
     reference: "desai2016",
@@ -75,7 +75,7 @@ export const challenges = [
     solution:
       "Improve uniform growth, cleaner transfer and repeatable integration; use characterization and circuit-level testing to track variability and yield.",
     foundation: "/foundations#characterization",
-    research: "/research?category=Manufacturing",
+    research: "/research#institutional-research",
     reference: "kwon2024",
     diagram: "Growth → patterning → integration → yield",
   },

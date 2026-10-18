@@ -37,8 +37,9 @@ export default function Home() {
               className={styles.lede + " appear appear--soft"}
               style={{ ...delay(0.46), animationDuration: "1.25s" }}
             >
-              Learn the materials, inspect atomic structures and devices in the
-              3D Lab, and test transistor parameters with numerical simulations.
+              Learn the materials, inspect structures in 3D and test transistor
+              parameters. Explore the research evidence and the engineering
+              limits behind each result.
             </p>
             <div className={styles.actions}>
               <Link
@@ -46,7 +47,7 @@ export default function Home() {
                 className="metal-button metal-solid appear appear--btn"
                 style={delay(0.64)}
               >
-                Let’s start
+                Learn materials
               </Link>
               <Link
                 href="/lab"

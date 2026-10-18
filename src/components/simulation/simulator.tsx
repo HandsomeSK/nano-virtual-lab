@@ -7,7 +7,6 @@ import {
   metrics,
   modelConstants,
   parameterControls,
-  parametersQuery,
   type Parameters,
   type CurveMode,
 } from "@/lib/simulation/model";
@@ -20,10 +19,21 @@ import { ParameterControl } from "./parameter-control";
 import { DeviceSchematic } from "@/components/device-schematic";
 import { ReferenceLink } from "@/components/reference-link";
 import { parameterInsight } from "@/lib/simulation/insights";
+import {
+  comparisonHref,
+  simulatorParametersHref,
+  type ComparisonJourney,
+} from "@/lib/simulation/journey";
 
-export function Simulator({ initial }: { initial: Parameters }) {
+export function Simulator({
+  initial,
+  journey = null,
+}: {
+  initial: Parameters;
+  journey?: ComparisonJourney | null;
+}) {
   const [parameters, setParameters] = useState(initial);
-  const [mode, setMode] = useState<CurveMode>("transfer");
+  const [mode, setMode] = useState<CurveMode>(journey?.mode ?? "transfer");
   const [name, setName] = useState("My configuration");
   const nameInput = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
@@ -46,7 +56,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
     window.history.replaceState(
       window.history.state,
       "",
-      "/simulator?" + parametersQuery(next) + window.location.hash,
+      simulatorParametersHref(next, window.location.search, window.location.hash),
     );
   }
   function save() {
@@ -79,6 +89,20 @@ export function Simulator({ initial }: { initial: Parameters }) {
   }
   return (
     <>
+      {journey ? (
+        <p className="model-note text-sm mb-6" data-comparison-edit>
+          Editing Scenario {journey.slot.toUpperCase()}:{" "}
+          {journey[journey.slot].name}.{" "}
+          Return to Comparison to apply these parameters; the other scenario and
+          your saved configurations stay unchanged.{" "}
+          <Link
+            href={comparisonHref(initial, journey, false)}
+            className="text-link"
+          >
+            Cancel changes
+          </Link>
+        </p>
+      ) : null}
       <div className="instrument-console">
         <section className="instrument-stage" aria-label="Calculated response">
           <div className="chart-heading instrument-heading">
@@ -103,8 +127,17 @@ export function Simulator({ initial }: { initial: Parameters }) {
               </button>
             </div>
           </div>
+          <p className="text-sm mt-3" aria-live="polite" data-sweep-explanation>
+            {mode === "transfer"
+              ? `Transfer: sweep gate voltage from 0 to 3 V with external drain voltage held at ${parameters.drainVoltage.toFixed(2)} V.`
+              : `Output: sweep drain voltage from 0 to 2 V with external gate voltage held at ${parameters.gateVoltage.toFixed(2)} V.`}
+            {" "}
+            The marker shows your selected external bias; the readouts refer to
+            that point.
+          </p>
           <IVChart
             mode={mode}
+            operatingPoint={parameters}
             series={[
               {
                 name: "Current configuration",
@@ -115,7 +148,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
           />
           <div className="metrics-grid instrument-readouts" aria-live="polite">
             <div>
-              <span>Drain current</span>
+              <span>Selected-point current</span>
               <strong data-metric="current">
                 {result.currentUa.toFixed(3)} <small>µA</small>
               </strong>
@@ -146,17 +179,16 @@ export function Simulator({ initial }: { initial: Parameters }) {
           </details>
           <div className="actions instrument-links">
             <Link
-              href={
-                "/comparison?" +
-                parametersQuery(parameters) +
-                "&source=simulator"
-              }
+              href={comparisonHref(parameters, journey)}
               className="button-primary"
             >
-              Compare Results →
+              {journey ? "Return to Comparison" : "Compare Results"}
             </Link>
             <Link href="/challenges#contacts" className="text-link">
-              Explore contact limitations →
+              Explore contact limitations
+            </Link>
+            <Link href="#model-assumptions" className="text-link">
+              Model assumptions & units
             </Link>
           </div>
         </section>
@@ -166,7 +198,8 @@ export function Simulator({ initial }: { initial: Parameters }) {
         >
           <h2>Parameter Controls</h2>
           <p className="text-sm mt-2">
-            Adjust an assumed device and bias point.
+            Adjust an assumed device and bias point. Curves and readouts update
+            immediately.
           </p>
           <fieldset className="parameter-group">
             <legend>Bias</legend>
@@ -199,11 +232,15 @@ export function Simulator({ initial }: { initial: Parameters }) {
               window.history.replaceState(
                 window.history.state,
                 "",
-                "/simulator?" + parametersQuery(defaultParameters),
+                simulatorParametersHref(
+                  defaultParameters,
+                  window.location.search,
+                  window.location.hash,
+                ),
               );
             }}
           >
-            Reset Parameters
+            {journey ? "Reset edited scenario parameters" : "Reset Parameters"}
           </button>
         </section>
       </div>
@@ -232,7 +269,7 @@ export function Simulator({ initial }: { initial: Parameters }) {
           Save Configuration
         </button>
         <p className="configuration-note text-sm">
-          Save locally, then compare assumptions.
+          Save a named copy on this device. Comparing also works without saving.
         </p>
         <div className="configuration-feedback">
           <p aria-live="polite" className="success-text">

@@ -4,6 +4,12 @@ import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { primaryNavigation } from "../src/lib/site.ts";
 import {
+  auxiliaryPages,
+  getBreadcrumbs,
+  getPageCategory,
+  pageHierarchy,
+} from "../src/lib/page-hierarchy.ts";
+import {
   navigationCategories,
   isActiveCategory,
   keepSubmenuOnPointerLeave,
@@ -56,6 +62,61 @@ test("3D Lab has one direct entry while transistor theory belongs to Materials",
   assert.deepEqual(lab.groups, []);
   assert.ok(materials.groups.some(({ links }) => links.some(({ href }) => href === "/device")));
   assert.equal(isActiveCategory(lab, "/device"), false);
+});
+
+test("page ownership remains stable when a submenu changes", () => {
+  const materials = navigationCategories.find(({ href }) => href === "/foundations");
+  const discoveries = navigationCategories.find(({ href }) => href === "/research");
+  assert.equal(isActiveCategory({ ...materials, groups: [] }, "/device"), true);
+  assert.equal(
+    isActiveCategory(
+      { ...discoveries, groups: [] },
+      "/discoveries/mos2-interface-breakthrough",
+    ),
+    true,
+  );
+  for (const path of ["/", "/about", "/researcher", "/device/unknown", "/missing"]) {
+    assert.equal(getPageCategory(path), undefined, path);
+  }
+});
+
+test("each maintained page has exactly one category or auxiliary role", () => {
+  const pages = pageHierarchy.flatMap(({ href, children }) => [href, ...children.map((page) => page.href)]);
+  const maintainedRoutes = [
+    "/foundations", "/why-mos2", "/device", "/lab", "/simulator",
+    "/comparison", "/research", "/discoveries/mos2-interface-breakthrough",
+    "/challenges", "/about",
+  ];
+  const ownedRoutes = [...pages, ...auxiliaryPages.map(({ href }) => href)];
+  assert.equal(new Set(ownedRoutes).size, maintainedRoutes.length);
+  assert.deepEqual([...ownedRoutes].sort(), [...maintainedRoutes].sort());
+  for (const pathname of maintainedRoutes) {
+    assert.ok(existsSync(`${root}src/app${pathname}/page.tsx`), pathname);
+    const owners = pageHierarchy.filter(
+      (category) => category.href === pathname || category.children.some((page) => page.href === pathname),
+    );
+    assert.equal(owners.length, pathname === "/about" ? 0 : 1, pathname);
+  }
+});
+
+test("breadcrumbs expose useful ancestors without duplicate or self-navigation steps", () => {
+  for (const [pathname, titles, ancestors] of [
+    ["/why-mos2", ["Home", "Materials", "MoS₂"], ["/", "/foundations"]],
+    ["/device", ["Home", "Materials", "Transistor Principles"], ["/", "/foundations"]],
+    ["/comparison", ["Home", "Simulators", "Comparison"], ["/", "/simulator"]],
+    ["/discoveries/mos2-interface-breakthrough", ["Home", "Discoveries", "Interface Breakthrough"], ["/", "/research"]],
+    ["/foundations", ["Home", "Materials"], ["/"]],
+    ["/lab", ["Home", "3D Lab"], ["/"]],
+    ["/about", ["Home", "About & References"], ["/"]],
+  ]) {
+    const crumbs = getBreadcrumbs(pathname);
+    assert.deepEqual(crumbs.map(({ title }) => title), titles, pathname);
+    assert.deepEqual(crumbs.slice(0, -1).map(({ href }) => href), ancestors, pathname);
+    assert.equal(crumbs.at(-1).href, pathname);
+    assert.equal(new Set(crumbs.map(({ href }) => href)).size, crumbs.length);
+  }
+  assert.deepEqual(getBreadcrumbs("/"), []);
+  assert.deepEqual(getBreadcrumbs("/missing"), []);
 });
 
 test("every secondary destination resolves an actual route and section", () => {

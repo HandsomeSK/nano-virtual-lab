@@ -1,4 +1,4 @@
-import { primaryNavigation } from "./site.ts";
+import { getPageCategory, primaryNavigation } from "./page-hierarchy.ts";
 
 type NavigationLink = { href: string; title: string };
 type NavigationGroup = { title: string; links: readonly NavigationLink[] };
@@ -96,12 +96,7 @@ export function isActiveCategory(
   category: (typeof navigationCategories)[number],
   pathname: string,
 ) {
-  return (
-    pathname === category.href ||
-    category.groups.some((group) =>
-      group.links.some((link) => link.href.split(/[?#]/, 1)[0] === pathname),
-    )
-  );
+  return getPageCategory(pathname)?.href === category.href;
 }
 
 export function keepSubmenuOnPointerLeave(

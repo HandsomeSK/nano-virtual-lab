@@ -75,7 +75,7 @@ export default async function Page({
     <div className="research-hub">
       <PageShell
         title="Research Knowledge Hub"
-        intro="Understand the problems connecting two-dimensional materials, working transistors and useful circuits. Start with the physics, then examine the evidence."
+        intro="Start with the physical question, read the reported result, then inspect its evidence and limits. Directions explain the problems; the timeline locates milestones; the catalogue holds each study’s full analysis."
         contents={contentsGroups}
       >
         <section className="section research-overview" id="research-overview">
@@ -121,7 +121,7 @@ export default async function Page({
         <section className="section" id="research-directions">
           <SectionHeading
             title="Research Directions"
-            description="Follow each scientific question through its mechanism, engineering challenge, selected evidence and unresolved limits."
+            description="Read the main finding and its limit first. Expand the physical explanation or follow a result directly to its study and engineering challenge."
           />
           <DiscoverySynthesis />
         </section>
@@ -168,7 +168,7 @@ export default async function Page({
         <section className="section" id="research-evidence">
           <SectionHeading
             title="Research Evidence"
-            description="Use the featured discovery, timeline and study catalogue to inspect how the explanations are supported."
+            description="The featured case explains one interface result. Use the timeline for chronology and the category catalogue for methods, evidence and limitations."
           />
           <div id="featured-discovery">
             <InterfaceFeature from="/research#featured-discovery" />
@@ -241,14 +241,14 @@ export default async function Page({
         <RelatedTopics
           links={[
             {
-              href: "/challenges",
-              title: "Engineering Challenges",
+              href: "/challenges#outlook",
+              title: "From a device result to reliable circuits",
               description:
                 "Connect milestones to unresolved engineering problems.",
             },
             {
               href: "/about#references",
-              title: "References",
+              title: "Find the original publications",
               description: "Read source details and model boundaries.",
             },
           ]}

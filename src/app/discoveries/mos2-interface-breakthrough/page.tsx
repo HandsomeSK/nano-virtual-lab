@@ -5,6 +5,7 @@ import { EotChart } from "@/components/research/eot-chart";
 import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
 import { ReferenceLink } from "@/components/reference-link";
 import { RelatedTopics } from "@/components/page-shell";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { references } from "@/data/references";
 const route = "/discoveries/mos2-interface-breakthrough";
 const paper = references.find((r) => r.id === "wong2026")!;
@@ -17,11 +18,7 @@ export const metadata: Metadata = {
 export default function InterfaceDiscovery() {
   const article = (
     <article className="container page-shell discovery-feature-page">
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <Link href="/research">Discoveries</Link>
-        <span aria-hidden="true">/</span>
-        <span>MoS₂ interfaces</span>
-      </nav>
+      <Breadcrumb />
       <header className="discovery-hero">
         <span className="eyebrow">
           Research story · Nature Communications · 7 October 2026
@@ -227,18 +224,19 @@ export default function InterfaceDiscovery() {
           </p>
         </section>
         <RelatedTopics
+          title="Continue from the evidence"
           links={[
             {
-              href: "/why-mos2",
-              title: "Explore MoS₂",
+              href: "/challenges#interfaces",
+              title: "Gate dielectric & interface challenge",
               description:
-                "Return to the material, structure and device context.",
+                "Connect oxide nucleation with charge traps, leakage and reliability.",
             },
             {
-              href: "/research",
-              title: "Discoveries",
+              href: "/research#discovery-interfaces",
+              title: "Follow dielectric-integration research",
               description:
-                "Connect the interface result with the wider research frontier.",
+                "Place this study beside the mechanism and questions that remain open.",
             },
           ]}
         />

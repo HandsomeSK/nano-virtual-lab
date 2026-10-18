@@ -39,6 +39,7 @@ export function ScientificStage(props: SceneProps) {
           <SceneFallback
             spec={props.spec}
             hidden={props.options.hidden}
+            options={props.options}
             message="The 3D model could not load. Reload the page to retry, or use the descriptions below."
           />
         }
@@ -49,6 +50,7 @@ export function ScientificStage(props: SceneProps) {
           <SceneFallback
             spec={props.spec}
             hidden={props.options.hidden}
+            options={props.options}
             message="Structure preview. Scroll closer to interact with the model."
           />
         )}

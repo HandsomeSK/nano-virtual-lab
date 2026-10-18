@@ -8,6 +8,7 @@ import { ScientificFigure } from "@/components/scientific-figure";
 import { ReferenceLink } from "@/components/reference-link";
 import { Simulator } from "@/components/simulation/simulator";
 import { normalizeParameters } from "@/lib/simulation/model";
+import { comparisonJourney } from "@/lib/simulation/journey";
 import type { Query } from "@/lib/site";
 export const metadata: Metadata = { title: "Transistor Simulator" };
 export default async function SimulatorPage({
@@ -19,7 +20,7 @@ export default async function SimulatorPage({
   return (
     <PageShell
       title="Transistor Simulator"
-      intro="Turn a material idea into a device experiment. Adjust bias, channel geometry and contacts, then follow the calculated response and its explanation."
+      intro="Test how bias, channel geometry and contacts change a calculated I–V curve. Change one assumption, inspect the response, then compare two scenarios."
     >
       <p className="model-note text-sm mb-6">
         <strong>Simplified Educational Model.</strong> A MoS₂-context,
@@ -30,6 +31,7 @@ export default async function SimulatorPage({
         <Simulator
           key={JSON.stringify(query)}
           initial={normalizeParameters(query)}
+          journey={comparisonJourney(query)}
         />
       </div>
       <section className="section" id="model-assumptions">
@@ -108,14 +110,16 @@ export default async function SimulatorPage({
       <RelatedTopics
         links={[
           {
-            href: "/comparison",
-            title: "Compare device assumptions",
-            description: "Compare the same model under different assumptions.",
+            href: "/device#working-principle",
+            title: "Understand gate control",
+            description:
+              "Connect the calculated voltages with transistor operation.",
           },
           {
-            href: "/challenges",
-            title: "Engineering Challenges",
-            description: "See the effects this teaching model leaves out.",
+            href: "/challenges#operating-history",
+            title: "Explore history-dependent behaviour",
+            description:
+              "Read why measured curves can change with time and sweep direction.",
           },
         ]}
       />
