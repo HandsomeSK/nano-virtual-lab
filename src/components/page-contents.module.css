@@ -57,7 +57,7 @@
   align-items: baseline;
   gap: 10px;
   min-height: 44px;
-  padding: 11px 0;
+  padding: 11px 12px;
   color: var(--prose);
   font-size: 14px;
   line-height: 1.6;
@@ -80,6 +80,13 @@
 .group a:hover,
 .group a:focus-visible {
   color: var(--primary);
+}
+
+.group a[aria-current="location"] {
+  color: var(--primary);
+  background: var(--indigo-soft);
+  box-shadow: inset 3px 0 var(--primary);
+  font-weight: 600;
 }
 
 .group a:focus-visible {

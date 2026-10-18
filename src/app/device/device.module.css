@@ -1,0 +1,32 @@
+.experiment > :global(figure.scientific-figure) {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  align-items: start;
+  gap: 28px;
+  max-width: none;
+  padding-block: 20px;
+  border-block: 1px solid var(--line);
+}
+
+.experiment :global(.scientific-image) {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.experiment :global(.scientific-figure figcaption) {
+  min-width: 0;
+  border-top: 0;
+  padding-top: 0;
+}
+
+@media (max-width: 800px) {
+  .experiment > :global(figure.scientific-figure) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .experiment :global(.scientific-image) {
+    width: min(100%, 340px);
+    justify-self: center;
+  }
+}

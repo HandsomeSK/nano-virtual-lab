@@ -1,3 +1,6 @@
+"use client";
+
+import { useFragment } from "@/lib/use-fragment";
 import styles from "./page-contents.module.css";
 
 export type PageContentsGroup = {
@@ -12,6 +15,7 @@ export function PageContents({
   groups: PageContentsGroup[];
   title?: string;
 }) {
+  const selected = useFragment();
   return (
     <nav className={styles.contents} aria-label={title}>
       <h2 className={styles.title}>{title}</h2>
@@ -22,7 +26,10 @@ export function PageContents({
             <ul>
               {group.items.map((item) => (
                 <li key={item.id}>
-                  <a href={"#" + item.id}>
+                  <a
+                    href={"#" + item.id}
+                    aria-current={selected === item.id ? "location" : undefined}
+                  >
                     {item.number ? (
                       <>
                         <span className={styles.number}>{item.number}</span>{" "}

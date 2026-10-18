@@ -1,4 +1,5 @@
 import { getPageCategory, primaryNavigation } from "./page-hierarchy.ts";
+import { fragmentId } from "./navigation-scroll.ts";
 
 type NavigationLink = { href: string; title: string };
 type NavigationGroup = { title: string; links: readonly NavigationLink[] };
@@ -91,6 +92,19 @@ export const navigationCategories = primaryNavigation.map((category) => ({
   ...category,
   groups: categoryGroups[category.href],
 }));
+
+const submenuLinks = navigationCategories.flatMap((category) =>
+  category.groups.flatMap((group) => group.links),
+);
+
+export function selectedSubmenuHref(pathname: string, fragment: string) {
+  return (
+    submenuLinks.find(({ href }) => {
+      const [page, hash] = href.split("#");
+      return page === pathname && hash && fragmentId("#" + hash) === fragment;
+    })?.href ?? submenuLinks.find(({ href }) => href === pathname)?.href
+  );
+}
 
 export function isActiveCategory(
   category: (typeof navigationCategories)[number],
