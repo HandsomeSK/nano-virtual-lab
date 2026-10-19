@@ -1,0 +1,30 @@
+.context {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.context h2 {
+  font-size: 20px;
+}
+
+.context p {
+  max-width: 76ch;
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.contextLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.contextLinks a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}

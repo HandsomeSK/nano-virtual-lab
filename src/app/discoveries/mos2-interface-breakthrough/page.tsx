@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { InterfaceComparisonFigure } from "@/components/science/teaching-figures";
 import { EotChart } from "@/components/research/eot-chart";
-import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
+import { discoveryThemes } from "@/data/discoveries";
+import styles from "@/components/research/research-context.module.css";
 import { ReferenceLink } from "@/components/reference-link";
 import { RelatedTopics } from "@/components/page-shell";
 import { Breadcrumb } from "@/components/breadcrumb";
@@ -206,7 +207,18 @@ export default function InterfaceDiscovery() {
               different parts of the same device problem.
             </p>
           </div>
-          <DiscoverySynthesis compact />
+          <nav aria-label="Connected research directions">
+            <ul className={styles.connections}>
+              {discoveryThemes.map((story) => (
+                <li id={"discovery-" + story.id} key={story.id}>
+                  <Link href={"/research#discovery-" + story.id}>
+                    <span>{story.label}</span>
+                    <strong>{story.title}</strong>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </section>
         <section className="source-record" id="primary-source">
           <span className="eyebrow">Primary source</span>

@@ -12,17 +12,15 @@ const categoryGroups: Record<
     {
       title: "Material fundamentals",
       links: [
-        { href: "/foundations#nanoscale", title: "Understanding the nanoscale" },
-        { href: "/foundations#quantum", title: "Quantum mechanics & energy bands" },
+        { href: "/foundations#nanoscale", title: "Nanoscale & graphene fundamentals" },
         { href: "/foundations#characterization", title: "Material characterization" },
       ],
     },
     {
       title: "Materials & devices",
       links: [
-        { href: "/foundations#graphene-structure", title: "Graphene crystal structure" },
-        { href: "/foundations#graphene-electronics", title: "Graphene electronic properties" },
         { href: "/why-mos2", title: "From graphene to MoS₂" },
+        { href: "/why-mos2#materials", title: "Compare material properties" },
         { href: "/device", title: "Transistor working principle" },
       ],
     },
@@ -32,15 +30,14 @@ const categoryGroups: Record<
     {
       title: "Numerical model",
       links: [
-        { href: "/simulator#parameter-gateVoltage", title: "Explore bias & device parameters" },
-        { href: "/simulator#understanding-results", title: "Interpret the model results" },
+        { href: "/simulator#simulation", title: "Run an I–V experiment" },
         { href: "/simulator#model-assumptions", title: "Device physics & model assumptions" },
       ],
     },
     {
       title: "Compare with context",
       links: [
-        { href: "/comparison", title: "Compare configurations" },
+        { href: "/comparison", title: "Compare A/B scenarios" },
         { href: "/comparison#saved", title: "Saved configurations" },
         { href: "/comparison#benchmarking", title: "Benchmarking limitations" },
         { href: "/simulator#experimental-evidence", title: "Measured transfer curves" },
@@ -53,13 +50,11 @@ const categoryGroups: Record<
       links: [
         { href: "/research#research-directions", title: "Six research directions" },
         { href: "/research#research-connections", title: "How the directions connect" },
-        { href: "/research#research-evidence", title: "Research evidence" },
       ],
     },
     {
       title: "Discoveries & studies",
       links: [
-        { href: "/research#featured-discovery", title: "Featured discovery" },
         { href: "/research#timeline", title: "Research timeline" },
         { href: "/research#catalogue", title: "Study catalogue" },
         { href: "/discoveries/mos2-interface-breakthrough", title: "The MoS₂ interface breakthrough" },

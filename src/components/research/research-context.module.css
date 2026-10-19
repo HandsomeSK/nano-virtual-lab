@@ -1,0 +1,65 @@
+.evidenceHeading {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.connections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.connections li {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+}
+
+.connections a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 44px;
+  padding-block: 18px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.connections span {
+  color: var(--primary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.connections strong {
+  color: var(--prose);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.connections a:hover strong,
+.connections a:focus-visible strong {
+  color: var(--primary);
+}
+
+.connections a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.connections a:active {
+  opacity: 0.8;
+}
+
+@media (max-width: 700px) {
+  .connections {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

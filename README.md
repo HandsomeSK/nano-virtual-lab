@@ -46,6 +46,8 @@ Run typecheck and build sequentially because both depend on generated .next type
 
 Foundations/Materials explains science; Lab owns every interactive scientific 3D viewer; Simulator/Comparison owns numerical calculations and 2D curves; Research/Challenges explains evidence and engineering limits. The 3D Lab header item is a direct link with no model submenu. Foundations, Research and Challenges retain visible page indices beneath their introductions; Lab has no index, model tabs or model-hiding disclosures.
 
+Material comparison is consolidated at `/why-mos2#materials`, including the explorer, complete property table and conceptual band diagrams. Scenario Comparison starts directly with the A/B experiment and retains its benchmarking context; its former material fragment IDs provide explicit links to the canonical reading sections. Research owns the complete six-direction synthesis, while the interface article links back to those directions and keeps its full case study. Existing routes, citations, source images, section targets, saved configurations and numerical models remain compatible.
+
 ## Code owners and extension points
 
 - `src/app`: server-rendered routes, shared layout and global styling.
