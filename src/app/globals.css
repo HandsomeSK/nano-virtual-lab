@@ -2957,3 +2957,34 @@ th {
     gap: 24px;
   }
 }
+
+/* Reading space follows the shared non-modal chapter drawer. */
+.page-contents-layout,
+.page-contents-body {
+  min-width: 0;
+}
+
+@media (max-width: 800px) {
+  .page-contents-layout > .page-contents-body {
+    margin-inline-start: calc(28px + env(safe-area-inset-left));
+  }
+}
+
+@media (max-width: 600px) {
+  .page-contents-layout > .page-contents-body {
+    margin-inline-start: calc(36px + env(safe-area-inset-left));
+  }
+}
+
+@media (min-width: 1101px) {
+  .page-contents-layout:has(> [data-page-contents][data-open="true"]) > .page-contents-body {
+    margin-inline-start: max(0px, calc(308px + env(safe-area-inset-left) - max(48px, calc((100vw - 1440px) / 2 + 48px))));
+  }
+}
+
+
+@media print {
+  .page-contents-layout > .page-contents-body {
+    margin-inline-start: 0;
+  }
+}
