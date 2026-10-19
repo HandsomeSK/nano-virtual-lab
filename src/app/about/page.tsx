@@ -26,6 +26,24 @@ export default async function Page({
     <PageShell
       title="About & References"
       intro="An independent virtual laboratory for exploring nanomaterials, understanding devices and reading the evidence behind them."
+      contents={[
+        {
+          title: "About the laboratory",
+          items: [
+            { id: "about-nanolab", label: "Science you can explore" },
+            { id: "learning", label: "From fundamentals to research" },
+            { id: "credits", label: "Development, credits & model limits" },
+          ],
+        },
+        {
+          title: "Sources & evidence",
+          items: [
+            { id: "references", label: "Scientific references" },
+            { id: "sources", label: "How to read the evidence" },
+            { id: "figure-sources", label: "Scientific image registry" },
+          ],
+        },
+      ]}
     >
       <nav className="actions mb-5" aria-label="Find sources and model information">
         <Link className="text-link" href="#references">

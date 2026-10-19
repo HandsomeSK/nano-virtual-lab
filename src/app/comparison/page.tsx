@@ -22,6 +22,15 @@ export default async function ComparisonPage({
     <PageShell
       title="Scenario Comparison"
       intro="Compare two parameter sets in one teaching model. The A/B curves are assumed device scenarios, not a ranking of materials."
+      contents={[
+        {
+          items: [
+            { id: "device-comparison", label: "Compare scenarios A & B" },
+            { id: "saved", label: "Saved simulations" },
+            { id: "benchmarking", label: "Read device benchmarks fairly" },
+          ],
+        },
+      ]}
     >
       <div id="device-comparison">
         <Comparison

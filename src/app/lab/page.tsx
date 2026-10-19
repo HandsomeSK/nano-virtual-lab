@@ -16,6 +16,15 @@ export default function Lab() {
     <PageShell
       title="3D Lab"
       intro="Explore three models as you scroll. Inspect atomic geometry, then operate one transistor and compare its interface structures. Each model has its own controls and scientific explanation."
+      contents={[
+        {
+          items: [
+            { id: "graphene", label: "Graphene atomic structure" },
+            { id: "mos2", label: "MoS₂ atomic structure" },
+            { id: "transistor", label: "Transistor & interface engineering" },
+          ],
+        },
+      ]}
     >
       <div id="atomic-structure" className={styles.models}>
         <div id="graphene" className={styles.model}>

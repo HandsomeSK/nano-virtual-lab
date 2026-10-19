@@ -1,104 +1,23 @@
-import { getPageCategory, primaryNavigation } from "./page-hierarchy.ts";
-import { fragmentId } from "./navigation-scroll.ts";
+import { getPageCategory, pageHierarchy } from "./page-hierarchy.ts";
 
-type NavigationLink = { href: string; title: string };
-type NavigationGroup = { title: string; links: readonly NavigationLink[] };
-
-const categoryGroups: Record<
-  (typeof primaryNavigation)[number]["href"],
-  readonly NavigationGroup[]
-> = {
-  "/foundations": [
-    {
-      title: "Material fundamentals",
-      links: [
-        { href: "/foundations#nanoscale", title: "Nanoscale & graphene fundamentals" },
-        { href: "/foundations#characterization", title: "Material characterization" },
-      ],
-    },
-    {
-      title: "Materials & devices",
-      links: [
-        { href: "/why-mos2", title: "From graphene to MoS₂" },
-        { href: "/why-mos2#materials", title: "Compare material properties" },
-        { href: "/device", title: "Transistor working principle" },
-      ],
-    },
-  ],
-  "/lab": [],
-  "/simulator": [
-    {
-      title: "Numerical model",
-      links: [
-        { href: "/simulator#simulation", title: "Run an I–V experiment" },
-        { href: "/simulator#model-assumptions", title: "Device physics & model assumptions" },
-      ],
-    },
-    {
-      title: "Compare with context",
-      links: [
-        { href: "/comparison", title: "Compare A/B scenarios" },
-        { href: "/comparison#saved", title: "Saved configurations" },
-        { href: "/comparison#benchmarking", title: "Benchmarking limitations" },
-        { href: "/simulator#experimental-evidence", title: "Measured transfer curves" },
-      ],
-    },
-  ],
-  "/research": [
-    {
-      title: "Research knowledge hub",
-      links: [
-        { href: "/research#research-directions", title: "Six research directions" },
-        { href: "/research#research-connections", title: "How the directions connect" },
-      ],
-    },
-    {
-      title: "Discoveries & studies",
-      links: [
-        { href: "/research#timeline", title: "Research timeline" },
-        { href: "/research#catalogue", title: "Study catalogue" },
-        { href: "/discoveries/mos2-interface-breakthrough", title: "The MoS₂ interface breakthrough" },
-      ],
-    },
-  ],
-  "/challenges": [
-    {
-      title: "Device physics",
-      links: [
-        { href: "/challenges#contacts", title: "Contact resistance" },
-        { href: "/challenges#interfaces", title: "Gate dielectric & interface" },
-        { href: "/challenges#scaling", title: "Short-channel effects" },
-      ],
-    },
-    {
-      title: "Integration & operation",
-      links: [
-        { href: "/challenges#manufacturing", title: "Manufacturing & integration" },
-        { href: "/challenges#thermal-management", title: "Heat removal" },
-        { href: "/challenges#operating-history", title: "Instability over time" },
-        { href: "/challenges#complementary-logic", title: "Complementary logic" },
-        { href: "/challenges#outlook", title: "Bringing the pieces together" },
-      ],
-    },
-  ],
+const categoryPageTitles: Partial<Record<(typeof pageHierarchy)[number]["href"], string>> = {
+  "/foundations": "Foundations",
+  "/simulator": "Transistor Simulator",
+  "/research": "Research Knowledge Hub",
 };
 
-export const navigationCategories = primaryNavigation.map((category) => ({
+export const navigationCategories = pageHierarchy.map(({ children, ...category }) => ({
   ...category,
-  groups: categoryGroups[category.href],
+  links: [
+    { href: category.href, title: categoryPageTitles[category.href] ?? category.title },
+    ...children,
+  ],
 }));
 
-const submenuLinks = navigationCategories.flatMap((category) =>
-  category.groups.flatMap((group) => group.links),
-);
+const submenuLinks = navigationCategories.flatMap((category) => category.links);
 
-export function selectedSubmenuHref(pathname: string, fragment: string) {
-  return (
-    submenuLinks.find(({ href }) => {
-      const [page, hash] = href.split("#");
-      return page === pathname && hash && fragmentId("#" + hash) === fragment;
-    })?.href ?? submenuLinks.find(({ href }) => href === pathname)?.href
-  );
+export function selectedSubmenuHref(pathname: string) {
+  return submenuLinks.find(({ href }) => href === pathname)?.href;
 }
 
 export function isActiveCategory(

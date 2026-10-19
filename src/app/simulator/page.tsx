@@ -21,6 +21,22 @@ export default async function SimulatorPage({
     <PageShell
       title="Transistor Simulator"
       intro="Test how bias, channel geometry and contacts change a calculated I–V curve. Change one assumption, inspect the response, then compare two scenarios."
+      contents={[
+        {
+          title: "Run the experiment",
+          items: [
+            { id: "simulation", label: "I–V characteristics & controls" },
+            { id: "understanding-results", label: "Understanding the results" },
+          ],
+        },
+        {
+          title: "Interpret the model",
+          items: [
+            { id: "model-assumptions", label: "Model assumptions & units" },
+            { id: "experimental-evidence", label: "Experimental evidence" },
+          ],
+        },
+      ]}
     >
       <p className="model-note text-sm mb-6">
         <strong>Simplified Educational Model.</strong> A MoS₂-context,

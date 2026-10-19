@@ -1,12 +1,99 @@
-.contents {
-  margin-bottom: 28px;
-  padding-block: 18px;
-  border-block: 1px solid var(--line);
+.drawer {
+  --contents-width: min(292px, calc(100vw - 48px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+  --contents-top: max(96px, calc(env(safe-area-inset-top) + 88px));
+  position: fixed;
+  z-index: 30;
+  inset-inline-start: env(safe-area-inset-left);
+  top: var(--contents-top);
+  width: 44px;
   color: var(--prose);
 }
 
+.drawer[data-open="true"] {
+  width: var(--contents-width);
+}
+
+.trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 44px;
+  min-height: 144px;
+  padding: 12px 8px;
+  border: 1px solid var(--primary);
+  border-inline-start: 0;
+  border-radius: 0 8px 8px 0;
+  background: var(--surface);
+  color: var(--primary);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.trigger svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.trigger span {
+  writing-mode: vertical-rl;
+}
+
+.drawer[data-open="true"] .trigger {
+  position: absolute;
+  z-index: 1;
+  inset-inline-end: 8px;
+  top: 8px;
+  min-height: 44px;
+  padding: 12px;
+  border: 0;
+  border-radius: 6px;
+}
+
+.drawer[data-open="true"] .trigger > svg:first-child,
+.drawer[data-open="true"] .trigger span {
+  display: none;
+}
+
+.drawer[data-open="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.trigger:hover,
+.trigger:active {
+  background: var(--indigo-soft);
+  color: var(--ink);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.contents {
+  max-height: calc(100dvh - var(--contents-top) - max(16px, env(safe-area-inset-bottom)));
+  padding: 20px 16px max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  border: 1px solid var(--line);
+  border-inline-start: 0;
+  border-radius: 0 12px 12px 0;
+  background: var(--surface);
+  box-shadow: 8px 12px 28px var(--shadow-color);
+  animation: reveal-contents 160ms ease-out;
+}
+
+.contents[hidden] {
+  display: none;
+}
+
 .contents .title {
-  margin: 0 0 14px;
+  margin: 0 36px 20px 0;
   color: var(--ink);
   font-size: 18px;
   font-weight: 600;
@@ -16,39 +103,25 @@
 
 .groups {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px 36px;
+  gap: 24px;
 }
 
 .group {
   min-width: 0;
 }
 
-.group:only-child {
-  grid-column: 1 / -1;
-}
-
 .group h3 {
   margin: 0 0 10px;
-  color: var(--prose);
-  font-size: 14px;
+  color: var(--muted);
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.5;
 }
 
 .group ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.group:only-child ul {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 28px;
 }
 
 .group li {
@@ -60,7 +133,7 @@
   align-items: baseline;
   gap: 10px;
   min-height: 44px;
-  padding: 11px 12px;
+  padding: 11px 10px;
   color: var(--prose);
   font-size: 14px;
   line-height: 1.6;
@@ -102,25 +175,25 @@
   color: var(--ink);
 }
 
-@media (max-width: 1050px) {
-  .group ul {
-    grid-template-columns: minmax(0, 1fr);
+@keyframes reveal-contents {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
   }
-
-  .group:only-child ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-@media (max-width: 700px) {
-  .groups,
-  .group ul,
-  .group:only-child ul {
-    grid-template-columns: 1fr;
-  }
-
+@media (prefers-reduced-motion: reduce) {
   .contents {
-    margin-bottom: 32px;
-    padding-block: 18px;
+    animation: none;
+  }
+}
+
+@media print {
+  .drawer {
+    display: none;
   }
 }
