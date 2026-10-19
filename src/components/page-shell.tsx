@@ -6,6 +6,23 @@ import {
   PageContents,
   type PageContentsGroup,
 } from "./page-contents";
+
+export function PageReadingLayout({
+  contents,
+  children,
+}: {
+  contents?: PageContentsGroup[];
+  children: ReactNode;
+}) {
+  if (!contents?.length) return children;
+  return (
+    <div className="page-contents-layout">
+      <PageContents groups={contents} />
+      <div className="page-contents-body">{children}</div>
+    </div>
+  );
+}
+
 export function PageShell({
   title,
   intro,
@@ -19,13 +36,14 @@ export function PageShell({
 }) {
   return (
     <div className="container page-shell">
-      <Breadcrumb />
-      <div className="page-heading">
-        <h1>{title}</h1>
-        <p>{intro}</p>
-      </div>
-      {contents?.length ? <PageContents groups={contents} /> : null}
-      {children}
+      <PageReadingLayout contents={contents}>
+        <Breadcrumb />
+        <div className="page-heading">
+          <h1>{title}</h1>
+          <p>{intro}</p>
+        </div>
+        {children}
+      </PageReadingLayout>
     </div>
   );
 }

@@ -22,6 +22,16 @@ export default function Device() {
     <PageShell
       title="MoS₂ Transistor Principles"
       intro="Follow the path from a thin semiconductor to a working switch. Understand how the contacts, channel and gate stack act together."
+      contents={[
+        {
+          items: [
+            { id: "channel-choice", label: "Why a MoS₂ channel?" },
+            { id: "interactive-device", label: "How the device fits together" },
+            { id: "working-principle", label: "How the transistor works" },
+            { id: "experimental-device", label: "A published experimental device" },
+          ],
+        },
+      ]}
     >
       <section className="panel mb-6" id="channel-choice">
         <h2>Why a MoS₂ channel?</h2>

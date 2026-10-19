@@ -17,7 +17,7 @@ The current brief keeps `/lab` as the sole home for interactive scientific 3D an
 | Engineering Challenges | Eight numbered mechanisms, device impacts and targeted experiments/research |
 | About & References | Auxiliary source search, citation returns, scientific limits and asset rights |
 
-The 3D Lab header item is a direct link without a submenu. Foundations, Research and Challenges retain visible indices below their introductions; Lab has no model directory, index, category switcher or whole-model accordion. The Midnight Blue / Arctic Blue palette, homepage silver particles, equal-size heading numbers and scientific colour ownership remain unchanged.
+The latest 19 October navigation brief gives all five header categories a consistent page-only dropdown, including the single Lab destination. Every substantive interior page uses the shared left-edge Contents drawer; Lab lists its three continuous models without a category switcher or whole-model accordion. The Midnight Blue / Arctic Blue palette, homepage silver particles, equal-size heading numbers and scientific colour ownership remain unchanged.
 
 ## Three continuous modules
 

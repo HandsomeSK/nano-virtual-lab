@@ -25,6 +25,33 @@ export default function Why() {
     <PageShell
       title="MoS₂ — Engineering the Next Atomic Layer"
       intro="Why move from graphene to a semiconductor? Follow the band-gap question, read the S–Mo–S structure, then see how layer number and interfaces shape a transistor."
+      contents={[
+        {
+          title: "The band-gap question",
+          items: [
+            { id: "zero-gap", label: "The zero-band-gap challenge" },
+            { id: "band-gap", label: "Why a band gap matters" },
+            { id: "meet-mos2", label: "Introducing MoS₂" },
+          ],
+        },
+        {
+          title: "Structure & evidence",
+          items: [
+            { id: "atomic-structure", label: "S–Mo–S atomic structure" },
+            { id: "layer-evidence", label: "Layers, coupling & stacking" },
+            { id: "materials", label: "Compare materials & bands" },
+          ],
+        },
+        {
+          title: "Connections & next steps",
+          items: [
+            { id: "possibilities", label: "Atomic thickness & design" },
+            { id: "beyond-silicon", label: "Optional: graphene transport" },
+            { id: "engineering-limits", label: "Engineering limits" },
+            { id: "devices", label: "From materials to devices" },
+          ],
+        },
+      ]}
     >
       <section className="section panel" id="zero-gap">
         <SectionHeading

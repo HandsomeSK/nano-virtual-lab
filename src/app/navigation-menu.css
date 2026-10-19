@@ -1,9 +1,10 @@
-/* One shared category panel; its trigger keeps the existing metal pill. */
+/* Every category opens a compact page list; chapter links live in PageContents. */
 .nano-nav {
   position: relative;
   z-index: 51;
 }
 .nav-category {
+  position: relative;
   flex-shrink: 0;
 }
 .nav-category-row {
@@ -19,11 +20,6 @@
   border: 0;
   background: transparent;
   border-radius: 6px 0 0 6px;
-}
-.nav-category-row > .metal-link:only-child {
-  width: 100%;
-  padding-inline: 18px;
-  border-radius: inherit;
 }
 .nav-category[data-active="true"] .nav-category-row {
   border-color: #b4e7ff;
@@ -58,16 +54,13 @@
 .nav-submenu {
   position: absolute;
   top: calc(100% + 10px);
-  left: 50%;
+  left: 0;
   z-index: 52;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-  width: min(640px, calc(100vw - 32px));
+  width: min(292px, calc(100vw - 32px));
   max-height: min(68dvh, calc(100dvh - 128px));
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 22px;
+  padding: 8px;
   border: 1px solid #40556d;
   border-radius: 10px;
   background: linear-gradient(145deg, #26384a, #1b2b40 55%);
@@ -76,7 +69,7 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(-50%, 8px);
+  transform: translateY(8px);
   transition:
     opacity 220ms ease,
     transform 220ms ease,
@@ -86,8 +79,12 @@
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
   transition-delay: 0ms;
+}
+.nav-category:nth-last-child(-n + 2) .nav-submenu {
+  right: 0;
+  left: auto;
 }
 .nav-category::after {
   content: "";
@@ -101,28 +98,17 @@
 .nav-category[data-expanded="true"]::after {
   visibility: visible;
 }
-.nav-submenu-group {
-  min-width: 0;
-}
-.nav-submenu-group h2 {
-  margin: 0 0 10px;
-  color: var(--secondary);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0;
-}
-.nav-submenu-group ul {
+.nav-submenu ul {
   display: grid;
   gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.nav-submenu-group a {
+.nav-submenu a {
   display: block;
-  min-height: 40px;
-  padding: 9px 10px;
+  min-height: 44px;
+  padding: 11px 10px;
   border-radius: 6px;
   color: var(--ink);
   font-size: 14px;
@@ -131,14 +117,13 @@
   overflow-wrap: anywhere;
   touch-action: manipulation;
 }
-.nav-submenu-group a:hover,
-.nav-submenu-group a[aria-current="page"],
-.nav-submenu-group a[aria-current="location"] {
+.nav-submenu a:hover,
+.nav-submenu a[aria-current="page"] {
   background: rgba(133, 215, 255, 0.12);
   color: var(--primary);
 }
 .nav-category-toggle:focus-visible,
-.nav-submenu-group a:focus-visible {
+.nav-submenu a:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
@@ -206,21 +191,15 @@
     width: 100%;
     max-height: none;
     margin-top: 8px;
-    padding: 18px;
-    gap: 20px;
+    padding: 8px;
     overflow: visible;
     box-shadow: none;
     transform: none;
   }
   .nav-category[data-expanded="true"] .nav-submenu {
-    display: grid;
+    display: block;
     transform: none;
     animation: navigation-panel-in 220ms ease both;
-  }
-}
-@media (max-width: 560px) {
-  .nav-submenu {
-    grid-template-columns: 1fr;
   }
 }
 @keyframes navigation-panel-in {

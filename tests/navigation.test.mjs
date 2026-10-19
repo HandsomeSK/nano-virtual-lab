@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { primaryNavigation } from "../src/lib/site.ts";
 import {
@@ -15,31 +15,22 @@ import {
   keepSubmenuOnPointerLeave,
   selectedSubmenuHref,
 } from "../src/lib/navigation.ts";
-import { fragmentId } from "../src/lib/navigation-scroll.ts";
-import { knowledge } from "../src/data/knowledge.ts";
-import { challenges } from "../src/data/challenges.ts";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 
-test("submenu selection prefers the exact section and falls back to one plain page entry", () => {
-  const links = navigationCategories.flatMap(({ groups }) => groups.flatMap(({ links }) => links));
+test("submenu selection stays on the owning page for section and parameter URLs", () => {
+  const links = navigationCategories.flatMap(({ links }) => links);
   for (const { href } of links) {
-    const url = new URL(href, "https://nanolab.invalid");
-    const selected = selectedSubmenuHref(url.pathname, fragmentId(url.hash));
-    assert.equal(selected, href);
-    assert.equal(links.filter((link) => link.href === selected).length, 1);
+    for (const suffix of ["", "#existing-section", "#%E0%A4%A", "?mode=output#saved"]) {
+      const url = new URL(href + suffix, "https://nanolab.invalid");
+      const selected = selectedSubmenuHref(url.pathname);
+      assert.equal(selected, href);
+      assert.equal(links.filter((link) => link.href === selected).length, 1);
+    }
   }
-  for (const [path, hash, expected] of [
-    ["/challenges", "#%69nterfaces", "/challenges#interfaces"],
-    ["/comparison", "#saved", "/comparison#saved"],
-    ["/comparison", "#missing", "/comparison"],
-    ["/comparison", "#%E0%A4%A", "/comparison"],
-    ["/comparison", "", "/comparison"],
-    ["/device", "#working-principle", "/device"],
-    ["/research", "#catalogue", "/research#catalogue"],
-    ["/challenges", "#missing", undefined],
-    ["/lab", "#transistor", undefined],
-  ]) assert.equal(selectedSubmenuHref(path, fragmentId(hash)), expected);
+  for (const path of ["/", "/about", "/missing", "/researcher"]) {
+    assert.equal(selectedSubmenuHref(path), undefined);
+  }
 });
 
 test("pointer leave closes mouse-opened panels despite retained button focus", () => {
@@ -79,21 +70,43 @@ test("five category homes stay stable and related routes select one category", (
   );
 });
 
-test("3D Lab has one direct entry while transistor theory belongs to Materials", () => {
-  const lab = navigationCategories.find(({ href }) => href === "/lab");
-  const materials = navigationCategories.find(({ href }) => href === "/foundations");
-  assert.deepEqual(lab.groups, []);
-  assert.ok(materials.groups.some(({ links }) => links.some(({ href }) => href === "/device")));
-  assert.equal(isActiveCategory(lab, "/device"), false);
+test("all five dropdowns list each owned page once with no section, query or Overview entries", () => {
+  const allLinks = navigationCategories.flatMap(({ links }) => links);
+  assert.equal(navigationCategories.length, 5);
+  assert.equal(allLinks.length, 9);
+  assert.equal(new Set(allLinks.map(({ href }) => href)).size, 9);
+  for (const category of navigationCategories) {
+    const owner = pageHierarchy.find(({ href }) => href === category.href);
+    assert.deepEqual(
+      category.links.map(({ href }) => href),
+      [owner.href, ...owner.children.map(({ href }) => href)],
+    );
+    assert.ok(category.links.length > 0, category.href);
+    for (const link of category.links) {
+      assert.equal(getPageCategory(link.href).href, category.href);
+      assert.ok(link.title && !/overview/i.test(link.title));
+      const url = new URL(link.href, "https://nanolab.invalid");
+      assert.equal(url.hash, "");
+      assert.equal(url.search, "");
+    }
+  }
+  assert.deepEqual(
+    navigationCategories.find(({ href }) => href === "/foundations").links,
+    [
+      { href: "/foundations", title: "Foundations" },
+      { href: "/why-mos2", title: "MoS₂" },
+      { href: "/device", title: "Transistor Principles" },
+    ],
+  );
 });
 
 test("page ownership remains stable when a submenu changes", () => {
   const materials = navigationCategories.find(({ href }) => href === "/foundations");
   const discoveries = navigationCategories.find(({ href }) => href === "/research");
-  assert.equal(isActiveCategory({ ...materials, groups: [] }, "/device"), true);
+  assert.equal(isActiveCategory({ ...materials, links: [] }, "/device"), true);
   assert.equal(
     isActiveCategory(
-      { ...discoveries, groups: [] },
+      { ...discoveries, links: [] },
       "/discoveries/mos2-interface-breakthrough",
     ),
     true,
@@ -142,35 +155,11 @@ test("breadcrumbs expose useful ancestors without duplicate or self-navigation s
   assert.deepEqual(getBreadcrumbs("/missing"), []);
 });
 
-test("every secondary destination resolves an actual route and section", () => {
-  const dynamicAnchors = {
-    "/foundations": new Set(knowledge.map(({ id }) => id)),
-    "/challenges": new Set(challenges.map(({ id }) => id)),
-    "/simulator": new Set(["parameter-gateVoltage", "understanding-results"]),
-    "/comparison": new Set(["saved"]),
-  };
+test("every dropdown destination resolves an actual maintained page", () => {
   for (const category of navigationCategories) {
-    const seen = new Set();
-    for (const group of category.groups) {
-      assert.ok(group.title && group.links.length);
-      for (const link of group.links) {
-        assert.ok(link.title && link.href.startsWith("/") && !link.href.startsWith("//"));
-        assert.equal(seen.has(link.href), false, `Duplicate ${link.href}`);
-        seen.add(link.href);
-        const url = new URL(link.href, "https://nanolab.invalid");
-        const page = `${root}src/app${url.pathname}/page.tsx`;
-        assert.ok(existsSync(page), `Missing route: ${link.href}`);
-        if (url.hash && !dynamicAnchors[url.pathname]?.has(url.hash.slice(1))) {
-          const sources = readFileSync(page, "utf8") +
-            (url.pathname === "/research"
-              ? readFileSync(`${root}src/components/research-explorer.tsx`, "utf8")
-              : "");
-          assert.ok(
-            sources.includes(`id="${url.hash.slice(1)}"`),
-            `Missing section: ${link.href}`,
-          );
-        }
-      }
+    for (const { href } of category.links) {
+      assert.ok(href.startsWith("/") && !href.startsWith("//"));
+      assert.ok(existsSync(`${root}src/app${href}/page.tsx`), `Missing route: ${href}`);
     }
   }
 });

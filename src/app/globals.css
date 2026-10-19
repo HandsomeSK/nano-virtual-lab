@@ -2006,7 +2006,8 @@ th {
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 36px;
 }
-.page-shell > .section.panel {
+.page-shell > .section.panel,
+.page-contents-body > .section.panel {
   background: transparent;
   border: 0;
   border-radius: 0;

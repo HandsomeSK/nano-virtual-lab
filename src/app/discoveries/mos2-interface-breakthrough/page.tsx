@@ -5,7 +5,7 @@ import { EotChart } from "@/components/research/eot-chart";
 import { discoveryThemes } from "@/data/discoveries";
 import styles from "@/components/research/research-context.module.css";
 import { ReferenceLink } from "@/components/reference-link";
-import { RelatedTopics } from "@/components/page-shell";
+import { PageReadingLayout, RelatedTopics } from "@/components/page-shell";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { references } from "@/data/references";
 const route = "/discoveries/mos2-interface-breakthrough";
@@ -19,6 +19,28 @@ export const metadata: Metadata = {
 export default function InterfaceDiscovery() {
   const article = (
     <article className="container page-shell discovery-feature-page">
+      <PageReadingLayout
+        contents={[
+          {
+            title: "The interface study",
+            items: [
+              { id: "challenge", label: "The surface-growth challenge", number: "01" },
+              { id: "breakthrough", label: "The carbon-dot breakthrough", number: "02" },
+              { id: "interactive-stack", label: "Compare the interface layers" },
+              { id: "measurements", label: "Measure the complete stack", number: "03" },
+              { id: "significance", label: "What the architecture changes", number: "04" },
+              { id: "limits", label: "Boundaries of the result", number: "05" },
+            ],
+          },
+          {
+            title: "Context & sources",
+            items: [
+              { id: "connected-discoveries", label: "Connected discoveries", number: "06" },
+              { id: "primary-source", label: "The primary study" },
+            ],
+          },
+        ]}
+      >
       <Breadcrumb />
       <header className="discovery-hero">
         <span className="eyebrow">
@@ -252,6 +274,7 @@ export default function InterfaceDiscovery() {
             },
           ]}
         />
+      </PageReadingLayout>
     </article>
   );
   return article;
