@@ -1,4 +1,4 @@
-/* Every category opens a compact page list; chapter links live in PageContents. */
+/* Multi-page categories open page lists; chapter links live in PageContents. */
 .nano-nav {
   position: relative;
   z-index: 51;
@@ -20,6 +20,10 @@
   border: 0;
   background: transparent;
   border-radius: 6px 0 0 6px;
+}
+.nav-category-row > .nav-direct-link {
+  padding-inline: 11px;
+  border-radius: 6px;
 }
 .nav-category[data-active="true"] .nav-category-row {
   border-color: #b4e7ff;
@@ -177,6 +181,9 @@
     width: 56px;
     border-left: 1px solid var(--line);
     border-radius: 0 9px 9px 0;
+  }
+  .nav-category-row > .nav-direct-link {
+    border-radius: 9px;
   }
   .nav-category-toggle svg {
     width: 16px;

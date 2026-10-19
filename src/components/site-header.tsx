@@ -181,8 +181,9 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
         >
           {navigationCategories.map((category, i) => {
             const { href, title, links } = category;
+            const hasSubmenu = links.length > 1;
             const panelId = `${navId}-category-${i}`;
-            const isExpanded = expanded === href;
+            const isExpanded = hasSubmenu && expanded === href;
             return (
               <div
                 key={href}
@@ -196,11 +197,12 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                   ) {
                     cancelClose();
                     keyboardInteraction.current = false;
-                    setExpanded(href);
+                    setExpanded(hasSubmenu ? href : null);
                   }
                 }}
                 onPointerLeave={(event) => {
                   if (
+                    hasSubmenu &&
                     event.pointerType === "mouse" &&
                     matchMedia("(min-width: 901px)").matches
                   )
@@ -222,11 +224,11 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                 >
                   <Link
                     href={href}
-                    className="metal-link"
+                    className={hasSubmenu ? "metal-link" : "metal-link nav-direct-link"}
                     aria-current={pathname === href ? "page" : undefined}
                     onClick={closeNavigation}
                     onKeyDown={(event) => {
-                      if (event.key !== "ArrowDown") return;
+                      if (!hasSubmenu || event.key !== "ArrowDown") return;
                       event.preventDefault();
                       cancelClose();
                       keyboardInteraction.current = true;
@@ -241,7 +243,7 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                   >
                     {title}
                   </Link>
-                  <button
+                  {hasSubmenu ? <button
                     type="button"
                     className="nav-category-toggle"
                     aria-label={`${isExpanded ? "Close" : "Open"} ${title} submenu`}
@@ -267,9 +269,9 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                         strokeWidth="1.5"
                       />
                     </svg>
-                  </button>
+                  </button> : null}
                 </div>
-                <div
+                {hasSubmenu ? <div
                   id={panelId}
                   className="nav-submenu"
                   role="region"
@@ -293,7 +295,7 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </div> : null}
               </div>
             );
           })}

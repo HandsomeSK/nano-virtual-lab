@@ -70,7 +70,7 @@ test("five category homes stay stable and related routes select one category", (
   );
 });
 
-test("all five dropdowns list each owned page once with no section, query or Overview entries", () => {
+test("all five categories own canonical pages without section, query or Overview entries", () => {
   const allLinks = navigationCategories.flatMap(({ links }) => links);
   assert.equal(navigationCategories.length, 5);
   assert.equal(allLinks.length, 9);
