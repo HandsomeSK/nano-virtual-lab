@@ -5,15 +5,13 @@ import {
   SectionHeading,
   RelatedTopics,
 } from "@/components/page-shell";
-import { MaterialExplorer } from "@/components/learning/material-explorer";
-import { BandDiagram } from "@/components/learning/band-diagram";
 import { Comparison } from "@/components/simulation/comparison";
-import { materials } from "@/data/materials";
 import { ReferenceLink } from "@/components/reference-link";
 import { normalizeParameters } from "@/lib/simulation/model";
 import { queryValue, type Query } from "@/lib/site";
 import { comparisonPair } from "@/lib/simulation/journey";
-export const metadata: Metadata = { title: "Materials & Scenario Comparison" };
+import styles from "./comparison.module.css";
+export const metadata: Metadata = { title: "Scenario Comparison" };
 export default async function ComparisonPage({
   searchParams,
 }: {
@@ -22,80 +20,28 @@ export default async function ComparisonPage({
   const query = await searchParams;
   return (
     <PageShell
-      title="Materials & Scenario Comparison"
-      intro="Compare material properties and electronic bands, then compare two parameter sets in one teaching model. The A/B curves are assumed device scenarios, not a ranking of materials."
+      title="Scenario Comparison"
+      intro="Compare two parameter sets in one teaching model. The A/B curves are assumed device scenarios, not a ranking of materials."
     >
-      <p className="text-sm mb-6">
-        Arriving from the Simulator?{" "}
-        <Link href="#device-comparison" className="text-link">
-          Continue with Scenario A & B
-        </Link>
-        . Your selected parameter sets appear below the material context.
-      </p>
-      <section id="material-selector">
-        <SectionHeading
-          title="Explore the materials"
-          description="Select a material to connect its atomic structure, electronic bands and possible applications."
+      <div id="device-comparison">
+        <Comparison
+          key={JSON.stringify(query)}
+          incoming={
+            queryValue(query, "source") === "simulator"
+              ? normalizeParameters(query)
+              : null
+          }
+          initialA={queryValue(query, "a")}
+          initialB={queryValue(query, "b")}
+          initialPair={comparisonPair(query)}
+          initialMode={
+            queryValue(query, "curve") === "output" ? "output" : "transfer"
+          }
+          initialLayout={
+            queryValue(query, "layout") === "side" ? "side" : "overlay"
+          }
         />
-        <MaterialExplorer from="/comparison" />
-      </section>
-      <section className="section" id="electronic-properties">
-        <SectionHeading
-          title="Material properties"
-          description="A qualitative comparison of material context, rather than a device-performance ranking."
-        />
-        <div className="horizontal-scroll">
-          <table>
-            <caption className="sr-only">
-              Qualitative comparison of three material families
-            </caption>
-            <thead>
-              <tr>
-                <th>Material</th>
-                <th>Band structure context</th>
-                <th>Opportunity</th>
-                <th>Engineering considerations</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.values(materials).map((item) => (
-                <tr key={item.name}>
-                  <th>{item.name}</th>
-                  <td>
-                    {item.band}
-                    <ReferenceLink id={item.reference} from="/comparison" />
-                  </td>
-                  <td>{item.strength}</td>
-                  <td>{item.limitation}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <Link href="/foundations#bands" className="text-link mt-3">
-          Review the meaning of a band gap →
-        </Link>
-      </section>
-      <section className="section" id="band-structure">
-        <SectionHeading
-          title="Electronic bands"
-          description="Pristine graphene has touching bands. Semiconducting MoS₂ and silicon have a finite gap; the direct or indirect character also depends on the material and layer count."
-        />
-        <div className="three-column">
-          {(["graphene", "mos2", "silicon"] as const).map((id) => (
-            <div className="panel" key={id}>
-              <h3>{materials[id].name}</h3>
-              <BandDiagram material={id} />
-              <p className="text-sm mt-2">{materials[id].band}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-sm mt-3">
-          Conceptual sketches with no common numerical energy scale. A finite
-          gap helps suppress thermally accessible carriers, while contacts,
-          electrostatics and defects also influence an actual OFF current.
-        </p>
-      </section>
+      </div>
       <section className="section panel" id="benchmarking">
         <SectionHeading title="Material Properties Are Not Device Benchmarks" />
         <p>
@@ -151,31 +97,42 @@ export default async function ComparisonPage({
           </table>
         </div>
         <p className="text-sm mt-4">
-          The A/B tool below compares the same classical equations with
+          The A/B tool above compares the same classical equations with
           different assumed parameters. Its curves are not measured graphene,
-          silicon or MoS₂ benchmarks, and changing the material selector does
-          not assign a new calibrated transport model.
+          silicon or MoS₂ benchmarks. The separate material explorer does not
+          assign a new calibrated transport model.
         </p>
       </section>
-      <div id="device-comparison">
-        <Comparison
-          key={JSON.stringify(query)}
-          incoming={
-            queryValue(query, "source") === "simulator"
-              ? normalizeParameters(query)
-              : null
-          }
-          initialA={queryValue(query, "a")}
-          initialB={queryValue(query, "b")}
-          initialPair={comparisonPair(query)}
-          initialMode={
-            queryValue(query, "curve") === "output" ? "output" : "transfer"
-          }
-          initialLayout={
-            queryValue(query, "layout") === "side" ? "side" : "overlay"
-          }
-        />
-      </div>
+      <nav className={styles.context} aria-label="Material comparison context">
+        <h2>Material context</h2>
+        <p>
+          Compare material properties and electronic bands separately from the
+          assumed A/B device scenarios.
+        </p>
+        <div className={styles.contextLinks}>
+          <Link
+            id="material-selector"
+            href="/why-mos2#materials"
+            className="text-link"
+          >
+            Explore the materials
+          </Link>
+          <Link
+            id="electronic-properties"
+            href="/why-mos2#electronic-properties"
+            className="text-link"
+          >
+            Material properties
+          </Link>
+          <Link
+            id="band-structure"
+            href="/why-mos2#band-structure"
+            className="text-link"
+          >
+            Electronic bands
+          </Link>
+        </div>
+      </nav>
       <RelatedTopics
         links={[
           {

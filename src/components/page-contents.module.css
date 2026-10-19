@@ -1,12 +1,12 @@
 .contents {
-  margin-bottom: 40px;
-  padding-block: 22px;
+  margin-bottom: 28px;
+  padding-block: 18px;
   border-block: 1px solid var(--line);
   color: var(--prose);
 }
 
 .contents .title {
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   color: var(--ink);
   font-size: 18px;
   font-weight: 600;
@@ -37,6 +37,9 @@
 }
 
 .group ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -100,6 +103,10 @@
 }
 
 @media (max-width: 1050px) {
+  .group ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .group:only-child ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -107,6 +114,7 @@
 
 @media (max-width: 700px) {
   .groups,
+  .group ul,
   .group:only-child ul {
     grid-template-columns: 1fr;
   }

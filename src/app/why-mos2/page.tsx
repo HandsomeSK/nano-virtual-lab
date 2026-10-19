@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  PageShell,
-  SectionHeading,
-  RelatedTopics,
-} from "@/components/page-shell";
+import { PageShell, SectionHeading } from "@/components/page-shell";
 import {
   MaterialExplorer,
   MaterialStructure,
@@ -15,6 +11,8 @@ import { ScientificFigure } from "@/components/scientific-figure";
 import { Mos2StructureFigure } from "@/components/science/teaching-figures";
 import { InterfaceFeature } from "@/components/research/interface-feature";
 import { LayerBandEvidence } from "@/components/learning/layer-band-evidence";
+import { materials } from "@/data/materials";
+import styles from "./why-mos2.module.css";
 
 export const metadata: Metadata = {
   title: "MoS₂ — Engineering the Next Atomic Layer",
@@ -154,7 +152,7 @@ export default function Why() {
           Rotate and compare MoS₂ structures in 3D Lab
         </Link>
       </section>
-      <section className="section" id="layer-evidence">
+      <section className={`section ${styles.layerEvidence}`} id="layer-evidence">
         <SectionHeading
           title="From one sheet to two: coupling and stacking"
           description="A monolayer and a bilayer differ in more than thickness: a second sheet introduces interlayer interactions and a choice of stacking registry."
@@ -199,11 +197,97 @@ export default function Why() {
           </p>
         </details>
       </section>
-      <section className="section material-reasons" id="possibilities">
+      <section className="section" id="materials">
         <SectionHeading
-          title="Atomic thickness changes the design space"
-          description="A material property becomes useful when its environment and device architecture support it."
+          title="Graphene vs MoS₂"
+          description="Switch the material to explore its structure, band picture and opportunities. Silicon provides a familiar reference."
         />
+        <div className={styles.comparisonPart} id="material-selector">
+          <h3>Explore the materials</h3>
+          <p className="text-sm mb-4">
+            Select a material to connect its atomic structure, electronic bands
+            and possible applications.
+          </p>
+          <MaterialExplorer
+            from="/why-mos2#materials"
+            initialMaterial="graphene"
+          />
+        </div>
+        <div className={styles.comparisonPart} id="electronic-properties">
+          <h3>Material properties</h3>
+          <p className="text-sm mb-4">
+            A qualitative comparison of material context, rather than a
+            device-performance ranking.
+          </p>
+          <div className="horizontal-scroll">
+            <table>
+              <caption className="sr-only">
+                Qualitative comparison of three material families
+              </caption>
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>Band structure context</th>
+                  <th>Opportunity</th>
+                  <th>Engineering considerations</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.values(materials).map((item) => (
+                  <tr key={item.name}>
+                    <th>{item.name}</th>
+                    <td>
+                      {item.band}
+                      <ReferenceLink
+                        id={item.reference}
+                        from="/why-mos2#electronic-properties"
+                      />
+                    </td>
+                    <td>{item.strength}</td>
+                    <td>{item.limitation}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <Link href="/foundations#bands" className="text-link mt-3">
+            Review the meaning of a band gap →
+          </Link>
+        </div>
+        <div className={styles.comparisonPart} id="band-structure">
+          <h3>Electronic bands</h3>
+          <p className="text-sm mb-4">
+            Pristine graphene has touching bands. Semiconducting MoS₂ and
+            silicon have a finite gap; the direct or indirect character also
+            depends on the material and layer count.
+          </p>
+          <div className={styles.bandGrid}>
+            {(["graphene", "mos2", "silicon"] as const).map((id) => (
+              <div className="panel" key={id}>
+                <h4>{materials[id].name}</h4>
+                <BandDiagram material={id} />
+                <p className="text-sm mt-2">{materials[id].band}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm mt-3">
+            Conceptual sketches with no common numerical energy scale. A finite
+            gap helps suppress thermally accessible carriers, while contacts,
+            electrostatics and defects also influence an actual OFF current.
+          </p>
+        </div>
+        <Link href="/foundations#graphene-structure" className="text-link">
+          Review graphene and carbon structures →
+        </Link>
+      </section>
+      <details className={styles.recap} id="possibilities">
+        <summary>
+          <h2>Atomic thickness changes the design space</h2>
+        </summary>
+        <p className="text-sm mb-5">
+          A material property becomes useful when its environment and device
+          architecture support it.
+        </p>
         <div className="open-questions">
           <article>
             <h3>A finite gap</h3>
@@ -249,9 +333,11 @@ export default function Why() {
             </a>
           </article>
         </div>
-      </section>
+      </details>
       <details className="material-deep-dive">
-        <summary>Optional: graphene transport and material comparison</summary>
+        <summary>
+          Optional: graphene transport and two-dimensional materials
+        </summary>
         <div>
           <section id="beyond-silicon" className="bridge-intro">
             <div>
@@ -297,83 +383,67 @@ export default function Why() {
               </figure>
             </div>
           </section>
-          <section className="section" id="materials">
-            <SectionHeading
-              title="Graphene vs MoS₂"
-              description="Switch the material to explore its structure, band picture and opportunities. Silicon provides a familiar reference."
-            />
-            <MaterialExplorer
-              from="/why-mos2#materials"
-              initialMaterial="graphene"
-            />
-            <Link href="/foundations#graphene-structure" className="text-link">
-              Review graphene and carbon structures →
-            </Link>
-          </section>
         </div>
       </details>
-      <InterfaceFeature from="/why-mos2" />
-      <section className="section lab-next" id="engineering-limits">
-        <div>
-          <span className="eyebrow">Materials become devices</span>
-          <h2>The next layer is an engineering decision</h2>
+      <InterfaceFeature compact from="/why-mos2" />
+      <div className={styles.nextSteps}>
+        <section id="engineering-limits">
+          <SectionHeading title="The next layer is an engineering decision" />
           <p>
             Contacts, dielectrics, transfer cleanliness and reproducible
             processing decide how much of a material’s potential survives
             integration. Understand the structure, then experiment with the
             separate classical model.
           </p>
-        </div>
-        <div className="actions">
-          <Link href="/challenges#interfaces" className="metal-button metal-ghost">
+          <Link
+            href="/challenges#interfaces"
+            className="text-link mt-4 inline-block"
+          >
             Read interface challenges
           </Link>
-        </div>
-      </section>
-      <section className="section" id="devices">
-        <SectionHeading
-          title="From Materials to Devices"
-          description="The channel is one part of the story. Contacts and a gate stack turn a material into a transistor."
-        />
-        <div className="two-column">
-          <div>
-            <h3>Explore the complete structure</h3>
-            <p className="mt-3">
-              See how a MoS₂ channel, source, drain, dielectric and gate fit
-              together, and read how each component controls the device.
-            </p>
-            <Link href="/device" className="text-link mt-3">
-              Read transistor principles
-            </Link>
+        </section>
+        <section className="section" id="devices">
+          <SectionHeading
+            title="From Materials to Devices"
+            description="The channel is one part of the story. Contacts and a gate stack turn a material into a transistor."
+          />
+          <div className="two-column">
+            <div>
+              <h3>Explore the complete structure</h3>
+              <p className="mt-3">
+                See how a MoS₂ channel, source, drain, dielectric and gate fit
+                together, and read how each component controls the device.
+              </p>
+              <Link href="/device" className="text-link mt-3">
+                Read transistor principles
+              </Link>
+            </div>
+            <div>
+              <h3>Experiment with a teaching model</h3>
+              <p className="mt-3">
+                Change mobility, geometry and contact resistance to understand
+                a simplified transistor model. Material band diagrams and
+                simulated device curves answer different questions.
+              </p>
+              <Link href="/simulator" className="text-link mt-3">
+                Explore I–V characteristics
+              </Link>
+            </div>
           </div>
-          <div>
-            <h3>Experiment with a teaching model</h3>
-            <p className="mt-3">
-              Change mobility, geometry and contact resistance to understand
-              a simplified transistor model. Material band diagrams and
-              simulated device curves answer different questions.
-            </p>
-            <Link href="/simulator" className="text-link mt-3">
-              Explore I–V characteristics
-            </Link>
-          </div>
-        </div>
-        <p className="text-sm muted mt-5">
-          Different applications favour different materials. Silicon retains
-          a mature manufacturing ecosystem; MoS₂ research explores
-          opportunities alongside substantial integration challenges.
+          <p className="text-sm muted mt-5">
+            Different applications favour different materials. Silicon retains
+            a mature manufacturing ecosystem; MoS₂ research explores
+            opportunities alongside substantial integration challenges.
+          </p>
+        </section>
+        <p className={styles.materialReturn}>
+          <Link href="#electronic-properties" className="text-link">
+            Compare material properties
+          </Link>{" "}
+          Read material values with their conditions; they do not rank complete
+          transistor performance.
         </p>
-      </section>
-      <RelatedTopics
-        links={[
-          {
-            href: "/comparison#electronic-properties",
-            title: "Compare material properties",
-            description:
-              "Read material values with their conditions; they do not rank complete transistor performance.",
-          },
-        ]}
-      />
+      </div>
     </PageShell>
   );
 }

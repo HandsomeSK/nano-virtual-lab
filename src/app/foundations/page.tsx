@@ -81,7 +81,7 @@ export default function Foundations() {
       <RelatedTopics
         links={[
           {
-            href: "/comparison#band-structure",
+            href: "/why-mos2#band-structure",
             title: "Compare electronic bands",
             description:
               "See how graphene, MoS₂ and silicon differ without treating the sketches as device benchmarks.",

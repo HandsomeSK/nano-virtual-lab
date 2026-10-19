@@ -4,9 +4,10 @@ import { researchDirections } from "@/data/research-knowledge";
 import { ReferenceLink } from "@/components/reference-link";
 import { studies } from "@/data/research";
 import styles from "@/components/reading-paths.module.css";
-export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
+import contextStyles from "./research-context.module.css";
+export function DiscoverySynthesis() {
   return (
-    <div className={compact ? "discovery-synthesis" : "research-directions"}>
+    <div className="research-directions">
       {discoveryThemes.map((story) => {
         const direction = researchDirections.find(
           (item) => item.id === story.id,
@@ -16,24 +17,20 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
           <article
             key={story.id}
             id={"discovery-" + story.id}
-            className={compact ? "discovery-story" : "research-direction"}
+            className="research-direction"
           >
-            <div
-              className={compact ? "discovery-index" : "research-direction-context"}
-            >
-              {compact ? <span>{story.number}</span> : null}
-              <p>{compact ? story.label : "Selected evidence"}</p>
+            <div className="research-direction-context">
+              <p>Selected evidence</p>
               <small>{story.date}</small>
             </div>
             <div>
-              <h3>{compact ? story.title : direction.label}</h3>
-              <p
-                className={compact ? "discovery-question" : "research-direction-question"}
-              >
-                {story.question}
-              </p>
-              <p className={compact ? undefined : "research-direction-evidence"}>
-                {!compact ? <strong>Research evidence. </strong> : null}
+              <h3>{direction.label}</h3>
+              <p className="research-direction-question">{story.question}</p>
+              <p className="research-direction-evidence">
+                <strong className={contextStyles.evidenceHeading}>
+                  {story.title}
+                </strong>
+                <strong>Research evidence. </strong>
                 {story.finding}
                 <ReferenceLink
                   id={story.reference}
@@ -46,37 +43,30 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
                   />
                 ) : null}
               </p>
-              <p className={compact ? "discovery-limit" : "research-direction-limit"}>
-                <strong>
-                  {compact ? "Interpret with care. " : "What remains open. "}
-                </strong>
+              <p className="research-direction-limit">
+                <strong>What remains open. </strong>
                 {story.limit}
               </p>
-              {!compact ? (
-                <details className={styles.details}>
-                  <summary>Mechanism & engineering context</summary>
-                  <p>{direction.mechanism}</p>
-                  <p>{direction.challenge}</p>
-                  <p>{direction.next}</p>
-                  <p className="research-direction-connection">
-                    Connect this question to{" "}
-                    <a
-                      className="text-link"
-                      href={"#discovery-" + direction.connectedId}
-                    >
-                      {direction.connectedLabel}
-                    </a>.
-                  </p>
-                  <Link href={direction.relatedHref} className="text-link">
-                    {direction.relatedLabel}
-                  </Link>
-                </details>
-              ) : null}
-              {compact ? (
-                <Link href={story.href} className="text-link">
-                  {story.action}
+              <details className={styles.details}>
+                <summary>Mechanism & engineering context</summary>
+                <p>{story.meaning}</p>
+                <p>{direction.mechanism}</p>
+                <p>{direction.challenge}</p>
+                <p>{direction.next}</p>
+                <p className="research-direction-connection">
+                  Connect this question to{" "}
+                  <a
+                    className="text-link"
+                    href={"#discovery-" + direction.connectedId}
+                  >
+                    {direction.connectedLabel}
+                  </a>.
+                </p>
+                <Link href={direction.relatedHref} className="text-link">
+                  {direction.relatedLabel}
                 </Link>
-              ) : study ? (
+              </details>
+              {study ? (
                 <div className={styles.actions}>
                   <Link
                     href={`/research?study=${story.reference}#study-${story.reference}`}
@@ -89,6 +79,9 @@ export function DiscoverySynthesis({ compact = false }: { compact?: boolean }) {
                     className="text-link"
                   >
                     Explore the engineering challenge
+                  </Link>
+                  <Link href={story.href} className="text-link">
+                    {story.action}
                   </Link>
                 </div>
               ) : null}
