@@ -52,7 +52,7 @@ export default function InterfaceDiscovery() {
           MoS₂ transistors.
         </p>
         <p className="research-context">
-          Wong et al. · Evidence reviewed 13 October 2026
+          Wong et al. · Evidence reviewed 21 October 2026
           <ReferenceLink id="wong2026" from={route} />
         </p>
       </header>
@@ -129,9 +129,10 @@ export default function InterfaceDiscovery() {
         <div>
           <h2>Measure the stack, not just its appearance</h2>
           <p>
-            The reported hybrid dielectric has an EOT of 0.6 ± 0.1 nm. Initial
-            structural measurements resolve HfO₂ near 1.6 nm and an interfacial
-            layer around 0.4–0.6 nm.
+            The 0.6 ± 0.1 nm EOT was extracted using double-gate graphene test
+            structures. Separate MoS₂ transistors with 3 nm HfO₂ had
+            approximately 0.8–0.9 nm EOT. STEM resolves HfO₂ near 1.6 nm and an
+            interfacial layer around 0.4–0.6 nm in structural specimens.
             <ReferenceLink id="wong2026" from={route + "#measurements"} />
           </p>
           <EotChart />
@@ -254,7 +255,8 @@ export default function InterfaceDiscovery() {
           <p className="text-xs">
             Original NanoLab schematics and geometry. No publisher figure is
             adapted; the reported EOT value is attributed to the paper. Public
-            metadata, abstract and initial PDF results were checked.
+            metadata, abstract, relevant main-text measurements and Figures 1–4 were checked
+            on 21 October 2026.
           </p>
         </section>
         <RelatedTopics

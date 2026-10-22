@@ -8,14 +8,14 @@ import styles from "./lab.module.css";
 export const metadata: Metadata = {
   title: "3D Lab",
   description:
-    "Explore graphene, MoS₂ layers and a unified transistor/interface model in one continuous, interactive 3D laboratory.",
+    "Inspect MoS₂ atomic layers and transistor interfaces in 3D, using graphene as a structural comparison in one continuous interactive laboratory.",
 };
 
 export default function Lab() {
   return (
     <PageShell
       title="3D Lab"
-      intro="Explore three models as you scroll. Inspect atomic geometry, then operate one transistor and compare its interface structures. Each model has its own controls and scientific explanation."
+      intro="Inspect MoS₂ from an S–Mo–S sheet to a transistor and its interfaces, with graphene as a structural comparison. Explore three models as you scroll; each has its own controls, dimensions and scientific explanation."
       contents={[
         {
           items: [
@@ -41,7 +41,7 @@ export default function Lab() {
             initialMaterial="mos2"
             fixedMaterial
             heading="MoS₂ atomic structure"
-            description="Inspect an S–Mo–S monolayer, then compare ideal 2H and 3R bilayers. Separate atomic planes or expand the spacing between sheets."
+            description="Inspect a 1H S–Mo–S monolayer, then compare the registry of two sheets derived from ideal 2H and 3R stacking. Separate atomic planes or expand the sheet spacing; no relaxed experimental structure is reconstructed."
           />
           <p><Link className="text-link" href="/why-mos2#meet-mos2">Understand S–Mo–S structure →</Link></p>
         </div>

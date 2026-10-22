@@ -99,7 +99,7 @@ export function createNavigationScroll(
     observer = null;
   }
 
-  function seek(destination: URL, behavior: ScrollBehavior) {
+  function seek(destination: URL, behavior: ScrollBehavior, focusTarget = true) {
     cancel();
     const expectedUrl = destination.href;
     const id = fragmentId(destination.hash);
@@ -120,7 +120,7 @@ export function createNavigationScroll(
         if (win.location.href !== expectedUrl) return;
         if (target?.isConnected) {
           target.scrollIntoView({ block: "start", behavior });
-          if (target instanceof win.HTMLElement) {
+          if (focusTarget && target instanceof win.HTMLElement) {
             if (target.tabIndex < 0 && !target.hasAttribute("tabindex"))
               target.setAttribute("tabindex", "-1");
             target.focus({ preventScroll: true });
@@ -198,6 +198,10 @@ export function createNavigationScroll(
       cancel();
       pending = null;
       restoredUrl = win.location.href;
+    },
+    realign(destination: URL) {
+      if (win.location.href === destination.href && win.location.href !== restoredUrl)
+        seek(destination, "instant", false);
     },
     hashChanged(event?: HashChangeEvent) {
       // Widget notifications update state; their own controls decide to scroll.

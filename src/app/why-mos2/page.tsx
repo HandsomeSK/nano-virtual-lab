@@ -12,6 +12,8 @@ import { Mos2StructureFigure } from "@/components/science/teaching-figures";
 import { InterfaceFeature } from "@/components/research/interface-feature";
 import { LayerBandEvidence } from "@/components/learning/layer-band-evidence";
 import { materials } from "@/data/materials";
+import { Mos2Optics } from "@/components/science/mos2-optics";
+import { Mos2Characterization } from "@/components/science/mos2-characterization";
 import styles from "./why-mos2.module.css";
 
 export const metadata: Metadata = {
@@ -24,7 +26,7 @@ export default function Why() {
   return (
     <PageShell
       title="MoS₂ — Engineering the Next Atomic Layer"
-      intro="Why move from graphene to a semiconductor? Follow the band-gap question, read the S–Mo–S structure, then see how layer number and interfaces shape a transistor."
+      intro="MoS₂ is the laboratory’s main case study. Connect its atomic structure and electronic and optical properties with experimental characterization; use graphene and silicon as comparisons."
       contents={[
         {
           title: "The band-gap question",
@@ -39,7 +41,18 @@ export default function Why() {
           items: [
             { id: "atomic-structure", label: "S–Mo–S atomic structure" },
             { id: "layer-evidence", label: "Layers, coupling & stacking" },
+            { id: "excitons", label: "Excitons & optical measurements" },
             { id: "materials", label: "Compare materials & bands" },
+          ],
+        },
+        {
+          title: "Characterize MoS₂",
+          items: [
+            { id: "characterization", label: "Combining complementary evidence" },
+            { id: "raman", label: "Raman spectroscopy" },
+            { id: "afm", label: "Atomic force microscopy" },
+            { id: "tem", label: "Transmission electron microscopy" },
+            { id: "pl", label: "Photoluminescence spectroscopy" },
           ],
         },
         {
@@ -131,7 +144,7 @@ export default function Why() {
       <section className="section panel" id="meet-mos2">
         <SectionHeading
           title="Introducing MoS₂"
-          description="Semiconducting 2H-molybdenum disulfide: a layered transition-metal dichalcogenide."
+          description="Molybdenum disulfide is a transition-metal dichalcogenide: one molybdenum atom for every two sulfur atoms."
         />
         <div className="two-column">
           <div className="material-canvas">
@@ -144,12 +157,12 @@ export default function Why() {
             {[
               [
                 "An atomically thin body",
-                "A monolayer is approximately 0.65 nm thick: a sulfur–molybdenum–sulfur unit. An ultrathin channel can help a gate control charge.",
+                "A monolayer is one sulfur–molybdenum–sulfur sheet. Its often-quoted nominal thickness is about 0.65 nm; that convention differs from the internal sulfur-plane separation and an AFM apparent step height.",
                 "radis2011",
               ],
               [
                 "A finite band gap",
-                "Monolayer semiconducting MoS₂ has a direct-gap optical transition in the approximately 1.8 eV context used here. Layer number and environment matter; optical transition energies are not quasiparticle-gap measurements.",
+                "Mak et al. observed a monolayer photoluminescence peak near 1.90 eV and a separate photocurrent onset near 1.8 eV. These optical observations support a direct-gap picture; neither is a universal quasiparticle-gap value.",
                 "mak2010",
               ],
               [
@@ -175,6 +188,26 @@ export default function Why() {
           description="Read the atomic planes first, then connect layer number and stacking with the electronic structure."
         />
         <Mos2StructureFigure />
+        <p className="text-sm mt-5">
+          Mo is a transition metal and S is a chalcogen. The semiconducting 1H
+          monolayer has a three-atom primitive cell: one Mo and two S atoms.
+          Each Mo has six nearest S neighbours in trigonal-prismatic
+          coordination; each S has three nearest Mo neighbours. Bonding within
+          a sheet differs from the largely van der Waals interaction between
+          adjacent sheets.
+          <ReferenceLink id="ridolfi2015" from="/why-mos2#atomic-structure" />
+        </p>
+        <p className="text-sm mt-3">
+          The Lab uses an ideal in-plane lattice constant of 3.16 Å, a Mo–S
+          bond length of approximately 2.40 Å, and sulfur planes 3.12 Å apart
+          within one sheet. Its representative 6.15 Å separation between Mo
+          planes in neighbouring sheets is a repeat distance, including the
+          inter-sheet gap. Neither distance is the nominal 0.65 nm thickness
+          convention. The ideal coordinates are cited teaching geometry, not
+          a relaxed reconstruction of a particular experimental bilayer.
+          <ReferenceLink id="ridolfi2015" from="/why-mos2#atomic-structure" />
+          <ReferenceLink id="polytypes2020" from="/why-mos2#atomic-structure" />
+        </p>
         <Link href="/lab#mos2" className="text-link mt-5 inline-block">
           Rotate and compare MoS₂ structures in 3D Lab
         </Link>
@@ -196,13 +229,27 @@ export default function Why() {
         <p className="text-sm">
           The 2H bulk stacking has trigonal-prismatic coordination within
           each sheet; an isolated sheet is often called the 1H monolayer.
-          The 1T coordination is different and must not be assigned the same
-          semiconducting band picture. Layer coupling changes band extrema,
+          The 1T structure instead has octahedral Mo coordination and must not
+          be assigned the same semiconducting band picture. 2H and 3R name
+          different bulk stacking sequences; a two-sheet registry model shows
+          their local alignment, not a complete three-sheet 3R repeat. Layer
+          coupling changes band extrema,
           while crystal phase, defects and the environment also matter.
           <ReferenceLink
             id="engineering2024"
             from="/why-mos2#layer-evidence"
           />
+        </p>
+        <p className="text-sm mt-3">
+          Changing layer number changes out-of-plane confinement, screening and
+          interlayer orbital hybridization. Different band extrema respond
+          differently, so the conventional bulk indirect gap can evolve into a
+          monolayer direct transition. Changing registry at the same layer
+          count also changes coupling and symmetry. A stacking illustration
+          therefore cannot determine a band gap without a calculation or
+          independent spectroscopy.
+          <ReferenceLink id="mak2010" from="/why-mos2#layer-evidence" />
+          <ReferenceLink id="yang-stacking2026" from="/why-mos2#layer-evidence" />
         </p>
         <LayerBandEvidence />
         <details>
@@ -224,6 +271,7 @@ export default function Why() {
           </p>
         </details>
       </section>
+      <Mos2Optics />
       <section className="section" id="materials">
         <SectionHeading
           title="Graphene vs MoS₂"
@@ -237,7 +285,7 @@ export default function Why() {
           </p>
           <MaterialExplorer
             from="/why-mos2#materials"
-            initialMaterial="graphene"
+            initialMaterial="mos2"
           />
         </div>
         <div className={styles.comparisonPart} id="electronic-properties">
@@ -307,6 +355,7 @@ export default function Why() {
           Review graphene and carbon structures →
         </Link>
       </section>
+      <Mos2Characterization />
       <details className={styles.recap} id="possibilities">
         <summary>
           <h2>Atomic thickness changes the design space</h2>

@@ -7,6 +7,7 @@ import {
   defaultParameters,
   normalizeParameters,
   parametersQuery,
+  modelConstants,
 } from "../src/lib/simulation/model.ts";
 import { parseConfigurations } from "../src/lib/simulation/configurations.ts";
 const close = (actual, expected) =>
@@ -48,6 +49,74 @@ test("mobility and geometry have expected zero-contact scaling", () => {
     currentA({ ...p, channelLength: p.channelLength * 2 }),
     currentA(p) / 2,
   );
+});
+test("cutoff and linear-to-saturation boundaries are continuous", () => {
+  const p = {
+    ...defaultParameters,
+    gateVoltage: modelConstants.thresholdV + 1,
+    contactResistance: 0,
+  };
+  const beta = (50e-4 * 0.01 * 1e-6) / 500e-9;
+  const epsilon = 1e-7;
+  const onset = currentA({ ...p, drainVoltage: 1 });
+  close(onset, beta / 2);
+  close(currentA({ ...p, drainVoltage: 1 - epsilon }), onset);
+  close(currentA({ ...p, drainVoltage: 1 + epsilon }), onset);
+  assert.equal(currentA({ ...p, gateVoltage: modelConstants.thresholdV }), 0);
+  const gateStep = 1e-4;
+  close(
+    currentA({ ...p, gateVoltage: modelConstants.thresholdV + gateStep }),
+    (beta * gateStep ** 2) / 2,
+  );
+});
+test("zero drain bias above threshold is a zero-current linear point, not cutoff", () => {
+  const charged = metrics({ ...defaultParameters, gateVoltage: 1.5, drainVoltage: 0 });
+  assert.equal(charged.currentUa, 0);
+  assert.equal(charged.region, "Linear");
+  assert.ok(charged.internalVgs > modelConstants.thresholdV);
+  assert.equal(metrics({ ...defaultParameters, gateVoltage: 0.7 }).region, "OFF");
+});
+test("series-contact solve stays physical and satisfies its channel equation across parameter corners", () => {
+  for (const gateVoltage of [0, 0.7, 0.700001, 1.5, 3])
+    for (const drainVoltage of [0, 0.001, 0.2, 2])
+      for (const channelLength of [100, 2000])
+        for (const mobility of [1, 200])
+          for (const contactResistance of [0, 0.000001, 10, 100]) {
+            const p = { gateVoltage, drainVoltage, channelLength, mobility, contactResistance };
+            const current = currentA(p), result = metrics(p);
+            const beta = (mobility * 1e-4 * 0.01 * 1e-6) / (channelLength * 1e-9);
+            const overdrive = result.internalVgs - 0.7;
+            const drain = result.internalVds;
+            const expected = overdrive <= 0 || drain <= 0 ? 0
+              : drain < overdrive ? beta * (overdrive * drain - drain ** 2 / 2)
+                : beta * overdrive ** 2 / 2;
+            assert.ok(Number.isFinite(current) && current >= 0);
+            assert.ok(result.internalVgs >= -1e-12 && result.internalVgs <= gateVoltage);
+            assert.ok(drain >= -1e-12 && drain <= drainVoltage);
+            assert.ok(Number.isFinite(result.gmUs) && result.gmUs >= 0);
+            close(current, expected);
+            if (contactResistance > 0)
+              assert.ok(current <= drainVoltage / (contactResistance * 1000) + 1e-15);
+          }
+});
+test("external transconductance agrees with the contact-feedback derivative and power balances", () => {
+  for (const p of [
+    { ...defaultParameters, gateVoltage: 2, drainVoltage: 0.2, contactResistance: 0 },
+    { ...defaultParameters, gateVoltage: 2, drainVoltage: 0.2, contactResistance: 30 },
+    { ...defaultParameters, gateVoltage: 1.5, drainVoltage: 2, contactResistance: 0 },
+    { ...defaultParameters, gateVoltage: 1.5, drainVoltage: 2, contactResistance: 50 },
+  ]) {
+    const i = currentA(p), result = metrics(p), r = p.contactResistance * 1000;
+    const beta = (p.mobility * 1e-4 * 0.01 * 1e-6) / (p.channelLength * 1e-9);
+    const overdrive = result.internalVgs - 0.7;
+    const saturated = result.internalVds >= overdrive;
+    const intrinsicGm = beta * (saturated ? overdrive : result.internalVds);
+    const intrinsicGd = saturated ? 0 : beta * (overdrive - result.internalVds);
+    const expectedGm = intrinsicGm / (1 + r * intrinsicGm / 2 + r * intrinsicGd);
+    assert.ok(Math.abs(result.gmUs * 1e-6 - expectedGm) <= expectedGm * 2e-5 + 1e-12);
+    close(result.powerUw * 1e-6, i * p.drainVoltage);
+    close(result.powerUw * 1e-6, i * result.internalVds + i ** 2 * r);
+  }
 });
 test("URL state round-trips; malformed and out-of-range inputs remain bounded", () => {
   assert.deepEqual(

@@ -6,7 +6,7 @@ export const knowledge = [
       "A nanometre is one billionth of a metre. Nanotechnology often concerns dimensions around 1–100 nm, where surfaces and quantum behaviour can become especially important.",
     connectionTitle: "Why does size change behaviour?",
     connection:
-      "Smaller particles expose more surface per volume. For an atomically thin sheet, exposed surfaces and interfaces are especially important; the spherical model below is a geometric analogy.",
+      "Smaller particles expose more surface per volume. For atomically thin MoS₂, exposed surfaces and interfaces are especially important; the spherical model below is a geometric analogy.",
     href: "/challenges#interfaces",
     link: "Explore interfaces",
     reference: "assets",
@@ -55,8 +55,8 @@ export const knowledge = [
     connectionTitle: "Choose evidence for your question",
     connection:
       "AFM can help identify thin flakes; TEM can investigate atomic structure. Optical spectroscopy and electrical measurements provide complementary evidence.",
-    href: "/research",
-    link: "See characterization in research",
+    href: "/why-mos2#characterization",
+    link: "Study MoS₂ characterization",
     reference: "mak2010",
   },
   {

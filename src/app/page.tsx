@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: { absolute: "NanoLab — Explore Nanomaterials" },
   description:
-    "Learn nanomaterial principles, inspect atomic structures and devices in the 3D Lab, and test transistor parameters with numerical simulations.",
+    "Explore MoS₂ as NanoLab’s primary case study: atomic structure, optical properties, fabrication, devices, characterization and nanoscale applications.",
 };
 export const viewport: Viewport = { themeColor: "#0c1524" };
 const delay = (seconds: number) => ({ "--d": seconds + "s" }) as CSSProperties;
@@ -37,9 +37,10 @@ export default function Home() {
               className={styles.lede + " appear appear--soft"}
               style={{ ...delay(0.46), animationDuration: "1.25s" }}
             >
-              Learn the materials, inspect structures in 3D and test transistor
-              parameters. Explore the research evidence and the engineering
-              limits behind each result.
+              MoS₂ is our primary case study. Explore why atomic structure and a
+              finite band gap matter, inspect devices in 3D, and connect
+              fabrication and measurements with teaching simulations, nanoscale
+              applications and real research.
             </p>
             <div className={styles.actions}>
               <Link

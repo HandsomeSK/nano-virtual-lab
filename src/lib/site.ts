@@ -8,7 +8,7 @@ export const site = {
   subtitle: "Beyond the visible",
   identity: "Nanotechnology Virtual Laboratory",
   description:
-    "Learn nanomaterial principles, explore three scientific models in one 3D Lab, and test transistor parameters with numerical simulations and verified research.",
+    "Study MoS₂ through atomic structure, optical properties, fabrication and devices. Explore three scientific models, teaching calculations and published experimental evidence.",
 };
 export const navigation = [
   { href: "/", title: "Home" },

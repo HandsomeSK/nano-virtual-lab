@@ -12,10 +12,11 @@ import {
 import { ReferenceLink } from "@/components/reference-link";
 import { ScientificFigure } from "@/components/scientific-figure";
 import styles from "./device.module.css";
+import { Mos2Fabrication } from "@/components/science/mos2-fabrication";
 export const metadata: Metadata = {
   title: "MoS₂ Transistor Principles",
   description:
-    "Read a labeled MoS₂ transistor cross-section, understand its gate and contacts, and compare the teaching structure with a published experimental device.",
+    "Connect MoS₂ transistor physics with exfoliation, CVD, transfer, nanofabrication and ALD; distinguish a teaching structure from measured devices.",
 };
 export default function Device() {
   return (
@@ -28,6 +29,7 @@ export default function Device() {
             { id: "channel-choice", label: "Why a MoS₂ channel?" },
             { id: "interactive-device", label: "How the device fits together" },
             { id: "working-principle", label: "How the transistor works" },
+            { id: "fabrication", label: "Fabrication & processing" },
             { id: "experimental-device", label: "A published experimental device" },
           ],
         },
@@ -116,6 +118,7 @@ export default function Device() {
           </div>
         </details>
       </section>
+      <Mos2Fabrication />
       <section className={`section ${styles.experiment}`} id="experimental-device">
         <SectionHeading
           title="From the Schematic to an Experimental Device"

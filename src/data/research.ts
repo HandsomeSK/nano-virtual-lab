@@ -238,7 +238,7 @@ export const studies: Study[] = [
     question:
       "What do full bias-dependent measurements and device statistics establish about the proposed scaling approach?",
     boundary:
-      "Early version checked 12 October 2026; final figures and production metadata can change. The headline comparison with scaled silicon is not a claim of sub-60 mV/dec room-temperature switching. Numerical performance is not imported into this model.",
+      "Publisher-labelled early version rechecked 21 October 2026; final figures and production metadata can change. The public abstract does not give all bias, temperature or extraction conditions. Its silicon comparison does not establish sub-60 mV/dec room-temperature switching; no performance values calibrate this model.",
     whyMatters:
       "Links material thickness to device electrostatics while requiring geometry, bias and subthreshold extraction conditions to interpret scaling claims.",
     concept: "/why-mos2#layer-evidence",
@@ -253,7 +253,7 @@ export const studies: Study[] = [
     question:
       "How can an oxide grow continuously on a chemically inert basal surface?",
     boundary:
-      "EOT is capacitance-equivalent; the conceptual diagrams do not reproduce a fabricated device or measured current curve.",
+      "The minimum EOT comes from graphene dielectric test structures; separate MoS₂ devices test transistor operation. The schematics are not measured I–V data.",
     whyMatters: "Connects interface chemistry with gate-stack engineering.",
     concept: "/discoveries/mos2-interface-breakthrough",
     conceptLabel: "Explore the interface",

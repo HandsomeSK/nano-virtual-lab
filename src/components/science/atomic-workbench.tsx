@@ -27,9 +27,9 @@ const descriptions: Record<AtomKind, string> = {
   molybdenum:
     "Each interior molybdenum sits between six sulfur neighbours in a trigonal prism.",
   "sulfur-top":
-    "The upper sulfur plane forms the top face of the S–Mo–S sheet.",
+    "Each interior sulfur has three nearest molybdenum neighbours. The upper sulfur plane forms the top face of the same S–Mo–S sheet.",
   "sulfur-bottom":
-    "The lower sulfur plane completes the same monolayer, beneath the molybdenum plane.",
+    "Each interior sulfur has three nearest molybdenum neighbours. The lower sulfur plane completes the same monolayer beneath the molybdenum plane.",
 };
 export function AtomicWorkbench({
   initialMaterial = "graphene",
@@ -404,10 +404,28 @@ export function AtomicWorkbench({
             </div>
             <div>
               <dt>
-                {material === "graphene" ? "C–C bond" : "Mo to S-plane height"}
+                {material === "graphene" ? "C–C bond" : "Nearest Mo–S bond"}
               </dt>
-              <dd>{material === "graphene" ? "≈ 1.42" : "1.56"} Å</dd>
+              <dd>{material === "graphene" ? "≈ 1.42" : "≈ 2.40"} Å</dd>
             </div>
+            {material === "mos2" ? (
+              <>
+                <div>
+                  <dt>Unexpanded S-plane span</dt>
+                  <dd>3.12 Å</dd>
+                </div>
+                {layers === 2 ? (
+                  <div>
+                    <dt>Adjacent Mo-plane spacing</dt>
+                    <dd>
+                      {options.separation === 0
+                        ? "6.15 Å"
+                        : "Expanded for inspection"}
+                    </dd>
+                  </div>
+                ) : null}
+              </>
+            ) : null}
             <div>
               <dt>Primitive cell</dt>
               <dd>
@@ -462,7 +480,12 @@ export function AtomicWorkbench({
                 <p>
                   Bilayer adds a second S–Mo–S sheet. The 2H registry alternates
                   sheet orientation; 3R preserves orientation with an in-plane
-                  shift. These controls show ideal registry, not a relaxed
+                  shift. The bulk polytypes repeat after two and three sheets,
+                  respectively; this two-sheet view shows local registry, not a
+                  complete bulk 3R repeat. Both retain trigonal-prismatic Mo
+                  coordination. An ideal 1T sheet instead has octahedral
+                  coordination and is not represented by these controls.
+                  These controls show ideal registry, not a relaxed
                   reconstruction. Separate S–Mo–S planes and Expand sheet spacing
                   exaggerate distances for inspection. Between sheets, van der
                   Waals interactions matter; no interlayer covalent bonds are
@@ -478,9 +501,18 @@ export function AtomicWorkbench({
                   <ReferenceLink id="ridolfi2015" from={from} />
                 </p>
                 <p>
-                  Representative sheet-to-sheet spacing is about 6.15 Å; this is
-                  the repeat distance, not the empty van der Waals gap. The 3R
-                  illustration holds spacing fixed to isolate registry and does
+                  Adjacent Mo planes are 6.15 Å apart in the representative
+                  unexpanded bilayer. This repeat distance includes one sheet
+                  and the intersheet gap; it is not the empty van der Waals gap.
+                  The approximately 0.65 nm (6.5 Å) nominal layer thickness
+                  quoted for transistor channels is not the 3.12 Å outer S-plane
+                  separation or an exact bulk repeat. An AFM apparent step height
+                  also depends on the sample and
+                  measurement conditions.
+                  <ReferenceLink id="radis2011" from={from} />
+                </p>
+                <p>
+                  The 3R illustration holds spacing fixed to isolate registry and does
                   not reconstruct the engineered 2026 bilayer. Sphere radii,
                   expanded distances and assembly motion are illustrative; the
                   finite edges are unrelaxed. Electronic bands, excitons and

@@ -146,7 +146,7 @@ export function metrics(input: Parameters) {
     currentUa: current * 1e6,
     gmUs: gm * 1e6,
     powerUw: current * p.drainVoltage * 1e6,
-    region: current === 0 ? "OFF" : vds >= vov ? "Saturation" : "Linear",
+    region: vov <= 0 ? "OFF" : vds >= vov ? "Saturation" : "Linear",
     internalVgs: p.gateVoltage - (current * r) / 2,
     internalVds: vds,
   };

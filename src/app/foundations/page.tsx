@@ -12,7 +12,7 @@ export default function Foundations() {
   return (
     <PageShell
       title="Foundations"
-      intro="Begin with nanomaterials and their size-dependent properties, then explore energy bands, graphene and the path from two-dimensional materials to transistors. Investigate six connected scientific ideas."
+      intro="Build the foundations for studying MoS₂: nanoscale surfaces, energy bands, complementary measurements and transistor charge control. Graphene supplies a useful structural and electronic comparison."
       contents={[
         {
           items: knowledge.map(({ id, title }, index) => ({
@@ -66,7 +66,18 @@ export default function Foundations() {
             </>
           ) : null}
           {item.id === "characterization" ? (
-            <ScientificFigure id="graphene-hrtem" />
+            <>
+              <p className="text-sm mt-4">
+                Use MoS₂ to combine Raman, AFM, TEM and photoluminescence rather
+                than asking one image to establish every property. The carbon
+                micrograph below remains a contrasting example, not a MoS₂
+                specimen.
+              </p>
+              <Link href="/why-mos2#characterization" className="text-link mt-3 inline-block">
+                Study MoS₂ characterization methods and their limits
+              </Link>
+              <ScientificFigure id="graphene-hrtem" />
+            </>
           ) : null}
           {item.id === "transistors" ? (
             <p className="text-sm mt-4">
