@@ -1,14 +1,14 @@
 // Editorial source cutoff, not an assertion that this is every/latest paper.
-export const researchCutoff = "2026-10-13";
+export const researchCutoff = "2026-10-21";
 export const interfaceMeasurement = {
   reference: "wong2026",
   value: 0.6,
   uncertainty: 0.1,
   unit: "nm",
   name: "Equivalent oxide thickness",
-  locator: "Primary paper abstract; hybrid HfO₂ / carbon-dot dielectric",
+  locator: "Paper abstract and Fig. 2; double-gate graphene test structures",
   context:
-    "Capacitance-equivalent SiO₂ thickness. The ± value is reproduced as reported, without assigning a statistical interpretation.",
+    "Graphene test-structure capacitance-equivalent SiO₂ thickness. The reported ± interval is not assigned a statistical meaning; this is not a MoS₂ layer thickness.",
 } as const;
 export const discoveryThemes = [
   {
@@ -21,7 +21,7 @@ export const discoveryThemes = [
     question:
       "How do you grow a continuous oxide on a surface with few dangling bonds?",
     finding:
-      "An insulating carbon-dot assembly supplies nucleation sites for ultrathin HfO₂. The reported hybrid dielectric reaches 0.6 ± 0.1 nm EOT.",
+      "Carbon-dot assembly assists HfO₂ growth on MoS₂; graphene test structures give the reported 0.6 ± 0.1 nm hybrid EOT.",
     meaning:
       "The relevant object is the complete gate stack: semiconductor, interface and dielectric.",
     limit:
@@ -57,7 +57,7 @@ export const discoveryThemes = [
     question:
       "Where does current actually transfer between a metal contact and the channel?",
     finding:
-      "Operando cross-sectional STM/STS probes carrier transfer in bismuth-contacted monolayer MoS₂, reporting a transfer length near 2.0 nm.",
+      "Room-temperature operando cross-sectional STM/STS probes carrier transfer in bismuth-contacted monolayer MoS₂, reporting a transfer length near 2.0 nm.",
     meaning:
       "A geometric electrode boundary does not describe the full injection region.",
     limit:
@@ -76,11 +76,11 @@ export const discoveryThemes = [
     question:
       "What is getting smaller: the gate, the channel or the circuit pitch?",
     finding:
-      "One study demonstrates sub-5 nm physical channels with 88 mV/dec switching; another uses a graphene sidewall for an ångström-scale gate and a separate nanometre-scale channel.",
+      "An accepted early-version abstract reports 88 mV/dec for sub-5 nm channels; a separate study combines a sub-1 nm graphene gate with a 10 nm channel.",
     meaning:
       "Gate geometry, drain fields and fabrication alignment must work together.",
     limit:
-      "88 mV/dec is above the ideal room-temperature 60 mV/dec thermal limit. An ångström gate does not imply an ångström channel.",
+      "The early abstract does not provide all bias, temperature and extraction conditions. Its 88 mV/dec is not below the ideal room-temperature 60 mV/dec thermionic limit; an ångström gate is not an ångström channel.",
     href: "/research?study=lin2026#catalogue",
     action: "Compare the scaling studies",
   },

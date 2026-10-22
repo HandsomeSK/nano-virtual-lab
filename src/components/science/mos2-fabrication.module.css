@@ -1,0 +1,11 @@
+.stages {
+  display: grid;
+  gap: 12px;
+  margin-block: 20px;
+  padding-inline-start: 24px;
+}
+
+.stages li {
+  padding-inline-start: 4px;
+  overflow-wrap: anywhere;
+}

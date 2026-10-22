@@ -1,3 +1,5 @@
+> Historical release report. The current scientific revision and validation are recorded in [the October 2026 audit](scientific-audit-2026-10-21.md); the region-readout correction and current source ledger supersede older counts and unchanged-model statements below.
+
 # Scientific evidence and image decisions
 
 Source review date: **12 October 2026**. This ledger complements [the baseline inventory](content-audit.md), the scientific reference list, and the public image registry on About & References.

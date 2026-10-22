@@ -167,13 +167,15 @@ export function Simulator({
           <details className="instrument-state mt-4">
             <summary>
               Device State Visualization ·{" "}
-              {currentA(parameters) > 0 ? "ON" : "OFF"}
+              {currentA(parameters) > 0 ? "Current flowing" : "Zero current"}
             </summary>
             <div className="device-state">
               <DeviceSchematic on={currentA(parameters) > 0} />
               <p className="text-sm">
-                Bias-point indication in the idealized model. A real OFF state
-                may still have leakage.
+                Conceptual current-flow indication, not a charge-density
+                calculation. Zero drain bias gives no net current even when
+                the gate induces channel charge. A real OFF state can still
+                have leakage.
               </p>
             </div>
           </details>
@@ -330,10 +332,13 @@ export function Simulator({
             <p className="formula" id="model">
               β = μ Cg W/L
             </p>
-            <p className="formula">I = β[(Vgs − Vt)Vds − Vds²/2]</p>
+            <p className="formula">I_D = β[(VGS,i − VT)VDS,i − VDS,i²/2]</p>
             <p className="text-sm">
-              Linear region: 0 ≤ Vds &lt; Vgs − Vt. In saturation: I = β(Vgs −
-              Vt)²/2. In cutoff: I = 0.{" "}
+              The subscript i denotes the internal channel voltage after the
+              contact drops. For positive overdrive, the linear region has
+              0 ≤ VDS,i &lt; VGS,i − VT; saturation has
+              VDS,i ≥ VGS,i − VT and I_D = β(VGS,i − VT)²/2. At or below
+              threshold the model assumes I_D = 0.{" "}
               <ReferenceLink id="mosfet" from="/simulator#model" />
             </p>
             <details>
@@ -345,6 +350,15 @@ export function Simulator({
                 Rc/2; internal Vds = Vd − I Rc. A bisection solve makes I
                 consistent with these internal voltages.
               </p>
+              <p className="text-sm mt-3">
+                β has units A/V². The transconductance readout is the
+                derivative of external drain current with respect to external
+                gate voltage at fixed external drain bias. It is estimated
+                using a ±1 mV finite difference, one-sided at the gate-control
+                bounds. The model computes drain-supply electrical power as
+                P = I_D VDS,external and includes both channel and contact
+                dissipation; it does not calculate temperature.
+              </p>
             </details>
           </details>
         </div>
@@ -353,10 +367,12 @@ export function Simulator({
             <summary>Assumptions & Limitations</summary>
             <p className="text-sm">
               Long-channel, quasi-static n-channel educational model with
-              constant mobility and ohmic series contacts. No Schottky barriers,
-              subthreshold transport, tunnelling, velocity saturation, quantum
-              capacitance, self-heating or traps. It does not predict
-              experimental MoS₂ performance.
+              constant mobility and ohmic series contacts. No quantum or
+              ballistic transport, Schottky-barrier injection, trap dynamics,
+              subthreshold or short-channel leakage, velocity saturation,
+              quantum capacitance or self-heating. No channel-length
+              modulation is included. These curves use assumed parameters,
+              without calibration to an experimental MoS₂ device.
             </p>
             <p className="text-sm mt-3">
               No ON/OFF ratio is reported: zero model cutoff current is an

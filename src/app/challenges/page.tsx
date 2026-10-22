@@ -18,7 +18,7 @@ export default function Page() {
   return (
     <PageShell
       title="Engineering Challenges"
-      intro="An atomically thin channel is only one part of a reliable transistor. Explore the interfaces, electrostatics and processes that shape a device."
+      intro="MoS₂’s atomically thin channel is only one part of a reliable transistor. Explore the interfaces, electrostatics, heat paths and fabrication choices that shape a device."
       contents={[
         {
           title: "Device physics",
@@ -298,6 +298,13 @@ export default function Page() {
               carrier types. Controlled doping helped match their on-currents:
               changing carrier polarity alone does not finish the circuit.
               <ReferenceLink id="pan2024" from="/challenges#complementary-logic" />
+            </p>
+            <p className="text-sm mt-3">
+              For a MoS₂ circuit, the transferable lesson is to engineer both
+              injection polarities and evaluate the complete pair. This MoTe₂
+              result supplies a comparison, not a recipe or a measured p-type
+              performance claim for MoS₂.
+              <ReferenceLink id="engineering2024" from="/challenges#complementary-logic" />
             </p>
             <p className="challenge-source-note">
               The table shows ideal stable logic levels. Real switching passes

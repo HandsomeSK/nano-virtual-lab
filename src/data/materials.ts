@@ -13,13 +13,13 @@ export const materials: Record<
 > = {
   mos2: {
     name: "MoS₂",
-    structure: "Semiconducting 2H phase; S–Mo–S monolayer",
-    band: "Direct-gap in monolayer; indirect in bulk",
-    gap: "Approximately 1.8 eV optical-gap context",
+    structure: "1H S–Mo–S monolayer; trigonal-prismatic Mo coordination",
+    band: "Direct-gap monolayer; conventional 2H bulk has an indirect gap",
+    gap: "Reported monolayer optical response near 1.8–1.9 eV; onset and PL peak differ, and neither is the quasiparticle gap",
     strength: "An ultrathin channel with a finite gap; promising gate control.",
     limitation:
       "Contacts, defects and dielectric integration remain device-level challenges.",
-    reference: "radis2011",
+    reference: "mak2010",
   },
   graphene: {
     name: "Graphene",

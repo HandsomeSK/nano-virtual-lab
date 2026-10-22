@@ -25,7 +25,7 @@ export default async function Page({
   return (
     <PageShell
       title="About & References"
-      intro="An independent virtual laboratory for exploring nanomaterials, understanding devices and reading the evidence behind them."
+      intro="An independent virtual laboratory with MoS₂ as its primary case study: connect materials, preparation, measurements, devices and the evidence behind them."
       contents={[
         {
           title: "About the laboratory",
@@ -62,8 +62,9 @@ export default async function Page({
           <div>
             <p>
               NanoLab is a public Nanotechnology Virtual Laboratory. Its focus
-              is two-dimensional nanomaterials, represented by graphene and
-              MoS₂, and their role in next-generation semiconductor transistors.
+              is MoS₂: a layered semiconductor linking nanomaterial structure with
+              optical properties, fabrication, characterization and devices.
+              Graphene and silicon provide scientific comparisons.
             </p>
             <p className="mt-4">
               Explore the nanoscale and energy bands, discover graphene’s
@@ -78,11 +79,11 @@ export default async function Page({
             <dl>
               <div>
                 <dt>Materials</dt>
-                <dd>Graphene, MoS₂ & silicon</dd>
+                <dd>MoS₂; graphene & silicon comparisons</dd>
               </div>
               <div>
                 <dt>Explore</dt>
-                <dd>Atomic structure, transport & device engineering</dd>
+                <dd>Structure, optical response, processing & devices</dd>
               </div>
               <div>
                 <dt>Experiment</dt>

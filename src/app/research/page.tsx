@@ -10,6 +10,7 @@ import { researchCategories, studies } from "@/data/research";
 import { references } from "@/data/references";
 import { ReferenceLink } from "@/components/reference-link";
 import { queryValue, type Query } from "@/lib/site";
+import { Mos2Applications } from "@/components/research/mos2-applications";
 import { InterfaceFeature } from "@/components/research/interface-feature";
 import { DiscoverySynthesis } from "@/components/research/discovery-synthesis";
 import { ResearchSystemMap } from "@/components/research/research-system-map";
@@ -20,7 +21,7 @@ import {
 export const metadata: Metadata = {
   title: "Research Knowledge Hub",
   description:
-    "Connect verified MoS₂ research across interfaces, stacking, contacts, scaling, deformable devices and circuit integration.",
+    "Connect MoS₂ evidence across device engineering, photodetection, nanosensing and electrocatalysis; distinguish mechanisms, measurements and limits.",
 };
 const contentsGroups: PageContentsGroup[] = [
   {
@@ -29,12 +30,21 @@ const contentsGroups: PageContentsGroup[] = [
       { id: "research-overview", label: "Research framework" },
       { id: "research-directions", label: "Six research directions" },
       { id: "research-connections", label: "How the directions connect" },
-      { id: "featured-discovery", label: "Featured discovery" },
+    ],
+  },
+  {
+    title: "MoS₂ applications",
+    items: [
+      { id: "applications", label: "Nanoscale properties in use" },
+      { id: "application-photodetectors", label: "Photodetectors" },
+      { id: "application-sensors", label: "Nanosensors" },
+      { id: "application-catalysis", label: "Electrocatalysis" },
     ],
   },
   {
     title: "Studies & outlook",
     items: [
+      { id: "featured-discovery", label: "Featured discovery" },
       { id: "timeline", label: "Research timeline" },
       { id: "studies", label: "Studies by category" },
       { id: "institutional-research", label: "Industry research" },
@@ -115,7 +125,9 @@ export default async function Page({
           <p className="research-editorial-note">
             NanoLab synthesis, supported by the numbered sources. Reported results
             remain specific to their devices and methods. Selected research
-            reviewed through 13 October 2026.
+            reviewed through 21 October 2026. Abstract-only records are kept
+            distinct from studies whose methods and figures were accessible;
+            this selection is not a complete survey of the literature.
           </p>
         </section>
         <section className="section" id="research-directions">
@@ -165,6 +177,7 @@ export default async function Page({
             />
           </p>
         </section>
+        <Mos2Applications />
         <section className="section" id="research-evidence">
           <SectionHeading
             title="Research Evidence"

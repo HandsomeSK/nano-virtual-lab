@@ -22,7 +22,7 @@ export function InterfaceFeature({
             0.6 ± 0.1 <small>nm</small>
           </strong>
           <span>
-            Reported equivalent oxide thickness
+            Lowest EOT in graphene test structures
             <ReferenceLink id="wong2026" from={from} />
           </span>
         </p>

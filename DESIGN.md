@@ -132,3 +132,10 @@ Lab defers Three.js/Anime.js until a stage approaches view. A viewer mounts with
 - Do not reconstruct unavailable experimental coordinates, invent curves or use generated images as evidence.
 - Research cutoff is 13 October 2026, not a claim to list every latest paper.
 - Publish checked updates through main to the original production URL under AGENTS.md standing authorization.
+
+
+## Scientific content revision — 21–22 October 2026
+
+MoS₂ is the primary case study; graphene and silicon provide comparisons. Existing visual tokens, typography, homepage particle/motif/title rendering, five navigation categories and instrument ownership remain unchanged. Server-rendered editorial modules extend the existing materials page with excitons and Raman/AFM/TEM/PL characterization, the device page with a coherent fabrication/ALD sequence, and Research with mechanism/evidence/limits for photodetectors, sensors and HER. Their local two-column layouts stack on smaller screens; only an original, labelled excitation-energy schematic is added. No new top-level page, experimental curve, large 3D scene or parallel simulator is introduced. All new sections are reachable through the shared left directory.
+
+Scientific dimensions distinguish the nominal thickness convention, internal S-plane separation and inter-sheet repeat; ideal 1H/2H/3R geometry remains fixed and cited. Optical evidence names the observation: ≈1.90 eV PL and ≈1.8 eV photoconductivity onset under the reported conditions. The interface feature identifies the lowest EOT as a graphene capacitance-test result, separate from MoS₂ transistor measurements. Bibliographic notes record accessible evidence and corrections rather than implying unrestricted full-text access.

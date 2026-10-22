@@ -1,0 +1,74 @@
+.methods {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.method {
+  min-width: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.method h3 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.findings {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+.findings dt {
+  color: var(--primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.findings dd {
+  margin: 0.3rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.optics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.optics > div,
+.energyFigure {
+  min-width: 0;
+}
+
+.energyFigure {
+  margin: 0;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: 12px;
+}
+
+.energyFigure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.energyFigure figcaption {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .methods,
+  .optics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

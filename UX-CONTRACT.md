@@ -75,3 +75,13 @@ The owner has authorized checked updates to be published to the original product
 ## Route document title policy
 
 Existing Next.js metadata identifies each route and NanoLab. Research now identifies itself as the Research Knowledge Hub. Error and not-found boundaries retain recovery navigation. No access or account model changes are part of this task.
+
+
+## MoS₂ scientific revision — October 2026
+
+The canonical chapters now include `/why-mos2#excitons` and `#characterization` with `#raman`, `#afm`, `#tem`, `#pl`; `/device#fabrication`; and `/research#applications` with three application targets. Existing IDs and reading flows remain available. New content uses the existing native directory, source lookup and contextual links; material selection starts at MoS₂ on its material page and still supports graphene/silicon.
+
+The current solver remains unchanged. Operating region uses internal gate overdrive and drain voltage: an above-threshold channel at zero drain bias is linear with zero current, not cutoff. The simulator labels current flow separately from conceptual channel availability. Symmetric contact resistance, parameter bounds, fixed capacitance/threshold, curve generation, numerical transconductance, save schemas and A/B journeys retain their previous contracts. Conceptual illustrations, calculated curves and source-labelled experimental figures remain distinct.
+
+
+When a selected desktop Contents drawer retracts, AnchorNavigation aligns the same destination once after reading-width reflow. The correction neither adds history nor changes focus. Manual wheel/touch scrolling, reading keys, an outside pointer action, another navigation or browser restoration cancels/guards the correction, preserving user reading intent. The drawer component itself still owns no history or scroll calls.

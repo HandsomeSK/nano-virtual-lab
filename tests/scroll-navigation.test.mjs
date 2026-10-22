@@ -308,3 +308,30 @@ test("a scheduled anchor scroll is cancelled by a newer destination or component
   page.flush();
   assert.equal(page.scrolls.length, 0);
 });
+
+test("drawer reflow aligns the current section without another history entry or changing restored positions", () => {
+  const page = browser("/why-mos2");
+  const target = new page.Element();
+  page.targets.set("excitons", target);
+  page.activate("#excitons");
+  page.flush();
+  const destination = new URL(page.win.location.href);
+  let refocused = false;
+  target.focus = () => { refocused = true; };
+  page.manager.realign(destination);
+  page.flush();
+  assert.equal(page.scrolls.length, 2);
+  assert.equal(page.scrolls[1].target, target);
+  assert.equal(page.scrolls[1].behavior, "instant");
+  assert.equal(page.historyEntries.length, 1);
+  assert.equal(page.historyReplacements.length, 0);
+  assert.equal(refocused, false, "collapse correction must not steal Escape/trigger focus");
+  page.manager.restore();
+  page.manager.realign(destination);
+  page.flush();
+  assert.equal(page.scrolls.length, 2, "browser-restored reading position is preserved");
+  page.win.location = new URL("/device", origin);
+  page.manager.realign(destination);
+  page.flush();
+  assert.equal(page.scrolls.length, 2, "an old chapter cannot move another route");
+});

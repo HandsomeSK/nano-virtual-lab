@@ -20,7 +20,7 @@ export default async function SimulatorPage({
   return (
     <PageShell
       title="Transistor Simulator"
-      intro="Test how bias, channel geometry and contacts change a calculated I–V curve. Change one assumption, inspect the response, then compare two scenarios."
+      intro="Explore a classical transistor calculation in a MoS₂ context. Test bias, channel geometry and contacts, inspect the response, then compare two assumed scenarios."
       contents={[
         {
           title: "Run the experiment",
@@ -85,13 +85,25 @@ export default async function SimulatorPage({
             <p className="text-sm mt-3">
               Zero drain bias or non-positive overdrive produces zero current.
               This assumed cutoff excludes subthreshold leakage, so no
-              experimental ON/OFF ratio can be inferred. The model also omits
-              traps, Schottky injection, quantum capacitance, velocity
-              saturation, self-heating and short-channel
-              tunnelling/electrostatics.
+              experimental ON/OFF ratio or subthreshold swing can be inferred.
+              The model omits quantum and ballistic transport,
+              Schottky-barrier injection, trap dynamics, short-channel
+              leakage/electrostatics, quantum capacitance, velocity saturation
+              and self-heating. A shorter assumed channel therefore does not
+              turn this calculation into a nanoscale transport solver.
             </p>
           </div>
         </div>
+        <p className="text-sm mt-4">
+          Real threshold voltage depends on the gate stack, work functions,
+          charge environment and extraction method. Below threshold, real
+          channels can carry thermally activated or leakage current. The fixed
+          threshold and abrupt cutoff here deliberately leave out those
+          mechanisms; a transfer curve from this model cannot establish the
+          leakage or switching limits of a fabricated MoS₂ transistor.
+          <ReferenceLink id="mosfet" from="/simulator#model-assumptions" />
+          <ReferenceLink id="benchmark2022" from="/simulator#model-assumptions" />
+        </p>
       </section>
       <section
         className="section simulator-evidence"
@@ -103,12 +115,13 @@ export default async function SimulatorPage({
         />
         <ScientificFigure id="shimazu-hysteresis" />
         <p>
-          Shimazu et al. found different forward and reverse transfer curves
-          under different gas and humidity conditions. Charge adsorption and
-          trapping can change the effective threshold as time passes. In
-          contrast, the teaching model is memoryless: the same inputs always
-          give the same current. Contact voltage drops are included; trap
-          occupation and hysteresis are not.
+          Shimazu et al. measured a 6 nm-thick, back-gated MoS₂ FET with Ti/Au
+          contacts at room temperature. Figure 1 uses VDS = 0.1 V and roughly
+          1 V/s gate sweeps. Forward and reverse transfer curves differ with gas
+          and humidity; the authors identify adsorbed water as the main source
+          of charge-trapping hysteresis in those devices. The teaching model
+          is memoryless: identical inputs give identical current, without
+          adsorption, trap occupation or sweep-rate dependence.
           <ReferenceLink
             id="shimazu2016"
             from="/simulator#experimental-evidence"

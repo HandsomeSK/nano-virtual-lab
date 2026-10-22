@@ -4,14 +4,14 @@ import { referenceResources } from "../src/lib/reference-resources.ts";
 import { references } from "../src/data/references.ts";
 
 test("publication access merges DOI and publisher article while retaining distinct resources", () => {
-  for (const id of ["radis2011", "neto2009", "polytypes2020"]) {
+  for (const id of ["radis2011", "neto2009"]) {
     const reference = references.find((item) => item.id === id);
     assert.deepEqual(referenceResources(reference), [{
       href: "https://doi.org/" + reference.doi,
       label: "Read publication",
     }]);
   }
-  for (const id of ["mak2010", "desai2016", "novoselov2004", "ridolfi2015"]) {
+  for (const id of ["mak2010", "desai2016", "novoselov2004", "ridolfi2015", "polytypes2020"]) {
     const reference = references.find((item) => item.id === id);
     const resources = referenceResources(reference);
     assert.equal(resources.length, 2, id);

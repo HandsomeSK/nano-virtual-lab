@@ -2,15 +2,15 @@ import { metrics, parameterControls, type Parameters } from "./model.ts";
 
 const explanations: Record<keyof Parameters, string> = {
   gateVoltage:
-    "Gate bias changes channel overdrive relative to the fixed 0.7 V threshold.",
+    "Gate bias changes channel overdrive and induced channel charge relative to the fixed 0.7 V threshold. A real device's threshold also depends on its gate stack, charge environment and measurement history.",
   drainVoltage:
     "Drain bias drives current; in model saturation, increasing it can leave the current unchanged.",
   channelLength:
-    "Here, channel length changes the W/L factor. Short-channel effects are outside this model.",
+    "At fixed width, gate charge and other assumptions, a shorter channel raises β through W/L. This classical trend cannot be extrapolated to atomic channels: ballistic or quantum transport and short-channel leakage are outside this model.",
   mobility:
-    "Mobility describes carrier response to an electric field. It does not create a band gap or guarantee a low OFF current.",
+    "At fixed gate charge and internal bias, larger assumed mobility raises β and the calculated current. Contact voltage drops can limit that gain. Mobility does not create a band gap or guarantee a low OFF current.",
   contactResistance:
-    "Ohmic contacts can lower the internal gate and drain biases through their voltage drops.",
+    "The total ohmic series resistance lowers both internal gate overdrive and drain bias when current flows. At zero current there is no contact voltage drop; bias-dependent Schottky injection is not calculated.",
 };
 
 export function parameterInsight(

@@ -103,6 +103,35 @@ test("bilayer registry changes orientation while preserving sheet coordination a
   assert.ok(mo(twoH, 1)[0] - mo(twoH, 0)[0] < 0);
   assert.ok(mo(threeR, 1)[0] - mo(threeR, 0)[0] > 0);
 });
+test("MoS₂ dimensions distinguish internal S-plane span, sheet repeat and nearest-neighbour coordination", () => {
+  for (const layers of [1, 2]) {
+    for (const stacking of ["2H", "3R"]) {
+      const { atoms, bonds, latticeConstant } = createAtomicStructure("mos2", layers, stacking);
+      assert.equal(latticeConstant, 3.16);
+      for (let layer = 0; layer < layers; layer++) {
+        const basis = atoms
+          .map((atom, index) => ({ atom, index }))
+          .filter(({ atom }) => atom.layer === layer && atom.cell.every((v) => v === 0));
+        assert.equal(basis.length, 3);
+        const mo = basis.find(({ atom }) => atom.element === "Mo").atom;
+        const top = basis.find(({ atom }) => atom.kind === "sulfur-top").atom;
+        const bottom = basis.find(({ atom }) => atom.kind === "sulfur-bottom").atom;
+        assert.ok(Math.abs(top.position[1] - bottom.position[1] - 3.12) < 1e-12);
+        assert.ok(Math.abs(top.position[1] - mo.position[1] - 1.56) < 1e-12);
+        assert.ok(Math.abs(distance(top.position, mo.position) - 2.40) < 0.005);
+        for (const { atom, index } of basis) {
+          const neighbours = bonds.filter(({ a, b }) => a === index || b === index);
+          assert.equal(neighbours.length, atom.element === "Mo" ? 6 : 3);
+        }
+      }
+      if (layers === 2) {
+        const lowerTopS = atoms.find((a) => a.layer === 0 && a.kind === "sulfur-top");
+        const upperBottomS = atoms.find((a) => a.layer === 1 && a.kind === "sulfur-bottom");
+        assert.ok(Math.abs(upperBottomS.position[1] - lowerTopS.position[1] - (6.15 - 3.12)) < 1e-12);
+      }
+    }
+  }
+});
 test("2H places upper sulfur above lower molybdenum, while 3R places it above a molybdenum hollow site", () => {
   const sameProjection = (a, b) =>
     Math.hypot(a.position[0] - b.position[0], a.position[2] - b.position[2]) <
@@ -145,7 +174,7 @@ test("featured evidence resolves primary citations and keeps EOT independent of 
     interfaceMeasurement.uncertainty > 0 &&
       interfaceMeasurement.value > interfaceMeasurement.uncertainty,
   );
-  assert.match(interfaceMeasurement.context, /Capacitance-equivalent/);
+  assert.match(interfaceMeasurement.context, /capacitance-equivalent/i);
   assert.equal(
     references.filter((r) => r.doi === "10.1038/s41467-026-78053-3").length,
     1,
