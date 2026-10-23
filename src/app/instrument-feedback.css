@@ -47,7 +47,7 @@
 
 .simulator-evidence .scientific-figure {
   display: grid;
-  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, min(560px, 55%)) minmax(0, 1fr);
   align-items: start;
   gap: 28px;
   max-width: none;
@@ -60,7 +60,7 @@
 }
 
 .simulator-evidence .scientific-image {
-  width: min(100%, 460px);
+  width: min(100%, 560px);
 }
 
 .simulator-evidence > p {
@@ -78,14 +78,14 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .simulator-evidence .scientific-figure {
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
   }
 
   .simulator-evidence .scientific-image {
-    width: min(100%, 460px);
+    width: min(100%, 560px);
     justify-self: center;
   }
 

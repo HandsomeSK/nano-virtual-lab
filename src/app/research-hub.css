@@ -23,7 +23,7 @@
   max-width: 90ch;
   margin-bottom: 28px;
   color: var(--prose);
-  font-size: 16px;
+  font-size: var(--reading-body-size);
   line-height: 1.8;
 }
 
@@ -79,8 +79,8 @@
 .research-overview-step p {
   margin-top: 8px;
   color: var(--prose);
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
   max-width: 76ch;
 }
 
@@ -120,6 +120,12 @@
   color: var(--prose);
   font-size: 16px;
   line-height: 1.8;
+}
+
+.research-direction > div + div > p,
+.research-connection p,
+.research-institution-context {
+  font-size: var(--reading-body-size);
 }
 
 .research-direction > div > p + p {
@@ -186,11 +192,11 @@
 
 .research-direction > div > .research-direction-limit {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--reading-support-size);
 }
 
 .research-direction > div > .research-direction-connection {
-  font-size: 14px;
+  font-size: var(--reading-support-size);
 }
 
 .research-direction-connection .text-link {
@@ -251,7 +257,7 @@
   max-width: 76ch;
   margin-top: 24px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--reading-support-size);
 }
 
 .research-hub #featured-discovery .interface-feature {

@@ -54,6 +54,12 @@
   margin-top: 12px;
 }
 
+.content p:not(:global(.formula)),
+.content li {
+  font-size: var(--reading-support-size);
+  line-height: 1.75;
+}
+
 .content h4 {
   color: var(--ink);
   font-size: 13px;

@@ -23,8 +23,8 @@
 .brief dd {
   margin: 6px 0 0;
   color: var(--prose);
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
 }
 
 .details {
@@ -40,4 +40,8 @@
   margin-top: 14px;
   font-size: 15px;
   line-height: 1.8;
+}
+
+.details p:not(:global(.research-direction-connection)) {
+  font-size: var(--reading-body-size);
 }

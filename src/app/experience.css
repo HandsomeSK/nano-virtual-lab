@@ -664,6 +664,9 @@ html:has(.nano-home) {
   font-size: 13px;
   line-height: 1.75;
 }
+.science-selection > p:not(.text-xs, .device-material) {
+  font-size: var(--reading-support-size);
+}
 .science-selection .text-link {
   margin-top: 12px;
   font-size: 12px;
@@ -804,6 +807,9 @@ html:has(.nano-home) {
   max-width: 80ch;
   line-height: 1.8;
 }
+.research-chapter > div > p {
+  font-size: var(--reading-body-size);
+}
 .research-chapter p + p {
   margin-top: 20px;
 }
@@ -841,7 +847,7 @@ html:has(.nano-home) {
   margin-bottom: 16px;
 }
 .open-questions p {
-  font-size: 14px;
+  font-size: var(--reading-support-size);
   line-height: 1.75;
 }
 .open-questions .text-link {

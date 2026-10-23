@@ -25,6 +25,11 @@
   line-height: 1.75;
 }
 
+.evidence p {
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
+}
+
 .controls {
   display: grid;
   gap: 1rem;

@@ -43,7 +43,7 @@
 
 .challenge-thermal p {
   color: var(--prose);
-  font-size: 15px;
+  font-size: var(--reading-body-size);
   line-height: 1.8;
   margin-top: 12px;
 }
@@ -106,8 +106,8 @@
 
 .challenge-check p {
   color: var(--prose);
-  font-size: 15px;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
   margin-top: 10px;
 }
 
@@ -146,8 +146,8 @@
 
 .challenge-qualification dd {
   color: var(--prose);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: var(--reading-support-size);
+  line-height: 1.75;
   margin-top: 6px;
 }
 
