@@ -601,6 +601,17 @@ export const references: Reference[] = [
     url: "https://www.nature.com/articles/nmat4465",
     note: "Publisher abstract and correction link (10.1038/nmat4564) checked 21 October 2026. In the studied monolayer 2H-MoS₂, sulfur vacancies and strain activate basal-plane sites; this specific treatment is not a claim about all pristine or modified basal planes.",
   },
+  {
+    id: "obrien-raman2016",
+    title: "Mapping of Low-Frequency Raman Modes in CVD-Grown Transition Metal Dichalcogenides: Layer Number, Stacking Orientation and Resonant Effects",
+    authors: "M. O’Brien, N. McEvoy, D. Hanlon, T. Hallam, J. N. Coleman & G. S. Duesberg",
+    year: 2016,
+    venue: "Scientific Reports 6, 19476; published 14 January 2016",
+    category: "Paper",
+    doi: "10.1038/srep19476",
+    url: "https://www.nature.com/articles/srep19476",
+    note: "Full publisher article checked 23 October 2026 for Raman symmetry notation: 2H-derived odd/even layers and bulk have different point groups and mode labels. Cited for naming only; no spectrum, figure or numerical dataset is reproduced.",
+  },
 ];
 export function referenceNumber(id: string) {
   return references.findIndex((ref) => ref.id === id) + 1;

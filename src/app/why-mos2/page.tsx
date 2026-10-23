@@ -53,6 +53,7 @@ export default function Why() {
             { id: "afm", label: "Atomic force microscopy" },
             { id: "tem", label: "Transmission electron microscopy" },
             { id: "pl", label: "Photoluminescence spectroscopy" },
+            { id: "raman-analysis", label: "Raman peak analysis" },
           ],
         },
         {

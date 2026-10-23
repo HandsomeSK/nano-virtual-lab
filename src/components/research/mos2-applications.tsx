@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SectionHeading } from "@/components/page-shell";
 import { ReferenceLink } from "@/components/reference-link";
 import readingStyles from "@/components/reading-paths.module.css";
+import { PhotodetectorAnalysis } from "@/components/research/photodetector-analysis";
 
 export function Mos2Applications() {
   return (
@@ -70,6 +71,7 @@ export function Mos2Applications() {
             </dd>
           </div>
         </dl>
+        <PhotodetectorAnalysis />
         <Link href="/why-mos2#excitons" className="text-link">
           Separate optical transitions, excitons and quasiparticle gaps
         </Link>

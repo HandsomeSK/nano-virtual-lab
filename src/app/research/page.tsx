@@ -37,6 +37,7 @@ const contentsGroups: PageContentsGroup[] = [
     items: [
       { id: "applications", label: "Nanoscale properties in use" },
       { id: "application-photodetectors", label: "Photodetectors" },
+      { id: "photodetector-analysis", label: "Photocurrent & responsivity" },
       { id: "application-sensors", label: "Nanosensors" },
       { id: "application-catalysis", label: "Electrocatalysis" },
     ],

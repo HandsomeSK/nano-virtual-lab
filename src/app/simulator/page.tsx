@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   PageShell,
   RelatedTopics,
   SectionHeading,
 } from "@/components/page-shell";
 import { ScientificFigure } from "@/components/scientific-figure";
+import { ModelValidation } from "@/components/simulation/model-validation";
 import { ReferenceLink } from "@/components/reference-link";
 import { Simulator } from "@/components/simulation/simulator";
 import { normalizeParameters } from "@/lib/simulation/model";
@@ -33,6 +35,7 @@ export default async function SimulatorPage({
           title: "Interpret the model",
           items: [
             { id: "model-assumptions", label: "Model assumptions & units" },
+            { id: "model-validation", label: "Model & experiment comparison" },
             { id: "experimental-evidence", label: "Experimental evidence" },
           ],
         },
@@ -83,8 +86,9 @@ export default async function SimulatorPage({
               width-normalized Ω·μm value from a contact-extraction paper.
             </p>
             <p className="text-sm mt-3">
-              Zero drain bias or non-positive overdrive produces zero current.
-              This assumed cutoff excludes subthreshold leakage, so no
+              Zero drain bias gives zero current even when a channel is
+              available. Cutoff means non-positive internal overdrive. The
+              assumed cutoff excludes subthreshold leakage, so no
               experimental ON/OFF ratio or subthreshold swing can be inferred.
               The model omits quantum and ballistic transport,
               Schottky-barrier injection, trap dynamics, short-channel
@@ -105,6 +109,7 @@ export default async function SimulatorPage({
           <ReferenceLink id="benchmark2022" from="/simulator#model-assumptions" />
         </p>
       </section>
+      <ModelValidation />
       <section
         className="section simulator-evidence"
         id="experimental-evidence"
@@ -115,13 +120,13 @@ export default async function SimulatorPage({
         />
         <ScientificFigure id="shimazu-hysteresis" />
         <p>
-          Shimazu et al. measured a 6 nm-thick, back-gated MoS₂ FET with Ti/Au
-          contacts at room temperature. Figure 1 uses VDS = 0.1 V and roughly
-          1 V/s gate sweeps. Forward and reverse transfer curves differ with gas
-          and humidity; the authors identify adsorbed water as the main source
-          of charge-trapping hysteresis in those devices. The teaching model
-          is memoryless: identical inputs give identical current, without
-          adsorption, trap occupation or sweep-rate dependence.
+          Inspect the published forward and reverse sweeps with their
+          panel-specific annotations. The{" "}
+          <Link href="#model-validation" className="text-link">
+            device conditions and model comparison
+          </Link>{" "}
+          explain which physical conclusions the figure supports, without
+          turning the measured histories into fitted simulator parameters.
           <ReferenceLink
             id="shimazu2016"
             from="/simulator#experimental-evidence"

@@ -1,0 +1,78 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(15rem, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+.figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--muted);
+}
+
+.figure figcaption,
+.evidence {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+}
+
+.controls {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.controls label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+}
+
+.controls input {
+  width: 100%;
+  min-width: 0;
+}
+
+.result {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.875rem;
+}
+
+.evidence {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.evidence strong {
+  color: var(--text);
+}
+
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .figure svg text {
+    font-size: 26px;
+  }
+}

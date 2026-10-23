@@ -85,3 +85,7 @@ The current solver remains unchanged. Operating region uses internal gate overdr
 
 
 When a selected desktop Contents drawer retracts, AnchorNavigation aligns the same destination once after reading-width reflow. The correction neither adds history nor changes focus. Manual wheel/touch scrolling, reading keys, an outside pointer action, another navigation or browser restoration cancels/guards the correction, preserving user reading intent. The drawer component itself still owns no history or scroll calls.
+
+## Scientific analysis — 23 October 2026
+
+The materials directory includes `#raman-analysis`, Simulator includes `#model-validation`, and Research includes `#photodetector-analysis`. Existing anchors and navigation remain available. Raman's adjustable peaks and calculated spectrum are explicitly illustrative, separate from immutable source observations and symmetry-dependent labels. Changing a peak produces a calculated cm⁻¹ separation, never a definitive layer assignment. Photodetector inputs retain signed electrical current and require finite positive incident power; unit changes recalculate with the selected prefix. Invalid or incomplete values show a recoverable message rather than stale calculated metrics. Both instruments are local calculations with no storage, URL, account or remote mutation contract. Existing simulator parameters, URL/save schemas and A/B workflows remain unchanged.
