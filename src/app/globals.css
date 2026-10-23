@@ -1580,7 +1580,7 @@ td {
 }
 /* Public laboratory: open articles, material exhibits and instrument surfaces. */
 :root {
-  --scroll-thumb: #40556d;
+  --scroll-thumb: #667d99;
   --scroll-track: #111e2d;
   --scroll-hover: #a9b9ce;
   --scroll-active: #85d7ff;

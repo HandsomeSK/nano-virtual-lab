@@ -78,6 +78,8 @@ An independent public Nanotechnology Virtual Laboratory. English is the sole UI 
 
 Runtime ownership is model B: src/app/globals.css holds semantic CSS variables and Tailwind mappings; src/app/experience.css holds the shared metal treatments. Frontmatter mirrors the runtime palette. Interior backgrounds use #111E2D, home uses #0C1524, viewer panels use #1B2B40 and navigation uses #26384A. Borders use #40556D with existing alpha values preserved. Main text is #F5F8FF, prose #D6E1EF, metadata #A9B9CE, primary UI accent #85D7FF and secondary accent #70E0D2. Route viewport colours match their backgrounds.
 
+Resting scrollbar thumbs use #667D99 against #111E2D for clearer contrast; hover and active retain the existing metadata and Arctic accents. Forced-colour mode restores system scrollbar colours.
+
 The Midnight Blue + Arctic Blue update preserves typography, dimensions, breakpoints, gradient angles/stops, alpha values, shadow geometry and animation timing. Scientific colours have separate ownership: --plot-primary remains #80DEDC; local scientific SVG variables retain their previous fills, strokes and labels. Atom, bond, material and data colours stay unchanged. Homepage.module.css continues to own homepage geometry, while HomeMotion and its particle renderer remain unchanged. Metal treatments remain confined to controls and instruments.
 
 ## Typography
@@ -130,7 +132,7 @@ Lab defers Three.js/Anime.js until a stage approaches view. A viewer mounts with
 - Keep experiment, illustration and model results visibly distinct; citation and measurement context accompany quantitative claims.
 - Treat EOT as capacitance-equivalent, not physical film thickness; distinguish gate, channel and transfer lengths.
 - Do not reconstruct unavailable experimental coordinates, invent curves or use generated images as evidence.
-- Research cutoff is 13 October 2026, not a claim to list every latest paper.
+- Research cutoff is 21 October 2026, not a claim to list every latest paper.
 - Publish checked updates through main to the original production URL under AGENTS.md standing authorization.
 
 

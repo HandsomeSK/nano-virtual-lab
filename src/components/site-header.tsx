@@ -57,12 +57,18 @@ export function NanoNavigation({ entrance = false }: { entrance?: boolean }) {
       setOpen(false);
     }
     function resize() {
+      const active = document.activeElement;
       setExpanded(null);
       if (media.matches) {
         setOpen(false);
-        if (document.activeElement === burger.current)
+        if (active === burger.current)
           header.current?.querySelector<HTMLAnchorElement>("a")?.focus();
-      }
+        else if (active?.closest(".nav-submenu"))
+          active
+            .closest(".nav-category")
+            ?.querySelector<HTMLButtonElement>("[data-submenu-toggle]")
+            ?.focus();
+      } else if (nav.current?.contains(active)) burger.current?.focus();
     }
     media.addEventListener("change", resize);
     window.addEventListener("popstate", historyNavigation);
