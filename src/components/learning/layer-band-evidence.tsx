@@ -1,4 +1,5 @@
 import { ReferenceLink } from "@/components/reference-link";
+import Link from "next/link";
 
 export function LayerBandEvidence() {
   return (
@@ -70,11 +71,11 @@ export function LayerBandEvidence() {
         <ReferenceLink id="mak2010" from="/why-mos2#meet-mos2" />
       </p>
       <p className="text-sm mt-3">
-        A photon can create a bound electron–hole pair (an exciton). Its optical
-        transition energy can be below the quasiparticle gap by the binding
-        energy. Screening, strain and layer number affect the result. The
-        approximately 1.8 eV optical context above is neither a universal
-        electrical gap nor a value used to calculate NanoLab’s drain current.
+        These sketches describe transition geometry, not exciton binding or a
+        quasiparticle-gap calculation. <Link href="#excitons" className="text-link">
+          Compare optical excitation and quasiparticle energies
+        </Link>. NanoLab’s transistor calculation uses separate illustrative
+        transport assumptions.
       </p>
     </div>
   );

@@ -1,0 +1,106 @@
+.analysis {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.analysis h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.intro {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.measurement {
+  min-width: 0;
+}
+
+.measurement > label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 550;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.5rem;
+  gap: 0.5rem;
+}
+
+.inputs input,
+.inputs select {
+  width: 100%;
+  min-width: 0;
+  color: var(--ink);
+}
+
+.inputs input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.error {
+  margin-top: 0.5rem;
+  color: var(--danger);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 0;
+}
+
+.results > div {
+  min-width: 0;
+  padding: 1rem;
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.results dt {
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.results dd {
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.interpretation {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.limitations {
+  margin-top: 1rem;
+}
+
+.limitations p {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

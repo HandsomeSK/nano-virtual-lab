@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/page-shell";
 import { ReferenceLink } from "@/components/reference-link";
+import { RamanAnalysis } from "@/components/science/raman-analysis";
 import styles from "./mos2-characterization.module.css";
 
 export function Mos2Characterization() {
@@ -202,6 +203,7 @@ export function Mos2Characterization() {
           </dl>
         </article>
       </div>
+      <RamanAnalysis />
       <p className="learning-tip mt-5">
         Match the measurement to the question: use topography and Raman together
         for layer identification, microscopy for structure, and optical or
