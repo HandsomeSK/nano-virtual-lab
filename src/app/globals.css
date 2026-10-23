@@ -62,6 +62,8 @@ body {
   --ink: #f5f8ff;
   --muted: #a9b9ce;
   --prose: #d6e1ef;
+  --reading-body-size: 1.0625rem;
+  --reading-support-size: 1rem;
   --primary: #85d7ff;
   --primary-hover: #b4e7ff;
   --secondary: #70e0d2;
@@ -1937,6 +1939,13 @@ th {
   max-width: 76ch;
   margin-block: 16px 24px;
 }
+/* Reading paragraphs share a scale; introductions, controls and captions keep theirs. */
+.page-contents-body > section > p:not(:where(.text-xs, .model-note, .research-editorial-note, .research-reading-note, .challenge-source-note, .qualification-source, .study-meta, .eyebrow, .formula, [role], [aria-live])),
+.page-contents-body > section > .two-column > div > p:not(:where(.text-xs, .formula, [role], [aria-live])),
+.page-contents-body > section > .about-layout > div > p {
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
+}
 .knowledge-section {
   margin-bottom: 36px;
   padding-bottom: 28px;
@@ -2266,6 +2275,11 @@ th {
 .instrument-analysis p {
   max-width: 78ch;
 }
+.instrument-analysis p:not(.formula),
+.instrument-model-notes p:not(.formula) {
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
+}
 .device-instrument {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
@@ -2504,6 +2518,10 @@ th {
 .study-body p {
   max-width: 76ch;
 }
+.study-body > p {
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
+}
 .study-context {
   border-left: 2px solid var(--line);
   padding-left: 22px;
@@ -2515,6 +2533,10 @@ th {
 }
 .study-context p {
   margin-top: 12px;
+}
+.study-context > p {
+  font-size: var(--reading-support-size);
+  line-height: 1.75;
 }
 .study-context .text-link {
   display: flex;
@@ -2609,7 +2631,7 @@ th {
 }
 .challenge-mechanism p,
 .challenge-direction p {
-  font-size: 16px;
+  font-size: var(--reading-body-size);
   line-height: 1.8;
 }
 .challenge-direction {
@@ -2712,7 +2734,8 @@ th {
 }
 .about-evidence-grid p {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: var(--reading-support-size);
+  line-height: 1.75;
 }
 .about-details {
   display: grid;

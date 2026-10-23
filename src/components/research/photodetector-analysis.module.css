@@ -11,8 +11,8 @@
 
 .intro {
   margin-top: 0.75rem;
-  font-size: 0.9375rem;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
 }
 
 .controls {
@@ -85,8 +85,8 @@
 
 .interpretation {
   margin-top: 1rem;
-  font-size: 0.875rem;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
 }
 
 .limitations {
@@ -95,8 +95,8 @@
 
 .limitations p {
   margin-top: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
 }
 
 @media (max-width: 900px) {

@@ -1,6 +1,6 @@
 .experiment > :global(figure.scientific-figure) {
   display: grid;
-  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, min(420px, 50%)) minmax(0, 1fr);
   align-items: start;
   gap: 28px;
   max-width: none;
@@ -26,7 +26,7 @@
   }
 
   .experiment :global(.scientific-image) {
-    width: min(100%, 340px);
+    width: min(100%, 420px);
     justify-self: center;
   }
 }

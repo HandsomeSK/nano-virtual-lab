@@ -1,6 +1,6 @@
 .layerEvidence > :global(figure.scientific-figure) {
   display: grid;
-  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, min(440px, 50%)) minmax(0, 1fr);
   align-items: start;
   gap: 28px;
   max-width: none;
@@ -94,7 +94,7 @@
   }
 
   .layerEvidence > :global(figure.scientific-figure) > :global(.scientific-image) {
-    width: min(100%, 360px);
+    width: min(100%, 440px);
     justify-self: center;
   }
 }

@@ -102,6 +102,12 @@
   color: var(--prose);
   line-height: 1.8;
 }
+.evidence-catalogue .study-body > p {
+  font-size: var(--reading-body-size);
+}
+.evidence-catalogue .study-context > p {
+  font-size: var(--reading-support-size);
+}
 .evidence-catalogue .study-context > h5 {
   font-size: 15px;
   font-weight: 650;
@@ -110,7 +116,7 @@
   margin-top: 22px;
 }
 .evidence-catalogue .study-body .scientific-figure {
-  max-width: 620px;
+  max-width: 760px;
 }
 .reference-access {
   display: flex;

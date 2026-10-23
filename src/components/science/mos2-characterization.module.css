@@ -30,8 +30,8 @@
 
 .findings dd {
   margin: 0.3rem 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.75;
+  font-size: var(--reading-body-size);
+  line-height: 1.8;
 }
 
 .optics {
