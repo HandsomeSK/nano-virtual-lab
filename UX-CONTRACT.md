@@ -74,6 +74,8 @@ The owner has authorized checked updates to be published to the original product
 
 ## Route document title policy
 
+When the header crosses its 900px breakpoint, keyboard focus moves out of controls that become hidden: desktop navigation hands focus to the mobile menu button, the disappearing menu button returns to Home, and a closing submenu returns to its visible category toggle. Focus outside the header is left in place.
+
 Existing Next.js metadata identifies each route and NanoLab. Research now identifies itself as the Research Knowledge Hub. Error and not-found boundaries retain recovery navigation. No access or account model changes are part of this task.
 
 

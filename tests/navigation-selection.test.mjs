@@ -107,3 +107,62 @@ test("multi-page menus retain selection; single-page modules stay direct links",
   pathname = "/about";
   assert.deepEqual(current(render()), []);
 });
+
+test("breakpoint changes move focus out of navigation controls that become hidden", () => {
+  const callbacks = new Set();
+  const effects = [];
+  const media = {
+    matches: true,
+    addEventListener(type, callback) { if (type === "change") callbacks.add(callback); },
+    removeEventListener(type, callback) { if (type === "change") callbacks.delete(callback); },
+  };
+  const document = { activeElement: null };
+  const focusable = (extra = {}) => ({ focus() { document.activeElement = this; }, ...extra });
+  const logo = focusable();
+  const burger = focusable();
+  const submenuToggle = focusable();
+  const category = { querySelector: () => submenuToggle };
+  const desktopLink = focusable({ closest: () => null });
+  const submenuLink = focusable({ closest: (selector) => selector === ".nav-submenu" ? {} : category });
+  const outside = focusable({ closest: () => null });
+  const navigationNode = { contains: (element) => [desktopLink, submenuLink, submenuToggle].includes(element) };
+  const compiledModule = { exports: {} };
+  runInNewContext(compiled, {
+    module: compiledModule, exports: compiledModule.exports, document, matchMedia: () => media,
+    window: { addEventListener() {}, removeEventListener() {} },
+    require: (name) => {
+      if (name === "react") return {
+        ...React, useState: (initial) => [initial, () => {}],
+        useEffect: (callback) => effects.push(callback), useId: () => "resize-menu",
+        useRef: (initial) => ({ current: initial }),
+      };
+      if (name === "next/navigation") return { usePathname: () => "/research" };
+      if (name === "next/link") return { default: "a", __esModule: true };
+      if (name === "@/lib/navigation") return navigation;
+      if (name === "./brand") return { Brand: () => null };
+      if (name === "./appreciation-button") return { AppreciationButton: () => null };
+      return require(name);
+    },
+  });
+  function elements(node) {
+    if (Array.isArray(node)) return node.flatMap(elements);
+    return React.isValidElement(node) ? [node, ...elements(node.props.children)] : [];
+  }
+  const nodes = elements(compiledModule.exports.NanoNavigation({}));
+  nodes.find(({ type }) => type === "header").props.ref.current = { querySelector: () => logo };
+  nodes.find(({ type }) => type === "nav").props.ref.current = navigationNode;
+  nodes.find(({ props }) => props.className?.startsWith("nano-burger")).props.ref.current = burger;
+  const dispose = effects[0]();
+  const resize = () => { for (const callback of callbacks) callback(); };
+
+  desktopLink.focus(); media.matches = false; resize();
+  assert.equal(document.activeElement, burger, "collapsing desktop navigation preserves a visible keyboard destination");
+  media.matches = true; resize();
+  assert.equal(document.activeElement, logo, "the hidden burger hands focus back to the visible header");
+  submenuLink.focus(); resize();
+  assert.equal(document.activeElement, submenuToggle, "a closing submenu returns focus to its own visible toggle");
+  outside.focus(); media.matches = false; resize();
+  assert.equal(document.activeElement, outside, "resizing does not steal reading focus");
+  dispose();
+  assert.equal(callbacks.size, 0, "breakpoint listener is removed on unmount");
+});
