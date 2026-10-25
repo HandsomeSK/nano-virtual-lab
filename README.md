@@ -74,7 +74,7 @@ The Lab directly embeds three models in this order: Graphene atomic structure, M
 
 Device layers and carbon-dot placement are original concept schematics, with exaggerated thicknesses. They do not compute spatial fields, injection or transport. The ON/OFF toggle illustrates charge control. The existing simulator remains an uncalibrated classical long-channel model; it omits subthreshold leakage, quantum transport, traps, self-heating and short-channel effects.
 
-The research cutoff is **21 October 2026**, not a claim to cover every latest paper. The interface plot shows the reported **0.6 ± 0.1 nm EOT** from Wong et al.’s graphene capacitance-test structure, separate from their MoS₂ transistor measurements. EOT is capacitance-equivalent, not physical HfO₂ thickness. The uncertainty is reproduced as reported without assigning an unverified statistical meaning. No invented I–V dataset, performance comparison or band-gap energy is presented.
+The research cutoff is **25 October 2026**, not a claim to cover every latest paper. The interface plot shows the reported **0.6 ± 0.1 nm EOT** from Wong et al.’s graphene capacitance-test structure, separate from their MoS₂ transistor measurements. EOT is capacitance-equivalent, not physical HfO₂ thickness. The uncertainty is reproduced as reported without assigning an unverified statistical meaning. No invented I–V dataset, performance comparison or band-gap energy is presented.
 
 Materials, 3D Lab, Simulators, Discoveries and Engineering Challenges are the five peer categories. Home is reached through the logo, and About & References is auxiliary. Child pages expose a Home / category / page breadcrumb and keep their owning category active. Footer children sit below their category rather than appearing as extra primary pages. Context links connect theory to specific Lab models, simulator experiments and exact research/challenge sections.
 
@@ -105,6 +105,8 @@ Open/review a pull request, verify its Vercel preview, merge to main, and verify
 Latest homepage/navigation/reading refinements are recorded in `docs/home-reading-feedback.md`. Scientific source and model verification for the broader redesign are in `docs/beyond-visible.md`. Earlier documents record previous releases; their screenshots/check counts are historical.
 
 The [23 October site review](docs/site-review-2026-10-23.md) records the current structure, content, responsive and functional checks, together with the resulting accessibility and documentation corrections.
+
+The [25 October scientific review](docs/scientific-truth-review-2026-10-25.md) records source-level corrections, bilayer cell readouts, independent calculation/diagram checks and the current browser-verification limits.
 
 The content, citation, submenu and scroll refinements are documented in [the research hub update](docs/research-hub-update.md). That report records an earlier release; [the unified Lab architecture](docs/unified-3d-lab.md) defines current 3D ownership and navigation. Browser screenshots and interaction coverage are reported only when a real browser could be run.
 

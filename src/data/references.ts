@@ -251,11 +251,11 @@ export const references: Reference[] = [
       "Wafer-scale 2D MoS₂ transistors with sub-5 nm channel length and subthreshold performance beyond the silicon limit",
     authors: "S. Lin, T. Huang, N. Yang et al.",
     year: 2026,
-    venue: "Nature Communications; early version published 21 September 2026",
+    venue: "Nature Communications 17, 11003; first published 21 September 2026, version of record 22 October 2026",
     category: "Paper",
     doi: "10.1038/s41467-026-77186-9",
     url: "https://www.nature.com/articles/s41467-026-77186-9",
-    note: "Citable early version checked on 12 October 2026; final production details may change. Air-gap isolation and gate/contact overlap target electrostatics at sub-5 nm channels. The title's silicon comparison does not mean a violation of the approximately 60 mV/dec room-temperature thermal limit. Figures remain linked to the original early version.",
+    note: "Version-of-record full text checked 25 October 2026. Air-gap isolation and gate/contact overlap target electrostatics at sub-5 nm physical channels. Its silicon comparison concerns modeled deeply scaled devices, not a violation of the approximately 60 mV/dec room-temperature thermal limit. Figures remain linked to the original article.",
   },
   {
     id: "wang2026",

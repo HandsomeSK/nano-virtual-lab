@@ -29,7 +29,7 @@ export const foundationDetails: Record<
   "graphene-electronics": {
     title: "Mobility, mean free path and scattering are different quantities",
     paragraphs: [
-      "Near a Dirac point, E± ≈ ±ℏvF|q|. Group velocity is (1/ℏ)∇kE; it describes the motion of a wave packet. Mobility μ relates weak-field drift velocity to electric field, vdrift = μE. A large characteristic band velocity does not by itself specify measured device mobility.",
+      "Near a Dirac point, E± ≈ ±ℏvF|q|. Group velocity is (1/ℏ)∇kE; it describes the motion of a wave packet. Positive mobility μ relates weak-field drift speed to field magnitude, |vdrift| = μ|E|; electron drift velocity points opposite to the electric field. A large characteristic band velocity does not by itself specify measured device mobility.",
       "A mean free path is the typical distance between relevant scattering events, often written ℓ ≈ vτ for a suitable velocity and scattering time. Phonons, disorder, adsorbates and substrate interactions change transport. L ≪ ℓ suggests a ballistic regime; injection and contacts still give a device finite resistance.",
       "High mobility helps charge move in the ON state. It does not create an intrinsic gap or ensure low digital OFF current. Fermi-level motion changes occupancy; the touching ideal bands remain. The transport activity is a relative-length illustration, not a measured conductance prediction.",
     ],

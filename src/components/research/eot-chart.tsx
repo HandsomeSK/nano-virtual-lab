@@ -32,7 +32,7 @@ export function EotChart() {
           (metric.uncertainty * factor).toFixed(1) +
           " " +
           unit +
-          "; one measurement with a reported uncertainty interval, not a device characteristic curve"
+          "; a single source-reported value and uncertainty interval, not a device characteristic curve"
         }
       >
         {Array.from({ length: 7 }, (_, i) => {

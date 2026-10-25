@@ -50,7 +50,7 @@ export const researchDirections = [
     challenge:
       "Scaling must specify which dimension changes. Physical gate length, source–drain channel length, contact transfer length and circuit pitch describe different objects. Comparing a tiny gate with another device's channel length obscures both the fabrication achievement and the transport problem.",
     next:
-      "The sub-5 nm report is a citable early version whose final production details can change. Compare geometry together with bias-dependent switching, leakage and device statistics. NanoLab's long-channel simulator illustrates parameter trends; it cannot validate these ultrascaled architectures or their quantum-transport projections.",
+      "The sub-5 nm report compares measured MoS₂ devices with modeled silicon at comparable physical channel lengths. Compare geometry together with bias-dependent switching, leakage and device statistics. NanoLab's long-channel simulator illustrates parameter trends; it cannot validate these ultrascaled architectures or their quantum-transport projections.",
     connectedId: "contacts",
     connectedLabel: "Contact Engineering",
     relatedHref: "/challenges#scaling",

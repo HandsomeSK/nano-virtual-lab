@@ -132,7 +132,7 @@ Lab defers Three.js/Anime.js until a stage approaches view. A viewer mounts with
 - Keep experiment, illustration and model results visibly distinct; citation and measurement context accompany quantitative claims.
 - Treat EOT as capacitance-equivalent, not physical film thickness; distinguish gate, channel and transfer lengths.
 - Do not reconstruct unavailable experimental coordinates, invent curves or use generated images as evidence.
-- Research cutoff is 21 October 2026, not a claim to list every latest paper.
+- Research cutoff is 25 October 2026, not a claim to list every latest paper.
 - Publish checked updates through main to the original production URL under AGENTS.md standing authorization.
 
 
@@ -150,3 +150,7 @@ The existing characterization and photodetector chapters own two compact analysi
 ## Selective reading and scientific figure sizing — 23 October 2026
 
 Small narrative copy in materials characterization, experimental analysis, research directions/studies, engineering mechanisms and explanatory disclosures adopts the shared 17px reading scale; supporting inspector/model explanations use 16px. Appropriate existing text, scientific labels and numerical interfaces are preserved. No root font-size adjustment is used. Full scientific images keep their aspect ratios, contain-fit presentation, source and caption. The MoS₂ phase image cap is 440px, published device image 420px, simulator four-panel evidence 560px and expanded research figures 760px. Reading columns can shrink alongside captions; the simulator figure stacks at 900px and the other existing responsive stacking rules remain. Unlabelled graphene artwork, already-large figures, SVG models, chart text and homepage particles retain their prior dimensions.
+
+## Scientific source and demonstration precision — 25 October 2026
+
+Atomic readouts count the complete selected in-plane cell: one MoS₂ sheet has one Mo and two S atoms, and either two-sheet registry has two Mo and four S. Geometry, scientific colours and viewer ownership are unchanged. Static previews explicitly distinguish their projection from camera, spacing and ON/OFF effects in the interactive view. Optical measurements retain their distinct specimens and excitation conditions; mobility's drift-speed convention is explicit. Source dates and publication status follow the current primary record, with literature-review access limits preserved. See docs/scientific-truth-review-2026-10-25.md.
