@@ -429,7 +429,11 @@ export function AtomicWorkbench({
             <div>
               <dt>Primitive cell</dt>
               <dd>
-                {material === "graphene" ? "2 C atoms" : "1 Mo + 2 S atoms"}
+                {material === "graphene"
+                  ? "2 C atoms"
+                  : layers === 2
+                    ? "2 Mo + 4 S atoms"
+                    : "1 Mo + 2 S atoms"}
               </dd>
             </div>
           </dl>
@@ -497,7 +501,9 @@ export function AtomicWorkbench({
                   The in-plane lattice constant is 3.16 Å. Each S plane is
                   1.56 Å from Mo, giving an S-to-S vertical separation of 3.12 Å
                   and a nearest Mo–S distance of about 2.40 Å. A primitive
-                  monolayer cell contains one Mo and two S atoms.
+                  monolayer cell contains one Mo and two S atoms. A bilayer’s
+                  in-plane primitive cell contains two Mo and four S atoms across
+                  its two sheets.
                   <ReferenceLink id="ridolfi2015" from={from} />
                 </p>
                 <p>

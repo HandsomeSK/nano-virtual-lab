@@ -1,4 +1,4 @@
-> Historical release report. The current scientific revision and validation are recorded in [the October 2026 audit](scientific-audit-2026-10-21.md); the region-readout correction and current source ledger supersede older counts and unchanged-model statements below.
+> Historical release report. The current scientific revision and validation are recorded in [the October 2026 audit](scientific-audit-2026-10-21.md); the region-readout correction and current source ledger supersede older counts and unchanged-model statements below. The [25 October source and demonstration review](scientific-truth-review-2026-10-25.md) also supersedes the early-version status recorded here for Lin et al.; its version of record was published on 22 October 2026.
 
 # Scientific evidence and image decisions
 

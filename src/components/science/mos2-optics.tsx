@@ -65,8 +65,9 @@ export function Mos2Optics() {
       <p className="learning-tip mt-5">
         A published optical example: Mak et al. measured a monolayer PL A peak
         at 1.90 eV in suspended MoS₂ at room temperature with 532 nm excitation.
-        Their photoconductivity response rose near 1.8 eV. These are different
-        optical observables under specified conditions, not interchangeable
+        Separate FET samples on 300 nm SiO₂/Si showed a photoconductivity rise
+        near 1.8 eV under spectrally selected illumination. These are different
+        optical observables and measurement arrangements, not interchangeable
         measurements of a universal quasiparticle gap.
         <ReferenceLink id="mak2010" from="/why-mos2#excitons" />
       </p>

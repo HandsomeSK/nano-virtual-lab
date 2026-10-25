@@ -127,8 +127,8 @@ export function SceneFallback({
       </svg>
       <p role="status">{message}</p>
       <p className="text-xs">
-        Static schematic · not to scale. The controls and layer descriptions
-        remain available.
+        Static schematic · not to scale. Camera motion, expanded spacing and
+        ON/OFF effects require the interactive 3D view.
       </p>
     </div>
   );

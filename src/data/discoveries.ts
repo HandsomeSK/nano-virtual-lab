@@ -1,5 +1,5 @@
 // Editorial source cutoff, not an assertion that this is every/latest paper.
-export const researchCutoff = "2026-10-21";
+export const researchCutoff = "2026-10-25";
 export const interfaceMeasurement = {
   reference: "wong2026",
   value: 0.6,
@@ -76,11 +76,11 @@ export const discoveryThemes = [
     question:
       "What is getting smaller: the gate, the channel or the circuit pitch?",
     finding:
-      "An accepted early-version abstract reports 88 mV/dec for sub-5 nm channels; a separate study combines a sub-1 nm graphene gate with a 10 nm channel.",
+      "A published wafer-scale study reports 88 mV/dec for sub-5 nm physical channels; a separate study combines a sub-1 nm graphene gate with a 10 nm channel.",
     meaning:
       "Gate geometry, drain fields and fabrication alignment must work together.",
     limit:
-      "The early abstract does not provide all bias, temperature and extraction conditions. Its 88 mV/dec is not below the ideal room-temperature 60 mV/dec thermionic limit; an ångström gate is not an ångström channel.",
+      "The silicon comparison uses quantum-transport modeling at deeply scaled dimensions. Its 88 mV/dec is not below the ideal room-temperature 60 mV/dec thermionic limit; an ångström gate is not an ångström channel.",
     href: "/research?study=lin2026#catalogue",
     action: "Compare the scaling studies",
   },

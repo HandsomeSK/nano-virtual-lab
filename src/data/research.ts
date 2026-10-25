@@ -228,17 +228,17 @@ export const studies: Study[] = [
     reference: "lin2026",
     category: "Scaling",
     summary:
-      "A citable early-version study reports wafer-scale monolayer MoS₂ devices with sub-5 nm channels, using air-gap isolation and gate/contact overlap for electrostatic control.",
+      "The published study reports wafer-scale monolayer MoS₂ devices with sub-5 nm physical channels, using air-gap isolation and gate/contact overlap for electrostatic control.",
     problem:
       "Drain influence becomes increasingly difficult to suppress when the physical channel is only a few nanometres long.",
     demonstration:
-      "The publisher's early-version abstract describes sub-5 nm channels on a four-inch wafer platform using a photolithography-compatible process.",
+      "The full article describes sub-5 nm physical channels on a four-inch wafer platform. A photolithography-based process defines self-aligned spacers, with tape-assisted and alternative wet-etch removal routes distinguished in the methods.",
     novelty:
       "Co-designs gate/contact overlap and air-gap isolation to manage fields at short channel dimensions.",
     question:
       "What do full bias-dependent measurements and device statistics establish about the proposed scaling approach?",
     boundary:
-      "Publisher-labelled early version rechecked 21 October 2026; final figures and production metadata can change. The public abstract does not give all bias, temperature or extraction conditions. Its silicon comparison does not establish sub-60 mV/dec room-temperature switching; no performance values calibrate this model.",
+      "Version of record checked 25 October 2026. The reported 88 mV/dec swing is compared with quantum-transport projections for deeply scaled silicon, not a violation of the ideal room-temperature 60 mV/dec thermionic limit. Device bias, distributions and extraction conditions remain essential; no performance values calibrate NanoLab's long-channel model.",
     whyMatters:
       "Links material thickness to device electrostatics while requiring geometry, bias and subthreshold extraction conditions to interpret scaling claims.",
     concept: "/why-mos2#layer-evidence",

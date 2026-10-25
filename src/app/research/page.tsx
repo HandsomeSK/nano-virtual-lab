@@ -7,6 +7,7 @@ import {
 import { ResearchExplorer } from "@/components/research-explorer";
 import type { PageContentsGroup } from "@/components/page-contents";
 import { researchCategories, studies } from "@/data/research";
+import { researchCutoff } from "@/data/discoveries";
 import { references } from "@/data/references";
 import { ReferenceLink } from "@/components/reference-link";
 import { queryValue, type Query } from "@/lib/site";
@@ -126,7 +127,9 @@ export default async function Page({
           <p className="research-editorial-note">
             NanoLab synthesis, supported by the numbered sources. Reported results
             remain specific to their devices and methods. Selected research
-            reviewed through 21 October 2026. Abstract-only records are kept
+            reviewed through {new Date(researchCutoff).toLocaleDateString("en-GB", {
+              day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+            })}. Abstract-only records are kept
             distinct from studies whose methods and figures were accessible;
             this selection is not a complete survey of the literature.
           </p>
