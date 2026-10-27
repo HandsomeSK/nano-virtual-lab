@@ -149,7 +149,8 @@ export function buildScientificModel(spec: SceneSpec) {
         mesh.visible = false;
         // Scaled ideal S–Mo–S motif, enlarged to expose bonding in the device.
         // It does not imply an experimental atom count or lattice-to-device scale.
-        const sheet = createAtomicStructure("mos2", 1, "2H", 7);
+        // Radius 5 covers the channel; a larger patch only adds discarded atoms.
+        const sheet = createAtomicStructure("mos2", 1, "2H", 5);
         const kept = new Set(
           sheet.atoms.map((a, i) =>
             Math.abs(a.position[0] * 0.21) < part.w / 100 - 0.12 &&

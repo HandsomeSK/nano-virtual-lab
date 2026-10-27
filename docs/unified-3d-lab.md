@@ -68,6 +68,8 @@ DeviceViewer reads initial location, hashchange and popstate, deduplicates uncha
 
 ScientificStage mounts a Canvas within 200 px of the viewport and retains it until its host leaves a wider 900 px boundary. Only the Canvas is released; parent model options and camera stay mounted. Hysteresis avoids rebuilding after small scrolls. Static previews reserve layout while a model is distant. There is no claim of a hard global WebGL context limit.
 
+As of 27 October 2026, the shared Canvas module starts downloading at Lab hydration, before the residency observer mounts a renderer. A shared spinner covers both module loading and GPU preparation in the reserved stage. Initialization allows the indicator to paint, then uses `compileAsync` before demand-rendering; readiness means the first successful `renderer.render`, rather than canvas creation. A visible preparation exceeding 30 seconds shows the static fallback; hidden/offscreen waiting is excluded. Cleanup ignores late shader completion and cancels frames and the preparation timer. Device channel generation starts with a smaller source lattice, retaining exactly the same 123 displayed atoms and 220 bonds; a regression test compares every displayed coordinate and bond endpoint with the previous larger source.
+
 ScientificCanvas demand-renders, pauses hidden/offscreen transitions and respects reduced motion. Cleanup removes observers/listeners/OrbitControls and queued animation frames, cancels animations, frees instance buffers, geometry, materials, textures, shadow/environment targets and render lists, disposes the renderer and loses the old WebGL context. Chunk/WebGL/context failures retain a labelled schematic and complete scientific explanation.
 
 ## Verification boundaries

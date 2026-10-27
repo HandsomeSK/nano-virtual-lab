@@ -6,6 +6,7 @@ import { animate, type JSAnimation } from "animejs";
 import { useEffect, useId, useRef, useState } from "react";
 import { buildScientificModel, type DisplayState } from "./build-scene";
 import { SceneFallback } from "./scene-fallback";
+import { SceneLoading } from "./scene-loading";
 import { atomNames, type SceneProps, type CameraView } from "./types";
 import { deviceParts } from "@/data/device";
 type Runtime = {
@@ -19,13 +20,22 @@ export default function ScientificCanvas(props: SceneProps) {
   const latest = useRef(props),
     runtime = useRef<Runtime | null>(null);
   const [fault, setFault] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
+  const [started, setStarted] = useState(false);
+  useEffect(() => {
+    // Give the loading indicator a paint before initializing the GPU resources.
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => setStarted(true));
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
   useEffect(() => {
     latest.current = props;
     runtime.current?.options(props);
   }, [props]);
   const specKey = JSON.stringify(props.spec);
   useEffect(() => {
-    if (fault || !host.current) return;
+    if (!started || fault || !host.current) return;
     const container = host.current,
       spec = JSON.parse(specKey) as SceneProps["spec"];
     let renderer: THREE.WebGLRenderer;
@@ -147,17 +157,18 @@ export default function ScientificCanvas(props: SceneProps) {
     canvas.setAttribute("role", "img");
     canvas.tabIndex = 0;
     container.prepend(canvas);
-    container.dataset.webgl = "ready";
     container.dataset.dpr = String(pixelRatio());
     container.dataset.atoms = String(model.atomCount);
     container.dataset.bonds = String(model.bondCount);
     let frame = 0,
       disposed = false,
       visible = typeof IntersectionObserver === "undefined",
+      prepared = false,
       frames = 0;
+    let preparationTimer: ReturnType<typeof setTimeout>;
     const animations = new Map<string, JSAnimation>();
     function invalidate() {
-      if (disposed || frame || !visible || document.hidden) return;
+      if (disposed || !prepared || frame || !visible || document.hidden) return;
       frame = requestAnimationFrame(() => {
         frame = 0;
         if (disposed || !visible || document.hidden) return;
@@ -166,6 +177,10 @@ export default function ScientificCanvas(props: SceneProps) {
           floor.visible =
             spec.kind === "device" && camera.position.y > floor.position.y;
           renderer.render(scene, camera);
+          if (!frames) {
+            clearTimeout(preparationTimer);
+            setReady(true);
+          }
           container.dataset.pitch = String(
             THREE.MathUtils.radToDeg(
               Math.asin(
@@ -364,6 +379,10 @@ export default function ScientificCanvas(props: SceneProps) {
     intersection?.observe(container);
     function pausePolicy() {
       controls.enabled = visible && !document.hidden;
+      if (!frames) {
+        clearTimeout(preparationTimer);
+        preparationTimer = setTimeout(checkPreparation, 30000);
+      }
       animations.forEach((animation) => {
         if (document.hidden || !visible) animation.pause();
         else animation.resume();
@@ -483,8 +502,35 @@ export default function ScientificCanvas(props: SceneProps) {
     canvas.addEventListener("pointerup", up);
     canvas.addEventListener("pointercancel", cancelPointer);
     canvas.addEventListener("keydown", keyboard);
+    preparationTimer = setTimeout(checkPreparation, 30000);
+    function checkPreparation() {
+      if (disposed) return;
+      if (!visible || document.hidden) {
+        preparationTimer = setTimeout(checkPreparation, 30000);
+        return;
+      }
+      setFault(
+        "The 3D model is taking too long to prepare. Reload to retry, or use the static structure and descriptions.",
+      );
+    }
+    resizeScene();
+    async function prepare() {
+      try {
+        await renderer.compileAsync(scene, camera);
+        if (disposed) return;
+        prepared = true;
+        invalidate();
+      } catch {
+        if (!disposed)
+          setFault(
+            "The 3D model could not prepare. Reload to retry, or use the static structure and descriptions.",
+          );
+      }
+    }
+    void prepare();
     return () => {
       disposed = true;
+      clearTimeout(preparationTimer);
       runtime.current = null;
       cancelAnimationFrame(frame);
       animations.forEach((animation) => animation.cancel());
@@ -515,7 +561,7 @@ export default function ScientificCanvas(props: SceneProps) {
       renderer.forceContextLoss();
       canvas.remove();
     };
-  }, [specKey, fault, instructionsId]);
+  }, [started, specKey, fault, instructionsId]);
   const name =
     props.spec.kind === "atomic"
       ? atomNames[props.options.selected as keyof typeof atomNames]
@@ -536,8 +582,10 @@ export default function ScientificCanvas(props: SceneProps) {
       ref={host}
       className="scientific-canvas"
       data-renderer="three"
-      data-webgl="loading"
+      data-webgl={ready ? "ready" : "loading"}
+      aria-busy={!ready}
     >
+      {!ready ? <SceneLoading overlay /> : null}
       <p id={instructionsId} className="sr-only">
         Drag to orbit. Use the arrow keys to rotate and plus or minus to zoom.
         Use the model controls to focus a selection or reset the view. On a
@@ -548,7 +596,7 @@ export default function ScientificCanvas(props: SceneProps) {
         className="scene-annotation"
         aria-hidden="true"
         hidden={
-          !props.options.labels ||
+          !ready || !props.options.labels ||
           props.options.hidden.includes(props.options.selected)
         }
       >
