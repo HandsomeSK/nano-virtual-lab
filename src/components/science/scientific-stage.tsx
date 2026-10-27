@@ -2,15 +2,12 @@
 import dynamic from "next/dynamic";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import { SceneFallback } from "./scene-fallback";
+import { SceneLoading } from "./scene-loading";
 import { observeSceneResidency } from "./scene-residency";
 import type { SceneProps } from "./types";
 const Canvas = dynamic(() => import("./scientific-canvas"), {
   ssr: false,
-  loading: () => (
-    <div className="scene-loading" role="status">
-      Preparing the interactive model…
-    </div>
-  ),
+  loading: () => <SceneLoading />,
 });
 class SceneBoundary extends Component<
   { children: ReactNode; fallback: ReactNode },
@@ -28,6 +25,8 @@ export function ScientificStage(props: SceneProps) {
   const host = useRef<HTMLDivElement>(null);
   const [nearby, setNearby] = useState(false);
   useEffect(() => {
+    // Download the shared viewer before proximity starts its WebGL renderer.
+    void import("./scientific-canvas").catch(() => undefined);
     if (!host.current) return;
     return observeSceneResidency(host.current, setNearby);
   }, []);

@@ -503,7 +503,36 @@ html:has(.nano-home) {
 .scene-loading {
   display: grid;
   place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 20px;
   color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+.scene-loading--overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.scene-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--input-line);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: scene-spin 0.85s linear infinite;
+}
+@keyframes scene-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scene-spinner {
+    animation: none;
+  }
 }
 .scene-fallback {
   display: flex;
